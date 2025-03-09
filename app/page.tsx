@@ -1,101 +1,120 @@
+"use client";
+import React from "react";
 import Image from "next/image";
+import Head from "next/head";
+import ColouredButton from "@/components/ColouredButton";
+import WhiteButton from "@/components/WhiteButton";
+import Navbar from "@/components/Navbar";
+import LandingPageTrackCard from "@/components/landingPage/LandingPageTrackCard";
+import Link from "next/link";
+import { useMatchMediaQuery } from "@/hooks/useViewPort";
+import device from "@/constants/breakpoints";
 
 export default function Home() {
+  const isNotDesktop = useMatchMediaQuery(device.desktop);
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div>
+      <Head>
+        <title>Landing Page | Panda App</title>
+        <meta name="description" content="Landing page for Panda App" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <Navbar />
+
+      <div className="flex flex-col md:flex-row relative">
+        <div className="md:w-1/2 px-4 sm:px-6 md:px-10 lg:px-[100px] bg-gray-600 w-full flex flex-col min-h-screen md:overflow-y-auto py-10 z-10">
+          <div className="w-full max-w-[600px]">
+            <div className="">
+              <h1 className="font-[700] font-[Plus Jakarta Sans] leading-[110%] tracking-[-0.01em] text-[32px] sm:text-[48px] lg:text-[64px] flex justify-start">
+                Manage Your Rentals with Ease!
+              </h1>
+              <h3 className="mt-6 md:mt-10 font-[500] font-[Plus Jakarta Sans] w-full max-w-[448px] leading-[160%] tracking-[-0.005em] text-[16px] sm:text-[18px] lg:text-[20px] flex justify-start">
+                Track rent payments, service requests, and tenant history—all in
+                one place.
+              </h3>
+            </div>
+          </div>
+
+          {!isNotDesktop && (
+            <div className="absolute left-0 right-100 mt-[400px] flex justify-center z-20">
+              <LandingPageTrackCard />
+            </div>
+          )}
+          <div className={`w-full flex flex-row sm:flex-row sm:items-start gap-[40px] sm:gap-[80px] lg:mt-[100px]`}
+          style={{marginTop: isNotDesktop ? '50px' : '250px'}}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <div className="flex flex-col items-center sm:items-start">
+              <div className="relative w-[50px] h-[50px]">
+                <Image
+                  src="/landingPage/renters.png"
+                  alt="Icon for renters"
+                  width={50}
+                  height={50}
+                  style={{ objectFit: "contain" }}
+                  priority
+                />
+              </div>
+              <div className="mt-4 text-center sm:text-left">
+                <div className="text-[#785DBA] font-[Plus Jakarta Sans] leading-[110%] tracking-[-0.01em] font-[700] text-[20px] sm:text-[24px]">
+                  50k+ renters
+                </div>
+                <div className="font-[Plus Jakarta Sans] text-[#000929] leading-[110%] tracking-[-0.01em] font-[500] text-[14px] sm:text-[16px]">
+                  believe in our service
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center sm:items-start">
+              <div className="relative w-[50px] h-[50px]">
+                <Image
+                  src="/landingPage/properties.png"
+                  alt="Icon for properties"
+                  width={50}
+                  height={50}
+                  style={{ objectFit: "contain" }}
+                  priority
+                />
+              </div>
+              <div className="mt-4 text-center sm:text-left">
+                <div className="text-[#785DBA] font-[Plus Jakarta Sans] leading-[110%] tracking-[-0.01em] font-[700] text-[20px] sm:text-[24px]">
+                  10k+ properties
+                </div>
+                <div className="font-[Plus Jakarta Sans] text-[#000929] leading-[110%] tracking-[-0.01em] font-[500] text-[14px] sm:text-[16px]">
+                  under our management
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {isNotDesktop && (
+            <div className="flex mt-10 gap-6 flex-row md:flex-row">
+              <div>
+                <Link href="/login" className="w-full md:w-auto">
+                  <WhiteButton title="Login" />
+                </Link>
+              </div>
+              <div className="md:mt-0">
+                <Link href="/sign-in" className="w-full md:w-auto">
+                  <ColouredButton title="Sign up" />
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        <section className="hidden md:block md:w-1/2 min-h-screen md:overflow-y-auto">
+          <div className="relative w-full h-full">
+            <Image
+              src="/landingPage/landing-image.png"
+              alt="Panda background"
+              fill
+              style={{ objectFit: "cover", objectPosition: "center" }}
+              priority
+            />
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
