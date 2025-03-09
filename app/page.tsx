@@ -37,12 +37,13 @@ export default function Home() {
           </div>
 
           {!isNotDesktop && (
-            <div className="absolute left-0 right-100 mt-[400px] flex justify-center z-20">
+            <div className="absolute animate__animated animate__slideInLeft left-0 right-100 mt-[400px] flex justify-center z-20">
               <LandingPageTrackCard />
             </div>
           )}
-          <div className={`w-full flex flex-row sm:flex-row sm:items-start gap-[40px] sm:gap-[80px] lg:mt-[100px]`}
-          style={{marginTop: isNotDesktop ? '50px' : '250px'}}
+          <div
+            className={`w-full flex flex-row sm:flex-row sm:items-start gap-[40px] sm:gap-[80px] lg:mt-[100px]`}
+            style={{ marginTop: isNotDesktop ? "50px" : "250px" }}
           >
             <div className="flex flex-col items-center sm:items-start">
               <div className="relative w-[50px] h-[50px]">
