@@ -20,7 +20,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
   return (
     <div 
       className="mx-auto p-6 bg-white rounded-lg shadow-lg">
-        <div className='flex flex-row gap-[120px] items-center'>
+        <div className='flex flex-row justify-between items-center'>
       <div className="text-[32px] font-[500] text-[#333333]">
         {isLogin ? 'Login' : 'Create an account'}
       </div>

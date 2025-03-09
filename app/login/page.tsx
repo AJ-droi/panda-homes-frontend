@@ -9,7 +9,7 @@ const Signup = () => {
   return (
     <div className='bg-white'>
          <Head>
-        <title>Signup Page | Panda App</title>
+        <title>Login Page | Panda App</title>
         <meta name="description" content="Landing page for Panda App" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -21,7 +21,7 @@ const Signup = () => {
             <FormShapes />
         </div>
         <div className='md:w-1/2'>
-      <AuthForm isLogin={false}/>
+      <AuthForm isLogin={true}/>
         </div>
     </div>
     </div>
