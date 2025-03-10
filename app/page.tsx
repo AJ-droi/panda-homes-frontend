@@ -22,8 +22,8 @@ export default function Home() {
 
       <Navbar />
 
-      <div className="flex flex-col md:flex-row relative">
-        <div className="md:w-1/2 px-4 sm:px-6 md:px-10 lg:px-[100px] bg-gray-600 w-full flex flex-col min-h-screen md:overflow-y-auto py-10 z-10">
+      <div className="flex flex-col md:flex-row relative text-[#000]">
+        <div className="md:w-1/2 px-4 sm:px-6 md:px-10 lg:px-[100px] bg-gradient-to-b  from-[#E0DEF7] to-[#fff] w-full flex flex-col min-h-screen md:overflow-y-auto py-10 z-10">
           <div className="w-full max-w-[600px]">
             <div className="">
               <h1 className="font-[700] font-[Plus Jakarta Sans] leading-[110%] tracking-[-0.01em] text-[32px] sm:text-[48px] lg:text-[64px] flex justify-start">
