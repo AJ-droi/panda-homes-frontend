@@ -11,7 +11,7 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     return (
         <nav className="w-full bg-white shadow-md p-4 flex flex-wrap justify-between items-center z-50">
-          <div className="flex justify-between items-center w-full lg:w-auto">
+          <div className="flex justify-between animate__animated animate__slideInLeft items-center w-full lg:w-auto">
             <div className="w-[133px] h-[38px] hover:cursor-pointer">
               <Image
                 src="/landingPage/logo.png"
@@ -54,12 +54,12 @@ const Navbar = () => {
           <div
             className={`${
               isMenuOpen ? "flex" : "hidden"
-            } lg:flex flex-col lg:flex-row gap-4 w-full lg:w-auto mt-4 lg:mt-0`}
+            } lg:flex flex-col animate__animated animate__slideInRight  lg:flex-row gap-4 w-full lg:w-auto mt-4 lg:mt-0`}
           >
             <Link href="/login" className="w-full lg:w-auto">
               <WhiteButton title="Login" />
             </Link>
-            <Link href="/sign-in" className="w-full lg:w-auto">
+            <Link href="/signup" className="w-full lg:w-auto">
               <ColouredButton title="Sign up" />
             </Link>
           </div>
