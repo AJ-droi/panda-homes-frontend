@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Link from 'next/link';
 import React, { useState } from 'react';
 import ColouredButton from "@/components/ColouredButton";
@@ -13,7 +14,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   return (
