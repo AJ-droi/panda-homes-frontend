@@ -110,9 +110,6 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
       <div className="text-center mt-10">
       <div
             className={`flex lg:flex lg:flex-row gap-4 w-full items-center justify-center lg:w-auto mt-4 lg:mt-0`}>
-            {/* <Link href="/login" className="w-full lg:w-auto">
-              <WhiteButton title="Login" />
-            </Link> */}
               <ColouredButton borderRadius='40px' height='64px'>
               <div className='font-[500] text-base sm:text-lg md:text-xl lg:text-[24px] whitespace-nowrap'>
               {isLogin ? 'Login' : 'Create an account'} 

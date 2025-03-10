@@ -1,5 +1,5 @@
 export interface ButtonProps {
-  title?: string; // Make title optional since children can be used instead
+  title?: string;
   borderRadius?: string;
   children?: React.ReactNode;
   height?: any;

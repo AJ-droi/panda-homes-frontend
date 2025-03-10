@@ -33,6 +33,4 @@ const Signup = () => {
   )
 }
 
-export default Signup; 
-
-//ipad pro, surface pro 7, ipad air Azus Zenbook fold
+export default Signup;
