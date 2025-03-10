@@ -59,7 +59,7 @@ const Navbar = () => {
             <Link href="/login" className="w-full lg:w-auto">
               <WhiteButton title="Login" />
             </Link>
-            <Link href="/sign-in" className="w-full lg:w-auto">
+            <Link href="/signup" className="w-full lg:w-auto">
               <ColouredButton title="Sign up" />
             </Link>
           </div>

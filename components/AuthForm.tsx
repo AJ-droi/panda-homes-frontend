@@ -13,18 +13,17 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   return (
     <div 
-      className="mx-auto p-6 bg-white rounded-lg shadow-lg">
+      className="mx-auto p-6 bg-white">
         <div className='flex flex-row justify-between items-center'>
       <div className="text-[32px] font-[500] text-[#333333]">
         {isLogin ? 'Login' : 'Create an account'}
       </div>
-      <Link href='#' className='underline font-[400] text-[#111111]'>
+      <Link href={isLogin ? 'signup' : 'login'} className='underline font-[400] text-[#111111]'>
         {isLogin ? 'Sign up' : 'log in instead'}
       </Link>
       </div>
@@ -115,7 +114,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
               <WhiteButton title="Login" />
             </Link> */}
               <ColouredButton borderRadius='40px' height='64px'>
-              <div className='font-[500] text-[22px]'>
+              <div className='font-[500] text-base sm:text-lg md:text-xl lg:text-[24px] whitespace-nowrap'>
               {isLogin ? 'Login' : 'Create an account'} 
               </div>
               </ColouredButton>
@@ -129,29 +128,29 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
         <div className='bg-[#66666640] w-1/2 h-0.5'></div>
       </div>
       
-      <div className="text-center mt-10">
-      <div
-            className={`flex lg:flex lg:flex-row gap-4 w-full items-center justify-center lg:w-auto mt-4 lg:mt-0`}>
-            {/* <Link href="/login" className="w-full lg:w-auto">
-              <WhiteButton title="Login" />
-            </Link> */}
-              <WhiteButton borderRadius='40px' height='64px'>
-                <div className='flex gap-[16px] justify-center items-center'>
-                    <div>
-                    <Image
-                src="/google-logo.png"
-                alt="Panda Logo"
-                width={24}
-                height={24}
-                style={{ objectFit: "contain" }}
-                priority
-              />
-                    </div>
-                    <div className='text-[#333333] font-[400] text-[24px]'>Continue with Goggle</div>
-                </div>
-              </WhiteButton>
-          </div>
+      <div className="text-center mt-6 sm:mt-8 lg:mt-10">
+  <div className="flex justify-center items-center w-full">
+    <WhiteButton borderRadius='40px' height={{base: '48px', sm: '56px', md: '64px'}}>
+        {/* className="w-full sm:max-w-md" */}
+      <div className='flex gap-2 sm:gap-3 md:gap-[16px] justify-center items-center py-2 px-3 sm:px-4'>
+        <div>
+          <Image
+            src="/google-logo.png"
+            alt="Google Logo"
+            width={20}
+            height={20}
+            className="w-5 h-5 sm:w-6 sm:h-6 md:w-[24px] md:h-[24px]"
+            style={{ objectFit: "contain" }}
+            priority
+          />
+        </div>
+        <div className='text-[#333333] font-[400] text-base sm:text-lg md:text-xl lg:text-[24px] whitespace-nowrap'>
+          Continue with Google
+        </div>
       </div>
+    </WhiteButton>
+  </div>
+</div>
 
     </div>
   );

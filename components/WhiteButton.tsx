@@ -2,7 +2,7 @@ export interface ButtonProps {
   title?: string; // Make title optional since children can be used instead
   borderRadius?: string;
   children?: React.ReactNode;
-  height?: string;
+  height?: any;
 }
 
 const WhiteButton: React.FC<ButtonProps> = ({ title, borderRadius = '8px', children, height='48px' }) => {

@@ -96,7 +96,7 @@ export default function Home() {
                 </Link>
               </div>
               <div className="md:mt-0">
-                <Link href="/sign-in" className="w-full md:w-auto">
+                <Link href="/signup" className="w-full md:w-auto">
                   <ColouredButton title="Sign up" />
                 </Link>
               </div>
