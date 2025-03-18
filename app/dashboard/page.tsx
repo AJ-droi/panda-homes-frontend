@@ -4,6 +4,7 @@ import Sidebar from '@/components/Sidebar';
 import Navbar from '@/components/Navbar';
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
+import DashboardHome from '@/components/dashboard/Home/DashboardHome';
 
 const Dashboard = () => {
   const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
@@ -15,6 +16,7 @@ const Dashboard = () => {
         <Navbar />
         
         <div className="p-4 sm:p-6 md:p-8 bg-[#fafafe] min-h-screen">
+            <DashboardHome />
         </div>
       </div>
     </div>
