@@ -115,7 +115,12 @@ const PropertyPaymentTable = () => {
           </thead>
           <tbody>
             {propertyData.map((item, index) => (
-              <tr key={item.id} className={`${index !== propertyData.length - 1 ? 'border-b' : ''} border-[#666666] hover:bg-gray-50`}>
+              <tr
+                key={item.id}
+                className={`${
+                  index !== propertyData.length - 1 ? "border-b" : ""
+                } border-[#666666] hover:bg-gray-50`}
+              >
                 <td className="py-4 px-6 text-center">{item.property}</td>
                 <td className="py-4 px-6 text-center">{item.amountDue}</td>
                 <td
