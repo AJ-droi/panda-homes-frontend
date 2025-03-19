@@ -75,7 +75,7 @@ const DashboardHomeNav = () => {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg shadow-[#0000001A] flex flex-wrap lg:flex-nowrap text-[#785DBA] w-full">
+    <div className="bg-white py-6 rounded-2xl shadow-lg shadow-[#0000001A] flex flex-wrap lg:flex-nowrap text-[#785DBA] w-full">
       {navItems.map((item, index) => (
         <div
           key={index}
