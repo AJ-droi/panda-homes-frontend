@@ -9,7 +9,8 @@ import {
   SidebarServiceRequestsIcon,
   SidebarNoticeAndAgreementIcon,
   SidebarReportsAnalyticsIcon,
-  BreadcrumbIcon
+  BreadcrumbIcon,
+  HomeActiveIcon
 } from "@/layout/svgIconPaths";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
@@ -22,6 +23,7 @@ const Sidebar = ({ activePage = "Home" }) => {
     {
       name: "Home",
       icon: <SidebarHomeIcon />,
+      activeIcon: <HomeActiveIcon />,
       path: "/",
     },
     {
@@ -101,14 +103,20 @@ const Sidebar = ({ activePage = "Home" }) => {
             />
           </section>
 
-          <section className="flex flex-col gap-8 px-4 w-full">
+          <section className="flex flex-col gap-8 w-full">
             {iconData.map((item, index) => (
               <nav
                 key={index}
-                className="flex gap-4 items-center px-4 py-2 rounded-lg hover:bg-gray-100 cursor-pointer"
+                className={`flex gap-4 items-center px-4 py-4 hover:bg-gray-100 cursor-pointer ${
+                  activePage === item.name ? "border-r-2 border-r-[#785DBA]" : ""
+                }`}
               >
-                <div>{item.icon}</div>
-                <div className="text-black text-base">{item.name}</div>
+                <div>{activePage === item.name ? item.activeIcon : item.icon}</div>
+                <div className={`text-base ${
+                  activePage === item.name ? "text-[#785DBA]" : "text-black"
+                }`}>
+                  {item.name}
+                </div>
               </nav>
             ))}
           </section>
