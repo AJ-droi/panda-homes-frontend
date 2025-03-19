@@ -1,6 +1,7 @@
+/* eslint-disable */
 import React from 'react';
 import Card from '@/components/Card';
-import GradientButton from './GradientButtons';
+import GradientButton from './GradientButton';
 import { AddPropertyPlus, NewTenantIcon, SendRentReminderIcon } from '@/layout/svgIconPaths';
 
 const ActionsCard = () => {

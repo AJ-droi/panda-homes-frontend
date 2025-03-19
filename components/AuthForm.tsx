@@ -14,7 +14,6 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  // const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   return (

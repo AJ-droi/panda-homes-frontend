@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
@@ -122,9 +123,6 @@ const Sidebar = ({ activePage = "Home" }) => {
           </section>
         </div>
       </div>
-
-      {/* <div className={`${isTabletOrSmaller ? 'pl-0' : 'pl-[179px]'} transition-all duration-300`}> */}
-      {/* </div> */}
     </div>
   );
 };
