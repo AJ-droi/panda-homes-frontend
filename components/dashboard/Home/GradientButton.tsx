@@ -7,7 +7,7 @@ export interface ButtonProps {
   padding?: string;
 }
 
-const ColouredButton: React.FC<ButtonProps> = ({
+const GradientButton: React.FC<ButtonProps> = ({
   title,
   borderRadius = "8px",
   children,
@@ -16,7 +16,7 @@ const ColouredButton: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={`hover:cursor-pointer bg-[#785DBA] hover:border-[#E0DEF7] hover:border-2 hover:bg-white hover:text-black font-[700] text-white text-base px-6 w-full py-[12px]`}
+      className={`hover:cursor-pointer bg-gradient-to-r  from-[#7942FB] to-[#B091F9] hover:border-[#E0DEF7] hover:border-2 hover:text-black font-[700] text-white text-base px-6 w-full py-[12px]`}
       style={{ borderRadius, height, padding }}
     >
       {children || title}
@@ -24,4 +24,4 @@ const ColouredButton: React.FC<ButtonProps> = ({
   );
 };
 
-export default ColouredButton;
+export default GradientButton;

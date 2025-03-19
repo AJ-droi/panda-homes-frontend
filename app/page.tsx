@@ -4,7 +4,7 @@ import Image from "next/image";
 import Head from "next/head";
 import ColouredButton from "@/components/ColouredButton";
 import WhiteButton from "@/components/WhiteButton";
-import Navbar from "@/components/Navbar";
+import LandingNavbar from "@/components/LandingPageNavbar";
 import LandingPageTrackCard from "@/components/landingPage/LandingPageTrackCard";
 import Link from "next/link";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
@@ -20,7 +20,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar />
+      <LandingNavbar />
 
       <div className="flex flex-col md:flex-row relative text-[#000]">
         <div className="md:w-1/2 px-4 sm:px-6 md:px-10 lg:px-[100px] bg-gradient-to-b  from-[#E0DEF7] to-[#fff] w-full flex flex-col min-h-screen md:overflow-y-auto py-10 z-10">
