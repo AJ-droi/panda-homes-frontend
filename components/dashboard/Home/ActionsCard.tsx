@@ -12,7 +12,7 @@ const ActionsCard = () => {
   ];
 
   return (
-    <div className="w-auto max-w-[700px] py-10 p-6 sm:p-4">
+    <div className="w-auto max-w-[700px] max-h-[364px] sm:p-4">
       <Card>
         <section className="flex justify-center bg-white flex-col rounded-2xl p-3 sm:p-4 md:p-6 w-full max-w-md mx-auto">
           {buttonData.map((item, index) => (

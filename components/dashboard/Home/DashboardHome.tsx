@@ -5,7 +5,7 @@ import DashboardHomeNav from './Homenav'
 import PropertyPaymentTable from './PropertyPaymentTable';
 import ActionsCard from './ActionsCard';
 import Pagination from "../PaginationComponent";
-import ServiceRequestTable from '@/components/ColouredTable';
+import ServiceRequestTable from '@/components/ServiceRequestTable';
 
 const DashboardHome = () => {
 
@@ -39,7 +39,7 @@ const DashboardHome = () => {
           </div>
         </section>
 
-        <section className='bg-[#fafafe] mt-16 w-full'>
+        <section className='mt-16 w-full'>
           <div 
             className='text-[#4D4D4D] font-[600] mt-10 text-[22px] leading-[145%]'
             style={{fontFamily: 'Plus Jakarta Sans'}}
@@ -47,7 +47,7 @@ const DashboardHome = () => {
             Upcoming Rent Payments
           </div>
             <div 
-              className={`flex ${useColumnLayout ? 'flex-col' : 'flex-col lg:flex-row'} lg:justify-center  gap-10 w-full`}
+              className={`flex ${useColumnLayout ? 'flex-col' : 'flex-col lg:flex-row'}  gap-10 w-full`}
               style={{fontFamily: 'Plus Jakarta Sans'}}
             >
               <div className='mt-6 w-full max-w-[780px]'>
@@ -69,8 +69,11 @@ const DashboardHome = () => {
             >
               Service Requests
           </div>
-          <div className='mt-6 w-full'>
+          <div className='mt-6 w-full max-w-[936px]'>
             <ServiceRequestTable />
+            <div className='mt-6 flex justify-center lg:justify-end'>
+                  <Pagination totalPages={10} currentPage={4} onPageChange={()=> ''}/>
+                </div>
           </div>
         </section>
     </div>

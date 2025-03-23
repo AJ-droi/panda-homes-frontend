@@ -167,7 +167,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
                   priority
                 />
               </div>
-              <div className="text-[#333333] font-[400] text-base sm:text-lg md:text-xl lg:text-[24px] whitespace-nowrap">
+              <div className="font-[400] text-base sm:text-lg md:text-xl lg:text-[24px] whitespace-nowrap">
                 Continue with Google
               </div>
             </div>
