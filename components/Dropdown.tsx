@@ -54,9 +54,9 @@ const Dropdown: React.FC<DropdownProps> = ({
           <path
             d="M15.3613 8.49268L10.5957 13.2583L5.83008 8.49268"
             stroke="white"
-            stroke-width="0.953125"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="0.953125"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </button>
