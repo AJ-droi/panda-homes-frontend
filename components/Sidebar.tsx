@@ -12,7 +12,8 @@ import {
   SidebarReportsAnalyticsIcon,
   BreadcrumbIcon,
   HomeActiveIcon,
-  PropertyActiveIcon
+  PropertyActiveIcon,
+  TenantActiveIcon
 } from "@/layout/svgIconPaths";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
@@ -40,6 +41,7 @@ const Sidebar = () => {
     {
       name: "Tenants",
       icon: <SidebarTenantsIcon />,
+      activeIcon: <TenantActiveIcon />,
       path: "/tenants",
     },
     {

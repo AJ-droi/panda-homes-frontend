@@ -5,12 +5,14 @@ interface DropdownProps {
   icon?: React.ReactNode;
   placeholder?: string;
   selectedOption?: string
+  colorIcon?: boolean;
 }
 
 const Dropdown2: React.FC<DropdownProps> = ({
   options,
   icon,
   placeholder = "Select an option",
+  colorIcon = false
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -49,11 +51,11 @@ const Dropdown2: React.FC<DropdownProps> = ({
             width="20.3333"
             height="20.3333"
             rx="10.1667"
-            fill=""
+            fill={colorIcon ? "#785DBA" : ""}
           />
           <path
             d="M15.3613 8.49268L10.5957 13.2583L5.83008 8.49268"
-            stroke="#785DBA"
+            stroke={colorIcon ? "#FFF" : "#785DBA"}
             stroke-width="0.953125"
             stroke-linecap="round"
             stroke-linejoin="round"
