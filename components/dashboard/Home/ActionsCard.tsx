@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from "react";
 import Card from "@/components/Card";
 import GradientButton from "./GradientButton";

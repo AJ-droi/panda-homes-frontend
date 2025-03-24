@@ -1,5 +1,6 @@
-/* eslint-disable */
-export interface ButtonProps {
+import React from "react";
+
+ export interface ButtonProps {
   title?: string;
   borderRadius?: string;
   children?: React.ReactNode;

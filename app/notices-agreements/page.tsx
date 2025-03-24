@@ -1,6 +1,4 @@
-
 "use client"
-import Loading from '@/components/Loading';
 import device from '@/constants/breakpoints';
 import { useMatchMediaQuery } from '@/hooks/useViewPort';
 import React from 'react';
