@@ -5,6 +5,7 @@ export interface ButtonProps {
   children?: React.ReactNode;
   height?: string;
   padding?: string;
+  hoverEffect?: boolean;
 }
 
 const ColouredButton: React.FC<ButtonProps> = ({
@@ -13,10 +14,11 @@ const ColouredButton: React.FC<ButtonProps> = ({
   children,
   height = "48px",
   padding,
+  hoverEffect = true,
 }) => {
   return (
     <button
-      className={`hover:cursor-pointer bg-[#785DBA] hover:border-[#E0DEF7] hover:border-2 hover:bg-white hover:text-black font-[700] text-white text-base px-6 w-full py-[12px]`}
+      className={`hover:cursor-pointer bg-[#785DBA] ${hoverEffect ? 'hover:border-[#E0DEF7] hover:border-2 hover:bg-white hover:text-black' : ''} font-[700] text-white text-base px-6 w-full py-[12px]`}
       style={{ borderRadius, height, padding }}
     >
       {children || title}

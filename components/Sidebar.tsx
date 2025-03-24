@@ -2,7 +2,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { colors } from "@/constants/colors";
+import { usePathname, useRouter } from "next/navigation"; // Import usePathname
 import {
   SidebarHomeIcon,
   SidebarPropertiesIcon,
@@ -11,25 +11,30 @@ import {
   SidebarNoticeAndAgreementIcon,
   SidebarReportsAnalyticsIcon,
   BreadcrumbIcon,
-  HomeActiveIcon
+  HomeActiveIcon,
+  PropertyActiveIcon
 } from "@/layout/svgIconPaths";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
 
-const Sidebar = ({ activePage = "Home" }) => {
+const Sidebar = () => {
+  const pathname = usePathname(); // Get the current path
   const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
   const [isOpen, setIsOpen] = useState(false);
+
+  const router = useRouter();
 
   const iconData = [
     {
       name: "Home",
       icon: <SidebarHomeIcon />,
       activeIcon: <HomeActiveIcon />,
-      path: "/",
+      path: "/dashboard",
     },
     {
       name: "Properties",
       icon: <SidebarPropertiesIcon />,
+      activeIcon: <PropertyActiveIcon />,
       path: "/properties",
     },
     {
@@ -58,14 +63,17 @@ const Sidebar = ({ activePage = "Home" }) => {
     setIsOpen(!isOpen);
   };
 
-  const Breadcrumb = () => (
-    <div className="flex items-center p-4 bg-white border-b border-gray-200">
-      <button onClick={toggleSidebar} className="mr-4">
-       <BreadcrumbIcon />
-      </button>
-      <span className="font-medium">{activePage}</span>
-    </div>
-  );
+  const Breadcrumb = () => {
+    const activeItem = iconData.find(item => item.path === pathname);
+    return (
+      <div className="flex items-center p-4 bg-white border-b border-gray-200">
+        <button onClick={toggleSidebar} className="mr-4">
+          <BreadcrumbIcon />
+        </button>
+        <span className="font-medium text-black">{activeItem?.name || "Home"}</span>
+      </div>
+    );
+  };
 
   return (
     <div>
@@ -73,7 +81,7 @@ const Sidebar = ({ activePage = "Home" }) => {
 
       {isTabletOrSmaller && isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm shadow-xl bg-opacity-50 z-30"
           onClick={toggleSidebar}
         />
       )}
@@ -109,12 +117,17 @@ const Sidebar = ({ activePage = "Home" }) => {
               <nav
                 key={index}
                 className={`flex gap-4 items-center px-4 py-4 hover:bg-gray-100 cursor-pointer ${
-                  activePage === item.name ? "border-r-2 border-r-[#785DBA]" : ""
+                  pathname === item.path ? "border-r-2 border-r-[#785DBA]" : ""
                 }`}
+                onClick={() => {
+                  if (item.path) {
+                    router.push(item.path);
+                  }
+                }}
               >
-                <div>{activePage === item.name ? item.activeIcon : item.icon}</div>
+                <div>{pathname === item.path ? item.activeIcon : item.icon}</div>
                 <div className={`text-base ${
-                  activePage === item.name ? "text-[#785DBA]" : "text-black"
+                  pathname === item.path ? "text-[#785DBA]" : "text-black"
                 }`}>
                   {item.name}
                 </div>

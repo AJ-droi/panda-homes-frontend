@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react'
 import DashboardHomeNav from './Homenav'
 import PropertyPaymentTable from './PropertyPaymentTable';
 import ActionsCard from './ActionsCard';
-import Pagination from "../PaginationComponent";
-import ServiceRequestTable from '@/components/ServiceRequestTable';
+import Pagination from "../../PaginationComponent";
+import ServiceRequestTable from '@/components/dashboard/Home/ServiceRequestTable';
 
 const DashboardHome = () => {
 
