@@ -13,7 +13,8 @@ import {
   BreadcrumbIcon,
   HomeActiveIcon,
   PropertyActiveIcon,
-  TenantActiveIcon
+  TenantActiveIcon,
+  ServiceRequestsActiveIcon
 } from "@/layout/svgIconPaths";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
@@ -47,6 +48,7 @@ const Sidebar = () => {
     {
       name: "Service Requests",
       icon: <SidebarServiceRequestsIcon />,
+      activeIcon: <ServiceRequestsActiveIcon />,
       path: "/service-requests",
     },
     {

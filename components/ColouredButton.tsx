@@ -6,7 +6,7 @@ export interface ButtonProps {
   height?: string;
   padding?: string;
   hoverEffect?: boolean;
-  onClick?: () => void
+  onClick?: () => void;
 }
 
 const ColouredButton: React.FC<ButtonProps> = ({
@@ -16,11 +16,15 @@ const ColouredButton: React.FC<ButtonProps> = ({
   height = "48px",
   padding,
   hoverEffect = true,
-  onClick
+  onClick,
 }) => {
   return (
     <button
-      className={`hover:cursor-pointer bg-[#785DBA] ${hoverEffect ? 'hover:border-[#E0DEF7] hover:border-2 hover:bg-white hover:text-black' : ''} font-[700] text-white text-base px-6 w-full py-[12px]`}
+      className={`hover:cursor-pointer bg-[#785DBA] ${
+        hoverEffect
+          ? "hover:border-[#E0DEF7] hover:border-2 hover:bg-white hover:text-black"
+          : ""
+      } font-[700] text-white text-base px-6 py-[12px]`}
       onClick={onClick}
       style={{ borderRadius, height, padding }}
     >
