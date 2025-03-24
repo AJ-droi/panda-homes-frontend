@@ -12,9 +12,11 @@ import { LocationIcon, PropertyTypeIcon, OccupantStatusIcon, PropertyStatusIcon,
 import RentCollectionSummary from './RentCollectionSummary';
 import IssuesListTable from './IssuesTable';
 import ColouredButton from '@/components/ColouredButton';
+import PropertyForm from './PropertyForm';
 
 const PropertiesHome = () => {
   const [useColumnLayout, setUseColumnLayout] = useState(false);
+  const [ newPropertyForm, setNewPropertyForm ] = useState(false)
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -30,7 +32,10 @@ const PropertiesHome = () => {
   }, []);
 
   return (
+
     <div className='bg-[#fafafe] px-3 sm:px-4 md:px-6 lg:px-10 w-full'>
+    {!newPropertyForm && (
+      <div>
       {/* Search and Filters Section */}
       <section className='flex flex-col justify-center'>
         <div className='mt-3 sm:mt-4 w-full flex justify-center'>
@@ -82,7 +87,7 @@ const PropertiesHome = () => {
 
         <div className='flex justify-center sm:justify-end mt-3 sm:mt-0'>
   <div className="w-auto">
-    <ColouredButton hoverEffect={false}>
+    <ColouredButton hoverEffect={false} onClick={()=> setNewPropertyForm(true)}>
       <div className='flex gap-[8.72px] justify-center items-center'>
         <div className='flex justify-center items-center'>
           <WhitePlusIcon />
@@ -96,6 +101,13 @@ const PropertiesHome = () => {
 </div>
 
       </section>
+      </div>
+    )}
+{newPropertyForm && (
+      <section className=''>
+        <PropertyForm onClose={()=> setNewPropertyForm(false)}/>
+      </section>
+)}
     </div>
   );
 };

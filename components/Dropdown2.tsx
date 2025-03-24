@@ -7,7 +7,7 @@ interface DropdownProps {
   selectedOption?: string
 }
 
-const Dropdown: React.FC<DropdownProps> = ({
+const Dropdown2: React.FC<DropdownProps> = ({
   options,
   icon,
   placeholder = "Select an option",
@@ -23,13 +23,13 @@ const Dropdown: React.FC<DropdownProps> = ({
   };
 
   return (
-    <div className="relative w-full sm:w-[200px] text-[11.44px] leading-[150%] font-[500] text-[#999999]" style={{fontFamily: 'Plus Jakarta Sans'}}>
+    <div className="relative w-full text-[11.44px] leading-[150%] font-[500] text-[#999999]" style={{fontFamily: 'Plus Jakarta Sans'}}>
       <button
         onClick={toggleDropdown}
         className="w-full p-3 border hover:cursor-pointer border-[#262626] text-[#999999] rounded-lg flex items-center justify-between focus:outline-none focus:border-[#785DBA] transition-colors"
         style={{fontFamily: 'Plus Jakarta Sans'}}
       >
-        <div className="flex items-center">
+        <div className="flex items-center text-sm">
           {icon && (
             <span className="mr-2 pr-2 border-[#262626] border-r-1 py-1">{icon}</span>
           )}
@@ -49,11 +49,11 @@ const Dropdown: React.FC<DropdownProps> = ({
             width="20.3333"
             height="20.3333"
             rx="10.1667"
-            fill="#785DBA"
+            fill=""
           />
           <path
             d="M15.3613 8.49268L10.5957 13.2583L5.83008 8.49268"
-            stroke="white"
+            stroke="#785DBA"
             stroke-width="0.953125"
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -61,7 +61,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         </svg>
       </button>
       {isOpen && (
-        <div className="absolute z-10 w-full mt-2 bg-white border border-gray-300 rounded-lg shadow-lg">
+        <div className="absolute text-sm z-10 w-full mt-2 bg-white border border-gray-300 rounded-lg shadow-lg">
           {options.map((option, index) => (
             <div
               key={index}
@@ -77,4 +77,4 @@ const Dropdown: React.FC<DropdownProps> = ({
   );
 };
 
-export default Dropdown;
+export default Dropdown2;
