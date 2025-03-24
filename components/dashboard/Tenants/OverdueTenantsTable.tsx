@@ -2,7 +2,7 @@
 import React from "react";
 
 const OverdueRentsTable = () => {
-  const propertyData = [
+  const overDueRentTable = [
     {
       id: 1,
       property: "Lekki Flat A",
@@ -53,19 +53,59 @@ const OverdueRentsTable = () => {
         <table className="w-full">
           <thead>
             <tr className="border-b">
-              <th className="text-center text-[16px] md:text-[16px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium" style={{ fontFamily: "Plus Jakarta Sans" }}>Tenant</th>
-              <th className="text-center text-[16px] md:text-[16px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium" style={{ fontFamily: "Plus Jakarta Sans" }}>Property</th>
-              <th className="text-center text-[16px] md:text-[16px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium" style={{ fontFamily: "Plus Jakarta Sans" }}>Amount Owed</th>
-              <th className="text-center text-[16px] md:text-[16px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium" style={{ fontFamily: "Plus Jakarta Sans" }}>Overdue Duration</th>
+              <th
+                className="text-center text-[16px] md:text-[16px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
+                Tenant
+              </th>
+              <th
+                className="text-center text-[16px] md:text-[16px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
+                Property
+              </th>
+              <th
+                className="text-center text-[16px] md:text-[16px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
+                Amount Owed
+              </th>
+              <th
+                className="text-center text-[16px] md:text-[16px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
+                Overdue Duration
+              </th>
             </tr>
           </thead>
-          <tbody className="leading-[145%]" style={{ fontFamily: "Plus Jakarta Sans" }}>
-            {propertyData.map((item, index) => (
-              <tr key={item.id} className={`${index !== propertyData.length - 1 ? "border-b" : ""} border-[#666666] hover:bg-gray-50`}>
-                <td className="py-4 px-6 text-[16px] md:text-[16px] text-center">{item.tenantName}</td>
-                <td className="py-4 px-6 text-[16px] md:text-[16px] text-center">{item.property}</td>
-                <td className={`py-4 text-[16px] md:text-[16px] text-center px-6`}>{item.rentOwed}</td>
-                <td className={`py-4 px-6 text-[16px] md:text-[16px] text-center`}>{item.overdueDuration}</td>
+          <tbody
+            className="leading-[145%]"
+            style={{ fontFamily: "Plus Jakarta Sans" }}
+          >
+            {overDueRentTable.map((item, index) => (
+              <tr
+                key={item.id}
+                className={`${
+                  index !== overDueRentTable.length - 1 ? "border-b" : ""
+                } border-[#666666] hover:bg-gray-50`}
+              >
+                <td className="py-4 px-6 text-[16px] md:text-[16px] text-center">
+                  {item.tenantName}
+                </td>
+                <td className="py-4 px-6 text-[16px] md:text-[16px] text-center">
+                  {item.property}
+                </td>
+                <td
+                  className={`py-4 text-[16px] md:text-[16px] text-center px-6`}
+                >
+                  {item.rentOwed}
+                </td>
+                <td
+                  className={`py-4 px-6 text-[16px] md:text-[16px] text-center`}
+                >
+                  {item.overdueDuration}
+                </td>
               </tr>
             ))}
           </tbody>

@@ -1,7 +1,7 @@
 import React from "react";
 
 const TenantsListTable = () => {
-  const propertyData = [
+  const tenantsList = [
     {
       id: 1,
       property: "Lekki Villa",
@@ -61,11 +61,11 @@ const TenantsListTable = () => {
             className="leading-[145%]"
             style={{ fontFamily: "Plus Jakarta Sans" }}
           >
-            {propertyData.map((item, index) => (
+            {tenantsList.map((item, index) => (
               <tr
                 key={item.id}
                 className={`${
-                  index !== propertyData.length - 1 ? "border-b" : ""
+                  index !== tenantsList.length - 1 ? "border-b" : ""
                 } border-[#666666] hover:bg-gray-50`}
               >
                 <td className="py-4 px-6 text-center">{item.tenantName}</td>

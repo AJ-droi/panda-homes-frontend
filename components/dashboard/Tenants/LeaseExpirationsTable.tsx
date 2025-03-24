@@ -2,7 +2,7 @@
 import React from "react";
 
 const LeaseExpirationsTable = () => {
-  const propertyData = [
+  const leaseExpirationData = [
     {
       id: 1,
       property: "Lekki Flat A",
@@ -39,54 +39,54 @@ const LeaseExpirationsTable = () => {
       tenantName: "Peter Okon",
       expiryDate: "Mar 10, 2023",
     },
-{
-    id: 7,
-    property: "Lekki Flat A",
-    tenantName: "Peter Okon",
-    expiryDate: "Mar 10, 2023",
-  },
-  {
-    id: 8,
-    property: "Abuja Duplex",
-    tenantName: "Peter Okon",
-    expiryDate: "Mar 10, 2023",
-  },
-  {
-    id: 9,
-    property: "Abuja Duplex",
-    tenantName: "Peter Okon",
-    expiryDate: "Mar 10, 2023",
-  },
-  {
-    id: 10,
-    property: "Abuja Duplex",
-    tenantName: "Peter Okon",
-    expiryDate: "Mar 10, 2023",
-  },
-  {
-    id: 11,
-    property: "Abuja Duplex",
-    tenantName: "Peter Okon",
-    expiryDate: "Mar 10, 2023",
-  },
-  {
-    id: 12,
-    property: "Ikeja Studio",
-    tenantName: "Peter Okon",
-    expiryDate: "Mar 10, 2023",
-  },
-  {
-    id: 13,
-    property: "Ikeja Studio",
-    tenantName: "Peter Okon",
-    expiryDate: "Mar 10, 2023",
-  },
-  {
-    id: 14,
-    property: "Abuja Duplex",
-    tenantName: "Peter Okon",
-    expiryDate: "Mar 10, 2023",
-  },
+    {
+      id: 7,
+      property: "Lekki Flat A",
+      tenantName: "Peter Okon",
+      expiryDate: "Mar 10, 2023",
+    },
+    {
+      id: 8,
+      property: "Abuja Duplex",
+      tenantName: "Peter Okon",
+      expiryDate: "Mar 10, 2023",
+    },
+    {
+      id: 9,
+      property: "Abuja Duplex",
+      tenantName: "Peter Okon",
+      expiryDate: "Mar 10, 2023",
+    },
+    {
+      id: 10,
+      property: "Abuja Duplex",
+      tenantName: "Peter Okon",
+      expiryDate: "Mar 10, 2023",
+    },
+    {
+      id: 11,
+      property: "Abuja Duplex",
+      tenantName: "Peter Okon",
+      expiryDate: "Mar 10, 2023",
+    },
+    {
+      id: 12,
+      property: "Ikeja Studio",
+      tenantName: "Peter Okon",
+      expiryDate: "Mar 10, 2023",
+    },
+    {
+      id: 13,
+      property: "Ikeja Studio",
+      tenantName: "Peter Okon",
+      expiryDate: "Mar 10, 2023",
+    },
+    {
+      id: 14,
+      property: "Abuja Duplex",
+      tenantName: "Peter Okon",
+      expiryDate: "Mar 10, 2023",
+    },
   ];
 
   return (
@@ -95,14 +95,37 @@ const LeaseExpirationsTable = () => {
         <table className="w-full">
           <thead>
             <tr className="border-b">
-              <th className="text-center text-[16px] md:text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium" style={{ fontFamily: "Plus Jakarta Sans" }}>Tenant Name</th>
-              <th className="text-center text-[16px] md:text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium" style={{ fontFamily: "Plus Jakarta Sans" }}>Property</th>
-              <th className="text-center text-[16px] md:text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium" style={{ fontFamily: "Plus Jakarta Sans" }}>Expiry Date</th>
-              </tr>
+              <th
+                className="text-center text-[16px] md:text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
+                Tenant Name
+              </th>
+              <th
+                className="text-center text-[16px] md:text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
+                Property
+              </th>
+              <th
+                className="text-center text-[16px] md:text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
+                Expiry Date
+              </th>
+            </tr>
           </thead>
-          <tbody className="leading-[145%]" style={{ fontFamily: "Plus Jakarta Sans" }}>
-            {propertyData.map((item, index) => (
-              <tr key={item.id} className={`${index !== propertyData.length - 1 ? "border-b" : ""} border-[#666666] hover:bg-gray-50`}>
+          <tbody
+            className="leading-[145%]"
+            style={{ fontFamily: "Plus Jakarta Sans" }}
+          >
+            {leaseExpirationData.map((item, index) => (
+              <tr
+                key={item.id}
+                className={`${
+                  index !== leaseExpirationData.length - 1 ? "border-b" : ""
+                } border-[#666666] hover:bg-gray-50`}
+              >
                 <td className="py-4 px-6 text-center">{item.property}</td>
                 <td className="py-4 px-6 text-center">{item.tenantName}</td>
                 <td className={`py-4 px-6 text-center`}>{item.expiryDate}</td>

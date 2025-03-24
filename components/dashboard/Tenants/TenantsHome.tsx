@@ -16,7 +16,6 @@ import OverdueRentsTable from "./OverdueTenantsTable";
 
 const TenantsHome = () => {
   const [useColumnLayout, setUseColumnLayout] = useState(false);
-  const [newPropertyForm, setNewPropertyForm] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -40,36 +39,36 @@ const TenantsHome = () => {
             <SearchBar placeholder="Search by tenant name, apartment, or phone number" />
           </div>
           <div className="mt-3 sm:mt-4">
-  <div className="flex flex-col sm:flex-row lg:flex-nowrap md:flex-wrap sm:flex-wrap  gap-2 w-full justify-center items-center sm:gap-3 md:gap-4 lg:gap-2 p-2 md:p-[6.35px] rounded-[7.62px] shadow-sm sm:shadow-md md:shadow-lg overflow-x-auto">
-    <Dropdown2
-      colorIcon={true}
-      options={["Bungalow", "3-Storey", "Duplex", "Hall"]}
-      placeholder="Property Name"
-      icon={<PropertyTypeIcon />}
-    />
+            <div className="flex flex-col sm:flex-row lg:flex-nowrap md:flex-wrap sm:flex-wrap  gap-2 w-full justify-center items-center sm:gap-3 md:gap-4 lg:gap-2 p-2 md:p-[6.35px] rounded-[7.62px] shadow-sm sm:shadow-md md:shadow-lg overflow-x-auto">
+              <Dropdown2
+                colorIcon={true}
+                options={["Bungalow", "3-Storey", "Duplex", "Hall"]}
+                placeholder="Property Name"
+                icon={<PropertyTypeIcon />}
+              />
 
-    <Dropdown2
-      colorIcon={true}
-      options={["Occupied", "Not Occupied"]}
-      placeholder="Lease Status"
-      icon={<OccupantStatusIcon />}
-    />
+              <Dropdown2
+                colorIcon={true}
+                options={["Occupied", "Not Occupied"]}
+                placeholder="Lease Status"
+                icon={<OccupantStatusIcon />}
+              />
 
-    <Dropdown2
-      colorIcon={true}
-      options={["Rental", "Outright Sell", "Landed Property"]}
-      placeholder="Rent Status"
-      icon={<PropertyStatusIcon />}
-    />
+              <Dropdown2
+                colorIcon={true}
+                options={["Rental", "Outright Sell", "Landed Property"]}
+                placeholder="Rent Status"
+                icon={<PropertyStatusIcon />}
+              />
 
-    <Dropdown2
-      colorIcon={true}
-      options={["2024", "2025", "2001", "1992"]}
-      placeholder="Move-in Date Range"
-      icon={<BuildYearCalendarIcon />}
-    />
-  </div>
-</div>
+              <Dropdown2
+                colorIcon={true}
+                options={["2024", "2025", "2001", "1992"]}
+                placeholder="Move-in Date Range"
+                icon={<BuildYearCalendarIcon />}
+              />
+            </div>
+          </div>
         </section>
 
         <section className="flex flex-col xl:flex-row gap-6 sm:gap-8 md:gap-10 mt-6 sm:mt-8 md:mt-10 lg:mt-12">

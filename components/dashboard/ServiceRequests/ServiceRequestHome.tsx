@@ -2,18 +2,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Pagination from "../../PaginationComponent";
-import SearchBar from "@/components/SearchBar";
-import Dropdown2 from "@/components/Dropdown2";
-import {
-  PropertyTypeIcon,
-  OccupantStatusIcon,
-  PropertyStatusIcon,
-  BuildYearCalendarIcon,
-  HazardSignIcon,
-} from "@/layout/svgIconPaths";
-import TenantsListTable from "../Tenants/TenantsListTable";
-import LeaseExpirationsTable from "../Tenants/LeaseExpirationsTable";
-import OverdueRentsTable from "../Tenants/OverdueTenantsTable";
+import { HazardSignIcon } from "@/layout/svgIconPaths";
 import ServiceRequestTable from "./RequestTable";
 import Card from "@/components/Card";
 import ColouredButton from "@/components/ColouredButton";
@@ -21,7 +10,6 @@ import WhiteButton from "@/components/WhiteButton";
 
 const ServiceRequestHome = () => {
   const [useColumnLayout, setUseColumnLayout] = useState(false);
-  const [newPropertyForm, setNewPropertyForm] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {

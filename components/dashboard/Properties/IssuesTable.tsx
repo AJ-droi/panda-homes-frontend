@@ -16,7 +16,7 @@ const IssuesListTable = () => {
       tenant: "Peter Okon",
       issue: "Power Outage",
       dateReported: "5 Days Ago",
-    }
+    },
   ];
 
   return (
@@ -57,8 +57,9 @@ const IssuesListTable = () => {
               </th>
             </tr>
           </thead>
-          <tbody className="leading-[145%]"
-          style={{ fontFamily: "Plus Jakarta Sans" }}
+          <tbody
+            className="leading-[145%]"
+            style={{ fontFamily: "Plus Jakarta Sans" }}
           >
             {propertyData.map((item, index) => (
               <tr
@@ -69,20 +70,14 @@ const IssuesListTable = () => {
               >
                 <td className="py-4 px-6 text-center">{item.property}</td>
                 <td className="py-4 px-6 text-center">{item.tenant}</td>
-                <td
-                  className={`py-4 px-6 text-center text-black`}
-                >
+                <td className={`py-4 px-6 text-center text-black`}>
                   {item.issue}
                 </td>
-                <td
-                  className={`py-4 text-center px-6`}
-                >
-                  {item.dateReported}
-                </td>
+                <td className={`py-4 text-center px-6`}>{item.dateReported}</td>
                 <td className="py-4 px-6 text-center">
-                <button className="bg-[#2A8252] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black text-white px-[16px] py-[10px] rounded-[12px] text-sm">
-            Resolve
-          </button>
+                  <button className="bg-[#2A8252] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black text-white px-[16px] py-[10px] rounded-[12px] text-sm">
+                    Resolve
+                  </button>
                 </td>
               </tr>
             ))}

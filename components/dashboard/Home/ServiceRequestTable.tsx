@@ -2,7 +2,7 @@
 import React from "react";
 
 const ServiceRequestTable = () => {
-  const propertyData = [
+  const serviceRequestData = [
     {
       id: 1,
       requestid: "#SR001",
@@ -89,7 +89,7 @@ const ServiceRequestTable = () => {
             </tr>
           </thead>
           <tbody>
-            {propertyData.map((item) => (
+            {serviceRequestData.map((item) => (
               <tr key={item.id} className="hover:bg-gray-50 bg-white">
                 <td className="py-4 px-6 text-center border border-[#666666]">
                   {item.requestid}

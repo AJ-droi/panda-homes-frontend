@@ -16,7 +16,11 @@ const PieChart: React.FC<PieChartProps> = ({
   upcomingPayments,
 }) => {
   const data = {
-    labels: ["Total Rent Collected", "Total Rent Owed", "Upcoming Payments Due"],
+    labels: [
+      "Total Rent Collected",
+      "Total Rent Owed",
+      "Upcoming Payments Due",
+    ],
     datasets: [
       {
         data: [totalCollected, totalOwed, upcomingPayments],
@@ -49,7 +53,9 @@ const PieChart: React.FC<PieChartProps> = ({
             <span className="w-4 h-4 md:w-5 md:h-5 rounded-sm bg-[#AF52DE]"></span>
             <span className="font-medium">Total Rent Collected</span>
             <span>-</span>
-            <span className="font-bold">₦{totalCollected.toLocaleString()}</span>
+            <span className="font-bold">
+              ₦{totalCollected.toLocaleString()}
+            </span>
           </div>
           <div className="flex flex-wrap items-center gap-1 text-sm md:text-base text-[#357AF6]">
             <span className="w-4 h-4 md:w-5 md:h-5 rounded-sm bg-[#357AF6]"></span>
@@ -61,7 +67,9 @@ const PieChart: React.FC<PieChartProps> = ({
             <span className="w-4 h-4 md:w-5 md:h-5 rounded-sm bg-[#5CC8BE]"></span>
             <span className="font-medium">Upcoming Payments Due</span>
             <span>-</span>
-            <span className="font-bold">₦{upcomingPayments.toLocaleString()}</span>
+            <span className="font-bold">
+              ₦{upcomingPayments.toLocaleString()}
+            </span>
           </div>
         </div>
       </div>
@@ -77,9 +85,9 @@ const RentCollectionSummary: React.FC = () => {
   return (
     <div className="p-4 md:p-6 lg:p-10 w-full max-w-sm md:max-w-md lg:max-w-lg flex flex-col justify-center items-center rounded-lg shadow-lg md:shadow-xl lg:shadow-2xl">
       <div className="w-full mb-4 md:mb-6">
-        <h1 
+        <h1
           className="text-xl md:text-2xl font-medium leading-tight text-[#785DBA]"
-          style={{fontFamily: 'Roboto'}}
+          style={{ fontFamily: "Roboto" }}
         >
           Rent Collection Summary
         </h1>

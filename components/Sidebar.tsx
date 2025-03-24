@@ -2,7 +2,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation"; // Import usePathname
+import { usePathname, useRouter } from "next/navigation";
 import {
   SidebarHomeIcon,
   SidebarPropertiesIcon,
@@ -14,15 +14,18 @@ import {
   HomeActiveIcon,
   PropertyActiveIcon,
   TenantActiveIcon,
-  ServiceRequestsActiveIcon
+  ServiceRequestsActiveIcon,
+  SidebarNoticeAndAgreementActiveIcon
 } from "@/layout/svgIconPaths";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
+import Loading from "./Loading";
 
 const Sidebar = () => {
-  const pathname = usePathname(); // Get the current path
+  const pathname = usePathname();
   const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const router = useRouter();
 
@@ -54,6 +57,7 @@ const Sidebar = () => {
     {
       name: "Notices & Agreements",
       icon: <SidebarNoticeAndAgreementIcon />,
+      activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
       path: "/notices-agreements",
     },
     {
@@ -66,6 +70,18 @@ const Sidebar = () => {
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+
+  const redirect = (path:string) => {
+    if(pathname === path){
+      return;
+    }
+    setIsLoading(true)
+
+    setTimeout(()=> {
+      router.push(path)
+    },500)
+
+  }
 
   const Breadcrumb = () => {
     const activeItem = iconData.find(item => item.path === pathname);
@@ -125,7 +141,7 @@ const Sidebar = () => {
                 }`}
                 onClick={() => {
                   if (item.path) {
-                    router.push(item.path);
+                    redirect(item.path);
                   }
                 }}
               >
@@ -140,6 +156,7 @@ const Sidebar = () => {
           </section>
         </div>
       </div>
+      {isLoading && <Loading />}
     </div>
   );
 };

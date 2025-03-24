@@ -3,9 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import PropertiesListTable from "./PropertiesListTable";
-import ActionsCard from "../Home/ActionsCard";
 import Pagination from "../../PaginationComponent";
-import ServiceRequestTable from "@/components/dashboard/Home/ServiceRequestTable";
 import SearchBar from "@/components/SearchBar";
 import Dropdown from "@/components/Dropdown";
 import {

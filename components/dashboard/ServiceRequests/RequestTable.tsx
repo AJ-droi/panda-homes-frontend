@@ -3,13 +3,13 @@ import React from "react";
 import ServiceRequestTableButton from "./TableDropdownButton";
 
 const PropertyPaymentTable = () => {
-  const propertyData = [
+  const requestTable = [
     {
       id: 1,
       property: "Lekki Flat A",
       requestId: "#SR002",
       tenant: "Jane Smith",
-      issue: 'Power Outage',
+      issue: "Power Outage",
       dateReported: "Mar 1st 2025",
       status: "Pending",
     },
@@ -18,7 +18,7 @@ const PropertyPaymentTable = () => {
       property: "Abuja Duplex",
       requestId: "#SR003",
       tenant: "Peter Okon",
-      issue: 'Leaking Roof',
+      issue: "Leaking Roof",
       dateReported: "Mar 1st 2025",
       status: "In Progress",
     },
@@ -27,7 +27,7 @@ const PropertyPaymentTable = () => {
       property: "Abuja Duplex",
       requestId: "#SR003",
       tenant: "Peter Okon",
-      issue: 'Leaking Roof',
+      issue: "Leaking Roof",
       dateReported: "Mar 1st 2025",
       status: "Resolved",
     },
@@ -36,7 +36,7 @@ const PropertyPaymentTable = () => {
       property: "Abuja Duplex",
       requestId: "#SR003",
       tenant: "Peter Okon",
-      issue: 'Leaking Roof',
+      issue: "Leaking Roof",
       dateReported: "Mar 1st 2025",
       status: "Resolved",
     },
@@ -45,7 +45,7 @@ const PropertyPaymentTable = () => {
       property: "Abuja Duplex",
       requestId: "#SR003",
       tenant: "Peter Okon",
-      issue: 'Leaking Roof',
+      issue: "Leaking Roof",
       dateReported: "Mar 1st 2025",
       status: "Resolved",
     },
@@ -54,39 +54,31 @@ const PropertyPaymentTable = () => {
       property: "Ikeja Studio",
       requestId: "#SR003",
       tenant: "Peter Okon",
-      issue: 'Leaking Roof',
+      issue: "Leaking Roof",
       dateReported: "Mar 1st 2025",
       status: "Resolved",
     },
     {
-        id: 7,
-        property: "Ikeja Studio",
-        requestId: "#SR003",
-        tenant: "Peter Okon",
-        issue: 'Leaking Roof',
-        dateReported: "Mar 1st 2025",
-        status: "Resolved",
-      },
+      id: 7,
+      property: "Ikeja Studio",
+      requestId: "#SR003",
+      tenant: "Peter Okon",
+      issue: "Leaking Roof",
+      dateReported: "Mar 1st 2025",
+      status: "Resolved",
+    },
   ];
 
   const getActionButton = (status: string) => {
     switch (status) {
       case "Pending":
-        return (
-        <ServiceRequestTableButton placeholder="Mark as Done"/>
-        );
+        return <ServiceRequestTableButton placeholder="Mark as Done" />;
       case "In Progress":
-        return (
-            <ServiceRequestTableButton placeholder="Undo"/>
-        );
+        return <ServiceRequestTableButton placeholder="Undo" />;
       case "Resolved":
-        return (
-            <ServiceRequestTableButton placeholder="Undo"/>
-        );
+        return <ServiceRequestTableButton placeholder="Undo" />;
       default:
-        return (
-            <ServiceRequestTableButton placeholder="Mark as Done"/>
-        );
+        return <ServiceRequestTableButton placeholder="Mark as Done" />;
     }
   };
 
@@ -141,22 +133,18 @@ const PropertyPaymentTable = () => {
             </tr>
           </thead>
           <tbody>
-            {propertyData.map((item, index) => (
+            {requestTable.map((item, index) => (
               <tr
                 key={item.id}
                 className={`${
-                  index !== propertyData.length - 1 ? "border-b" : ""
+                  index !== requestTable.length - 1 ? "border-b" : ""
                 } border-[#666666] hover:bg-gray-50`}
               >
                 <td className="py-4 px-6 text-center">{item.requestId}</td>
                 <td className="py-4 px-6 text-center">{item.tenant}</td>
                 <td className="py-4 px-6 text-center">{item.property}</td>
                 <td className="py-4 px-6 text-center">{item.issue}</td>
-                <td
-                  className={`py-4 px-6 text-center`}
-                >
-                  {item.dateReported}
-                </td>
+                <td className={`py-4 px-6 text-center`}>{item.dateReported}</td>
                 <td
                   className={`py-4 text-center px-6 ${
                     item.status === "Pending"
@@ -164,7 +152,7 @@ const PropertyPaymentTable = () => {
                       : item.status === "In Progress"
                       ? "text-[#FBBC05] font-medium"
                       : item.status === "Resolved"
-                      ? "text-[#34A853] font-medium" 
+                      ? "text-[#34A853] font-medium"
                       : ""
                   }`}
                 >
