@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import ColouredButton from "@/components/ColouredButton";
 import WhiteButton from "@/components/WhiteButton";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 type AuthFormProps = {
   isLogin: boolean;
@@ -15,6 +16,12 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [error, setError] = useState("");
+
+  const router = useRouter()
+
+  const redirectUser = () => {
+    isLogin ? router.push('/dashboard') : router.push('/login')
+  }
 
   return (
     <div className="mx-auto p-6 bg-white">
@@ -133,7 +140,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
           <div
             className={`flex lg:flex lg:flex-row gap-4 w-full items-center justify-center lg:w-auto mt-4 lg:mt-0`}
           >
-            <ColouredButton borderRadius="40px" height="64px">
+            <ColouredButton borderRadius="40px" height="64px" onClick={() => redirectUser()}>
               <div className="font-[500] text-base sm:text-lg md:text-xl lg:text-[24px] whitespace-nowrap">
                 {isLogin ? "Login" : "Create an account"}
               </div>
