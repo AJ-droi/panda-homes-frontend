@@ -1,14 +1,9 @@
+/* eslint-disable */
 import React from "react";
-import {
-  DashboardNavProperties,
-  DashboardNavComplaints,
-  DashboardNavTenantRenting,
-  DashboardNavTenantDue,
-} from "@/layout/svgIconPaths";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
 
-const DashboardHomeNav = () => {
+const NoticesHomeNav = () => {
   const isMobile = useMatchMediaQuery(device.mobile);
   const isTablet = useMatchMediaQuery(device.laptop);
 
@@ -22,20 +17,16 @@ const DashboardHomeNav = () => {
 
   const navItems = [
     {
-      icon: <DashboardNavProperties />,
-      text: "12 Properties Managed",
+      text: "Total Notices Sent (This Month):",
+      data: "12 Notices",
     },
     {
-      icon: <DashboardNavTenantRenting />,
-      text: "36 Tenants Currently Renting",
+      text: "Acknowledged Notices:",
+      data: "8 Tenants Confirmed",
     },
     {
-      icon: <DashboardNavTenantDue />,
-      text: "5 Tenants with Rent Due in 7 Days",
-    },
-    {
-      icon: <DashboardNavComplaints />,
-      text: "3 Unresolved Complaints",
+      text: "Upcoming Lease Expirations:",
+      data: "5 Tenants in 30 Days",
     },
   ];
 
@@ -44,9 +35,11 @@ const DashboardHomeNav = () => {
       <div className="bg-white rounded-2xl shadow-lg shadow-[#0000001A] divide-y divide-[#E3E3E3]">
         {navItems.map((item, index) => (
           <div key={index} className="flex items-center gap-3 p-4">
-            <div className="text-[#785DBA]">{item.icon}</div>
-            <div className="text-black text-sm font-normal leading-tight">
-              {item.text}
+            <div
+              className="text-black text-sm font-[700] leading-[100%]"
+              style={{ fontFamily: "Plus Jakarta Sans" }}
+            >
+              {item.text} <span className="text-[#785DBA]">{item.data}</span>
             </div>
           </div>
         ))}
@@ -64,9 +57,11 @@ const DashboardHomeNav = () => {
               index % 2 === 0 ? "border-r border-[#E3E3E3]" : ""
             } ${index < 2 ? "border-b border-[#E3E3E3]" : ""}`}
           >
-            <div className="text-[#785DBA]">{item.icon}</div>
-            <div className="text-black text-sm font-normal leading-tight">
-              {item.text}
+            <div
+              className="text-black text-sm font-[700] leading-[100%]"
+              style={{ fontFamily: "Plus Jakarta Sans" }}
+            >
+              {item.text} <span className="text-[#785DBA]">{item.data}</span>
             </div>
           </div>
         ))}
@@ -83,9 +78,11 @@ const DashboardHomeNav = () => {
             index < navItems.length - 1 ? "border-r border-[#E3E3E3]" : ""
           }`}
         >
-          <div>{item.icon}</div>
-          <div className="text-black text-sm md:text-base font-normal leading-tight">
-            {item.text}
+          <div
+            className="text-black text-sm md:text-base font-[700] leading-[100%]"
+            style={{ fontFamily: "Plus Jakarta Sans" }}
+          >
+            {item.text} <span className="text-[#785DBA]">{item.data}</span>
           </div>
         </div>
       ))}
@@ -93,4 +90,4 @@ const DashboardHomeNav = () => {
   );
 };
 
-export default DashboardHomeNav;
+export default NoticesHomeNav;
