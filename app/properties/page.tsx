@@ -1,12 +1,14 @@
- "use client";
+/* eslint-disable */
+"use client";
 import React from 'react'
 import Sidebar from '@/components/Sidebar';
 import Navbar from '@/components/Navbar';
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
 import DashboardHome from '@/components/dashboard/Home/DashboardHome';
+import PropertiesHome from '@/components/dashboard/Properties/PropertiesHome';
 
-const Dashboard = () => {
+const Propeties = () => {
   const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
 
   return (
@@ -16,11 +18,11 @@ const Dashboard = () => {
         <Navbar />
         
         <div className="p-4 sm:p-6 md:p-8 bg-[#fafafe] min-h-screen">
-            <DashboardHome />
+            <PropertiesHome />
         </div>
       </div>
     </div>
   )
 }
 
-export default Dashboard;
+export default Propeties;

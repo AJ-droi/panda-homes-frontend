@@ -41,9 +41,8 @@ export default function Home() {
               <LandingPageTrackCard />
             </div>
           )}
-          <div
-            className={`w-full flex flex-row sm:flex-row sm:items-start gap-[40px] sm:gap-[80px] lg:mt-[100px]`}
-            style={{ marginTop: isNotDesktop ? "50px" : "250px" }}
+          <section className={`w-full flex flex-row sm:flex-row sm:items-start gap-[40px] sm:gap-[80px] lg:mt-[100px]`}
+            style={{ marginTop: isNotDesktop ? "50px" : "280px" }}
           >
             <div className="flex flex-col items-center sm:items-start">
               <div className="relative w-[50px] h-[50px]">
@@ -86,7 +85,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
+          </section>
 
           {isNotDesktop && (
             <div className="flex mt-10 gap-6 flex-row md:flex-row">
