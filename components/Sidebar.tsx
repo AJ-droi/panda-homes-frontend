@@ -85,11 +85,11 @@ const Sidebar = () => {
   const Breadcrumb = () => {
     const activeItem = iconData.find(item => item.path === pathname);
     return (
-      <div className="flex items-center p-4 bg-white border-b border-gray-200">
+      <div className="flex items-center p-4 bg-white border-b border-gray-200 ">
         <button onClick={toggleSidebar} className="mr-4">
           <BreadcrumbIcon />
         </button>
-        <span className="font-medium text-black">{activeItem?.name || "Home"}</span>
+        <span className="font-medium text-black font-plus-jakarta">{activeItem?.name || "Home"}</span>
       </div>
     );
   };
@@ -145,7 +145,7 @@ const Sidebar = () => {
                 }}
               >
                 <div>{pathname === item.path ? item.activeIcon : item.icon}</div>
-                <div className={`text-base ${
+                <div className={`text-base font-plus-jakarta ${
                   pathname === item.path ? "text-[#785DBA]" : "text-black"
                 }`}>
                   {item.name}

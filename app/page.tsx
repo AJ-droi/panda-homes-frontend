@@ -9,6 +9,8 @@ import LandingPageTrackCard from "@/components/landingPage/LandingPageTrackCard"
 import Link from "next/link";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
+import Footer from "@/components/Footer";
+
 
 export default function Home() {
   const isNotDesktop = useMatchMediaQuery(device.desktop);
@@ -26,10 +28,10 @@ export default function Home() {
         <div className="md:w-1/2 px-4 sm:px-6 md:px-10 lg:px-[100px] bg-gradient-to-b  from-[#E0DEF7] to-[#fff] w-full flex flex-col min-h-screen md:overflow-y-auto py-10 z-10">
           <div className="w-full max-w-[600px]">
             <div className="">
-              <h1 className="font-[700] font-[Plus Jakarta Sans] leading-[110%] tracking-[-0.01em] text-[32px] sm:text-[48px] lg:text-[64px] flex justify-start">
+              <h1 className="font-[700] font-plus-jakarta leading-[110%] tracking-[-0.01em] text-[32px] sm:text-[48px] lg:text-[64px] flex justify-start">
                 Manage Your Rentals with Ease!
               </h1>
-              <h3 className="mt-6 md:mt-10 font-[500] font-[Plus Jakarta Sans] w-full max-w-[448px] leading-[160%] tracking-[-0.005em] text-[16px] sm:text-[18px] lg:text-[20px] flex justify-start">
+              <h3 className="mt-6 md:mt-10 font-[500] font-plus-jakarta w-full max-w-[448px] leading-[160%] tracking-[-0.005em] text-[16px] sm:text-[18px] lg:text-lg flex justify-start">
                 Track rent payments, service requests, and tenant history—all in
                 one place.
               </h3>
@@ -37,12 +39,12 @@ export default function Home() {
           </div>
 
           {!isNotDesktop && (
-            <div className="absolute animate__animated animate__slideInLeft left-0 right-100 mt-[400px] flex justify-center z-20">
+            <div className="absolute animate__animated animate__slideInLeft left-0 right-100 mt-[350px] flex justify-center z-20">
               <LandingPageTrackCard />
             </div>
           )}
           <section className={`w-full flex flex-row sm:flex-row sm:items-start gap-[40px] sm:gap-[80px] lg:mt-[100px]`}
-            style={{ marginTop: isNotDesktop ? "50px" : "280px" }}
+            style={{ marginTop: isNotDesktop ? "50px" : "200px" }}
           >
             <div className="flex flex-col items-center sm:items-start">
               <div className="relative w-[50px] h-[50px]">
@@ -56,10 +58,10 @@ export default function Home() {
                 />
               </div>
               <div className="mt-4 text-center sm:text-left">
-                <div className="text-[#785DBA] font-[Plus Jakarta Sans] leading-[110%] tracking-[-0.01em] font-[700] text-[20px] sm:text-[24px]">
+                <div className="text-[#785DBA] font-plus-jakarta leading-[110%] tracking-[-0.01em] font-[700] text-[20px] sm:text-[24px]">
                   50k+ renters
                 </div>
-                <div className="font-[Plus Jakarta Sans] text-[#000929] leading-[110%] tracking-[-0.01em] font-[500] text-[14px] sm:text-[16px]">
+                <div className="font-plus-jakarta text-[#000929] leading-[110%] tracking-[-0.01em] font-[500] text-[14px] sm:text-[16px]">
                   believe in our service
                 </div>
               </div>
@@ -77,10 +79,10 @@ export default function Home() {
                 />
               </div>
               <div className="mt-4 text-center sm:text-left">
-                <div className="text-[#785DBA] font-[Plus Jakarta Sans] leading-[110%] tracking-[-0.01em] font-[700] text-[20px] sm:text-[24px]">
+                <div className="text-[#785DBA] font-plus-jakarta leading-[110%] tracking-[-0.01em] font-[700] text-[20px] sm:text-[24px]">
                   10k+ properties
                 </div>
-                <div className="font-[Plus Jakarta Sans] text-[#000929] leading-[110%] tracking-[-0.01em] font-[500] text-[14px] sm:text-[16px]">
+                <div className="font-plus-jakarta text-[#000929] leading-[110%] tracking-[-0.01em] font-[500] text-[14px] sm:text-[16px]">
                   under our management
                 </div>
               </div>
@@ -115,6 +117,7 @@ export default function Home() {
           </div>
         </section>
       </div>
+      <Footer />
     </div>
   );
 }

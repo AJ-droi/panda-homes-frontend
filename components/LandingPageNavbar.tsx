@@ -58,11 +58,11 @@ const LandingNavbar = () => {
         } lg:flex flex-col animate__animated animate__slideInRight  lg:flex-row gap-4 w-full lg:w-auto mt-4 lg:mt-0`}
       >
         <Link href="/login" className="w-full lg:w-auto">
-          <WhiteButton title="Login" />
+          <ColouredButton title="Login" />
         </Link>
-        <Link href="/signup" className="w-full lg:w-auto">
+        {/* <Link href="/signup" className="w-full lg:w-auto">
           <ColouredButton title="Sign up" />
-        </Link>
+        </Link> */}
       </div>
     </nav>
   );

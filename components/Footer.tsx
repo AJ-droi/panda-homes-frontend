@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="px-4 sm:px-6 md:px-12 lg:px-[64px] py-10 md:py-[80px]">
+    <div className="px-4 sm:px-6 md:px-12 lg:px-[64px] py-10 md:py-[40px] bg-[#fff]">
       <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-6 sm:gap-0">
         <div className="w-[133px] h-[38px] hover:cursor-pointer">
           <Image
@@ -65,7 +65,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="mt-10 md:mt-[80px]">
+      <div className="mt-[3%]">
         <div className="bg-[#66666640] w-full h-0.5"></div>
       </div>
       <div className="flex justify-center items-center">
