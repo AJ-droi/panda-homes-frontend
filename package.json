@@ -9,12 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.72.1",
+    "@tanstack/react-query-devtools": "^5.72.1",
     "animate.css": "^4.1.1",
+    "axios": "^1.8.4",
     "chart.js": "^4.4.8",
     "next": "15.2.1",
     "react": "^19.0.0",
     "react-chartjs-2": "^5.3.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "typescript": "^5",

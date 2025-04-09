@@ -1,9 +1,11 @@
 /* eslint-disable */
+"use client"
 import Link from "next/link";
 import React, { useState } from "react";
 import ColouredButton from "@/components/ColouredButton";
 import WhiteButton from "@/components/WhiteButton";
 import Image from "next/image";
+import { useLoginMutation } from "@/services/users/mutation";
 import { useRouter } from "next/navigation";
 
 type AuthFormProps = {
@@ -21,6 +23,42 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
 
   const redirectUser = () => {
     isLogin ? router.push('/dashboard') : router.push('/login')
+  }
+
+  const { mutate, isPending } = useLoginMutation();
+  
+  const handleLogin = async (e: React.FormEvent) => { 
+    e.preventDefault();
+    mutate({email, password},
+    {
+      onSuccess: (data) => {
+        console.log("Login successful", data);
+        // redirectUser()
+      },
+      onError: (error: any) => {
+        console.error("Login failed", error);
+        setError(error.message || "An error occurred during login.");
+      },  
+    })
+
+  }
+
+  const handleRegister = async (e: React.FormEvent) => { 
+    e.preventDefault();
+    mutate(
+      {email, password},
+      {
+        onSuccess: (data) => {
+          console.log("Login successful", data);
+          // redirectUser()
+        },
+        onError: (error: any) => {
+          console.error("Login failed", error);
+          setError(error.message || "An error occurred during login.");
+        },  
+      }
+
+    )
   }
 
   return (
@@ -43,7 +81,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
         </div>
       )}
 
-      <form className="space-y-4 mt-6 text-[#666666]">
+      <form className="space-y-4 mt-6 text-[#666666]"   onSubmit={isLogin ? handleLogin : handleRegister}>
         {!isLogin && (
           <>
             <div className="mt-6">
@@ -139,8 +177,9 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
         <div className="text-center mt-10">
           <div
             className={`flex lg:flex lg:flex-row gap-4 w-full items-center justify-center lg:w-auto mt-4 lg:mt-0`}
+            
           >
-            <ColouredButton borderRadius="40px" height="64px" onClick={() => redirectUser()}>
+            <ColouredButton borderRadius="40px" height="64px" disabled={isPending}>
               <div className="font-[500] text-base sm:text-lg md:text-xl lg:text-[24px] whitespace-nowrap">
                 {isLogin ? "Login" : "Create an account"}
               </div>
@@ -149,6 +188,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
         </div>
       </form>
 
+      {/* Google login button */}
       <div className="flex mt-10 gap-2 justify-between items-center">
         <div className="bg-[#66666640] w-1/2 h-0.5"></div>
         <div className="text-[#666666]">OR</div>

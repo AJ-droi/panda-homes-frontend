@@ -5,9 +5,11 @@ import React from "react";
   borderRadius?: string;
   children?: React.ReactNode;
   height?: string;
+  width?: string;
   padding?: string;
   hoverEffect?: boolean;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 const ColouredButton: React.FC<ButtonProps> = ({
@@ -15,9 +17,11 @@ const ColouredButton: React.FC<ButtonProps> = ({
   borderRadius = "8px",
   children,
   height = "48px",
+  width = "100%",
   padding,
   hoverEffect = true,
   onClick,
+  disabled= false
 }) => {
   return (
     <button
@@ -27,7 +31,9 @@ const ColouredButton: React.FC<ButtonProps> = ({
           : ""
       } font-[700] text-white text-base px-6 py-[12px]`}
       onClick={onClick}
-      style={{ borderRadius, height, padding }}
+      style={{ borderRadius, height, padding, width}}
+      type='submit'
+      disabled={disabled}
     >
       {children || title}
     </button>
