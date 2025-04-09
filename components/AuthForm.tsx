@@ -33,7 +33,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
     {
       onSuccess: (data) => {
         console.log("Login successful", data);
-        // redirectUser()
+        redirectUser()
       },
       onError: (error: any) => {
         console.error("Login failed", error);
