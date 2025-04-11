@@ -56,7 +56,7 @@ const DashboardHomeNav = () => {
 
   if (layoutType === "tablet") {
     return (
-      <div className="grid grid-cols-2 bg-white rounded-2xl shadow-lg shadow-[#0000001A]">
+      <div className="grid grid-cols-2 bg-white rounded-2xl shadow-md shadow-[#CFD3D45C]">
         {navItems.map((item, index) => (
           <div
             key={index}
@@ -65,7 +65,7 @@ const DashboardHomeNav = () => {
             } ${index < 2 ? "border-b border-[#E3E3E3]" : ""}`}
           >
             <div className="text-[#785DBA]">{item.icon}</div>
-            <div className="text-black text-sm font-normal leading-tight">
+            <div className="text-[#545454] text-sm font-normal leading-tight">
               {item.text}
             </div>
           </div>
@@ -75,7 +75,7 @@ const DashboardHomeNav = () => {
   }
 
   return (
-    <div className="bg-white py-6 rounded-2xl shadow-lg shadow-[#0000001A] flex flex-wrap lg:flex-nowrap text-[#785DBA] w-full">
+    <div className="bg-white py-6 rounded-2xl shadow-md shadow-[#CFD3D45C] flex flex-wrap lg:flex-nowrap text-[#785DBA] w-full">
       {navItems.map((item, index) => (
         <div
           key={index}
@@ -84,7 +84,7 @@ const DashboardHomeNav = () => {
           }`}
         >
           <div>{item.icon}</div>
-          <div className="text-black text-sm md:text-base font-normal leading-tight">
+          <div className="text-[#545454] text-sm md:text-sm font-normal leading-tight">
             {item.text}
           </div>
         </div>

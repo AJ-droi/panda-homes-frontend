@@ -25,7 +25,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   width,
 }) => {
   return (
-    <div className="flex flex-col md:flex-row shadow-2xl border-[0.64px] text-[15.25px] font-[500] border-[#262626] rounded-[8px] focus:outline-none pr-[12.71px] pl-[15.25px] py-[12.71px] w-full max-w-[826.04px] focus:border-[#785DBA] transition-colors text-[#666666] items-center justify-between gap-3">
+    <div className="flex flex-col md:flex-row shadow-md border-[0.64px] text-[15.25px] font-[500] border-[#262626] rounded-[8px] focus:outline-none pr-[12.71px] pl-[15.25px] py-[12.71px] w-full max-w-[826.04px] focus:border-[#785DBA] transition-colors text-[#666666] items-center justify-between gap-3">
       <input
         type="text"
         placeholder={placeholder}
@@ -37,9 +37,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
           <ColouredButton hoverEffect={false}>
             <div className="flex items-center gap-[7px] flex-nowrap">
               <SearchIcon />
-              <div className="text-base font-[100] whitespace-nowrap">
+              <p className="text-base font-[400] whitespace-nowrap text-[#fff]">
                 {buttonTitle}
-              </div>
+              </p>
             </div>
           </ColouredButton>
         </div>

@@ -1,3 +1,4 @@
+import { useFetchUserDetails } from "@/services/users/query";
 import React from "react";
 
 const TenantsListTable = () => {
@@ -24,6 +25,12 @@ const TenantsListTable = () => {
       rentStatus: "Overdue",
     },
   ];
+
+  const { data: users, isLoading, error, refetch } = useFetchUserDetails();
+const tenants = users ?? tenantsList;
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div className="w-full text-[#000000] rounded-2xl overflow-hidden shadow-2xl bg-white">
@@ -61,7 +68,7 @@ const TenantsListTable = () => {
             className="leading-[145%]"
             style={{ fontFamily: "Plus Jakarta Sans" }}
           >
-            {tenantsList.map((item, index) => (
+            {tenants.map((item:any, index:any) => (
               <tr
                 key={item.id}
                 className={`${
