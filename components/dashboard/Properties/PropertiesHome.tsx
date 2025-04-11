@@ -37,7 +37,7 @@ const PropertiesHome = () => {
   }, []);
 
   return (
-    <div className="bg-[#fafafe] px-3 sm:px-4 md:px-6 lg:px-10 w-full">
+    <div className=" px-3 sm:px-4 md:px-6 lg:px-10 w-full">
       {!newPropertyForm && (
         <div>
           <section className="flex flex-col justify-center">
@@ -47,7 +47,7 @@ const PropertiesHome = () => {
                 buttonTitle="Find Property"
               />
             </div>
-            <div className="flex flex-wrap justify-center items-center gap-1.5 sm:gap-2 md:gap-3 lg:gap-[12.71px] p-2 md:p-[6.35px] mt-2 rounded-[7.62px] shadow-lg sm:shadow-xl md:shadow-2xl">
+            <div className="flex flex-wrap justify-center items-center gap-1.5 sm:gap-2 md:gap-3 lg:gap-[12.71px] p-2 md:p-[6.35px] mt-2 rounded-[7.62px] shadow-md">
               <Dropdown
                 options={["Lagos", "Abia", "Benue", "Benin"]}
                 placeholder="Location"
@@ -76,9 +76,9 @@ const PropertiesHome = () => {
             </div>
           </section>
 
-          <section className="mt-6 sm:mt-8 md:mt-12 lg:mt-16 w-full">
+          <section className="max-w-full text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] my-[2%]">
             <div
-              className="text-[#4D4D4D] font-[600] mt-4 sm:mt-6 md:mt-10 text-[16px] sm:text-[18px] md:text-[22px] leading-[145%]"
+              className="text-[#4D4D4D] font-[600] text-[22px] leading-[145%] py-[2%]"
               style={{ fontFamily: "Plus Jakarta Sans" }}
             >
               Properties List
@@ -86,7 +86,7 @@ const PropertiesHome = () => {
             <div
               className={`flex ${
                 useColumnLayout ? "flex-col" : "flex-col lg:flex-row"
-              } gap-4 sm:gap-6 w-full flex-wrap`}
+              } gap-10 w-full`}
               style={{ fontFamily: "Plus Jakarta Sans" }}
             >
               <div className="mt-4 sm:mt-6 w-full lg:max-w-[780px]">

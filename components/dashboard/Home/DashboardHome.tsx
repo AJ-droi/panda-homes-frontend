@@ -37,20 +37,20 @@ const DashboardHome = () => {
         </div>
       </section>
 
-      <section className="mt-16 w-full">
-        <div
-          className="text-[#4D4D4D] font-[600] mt-10 text-[22px] leading-[145%]"
-          style={{ fontFamily: "Plus Jakarta Sans" }}
-        >
-          Upcoming Rent Payments
-        </div>
+      <section className="max-w-full text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] my-[2%]">
+      <div
+        className="text-[#4D4D4D] font-[600] text-[22px] leading-[145%] py-[2%]"
+        style={{ fontFamily: "Plus Jakarta Sans" }}
+      >
+        Upcoming Rent Payments
+      </div>
         <div
           className={`flex ${
             useColumnLayout ? "flex-col" : "flex-col lg:flex-row"
           }  gap-10 w-full`}
           style={{ fontFamily: "Plus Jakarta Sans" }}
         >
-          <div className="mt-6 w-full max-w-[780px]">
+          <div className="w-full">
             <PropertyPaymentTable />
             <div className="mt-6 flex justify-center lg:justify-end">
               <Pagination
@@ -60,20 +60,20 @@ const DashboardHome = () => {
               />
             </div>
           </div>
-          <div className="w-auto lg:w-auto">
+          {/* <div className="w-auto lg:w-auto">
             <ActionsCard />
-          </div>
+          </div> */}
         </div>
       </section>
 
-      <section className="mt-6 flex flex-col gap-[14px] w-full">
+      <section className="mt-6 flex flex-col gap-[14px] w-full max-w-full text-[#6E7079] rounded-2xl overflow-hidden shadow-lg bg-white p-[2%] my-[2%]">
         <div
-          className="text-[#4D4D4D] font-[600] mt-6 text-[22px] leading-[145%]"
+          className="text-[#4D4D4D] font-[600] text-[22px] leading-[145%]"
           style={{ fontFamily: "Plus Jakarta Sans" }}
         >
           Service Requests
         </div>
-        <div className="mt-6 w-full max-w-[936px]">
+        <div className="mt-6 w-full">
           <ServiceRequestTable />
           <div className="mt-6 flex justify-center lg:justify-end">
             <Pagination

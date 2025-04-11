@@ -47,37 +47,37 @@ const PropertiesListTable = () => {
   ];
 
   return (
-    <div className="w-full text-[#000000] rounded-2xl overflow-hidden shadow-2xl bg-white">
+    <div className="max-w-full text-[#6E7079] overflow-hidden ">
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="border-b">
+            <tr className="border-y border-[#E1E2E9]">
               <th
-                className="text-center text-[16px] md:text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+               className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Property
               </th>
               <th
-                className="text-center text-[16px] md:text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+               className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Location
               </th>
               <th
-                className="text-center text-[16px] md:text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+               className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Vacancy
               </th>
               <th
-                className="text-center text-[16px] md:text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+               className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Rent Owed
               </th>
               <th
-                className="text-center text-[16px] md:text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+               className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Action
@@ -92,8 +92,8 @@ const PropertiesListTable = () => {
               <tr
                 key={item.id}
                 className={`${
-                  index !== propertyData.length - 1 ? "border-b" : ""
-                } border-[#666666] hover:bg-gray-50`}
+                  index !== propertyData.length - 1 ? " " : ""
+                } text-sm`}
               >
                 <td className="py-4 px-6 text-center">{item.property}</td>
                 <td className="py-4 px-6 text-center">{item.location}</td>
@@ -114,7 +114,7 @@ const PropertiesListTable = () => {
                   {item.rentOwed}
                 </td>
                 <td className="py-4 px-6 text-center">
-                  <button className="bg-[#2A8252] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black text-white px-[16px] py-[10px] rounded-[12px] text-sm">
+                <button className="bg-[#5E636614] text-[#8B8D97] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm">
                     View Details
                   </button>
                 </td>

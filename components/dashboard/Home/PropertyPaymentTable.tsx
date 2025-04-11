@@ -76,37 +76,38 @@ const PropertyPaymentTable = () => {
   };
 
   return (
-    <div className="max-w-4xl text-[#000000] rounded-2xl overflow-hidden shadow-2xl bg-white">
+    <div className="max-w-full text-[#6E7079] overflow-hidden ">
+    
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="border-b">
+            <tr className="border-y border-[#E1E2E9]">
               <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Property
               </th>
               <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Amount Due
               </th>
               <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Due Date
               </th>
               <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Status
               </th>
               <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Action
@@ -118,8 +119,8 @@ const PropertyPaymentTable = () => {
               <tr
                 key={item.id}
                 className={`${
-                  index !== propertyPaymentData.length - 1 ? "border-b" : ""
-                } border-[#666666] hover:bg-gray-50`}
+                  index !== propertyPaymentData.length - 1 ? "" : ""
+                } text-sm`}
               >
                 <td className="py-4 px-6 text-center">{item.property}</td>
                 <td className="py-4 px-6 text-center">{item.amountDue}</td>
@@ -138,13 +139,16 @@ const PropertyPaymentTable = () => {
                       ? "text-[#EB4335] font-medium"
                       : item.status === "Paid"
                       ? "text-[#34A853] font-medium"
-                      : ""
+                      : "text-[#FBBC05]"
                   }`}
                 >
                   {item.status}
                 </td>
                 <td className="py-4 px-6 text-center">
-                  {getActionButton(item.status)}
+                  {/* {getActionButton(item.status)} */}
+                  <button className="bg-[#5E636614] text-[#8B8D97] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm">
+                    View Details
+                  </button>
                 </td>
               </tr>
             ))}

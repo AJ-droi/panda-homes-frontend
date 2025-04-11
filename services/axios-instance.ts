@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -7,19 +8,20 @@ const axiosInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true, // Allow sending cookies with requests
 });
 
+// ✅ Read token from cookies (if needed for other purposes)
 const getToken = async () => {
-  const token = localStorage.getItem("authToken");
-  return token;
+  return Cookies.get("access_token");
 };
 
 axiosInstance.interceptors.request.use(
   async (config) => {
     const token = await getToken();
-    if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+    console.log({ config, token }); // If you want to log the token for debugging
+
+    // You don't need to add cookies manually to the headers if the browser handles them
     return config;
   },
   (error) => {

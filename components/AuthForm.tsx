@@ -31,12 +31,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
     e.preventDefault();
     mutate({email, password},
     {
-      onSuccess: (data) => {
-        console.log("Login successful", data);
+      onSuccess: () => {
         redirectUser()
       },
       onError: (error: any) => {
-        console.error("Login failed", error);
         setError(error.message || "An error occurred during login.");
       },  
     })
