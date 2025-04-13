@@ -104,7 +104,7 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
             />
           </section>
 
-          <section className="flex justify-center items-center mb-6 md:mb-8">
+          {/* <section className="flex justify-center items-center mb-6 md:mb-8">
             <div className="gap-2 md:gap-[12.14px] w-full sm:w-[250px] h-auto sm:h-[232px] flex flex-col justify-center items-center">
               <label
                 className="block text-sm font-medium mb-1 md:mb-2"
@@ -137,7 +137,7 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
                 </label>
               </div>
             </div>
-          </section>
+          </section> */}
 
           <section className="flex flex-col-reverse sm:flex-row justify-end gap-3 md:gap-4">
             <div className="w-full sm:w-auto">

@@ -1,4 +1,5 @@
-import React from "react";
+import Pagination from "@/components/PaginationComponent";
+import React, { useState } from "react";
 
 const OverdueRentsTable = () => {
   const overDueRentTable = [
@@ -46,32 +47,40 @@ const OverdueRentsTable = () => {
     },
   ];
 
+      const [currentPage, setCurrentPage] = useState(1);
+      const itemsPerPage = 10;
+      
+      // Calculate items to display on current page
+      const indexOfLastItem = currentPage * itemsPerPage;
+      const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+      const currentItems = overDueRentTable.slice(indexOfFirstItem, indexOfLastItem);
+
   return (
-    <div className="w-full text-[#000000] rounded-2xl overflow-hidden shadow-2xl bg-white">
+    <div className="max-w-full text-[#6E7079] overflow-hidden ">
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="border-b">
+            <tr className="border-y border-[#E1E2E9]">
               <th
-                className="text-center text-[16px] md:text-[16px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Tenant
               </th>
               <th
-                className="text-center text-[16px] md:text-[16px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Property
               </th>
               <th
-                className="text-center text-[16px] md:text-[16px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Amount Owed
               </th>
               <th
-                className="text-center text-[16px] md:text-[16px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Overdue Duration
@@ -82,26 +91,26 @@ const OverdueRentsTable = () => {
             className="leading-[145%]"
             style={{ fontFamily: "Plus Jakarta Sans" }}
           >
-            {overDueRentTable.map((item, index) => (
+            {currentItems.map((item, index) => (
               <tr
                 key={item.id}
                 className={`${
-                  index !== overDueRentTable.length - 1 ? "border-b" : ""
-                } border-[#666666] hover:bg-gray-50`}
+                  index !== overDueRentTable.length - 1 ? "" : ""
+                } text-sm`}
               >
-                <td className="py-4 px-6 text-[16px] md:text-[16px] text-center">
+                <td className="py-4 px-6 text-center">
                   {item.tenantName}
                 </td>
-                <td className="py-4 px-6 text-[16px] md:text-[16px] text-center">
+                <td className="py-4 px-6 text-center">
                   {item.property}
                 </td>
                 <td
-                  className={`py-4 text-[16px] md:text-[16px] text-center px-6`}
+                  className={`py-4  px-6 text-center`}
                 >
                   {item.rentOwed}
                 </td>
                 <td
-                  className={`py-4 px-6 text-[16px] md:text-[16px] text-center`}
+                  className={`py-4 px-6 text-center`}
                 >
                   {item.overdueDuration}
                 </td>
@@ -110,6 +119,12 @@ const OverdueRentsTable = () => {
           </tbody>
         </table>
       </div>
+      <Pagination 
+        itemsPerPage={itemsPerPage}
+        totalItems={overDueRentTable.length}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 };

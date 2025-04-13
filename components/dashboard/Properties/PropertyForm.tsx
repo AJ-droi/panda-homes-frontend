@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+"use client"
 import React, { useState } from "react";
 import Dropdown2 from "@/components/Dropdown2";
 import InputField from "@/components/InputField";
@@ -55,23 +56,13 @@ const PropertyForm: React.FC<propertyFormProps> = ({ onClose }) => {
   return (
     <div className="w-full p-4 md:p-6 shadow-2xl bg-white rounded-lg">
       <h1
-        className="text-2xl md:text-4xl leading-[150%] font-bold mb-4 md:mb-6 text-[#000000]"
+        className="text-2xl md:text-3xl leading-[150%] font-bold mb-4 md:mb-6 text-[#000000]"
         style={{ fontFamily: "Plus Jakarta Sans" }}
       >
         Add a new property
       </h1>
 
-      <p
-        className="text-[#666666] text-sm md:text-base mb-6 md:mb-8"
-        style={{ fontFamily: "Plus Jakarta Sans" }}
-      >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-
-      <main className="p-4 md:p-8 lg:p-[75.89px] text-black">
+      <main className=" text-black">
         <form onSubmit={handleSubmit}>
           <section className="mb-4 md:mb-6 gap-2 md:gap-[12.14px] flex flex-col">
             <label
@@ -226,7 +217,7 @@ const PropertyForm: React.FC<propertyFormProps> = ({ onClose }) => {
             />
           </section>
 
-          <section className="flex justify-center items-center mb-6 md:mb-8">
+          {/* <section className="flex justify-center items-center mb-6 md:mb-8">
             <div className="gap-2 md:gap-[12.14px] w-full sm:w-[250px] h-auto sm:h-[232px] flex flex-col">
               <label
                 className="block text-sm font-medium mb-1 md:mb-2"
@@ -259,12 +250,9 @@ const PropertyForm: React.FC<propertyFormProps> = ({ onClose }) => {
                 </label>
               </div>
             </div>
-          </section>
+          </section> */}
 
-          <section className="flex flex-col-reverse sm:flex-row justify-between gap-3 md:gap-4">
-            <div className="w-full sm:w-auto">
-              <ColouredButton title="Close" onClick={onClose} />
-            </div>
+          <section className="flex flex-col-reverse sm:flex-row justify-end gap-3 md:gap-4">
             <div className="w-full sm:w-auto">
               <ColouredButton title="Save" />
             </div>

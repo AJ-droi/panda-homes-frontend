@@ -1,4 +1,5 @@
-import React from "react";
+import Pagination from "@/components/PaginationComponent";
+import React, { useState } from "react";
 
 const NoticeTable = () => {
   const noticeData = [
@@ -44,73 +45,52 @@ const NoticeTable = () => {
     },
   ];
 
-  const getActionButton = (status: string) => {
-    switch (status) {
-      case "Acknowledged":
-        return (
-          <button className="bg-[#2A8252] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black text-white px-[16px] py-[10px] rounded-[12px] text-sm">
-            View Notice
-          </button>
-        );
-      case "Unacknowledged":
-        return (
-          <button className="bg-[#2A8252] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black text-white px-[16px] py-[10px] rounded-[12px] text-sm">
-            Send Reminder
-          </button>
-        );
-      case "Pending":
-        return (
-          <button className="bg-[#2A8252] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black text-white px-[16px] py-[10px] rounded-[12px] text-sm">
-            Resend Notice
-          </button>
-        );
-      default:
-        return (
-          <button className="bg-[#2A8252] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black text-white px-[16px] py-[10px] rounded-[12px] text-sm">
-            Resend Notice
-          </button>
-        );
-    }
-  };
+    const [currentPage, setCurrentPage] = useState(1);
+      const itemsPerPage = 10;
+      
+      // Calculate items to display on current page
+      const indexOfLastItem = currentPage * itemsPerPage;
+      const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+      const currentItems = noticeData.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <div className="text-[#000000] rounded-2xl overflow-hidden shadow-2xl bg-white">
+    <div className="max-w-full text-[#6E7079] overflow-hidden ">
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="border-b">
-              <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+          <tr className="border-y border-[#E1E2E9]">
+               <th
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Notice Type
               </th>
-              <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+               <th
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Tenant
               </th>
-              <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+               <th
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Property
               </th>
-              <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+               <th
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Date Sent
               </th>
-              <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+               <th
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Status
               </th>
-              <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+               <th
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Action
@@ -118,12 +98,12 @@ const NoticeTable = () => {
             </tr>
           </thead>
           <tbody>
-            {noticeData.map((item, index) => (
+            {currentItems.map((item, index) => (
               <tr
                 key={item.id}
                 className={`${
-                  index !== noticeData.length - 1 ? "border-b" : ""
-                } border-[#666666] hover:bg-gray-50`}
+                  index !== noticeData.length - 1 ? "" : ""
+                } text-sm`}
               >
                 <td className={`py-4 text-center px-6`}>{item.status}</td>
                 <td className="py-4 px-6 text-center">{item.tenant}</td>
@@ -131,13 +111,21 @@ const NoticeTable = () => {
                 <td className={`py-4 px-6 text-center`}>{item.dateSent}</td>
                 <td className={`py-4 text-center px-6`}>{item.status}</td>
                 <td className="py-4 px-6 text-center">
-                  {getActionButton(item.status)}
+                <button className="bg-[#5E636614] text-[#8B8D97] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm">
+                    View Details
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <Pagination 
+        itemsPerPage={itemsPerPage}
+        totalItems={noticeData.length}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 };

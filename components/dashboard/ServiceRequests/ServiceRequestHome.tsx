@@ -41,28 +41,27 @@ const ServiceRequestHome = () => {
                 >
                   3 High-Priority Issues Need Immediate Attention!
                 </div>
-                <div className="flex flex-col lg:flex-row xs:flex-row items-center justify-center w-full gap-3 xs:gap-4 sm:gap-5">
+                {/* <div className="flex flex-col lg:flex-row xs:flex-row items-center justify-center w-full gap-3 xs:gap-4 sm:gap-5">
                   <div className="flex justify-center items-center">
                     <WhiteButton title="Assign Technician Now" />
                   </div>
                   <div className="flex justify-center items-center">
                     <ColouredButton title="View Issues" />
                   </div>
-                </div>
+                </div> */}
               </section>
             </Card>
           </section>
 
-          <section className="w-full">
+          <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] ">
+            <div
+              className="text-[#4D4D4D] font-[600] text-[22px] leading-[145%] py-[2%]"
+              style={{ fontFamily: "Plus Jakarta Sans" }}
+            >
+              All Requests
+            </div>
             <div className="mt-2 xs:mt-3 sm:mt-4 md:mt-5 w-full">
               <ServiceRequestTable />
-              <div className="mt-2 xs:mt-3 sm:mt-4 md:mt-5 flex justify-center lg:justify-end">
-                <Pagination
-                  totalPages={10}
-                  currentPage={4}
-                  onPageChange={() => ""}
-                />
-              </div>
             </div>
           </section>
         </section>

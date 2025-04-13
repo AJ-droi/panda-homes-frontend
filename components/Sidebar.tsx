@@ -8,13 +8,12 @@ import {
   SidebarTenantsIcon,
   SidebarServiceRequestsIcon,
   SidebarNoticeAndAgreementIcon,
-  SidebarReportsAnalyticsIcon,
   BreadcrumbIcon,
   HomeActiveIcon,
   PropertyActiveIcon,
   TenantActiveIcon,
   ServiceRequestsActiveIcon,
-  SidebarNoticeAndAgreementActiveIcon
+  SidebarNoticeAndAgreementActiveIcon,
 } from "@/layout/svgIconPaths";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
@@ -24,7 +23,7 @@ const Sidebar = () => {
   const pathname = usePathname();
   const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -60,9 +59,14 @@ const Sidebar = () => {
       path: "/notices-agreements",
     },
     {
-      name: "Reports & Analytics",
-      icon: <SidebarReportsAnalyticsIcon />,
-      path: "/reports-analytics",
+      name: "Property History",
+      icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#000000">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>,
+     activeIcon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#785DBA">
+     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+   </svg>,
+      path: "/dashboard/property-history",
     },
   ];
 
@@ -70,26 +74,27 @@ const Sidebar = () => {
     setIsOpen(!isOpen);
   };
 
-  const redirect = (path:string) => {
-    if(pathname === path){
+  const redirect = (path: string) => {
+    if (pathname === path) {
       return;
     }
-    setIsLoading(true)
+    setIsLoading(true);
 
-    setTimeout(()=> {
-      router.push(path)
-    },500)
-
-  }
+    setTimeout(() => {
+      router.push(path);
+    }, 500);
+  };
 
   const Breadcrumb = () => {
-    const activeItem = iconData.find(item => item.path === pathname);
+    const activeItem = iconData.find((item) => item.path === pathname);
     return (
       <div className="flex items-center p-4 bg-white border-b border-gray-200 ">
         <button onClick={toggleSidebar} className="mr-4">
           <BreadcrumbIcon />
         </button>
-        <span className="font-medium text-black font-plus-jakarta">{activeItem?.name || "Home"}</span>
+        <span className="font-medium text-black font-plus-jakarta">
+          {activeItem?.name || "Home"}
+        </span>
       </div>
     );
   };
@@ -131,7 +136,7 @@ const Sidebar = () => {
             />
           </section>
 
-          <section className="flex flex-col gap-8 w-full">
+          <section className="flex flex-col gap-4 w-full">
             {iconData.map((item, index) => (
               <nav
                 key={index}
@@ -144,15 +149,33 @@ const Sidebar = () => {
                   }
                 }}
               >
-                <div>{pathname === item.path ? item.activeIcon : item.icon}</div>
-                <div className={`text-base font-plus-jakarta ${
-                  pathname === item.path ? "text-[#785DBA]" : "text-black"
-                }`}>
+                <div>
+                  {pathname === item.path ? item.activeIcon : item.icon}
+                </div>
+                <div
+                  className={`text-base font-plus-jakarta ${
+                    pathname === item.path ? "text-[#785DBA]" : "text-black"
+                  }`}
+                >
                   {item.name}
                 </div>
               </nav>
             ))}
           </section>
+
+          <button
+            className="text-sm font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-2 rounded-md w-[90%]"
+            onClick={() => router.push("/dashboard/add-property")}
+          >
+            Add New Property
+          </button>
+
+          <button
+            className="text-sm font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-2 rounded-md w-[90%]"
+            onClick={() => router.push("/dashboard/add-property")}
+          >
+           Register New Tenant
+          </button>
         </div>
       </div>
       {isLoading && <Loading />}
