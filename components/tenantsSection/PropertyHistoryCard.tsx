@@ -1,238 +1,194 @@
-"use client";
-import React, { useState } from "react";
-import Card from "../Card";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+// pages/history.tsx
+import { useState } from 'react';
+import { ChevronDown, ChevronLeft, ChevronRight, Filter, Grid, Search } from 'lucide-react';
+import { HistoriesPageBulletIcon } from '@/layout/svgIconPaths';
 
 interface HistoryItem {
-  id: string;
+  id: number;
   date: string;
-  title: string;
+  type: string;
   description: string;
-  status: "Completed" | "In Progress" | "Pending";
+  status: 'Completed' | 'In Progress' | 'Pending';
 }
 
-const PropertyHistoryCard = () => {
+export default function History() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  
   // Sample data
-  const allHistoryItems: HistoryItem[] = [
+  const historyItems: HistoryItem[] = [
     {
-      id: "1",
-      date: "March 20, 2025",
-      title: "Lease Signed",
-      description: "You signed rental agreement.",
-      status: "Completed",
+      id: 1,
+      date: 'March 20, 2025',
+      type: 'Lease Signed',
+      description: 'You signed rental agreement.',
+      status: 'Completed'
     },
     {
-      id: "2",
-      date: "April 1, 2025",
-      title: "Rent Payment",
-      description: "Paid ₦500,000 for April - June rent.",
-      status: "Completed",
+      id: 2,
+      date: 'April 1, 2025',
+      type: 'Rent Payment',
+      description: 'Paid N500,000 for April - June rent.',
+      status: 'Completed'
     },
     {
-      id: "3",
-      date: "April 10, 2025",
-      title: "Service Request",
+      id: 3,
+      date: 'April 10, 2025',
+      type: 'Service Request',
       description: '"Leaking bathroom pipe" reported.',
-      status: "In Progress",
+      status: 'In Progress'
     },
     {
-      id: "4",
-      date: "April 15, 2025",
-      title: "Agreement Update",
-      description: "Downloaded lease agreement document.",
-      status: "Completed",
+      id: 4,
+      date: 'April 15, 2025',
+      type: 'Agreement Update',
+      description: 'Downloaded lease agreement document.',
+      status: 'Completed'
     },
     {
-      id: "5",
-      date: "May 2, 2025",
-      title: "Rent Payment",
-      description: "Paid ₦500,000 for July - Sept rent.",
-      status: "Pending",
+      id: 5,
+      date: 'May 2, 2025',
+      type: 'Rent Payment',
+      description: 'Paid N500,000 for July - Sept rent.',
+      status: 'Pending'
     },
   ];
 
-  // State management
-  const [searchTerm, setSearchTerm] = useState("");
-  const [statusFilter, setStatusFilter] = useState<string>("All");
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  const [showBulkActions, setShowBulkActions] = useState(false);
-
-  // Filter logic
-  const filteredItems = allHistoryItems.filter((item) => {
-    const matchesSearch =
-      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesFilter =
-      statusFilter === "All" || item.status === statusFilter;
-    return matchesSearch && matchesFilter;
+  // 1107.017578125px
+  const groupedItems: { [key: string]: HistoryItem[] } = {};
+  historyItems.forEach(item => {
+    if (!groupedItems[item.date]) {
+      groupedItems[item.date] = [];
+    }
+    groupedItems[item.date].push(item);
   });
 
-  // Toggle item selection
-  const toggleItemSelection = (id: string) => {
-    setSelectedItems((prev) =>
-      prev.includes(id) ? prev.filter((itemId) => itemId !== id) : [...prev, id]
-    );
-  };
-
-  // Status color mapping
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Completed":
-        return "bg-[#34A853]";
-      case "In Progress":
-        return "bg-[#FBBC05]";
-      case "Pending":
-        return "bg-[#EB4335]";
-      default:
-        return "bg-gray-500";
-    }
-  };
-
-  // Bulk actions
-  const handleBulkAction = (action: string) => {
-    console.log(`Performing ${action} on selected items:`, selectedItems);
-    // Add your bulk action logic here
-    setSelectedItems([]);
-    setShowBulkActions(false);
-  };
+  const totalPages = 44;
+  const totalItems = 200;
 
   return (
-    <Card>
-      <div className="p-4 md:p-6 h-full flex flex-col">
-        {/* Header with search and filters */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-          <h2
-            className="text-xl text-[#785DBA] font-bold leading-[150%]"
-            style={{ fontFamily: "Urbanist" }}
-          >
-            History
-          </h2>
-
-          <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-            {/* Search */}
-            <div className="relative flex-1 md:w-48">
-              <input
-                type="text"
-                placeholder="Search"
-                className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#785DBA]"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <svg
-                className="absolute left-3 top-2.5 h-4 w-4 text-gray-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
+    <div className="container overflow-y-scroll max-h-[1107.017578125px] mx-auto p-4 border border-gray-200 rounded-lg bg-white" style={{ fontFamily: 'Plus Jakarta Sans' }}>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+        <h1 className="text-2xl font-bold leading-[145%] text-[#45464E]">History</h1>
+        
+        <div className="flex flex-col sm:flex-row gap-2 mt-4 sm:mt-0 w-full sm:w-auto">
+          {/* Search Bar */}
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search"
+              className="pl-10 pr-4 font-[400] text-[14.53px] leading-[100%] text-[#ABAFB1] py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full sm:w-64"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <Search className="h-5 w-5 text-gray-400" />
             </div>
-
-            {/* Status Filter */}
-            <select
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#785DBA]"
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-            >
-              <option value="All">All Status</option>
-              <option value="Completed">Completed</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Pending">Pending</option>
-            </select>
-
-            {/* Bulk Actions (shown when items are selected) */}
-            {selectedItems.length > 0 && (
-              <div className="relative">
-                <button
-                  className="px-4 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-[#6747C7] transition-colors"
-                  onClick={() => setShowBulkActions(!showBulkActions)}
-                >
-                  Bulk Actions ({selectedItems.length})
-                </button>
-
-                {showBulkActions && (
-                  <div className="absolute right-0 mt-1 w-48 bg-white rounded-md shadow-lg z-10">
-                    <div className="py-1">
-                      <button
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => handleBulkAction("export")}
-                      >
-                        Export Selected
-                      </button>
-                      <button
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => handleBulkAction("delete")}
-                      >
-                        Delete Selected
-                      </button>
+          </div>
+          
+          {/* Filter Buttons */}
+          <div className="flex text-[#53545C] font-[400] leading-[100%] gap-2">
+            <button className="flex items-center px-4 py-2 border border-[#53545C] rounded-md bg-white hover:bg-gray-50">
+              <Filter className="h-5 w-5 mr-1" />
+              <span>Filter</span>
+            </button>
+            
+            <button className="flex items-center px-4 py-2 border border-[#53545C] rounded-md bg-white hover:bg-gray-50">
+              <Grid className="h-5 w-5 mr-1" />
+              <span>Filter</span>
+            </button>
+            
+            <div className="relative">
+              <button className="flex items-center px-4 py-4 border border-[#53545C] rounded-md bg-white hover:bg-gray-50">
+                <span>Bulk Action</span>
+                <ChevronDown className="h-5 w-5 ml-1" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* History Timeline */}
+      <div>
+        {Object.keys(groupedItems).map((date, dateIndex) => (
+          <div key={date}>
+            {groupedItems[date].map((item, itemIndex) => (
+              <div key={item.id} className="border-b-1 mt-10 border-[#37352F29] max-w-[708px] py-2">
+                {itemIndex === 0 && (
+                  <div className="flex items-start border-l-2 border-[#37352F] p-4">
+                    <div className="ml-6">
+                      <h3 className="text-[16px] font-[700] leading-[24px] text-gray-700">{date}</h3>
                     </div>
                   </div>
                 )}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* History Timeline */}
-        <div className="overflow-y-auto max-h-[400px] pr-2">
-          {filteredItems.length === 0 ? (
-            <div className="text-center py-8 text-gray-500">
-              No history items found
-            </div>
-          ) : (
-            <div className="space-y-6">
-              {filteredItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="relative pl-6 pb-6 border-l-2 border-[#E3E3E3] last:border-l-0 last:pb-0"
-                >
-                  {/* Checkbox for bulk selection */}
-                  <input
-                    type="checkbox"
-                    checked={selectedItems.includes(item.id)}
-                    onChange={() => toggleItemSelection(item.id)}
-                    className="absolute left-[-13px] top-0 h-4 w-4 rounded border-gray-300 text-[#785DBA] focus:ring-[#785DBA]"
-                  />
-
-                  {/* Timeline dot */}
-                  <div
-                    className={`absolute w-3 h-3 rounded-full ${getStatusColor(
-                      item.status
-                    )} -left-[7px] top-6`}
-                  ></div>
-
-                  <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 ml-4">
-                    <h3 className="text-sm font-semibold text-gray-700 min-w-[120px]">
-                      {item.date}
-                    </h3>
-                    <div className="flex-1">
-                      <h4 className="text-base font-bold text-[#4D4D4D] mb-1">
-                        {item.title}
-                      </h4>
-                      <p className="text-sm text-gray-600 mb-1">
-                        {item.description}
-                      </p>
-                      <span
-                        className={`text-xs px-2 py-1 rounded-full ${getStatusColor(
-                          item.status
-                        )} text-white`}
-                      >
-                        {item.status}
-                      </span>
+                
+                <div className="flex border-l-2 border-[#37352F] pl-4 pr-6">
+                  
+                  <div className="ml-6 flex gap-[10px]">
+                    <HistoriesPageBulletIcon />
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between">
+                      <h4 className="text-base font-medium leading-[8px] text-[#787774]">{item.type}</h4>
                     </div>
                   </div>
                 </div>
-              ))}
+                <p className="mt-[15px] text-[16px] text-[#A1A09E] font-[400] leading-[24px]">{item.description} ({item.status})</p>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      
+      {/* Pagination */}
+      <div className="flex border-t-1 border-[#37352F29] py-6 flex-col sm:flex-row justify-between items-center mt-4 text-sm text-gray-600">
+        <div className="flex items-center space-x-2 mb-4 sm:mb-0">
+          <span>Items per page</span>
+          <div className="relative">
+            <select 
+              className="appearance-none border rounded-md py-1 pl-3 pr-8 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={itemsPerPage}
+              onChange={(e) => setItemsPerPage(Number(e.target.value))}
+            >
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+              <ChevronDown className="h-4 w-4" />
             </div>
-          )}
+          </div>
+          
+          <span>1-10 of 200 items</span>
+        </div>
+        
+        <div className="flex items-center space-x-2">
+          <span>of 44 pages</span>
+          <div className="relative">
+            <select 
+              className="appearance-none border rounded-md py-1 pl-3 pr-8 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={currentPage}
+              onChange={(e) => setCurrentPage(Number(e.target.value))}
+            >
+              {[...Array(totalPages)].map((_, i) => (
+                <option key={i} value={i + 1}>{i + 1}</option>
+              ))}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+              <ChevronDown className="h-4 w-4" />
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-1">
+            <button className="p-1 rounded-md hover:bg-gray-200">
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button className="p-1 rounded-md hover:bg-gray-200">
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
         </div>
       </div>
-    </Card>
+    </div>
   );
-};
-
-export default PropertyHistoryCard;
+}

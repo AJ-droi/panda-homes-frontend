@@ -915,3 +915,18 @@ export const SuccessBadge = () => (
     </defs>
   </svg>
 );
+
+export const HistoriesPageBulletIcon = () => (
+  <svg
+    width="10"
+    height="10"
+    viewBox="0 0 10 10"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M0.421143 0.842773L9.42114 5.34277L0.421143 9.84277V0.842773Z"
+      fill="#785DBA"
+    />
+  </svg>
+);
