@@ -1,8 +1,6 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import PropertiesListTable from "./PropertiesListTable";
-import Pagination from "../../PaginationComponent";
 import SearchBar from "@/components/SearchBar";
 import Dropdown from "@/components/Dropdown";
 import {
@@ -11,17 +9,13 @@ import {
   OccupantStatusIcon,
   PropertyStatusIcon,
   BuildYearCalendarIcon,
-  WhitePlusIcon,
-  PropertyFormStar,
+
 } from "@/layout/svgIconPaths";
-import RentCollectionSummary from "./RentCollectionSummary";
 import IssuesListTable from "./IssuesTable";
-import ColouredButton from "@/components/ColouredButton";
-import PropertyForm from "./PropertyForm";
+import LeaseExpirationTable from "./LeaseExpirationTable";
 
 const PropertiesHome = () => {
   const [useColumnLayout, setUseColumnLayout] = useState(false);
-  const [newPropertyForm, setNewPropertyForm] = useState(false);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -37,8 +31,7 @@ const PropertiesHome = () => {
   }, []);
 
   return (
-    <div className=" px-3 sm:px-4 md:px-6 lg:px-10 w-full">
-      {!newPropertyForm && (
+    <div className=" px-3 sm:px-4 md:px-6 lg:px-0 w-full">
         <div>
           <section className="flex flex-col justify-center">
             <div className="mt-3 sm:mt-4 w-full flex justify-center">
@@ -76,7 +69,10 @@ const PropertiesHome = () => {
             </div>
           </section>
 
-          <section className="max-w-full text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] my-[2%]">
+        <section className="flex items-start py-5">
+          <div className="w-[65%]">
+    
+          <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] ">
             <div
               className="text-[#4D4D4D] font-[600] text-[22px] leading-[145%] py-[2%]"
               style={{ fontFamily: "Plus Jakarta Sans" }}
@@ -91,69 +87,31 @@ const PropertiesHome = () => {
             >
               <div className="mt-4 sm:mt-6 w-full lg:max-w-[780px]">
                 <PropertiesListTable />
-                <div className="mt-4 sm:mt-6 flex justify-center lg:justify-end">
-                  <Pagination
-                    totalPages={10}
-                    currentPage={4}
-                    onPageChange={() => ""}
-                  />
-                </div>
               </div>
-              <div className="w-full flex justify-center lg:justify-start lg:w-auto">
+              {/* <div className="w-full flex justify-center lg:justify-start lg:w-auto">
                 <RentCollectionSummary />
-              </div>
+              </div> */}
             </div>
           </section>
 
-          <section className="flex flex-col gap-4 sm:gap-6 mt-6 sm:mt-8 md:mt-10">
-            <div className="flex flex-col sm:flex-row justify-between items-start w-full">
+          <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] my-[2%]">
+
               <div
-                className="text-[#4D4D4D] font-[600] text-[16px] sm:text-[18px] md:text-[22px] leading-[145%]"
+                className="text-[#4D4D4D] font-[600] text-[22px] leading-[145%] py-[2%]"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Active Maintenance Issues
               </div>
-            </div>
+  
 
             <div className="w-full max-w-[900px]">
               <IssuesListTable />
-              <div className="mt-4 sm:mt-6 flex justify-center lg:justify-end">
-                <Pagination
-                  totalPages={10}
-                  currentPage={4}
-                  onPageChange={() => ""}
-                />
-              </div>
-            </div>
-
-            <div className="flex justify-center sm:justify-end mt-3 sm:mt-0">
-              <div className="w-auto">
-                <ColouredButton
-                  hoverEffect={false}
-                  onClick={() => setNewPropertyForm(true)}
-                >
-                  <div className="flex gap-[8.72px] justify-center items-center">
-                    <div className="flex justify-center items-center">
-                      <WhitePlusIcon />
-                    </div>
-                    <div className="text-sm sm:text-base font-[100]">
-                      Add New Property
-                    </div>
-                  </div>
-                </ColouredButton>
-              </div>
             </div>
           </section>
-        </div>
-      )}
-      {newPropertyForm && (
-        <section className="">
-          <div className="mb-4">
-            <PropertyFormStar />
           </div>
-          <PropertyForm onClose={() => setNewPropertyForm(false)} />
-        </section>
-      )}
+          <LeaseExpirationTable />
+          </section>
+        </div>
     </div>
   );
 };

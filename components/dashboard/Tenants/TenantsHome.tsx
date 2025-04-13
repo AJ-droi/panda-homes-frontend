@@ -72,67 +72,32 @@ const TenantsHome = () => {
         </section>
 
         <section className="flex flex-col xl:flex-row gap-6 sm:gap-8 md:gap-10 mt-6 sm:mt-8 md:mt-10 lg:mt-12">
-          <section className="w-full xl:w-[65%]">
-            <section>
+          <section className="w-full xl:w-[65%] flex flex-col gap-y-5">
+            <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] ">
               <div
-                className="text-[#4D4D4D] font-[600] text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] leading-[145%]"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
+                   className="text-[#4D4D4D] font-[600] text-[22px] leading-[145%] py-[2%]"
+                   style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Tenants List
               </div>
               <div className="mt-3 sm:mt-4 md:mt-5 w-full">
                 <TenantsListTable />
-                <div className="mt-3 sm:mt-4 md:mt-5 flex justify-center lg:justify-end">
-                  <Pagination
-                    totalPages={10}
-                    currentPage={4}
-                    onPageChange={() => ""}
-                  />
-                </div>
               </div>
             </section>
 
-            <section className="mt-6 sm:mt-8 md:mt-10">
+            <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] ">
               <div
-                className="text-[#4D4D4D] font-[600] text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] leading-[145%]"
+                className="text-[#4D4D4D] font-[600] text-[22px] leading-[145%] py-[2%]"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Overdue Payments
               </div>
               <div className="mt-3 sm:mt-4 md:mt-5 w-full">
                 <OverdueRentsTable />
-                <div className="mt-3 sm:mt-4 md:mt-5 flex justify-center lg:justify-end">
-                  <Pagination
-                    totalPages={10}
-                    currentPage={4}
-                    onPageChange={() => ""}
-                  />
-                </div>
               </div>
             </section>
           </section>
 
-          <section className="w-full xl:w-[35%] flex flex-col gap-4 sm:gap-6">
-            <div className="flex flex-col sm:flex-row justify-between items-start w-full">
-              <div
-                className="text-[#4D4D4D] font-[600] text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] leading-[145%]"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-              >
-                Upcoming Lease Expirations (30 Days)
-              </div>
-            </div>
-
-            <div className="w-full">
-              <LeaseExpirationsTable />
-              <div className="mt-3 sm:mt-4 md:mt-5 flex justify-center lg:justify-end">
-                <Pagination
-                  totalPages={10}
-                  currentPage={4}
-                  onPageChange={() => ""}
-                />
-              </div>
-            </div>
-          </section>
         </section>
       </div>
     </div>

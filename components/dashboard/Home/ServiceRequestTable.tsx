@@ -31,35 +31,6 @@ const ServiceRequestTable = () => {
     },
   ];
 
-  const getActionButton = (status: string) => {
-    switch (status) {
-      case "Pending":
-        return (
-          <button className="bg-[#2A8252] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black text-white px-[16px] py-[10px] rounded-[12px] text-sm">
-            Assign Technician
-          </button>
-        );
-      case "Resolved":
-        return (
-          <button className="bg-[#2A8252] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black text-white px-[16px] py-[10px] rounded-[12px] text-sm">
-            View Report
-          </button>
-        );
-      case "Urgent":
-        return (
-          <button className="bg-[#2A8252] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black text-white px-[16px] py-[10px] rounded-[12px] text-sm">
-            Escalate
-          </button>
-        );
-      default:
-        return (
-          <button className="bg-green-600 text-white px-4 py-2 rounded-md text-sm">
-            Action
-          </button>
-        );
-    }
-  };
-
   return (
     <div className="w-full  text-[#6E7079] overflow-hidden">
       <div className="overflow-x-auto">

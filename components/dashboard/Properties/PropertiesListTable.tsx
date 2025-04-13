@@ -1,4 +1,5 @@
-import React from "react";
+import Pagination from "@/components/PaginationComponent";
+import React, { useState } from "react";
 
 const PropertiesListTable = () => {
   const propertyData = [
@@ -46,6 +47,14 @@ const PropertiesListTable = () => {
     },
   ];
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
+    
+    // Calculate items to display on current page
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = propertyData.slice(indexOfFirstItem, indexOfLastItem);
+
   return (
     <div className="max-w-full text-[#6E7079] overflow-hidden ">
       <div className="overflow-x-auto">
@@ -53,31 +62,31 @@ const PropertiesListTable = () => {
           <thead>
             <tr className="border-y border-[#E1E2E9]">
               <th
-               className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Property
               </th>
               <th
-               className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Location
               </th>
               <th
-               className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Vacancy
               </th>
               <th
-               className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Rent Owed
               </th>
               <th
-               className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Action
@@ -88,7 +97,7 @@ const PropertiesListTable = () => {
             className="leading-[145%]"
             style={{ fontFamily: "Plus Jakarta Sans" }}
           >
-            {propertyData.map((item, index) => (
+            {currentItems.map((item, index) => (
               <tr
                 key={item.id}
                 className={`${
@@ -123,6 +132,13 @@ const PropertiesListTable = () => {
           </tbody>
         </table>
       </div>
+
+      <Pagination 
+        itemsPerPage={itemsPerPage}
+        totalItems={propertyData.length}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 };

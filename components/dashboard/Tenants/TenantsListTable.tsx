@@ -1,5 +1,7 @@
+/* eslint-disable */
+import Pagination from "@/components/PaginationComponent";
 import { useFetchUserDetails } from "@/services/users/query";
-import React from "react";
+import React, { useState } from "react";
 
 const TenantsListTable = () => {
   const tenantsList = [
@@ -26,38 +28,46 @@ const TenantsListTable = () => {
     },
   ];
 
-  const { data: users, isLoading, error, refetch } = useFetchUserDetails();
+  const { data: users, isLoading } = useFetchUserDetails();
 const tenants = users ?? tenantsList;
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
+    
+    // Calculate items to display on current page
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = tenants.slice(indexOfFirstItem, indexOfLastItem);
+
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  // if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="w-full text-[#000000] rounded-2xl overflow-hidden shadow-2xl bg-white">
+    <div className="max-w-full text-[#6E7079] overflow-hidden ">
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="border-b">
+            <tr className="border-y border-[#E1E2E9]">
               <th
-                className="text-center text-[16px] md:text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                 className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Tenant Name
               </th>
               <th
-                className="text-center text-[16px] md:text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                 className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Property
               </th>
               <th
-                className="text-center text-[16px] md:text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                 className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Move-in Date
               </th>
               <th
-                className="text-center text-[16px] md:text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+                 className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Rent Status
@@ -68,12 +78,12 @@ const tenants = users ?? tenantsList;
             className="leading-[145%]"
             style={{ fontFamily: "Plus Jakarta Sans" }}
           >
-            {tenants.map((item:any, index:any) => (
+            {currentItems.map((item:any, index:any) => (
               <tr
                 key={item.id}
                 className={`${
-                  index !== tenantsList.length - 1 ? "border-b" : ""
-                } border-[#666666] hover:bg-gray-50`}
+                  index !== tenantsList.length - 1 ? "" : ""
+                } text-sm`}
               >
                 <td className="py-4 px-6 text-center">{item.tenantName}</td>
                 <td className="py-4 px-6 text-center">{item.property}</td>
@@ -92,6 +102,13 @@ const tenants = users ?? tenantsList;
           </tbody>
         </table>
       </div>
+
+            <Pagination 
+              itemsPerPage={itemsPerPage}
+              totalItems={tenants.length}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
     </div>
   );
 };

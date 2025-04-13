@@ -1,5 +1,5 @@
-import React from "react";
-import ServiceRequestTableButton from "./TableDropdownButton";
+import React, { useState } from "react";
+import Pagination from "@/components/PaginationComponent";
 
 const PropertyPaymentTable = () => {
   const requestTable = [
@@ -68,63 +68,59 @@ const PropertyPaymentTable = () => {
     },
   ];
 
-  const getActionButton = (status: string) => {
-    switch (status) {
-      case "Pending":
-        return <ServiceRequestTableButton placeholder="Mark as Done" />;
-      case "In Progress":
-        return <ServiceRequestTableButton placeholder="Undo" />;
-      case "Resolved":
-        return <ServiceRequestTableButton placeholder="Undo" />;
-      default:
-        return <ServiceRequestTableButton placeholder="Mark as Done" />;
-    }
-  };
+
+   const [currentPage, setCurrentPage] = useState(1);
+      const itemsPerPage = 10;
+      
+      // Calculate items to display on current page
+      const indexOfLastItem = currentPage * itemsPerPage;
+      const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+      const currentItems = requestTable.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <div className=" text-[#000000] rounded-2xl overflow-hidden shadow-2xl bg-white">
+    <div className="max-w-full text-[#6E7079] overflow-hidden ">
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
-            <tr className="border-b">
-              <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+          <tr className="border-y border-[#E1E2E9]">
+               <th
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Request ID
               </th>
-              <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+               <th
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Tenant
               </th>
-              <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+               <th
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Property
               </th>
-              <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+               <th
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Issue
               </th>
-              <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+               <th
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Date Reported
               </th>
-              <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+               <th
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Status
               </th>
-              <th
-                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-medium"
+               <th
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Action
@@ -132,12 +128,12 @@ const PropertyPaymentTable = () => {
             </tr>
           </thead>
           <tbody>
-            {requestTable.map((item, index) => (
+            {currentItems.map((item, index) => (
               <tr
                 key={item.id}
                 className={`${
-                  index !== requestTable.length - 1 ? "border-b" : ""
-                } border-[#666666] hover:bg-gray-50`}
+                  index !== requestTable.length - 1 ? "" : ""
+                } text-sm`}
               >
                 <td className="py-4 px-6 text-center">{item.requestId}</td>
                 <td className="py-4 px-6 text-center">{item.tenant}</td>
@@ -158,12 +154,20 @@ const PropertyPaymentTable = () => {
                   {item.status}
                 </td>
                 <td className="py-4 px-6 text-center">
-                  {getActionButton(item.status)}
+                <button className="bg-[#5E636614] text-[#8B8D97] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm">
+                    View Details
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+          <Pagination 
+                itemsPerPage={itemsPerPage}
+                totalItems={requestTable.length}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
       </div>
     </div>
   );

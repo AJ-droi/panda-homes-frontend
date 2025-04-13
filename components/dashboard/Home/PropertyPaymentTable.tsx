@@ -46,35 +46,6 @@ const PropertyPaymentTable = () => {
     },
   ];
 
-  const getActionButton = (status: string) => {
-    switch (status) {
-      case "Pending":
-        return (
-          <button className="bg-[#2A8252] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black text-white px-[16px] py-[10px] rounded-[12px] text-sm">
-            Send Reminder
-          </button>
-        );
-      case "Late":
-        return (
-          <button className="bg-[#2A8252] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black text-white px-[16px] py-[10px] rounded-[12px] text-sm">
-            Issue Notice
-          </button>
-        );
-      case "Paid":
-        return (
-          <button className="bg-[#2A8252] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black text-white px-[16px] py-[10px] rounded-[12px] text-sm">
-            View Receipt
-          </button>
-        );
-      default:
-        return (
-          <button className="bg-[#2A8252] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black text-white px-[16px] py-[10px] rounded-[12px] text-sm">
-            Action
-          </button>
-        );
-    }
-  };
-
   return (
     <div className="max-w-full text-[#6E7079] overflow-hidden ">
     

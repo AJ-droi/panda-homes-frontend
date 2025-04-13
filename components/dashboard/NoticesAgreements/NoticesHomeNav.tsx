@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from "react";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
@@ -32,11 +31,11 @@ const NoticesHomeNav = () => {
 
   if (layoutType === "mobile") {
     return (
-      <div className="bg-white rounded-2xl shadow-lg shadow-[#0000001A] divide-y divide-[#E3E3E3]">
+      <div className="bg-white rounded-2xl shadow-md shadow-[#C2C2C229] divide-y divide-[#E3E3E3]">
         {navItems.map((item, index) => (
           <div key={index} className="flex items-center gap-3 p-4">
             <div
-              className="text-black text-sm font-[700] leading-[100%]"
+              className="text-black text-sm font-[500] leading-[100%]"
               style={{ fontFamily: "Plus Jakarta Sans" }}
             >
               {item.text} <span className="text-[#785DBA]">{item.data}</span>
@@ -49,7 +48,7 @@ const NoticesHomeNav = () => {
 
   if (layoutType === "tablet") {
     return (
-      <div className="grid grid-cols-2 bg-white rounded-2xl shadow-lg shadow-[#0000001A]">
+      <div className="grid grid-cols-2 bg-white rounded-2xl shadow-md shadow-[#C2C2C229]">
         {navItems.map((item, index) => (
           <div
             key={index}
@@ -58,7 +57,7 @@ const NoticesHomeNav = () => {
             } ${index < 2 ? "border-b border-[#E3E3E3]" : ""}`}
           >
             <div
-              className="text-black text-sm font-[700] leading-[100%]"
+              className="text-black text-sm font-[500] leading-[100%]"
               style={{ fontFamily: "Plus Jakarta Sans" }}
             >
               {item.text} <span className="text-[#785DBA]">{item.data}</span>
@@ -70,7 +69,7 @@ const NoticesHomeNav = () => {
   }
 
   return (
-    <div className="bg-white py-6 rounded-2xl shadow-lg shadow-[#0000001A] flex flex-wrap lg:flex-nowrap text-[#785DBA] w-full">
+    <div className="bg-white py-6 rounded-2xl shadow-md shadow-[#C2C2C229] flex flex-wrap lg:flex-nowrap text-[#785DBA] w-full">
       {navItems.map((item, index) => (
         <div
           key={index}
@@ -79,7 +78,7 @@ const NoticesHomeNav = () => {
           }`}
         >
           <div
-            className="text-black text-sm md:text-base font-[700] leading-[100%]"
+            className="text-black text-sm md:text-base font-[500] leading-[100%]"
             style={{ fontFamily: "Plus Jakarta Sans" }}
           >
             {item.text} <span className="text-[#785DBA]">{item.data}</span>
