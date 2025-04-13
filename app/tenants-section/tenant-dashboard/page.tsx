@@ -1,12 +1,19 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import PropertyDescriptionCard from "@/components/tenantsSection/PropertyDescriptionCard";
 import TenantServiceRequestCard from "@/components/tenantsSection/ServiceRequestCard";
 import RentCountdown from "@/components/tenantsSection/RentExpiryProgressBar";
+import PropertyHistoryCard from "@/components/tenantsSection/PropertyHistoryCard";
+import TenantServiceRequestForm from "@/components/tenantsSection/TenantServiceRequestForm";
 
 const TenantDashboard = () => {
+  const [propertyHistory, setPropertyHistory] = useState(false)
+  const [newServiceRequest, setNewServiceRequest] = useState(false)
   return (
     <div className="flex px-4 sm:px-8 md:px-16 py-6 md:py-10 bg-[#fafafe] flex-col min-h-screen">
+
+      {!propertyHistory && !newServiceRequest && (
+      <div>
       <section className="flex flex-col items-end w-full">
         <div className="w-full md:w-auto" style={{ fontFamily: "Plus Jakarta Sans" }}>
           <div className="font-[500] text-[16px] md:text-[18px] text-[#999999] leading-[150%]">
@@ -40,10 +47,26 @@ const TenantDashboard = () => {
           </div>
         </div>
         <div className="grid grid-cols-1 mt-4 md:mt-6 lg:grid-cols-2 gap-4 md:gap-6 w-full">
-          <PropertyDescriptionCard />
-          <TenantServiceRequestCard />
+          <PropertyDescriptionCard onClick={() => { setNewServiceRequest(false); setPropertyHistory(true); return null; }}/>
+          <TenantServiceRequestCard onClick={()=> { setPropertyHistory(false); setNewServiceRequest(true); return null;}} />
         </div>
       </section>
+      </div>
+      )}
+
+
+      {propertyHistory && (
+    <div className="mt-4">
+      <PropertyHistoryCard />
+    </div>
+    )}
+
+{newServiceRequest && (
+    <div className="mt-4">
+      <TenantServiceRequestForm onClose={()=> {setNewServiceRequest(false); return null}}/>
+    </div>
+    )}
+
     </div>
   );
 };

@@ -28,7 +28,7 @@ const Dropdown2: React.FC<DropdownProps> = ({
     <div className="relative w-full text-[11.44px] leading-[150%] font-[500] text-[#999999]" style={{fontFamily: 'Plus Jakarta Sans'}}>
       <button
         onClick={toggleDropdown}
-        className="w-full p-3 border hover:cursor-pointer border-[#262626] text-[#999999] rounded-lg flex items-center justify-between focus:outline-none focus:border-[#785DBA] transition-colors"
+        className="w-full px-[30px] py-[19px] border-1 h-[64px] hover:cursor-pointer border-[#8692A6] text-[#999999] rounded-[6px] flex items-center justify-between focus:outline-none focus:border-[#785DBA] transition-colors"
         style={{fontFamily: 'Urbanist'}}
       >
         <div className="flex items-center text-sm">

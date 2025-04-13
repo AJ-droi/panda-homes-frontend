@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Head from "next/head";
-import Navbar from "@/components/Navbar";
 import Form1 from "@/components/tenantsSection/tenantRegistrationForms/Form1";
 import Form2 from "@/components/tenantsSection/tenantRegistrationForms/Form2";
 import Form3 from "@/components/tenantsSection/tenantRegistrationForms/Form3";
@@ -88,8 +87,6 @@ const TenantRegistration = () => {
         <title>Tenant Registration | Panda App</title>
         <meta name="description" content="Tenant Registration page" />
       </Head>
-
-      <Navbar isTenantRegister={true} />
 
       <div className="w-full py-10 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 mt-8 md:mt-20">
         <div className="max-w-[1189px] mx-auto">          
