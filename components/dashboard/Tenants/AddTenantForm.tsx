@@ -1,57 +1,22 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+// /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import React, { useState } from "react";
 import Dropdown2 from "@/components/Dropdown2";
 import InputField from "@/components/InputField";
 import ColouredButton from "@/components/ColouredButton";
 import CalendarDropdown from "@/components/CalendarDropdown";
-import { set } from "zod";
 
 interface addTenantProps {
   onClose?: () => void;
 }
 
-const AddTenantForm: React.FC<addTenantProps> = ({ onClose }) => {
-  // Form state
-  const [propertyName, setPropertyName] = useState("");
-  const [rentalPrice, setRentalPrice] = useState("");
-  const [securityDeposit, setSecurityDeposit] = useState("");
-  const [serviceCharge, setServiceCharge] = useState("");
-  const [additionalNotes, setAdditionalNotes] = useState("");
-  const [files, setFiles] = useState<FileList | null>(null);
+const AddTenantForm: React.FC<addTenantProps> = ({}) => {
+  const [email, setEmail] = useState("");
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
   const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
 
-  // Dropdown options
-  const locationOptions = [
-    "New York",
-    "Los Angeles",
-    "Chicago",
-    "Houston",
-    "Miami",
-  ];
-  const propertyTypeOptions = [
-    "Apartment",
-    "House",
-    "Condo",
-    "Townhouse",
-    "Studio",
-  ];
-  const bathroomOptions = ["1", "2", "3", "4", "5+"];
-  const bedroomOptions = ["1", "2", "3", "4", "5+"];
+  const propertyOptions = ["Lekki", "Ajah", "Uyo", "Epe", "5th Avenue"];
   const paymentFrequencyOptions = ["Monthly", "Weekly", "Yearly"];
-  const leaseDurationOptions = [
-    "6 months",
-    "1 year",
-    "2 years",
-    "Month-to-month",
-  ];
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setFiles(e.target.files);
-    }
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,7 +41,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({ onClose }) => {
               Property
             </label>
             <Dropdown2
-              options={bathroomOptions}
+              options={propertyOptions}
               placeholder="Select Property"
             />
           </section>
@@ -132,8 +97,8 @@ const AddTenantForm: React.FC<addTenantProps> = ({ onClose }) => {
               </label>
               <InputField
                 placeholder="Enter email address"
-                value={securityDeposit}
-                onChange={setSecurityDeposit}
+                value={email}
+                onChange={setEmail}
                 type="email"
               />
             </div>

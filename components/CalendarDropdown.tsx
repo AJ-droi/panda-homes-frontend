@@ -33,12 +33,12 @@ const CalendarDropdown: React.FC<CalendarDropdownProps> = ({
       <button
         type="button"
         onClick={toggleCalendar}
-        className="w-full p-3 border hover:cursor-pointer border-[#262626] text-[#999999] rounded-lg flex items-center justify-between focus:outline-none focus:border-[#785DBA] transition-colors"
-        style={{fontFamily: 'Plus Jakarta Sans'}}
+        className="w-full px-[30px] py-[19px] border-1 h-[64px] hover:cursor-pointer border-[#8692A6] text-[#999999] rounded-[6px] flex items-center justify-between focus:outline-none focus:border-[#785DBA] transition-colors"
+        style={{fontFamily: 'Inter'}}
       >
         <div className="flex items-center text-sm">
           {icon && (
-            <span className="mr-2 pr-2 border-[#262626] border-r-1 py-1">{icon}</span>
+            <span className="mr-2 pr-2 border-[#8692A6] border-r-1 py-1">{icon}</span>
           )}
           {selectedDate ? selectedDate.toLocaleDateString() : placeholder}
         </div>

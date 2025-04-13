@@ -5,6 +5,7 @@ interface DropdownProps {
   icon?: React.ReactNode;
   placeholder?: string;
   selectedOption?: string
+  height?: string;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -27,7 +28,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       <button
         onClick={toggleDropdown}
         className="w-full p-3 border hover:cursor-pointer border-[#8B8D97] text-[#999999] rounded-lg flex items-center justify-between focus:outline-none focus:border-[#785DBA] transition-colors"
-        style={{fontFamily: 'Plus Jakarta Sans'}}
+        style={{fontFamily: 'Urbanist'}}
       >
         <div className="flex items-center">
           {icon && (
