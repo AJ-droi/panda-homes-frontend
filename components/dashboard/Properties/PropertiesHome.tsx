@@ -1,6 +1,6 @@
 "use client";
-/* eslint-disable */
 import React, { useEffect, useState } from "react";
+import LeaseExpirationTable from "./LeaseExpirationTable";
 import PropertiesListTable from "./PropertiesListTable";
 import SearchBar from "@/components/SearchBar";
 import Dropdown from "@/components/Dropdown";
@@ -13,7 +13,7 @@ import {
 
 } from "@/layout/svgIconPaths";
 import IssuesListTable from "./IssuesTable";
-import LeaseExpirationTable from "./LeaseExpirationTable";
+
 
 
 const PropertiesHome = () => {
