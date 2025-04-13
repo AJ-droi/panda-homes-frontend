@@ -2,7 +2,7 @@
 import React from "react";
 import InputField from "@/components/InputField";
 import ColouredButton from "@/components/ColouredButton";
-import { TenantFormData } from "@/app/tenants-section/tenant-registration/page";
+import { TenantFormData } from "@/app/tenant-signup/page";
 import NationalityInput from "@/components/NatonalityInput";
 
 interface Form2Props {
@@ -25,10 +25,10 @@ const Form2: React.FC<Form2Props> = ({
   return (
     <div className="w-full p-12 shadow-lg bg-white rounded-[10px] border-1">
       <h1
-        className="text-2xl max-w-[916px] leading-[145%] text-[#45464E] border-b mb-6"
+        className="text-[20px] font-[700] max-w-[279px] py-2 flex justify-center leading-[145%] text-[#785DBA] border-b mb-6"
         style={{ fontFamily: "Plus Jakarta Sans" }}
       >
-        Tenant Details
+        Profile & Account Settings
       </h1>
       <div className="flex mt-20 min-h-[784px] justify-center">
         <div className="space-y-6 w-full max-w-[890px] flex gap-[38px] flex-col">

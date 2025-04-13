@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // /* eslint-disable @typescript-eslint/no-unused-vars */
-"use client"
+"use client";
 import React, { useState } from "react";
 import Dropdown2 from "@/components/Dropdown2";
 import ColouredButton from "@/components/ColouredButton";
@@ -21,12 +22,7 @@ const TenantServiceRequestForm: React.FC<propertyFormProps> = ({ onClose }) => {
     "Houston",
     "Miami",
   ];
-  const categoryOptions = [
-    "Plumbing",
-    "Electricity",
-    "Leaking Roof",
-    "Other",
-  ];
+  const categoryOptions = ["Plumbing", "Electricity", "Leaking Roof", "Other"];
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -41,8 +37,11 @@ const TenantServiceRequestForm: React.FC<propertyFormProps> = ({ onClose }) => {
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Blurry overlay */}
-      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose}></div>
-      
+      <div
+        className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
+      ></div>
+
       {/* Modal container */}
       <div className="flex items-center justify-center min-h-screen p-4">
         <div className="relative w-full max-w-4xl mx-auto">
@@ -73,9 +72,7 @@ const TenantServiceRequestForm: React.FC<propertyFormProps> = ({ onClose }) => {
                       />
                     </div>
                     <div className="gap-2 md:gap-[12.14px] flex flex-col">
-                      <CalendarDropdown
-                        placeholder="Effective Date"
-                      />
+                      <CalendarDropdown placeholder="Effective Date" />
                     </div>
                   </section>
 
@@ -132,14 +129,10 @@ const TenantServiceRequestForm: React.FC<propertyFormProps> = ({ onClose }) => {
 
                   <section className="flex flex-col-reverse sm:flex-row justify-between gap-3 md:gap-4">
                     <div className="w-full sm:w-auto">
-                      <ColouredButton onClick={onClose}>
-                      Cancel
-                      </ColouredButton>
+                      <ColouredButton onClick={onClose}>Cancel</ColouredButton>
                     </div>
                     <div className="w-full sm:w-auto">
-                      <ColouredButton onClick={onClose}>
-                      Submit
-                      </ColouredButton>
+                      <ColouredButton onClick={onClose}>Submit</ColouredButton>
                     </div>
                   </section>
                 </form>

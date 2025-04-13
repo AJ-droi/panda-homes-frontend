@@ -21,6 +21,7 @@ export default function Home() {
         <meta name="description" content="Landing page for Panda App" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {/* background: linear-gradient(224.89deg, rgba(70, 95, 241, 0.0851) 12.36%, rgba(70, 95, 241, 0.23) 87.59%); */}
 
       <LandingNavbar />
 

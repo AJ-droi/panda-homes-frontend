@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import Head from "next/head";
-import Form1 from "@/components/tenantsSection/tenantRegistrationForms/Form1";
-import Form2 from "@/components/tenantsSection/tenantRegistrationForms/Form2";
-import Form3 from "@/components/tenantsSection/tenantRegistrationForms/Form3";
+import Form1 from "@/components/tenantsSection/tenantRegistrationForms/RegistrationForm1";
+import Form2 from "@/components/tenantsSection/tenantRegistrationForms/RegistrationForm2";
+import Form3 from "@/components/tenantsSection/tenantRegistrationForms/RegistrationForm3";
+import SuccessForm from "@/components/tenantsSection/tenantRegistrationForms/SignupSuccesComponent";
 
 export interface TenantFormData {
   fullName: string;
@@ -75,21 +76,23 @@ const TenantRegistration = () => {
       case 2:
         return <Form2 formData={formData} updateFormData={updateFormData} nextStep={nextStep} prevStep={prevStep} />;
       case 3:
-        return <Form3 formData={formData} updateFormData={updateFormData} prevStep={prevStep} />;
+        return <Form3 formData={formData} updateFormData={updateFormData} nextStep={nextStep} prevStep={prevStep} />;
+        case 4:
+        return <SuccessForm />;
       default:
         return <Form1 formData={formData} updateFormData={updateFormData} nextStep={nextStep} />;
     }
   };
 
   return (
-    <div className="bg-white flex flex-col min-h-screen">
+    <div className="border-20 bg-[#c0bdfc] border-[#c0bdfc] flex justify-center items-center flex-col min-h-screen">
       <Head>
         <title>Tenant Registration | Panda App</title>
         <meta name="description" content="Tenant Registration page" />
       </Head>
 
-      <div className="w-full py-10 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 mt-8 md:mt-20">
-        <div className="max-w-[1189px] mx-auto">          
+      <div className="w-full min-h-screen flex rounded-[10px] justify-center item-center">
+        <div className="w-full rounded-[10px] mx-auto">          
           {renderStep()}
         </div>
       </div>
@@ -97,5 +100,7 @@ const TenantRegistration = () => {
   );
   
 };
+
+//py-10 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40
 
 export default TenantRegistration;

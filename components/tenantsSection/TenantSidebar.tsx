@@ -20,6 +20,8 @@ const TenantSidebar = () => {
   const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+   const [loadingPath, setLoadingPath] = useState<string | null>(null);
+  
 
   const router = useRouter();
 
@@ -48,16 +50,25 @@ const TenantSidebar = () => {
     setIsOpen(!isOpen);
   };
 
-  const redirect = (path: string) => {
-    if (pathname === path) {
-      return;
-    }
-    setIsLoading(true);
+  const redirect = async (path: string) => {
+    if (pathname === path) return;
 
-    setTimeout(() => {
-      router.push(path);
-    }, 500);
-  };
+    setIsLoading(true);
+    setLoadingPath(path);
+
+    try {
+      setTimeout(() => {
+        router.push(path);
+      }, 500);
+    } catch (error) {
+      console.error("Navigation error:", error);
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+      setLoadingPath(null);
+    }
+  }
 
   const Breadcrumb = () => {
     const activeItem = iconData.find((item) => item.path === pathname);
@@ -117,11 +128,9 @@ const TenantSidebar = () => {
                 className={`flex gap-4 items-center px-4 py-4 hover:bg-gray-100 cursor-pointer ${
                   pathname === item.path ? "border-r-2 border-r-[#785DBA]" : ""
                 }`}
-                onClick={() => {
-                  if (item.path) {
-                    redirect(item.path);
-                  }
-                }}
+                onClick={() =>
+                  !isLoading && loadingPath !== item.path && redirect(item.path)
+                }
               >
                 <div>
                   {pathname === item.path ? item.activeIcon : item.icon}
