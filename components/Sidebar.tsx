@@ -14,6 +14,8 @@ import {
   TenantActiveIcon,
   ServiceRequestsActiveIcon,
   SidebarNoticeAndAgreementActiveIcon,
+  SidebarPropertyHistoryIcon,
+  ActiveSidebarPropertyHistoryIcon,
 } from "@/layout/svgIconPaths";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
@@ -60,12 +62,8 @@ const Sidebar = () => {
     },
     {
       name: "Property History",
-      icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#000000">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>,
-     activeIcon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#785DBA">
-     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-   </svg>,
+      icon: <SidebarPropertyHistoryIcon />,
+     activeIcon: <ActiveSidebarPropertyHistoryIcon />,
       path: "/dashboard/property-history",
     },
   ];

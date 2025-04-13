@@ -4,14 +4,10 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   SidebarHomeIcon,
-  SidebarPropertiesIcon,
-  SidebarTenantsIcon,
   SidebarServiceRequestsIcon,
   SidebarNoticeAndAgreementIcon,
   BreadcrumbIcon,
   HomeActiveIcon,
-  PropertyActiveIcon,
-  TenantActiveIcon,
   ServiceRequestsActiveIcon,
   SidebarNoticeAndAgreementActiveIcon,
 } from "@/layout/svgIconPaths";
@@ -32,41 +28,19 @@ const TenantSidebar = () => {
       name: "Home",
       icon: <SidebarHomeIcon />,
       activeIcon: <HomeActiveIcon />,
-      path: "/dashboard",
-    },
-    {
-      name: "Properties",
-      icon: <SidebarPropertiesIcon />,
-      activeIcon: <PropertyActiveIcon />,
-      path: "/properties",
-    },
-    {
-      name: "Tenants",
-      icon: <SidebarTenantsIcon />,
-      activeIcon: <TenantActiveIcon />,
-      path: "/tenants",
+      path: "/tenants-section/tenant-dashboard",
     },
     {
       name: "Service Requests",
       icon: <SidebarServiceRequestsIcon />,
       activeIcon: <ServiceRequestsActiveIcon />,
-      path: "/service-requests",
+      path: "/tenants-section/tenant-service-requests",
     },
     {
       name: "Notices & Agreements",
       icon: <SidebarNoticeAndAgreementIcon />,
       activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
-      path: "/notices-agreements",
-    },
-    {
-      name: "Property History",
-      icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#000000">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>,
-     activeIcon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#785DBA">
-     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-   </svg>,
-      path: "/dashboard/property-history",
+      path: "/tenants-section/tenant-notices-agreements",
     },
   ];
 
@@ -162,20 +136,6 @@ const TenantSidebar = () => {
               </nav>
             ))}
           </section>
-
-          <button
-            className="text-sm font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-2 rounded-md w-[90%]"
-            onClick={() => router.push("/dashboard/add-property")}
-          >
-            Add New Property
-          </button>
-
-          <button
-            className="text-sm font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-2 rounded-md w-[90%]"
-            onClick={() => router.push("/dashboard/add-tenant")}
-          >
-           Register New Tenant
-          </button>
         </div>
       </div>
       {isLoading && <Loading />}
