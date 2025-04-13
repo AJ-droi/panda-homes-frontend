@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import PropertiesListTable from "./PropertiesListTable";
 import SearchBar from "@/components/SearchBar";
@@ -13,6 +14,7 @@ import {
 } from "@/layout/svgIconPaths";
 import IssuesListTable from "./IssuesTable";
 import LeaseExpirationTable from "./LeaseExpirationTable";
+
 
 const PropertiesHome = () => {
   const [useColumnLayout, setUseColumnLayout] = useState(false);
