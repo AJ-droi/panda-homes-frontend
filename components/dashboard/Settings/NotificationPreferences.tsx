@@ -1,8 +1,8 @@
 // components/NotificationPreferences.jsx
+/*eslint-disable */
 import { useState } from 'react';
 
 export default function NotificationPreferences() {
-  const [activeTab, setActiveTab] = useState('notifications');
   const [notifications, setNotifications] = useState({
     securityAlerts: true,
     emailNotification: false,
@@ -47,7 +47,7 @@ export default function NotificationPreferences() {
         {/* Email Notification */}
         <div className="flex items-center justify-between py-4 border-b">
           <div className="flex items-center">
-            <div className="bg-purple-500 p-3 rounded-full mr-4">
+            <div className="bg-[#785DBA] p-3 rounded-full mr-4">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
               </svg>

@@ -1,6 +1,9 @@
-"use client"
+"use client";
 import React from "react";
-import { NavbarNotificationBell, NavbarSettingsIcon } from "@/layout/svgIconPaths";
+import {
+  NavbarNotificationBell,
+  NavbarSettingsIcon,
+} from "@/layout/svgIconPaths";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
@@ -19,7 +22,7 @@ const Navbar = () => {
         </nav>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Navbar;

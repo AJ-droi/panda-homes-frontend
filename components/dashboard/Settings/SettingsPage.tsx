@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client"
 import { useState } from 'react';
 import NotificationPreferences from './NotificationPreferences';
@@ -89,7 +90,7 @@ const SettingsPage = () => {
                     id="fullName"
                     name="fullName"
                     placeholder="Please enter your full name"
-                    className="w-full px-4 py-3 bg-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full px-4 py-3 bg-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-[#785DBA]"
                     value={formData.fullName}
                     onChange={handleInputChange}
                   />
@@ -105,7 +106,7 @@ const SettingsPage = () => {
                     id="email"
                     name="email"
                     placeholder="Please enter your email"
-                    className="w-full px-4 py-3 bg-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full px-4 py-3 bg-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-[#785DBA]"
                     value={formData.email}
                     onChange={handleInputChange}
                   />
@@ -121,7 +122,7 @@ const SettingsPage = () => {
                     id="oldPassword"
                     name="oldPassword"
                     placeholder="Please enter your old password"
-                    className="w-full px-4 py-3 bg-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full px-4 py-3 bg-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-[#785DBA]"
                     value={formData.oldPassword}
                     onChange={handleInputChange}
                   />
@@ -141,7 +142,7 @@ const SettingsPage = () => {
                       id="phoneNumber"
                       name="phoneNumber"
                       placeholder="Please enter your phone number"
-                      className="w-full px-4 py-3 bg-gray-100 rounded-r focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full px-4 py-3 bg-gray-100 rounded-r focus:outline-none focus:ring-2 focus:ring-[#785DBA]"
                       value={formData.phoneNumber}
                       onChange={handleInputChange}
                     />
@@ -158,7 +159,7 @@ const SettingsPage = () => {
                     id="newPassword"
                     name="newPassword"
                     placeholder="Please enter your new password"
-                    className="w-full md:w-1/2 px-4 py-3 bg-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full md:w-1/2 px-4 py-3 bg-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-[#785DBA]"
                     value={formData.newPassword}
                     onChange={handleInputChange}
                   />
@@ -169,7 +170,7 @@ const SettingsPage = () => {
               <div className="mt-8 flex flex-wrap gap-4">
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-[#785DBA] text-white font-medium rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="px-6 py-3 bg-[#785DBA] text-white font-medium rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-[#785DBA]"
                 >
                   Update Profile
                 </button>

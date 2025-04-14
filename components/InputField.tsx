@@ -32,10 +32,10 @@ const InputField: React.FC<InputFieldProps> = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className={`w-full p-3 border text-sm border-[#262626] h-[49.39px] rounded-lg focus:outline-none focus:border-[#785DBA] text-black transition-colors text-[11.44px] leading-[150%] font-[500] ${
+        className={`w-full px-[30px] h-[64px] py-[23px] border-1 text-[14px] border-[#8692A6] rounded-[6px] focus:outline-none focus:border-[#785DBA] text-[#8692A6] transition-colors leading-[100%] font-[500] ${
           icon ? "pl-10" : ""
         } ${className}`}
-        style={{ fontFamily: 'Plus Jakarta Sans' }}
+        style={{ fontFamily: 'Inter' }}
       />
     </div>
   );

@@ -67,11 +67,11 @@ const PropertyPaymentTable = () => {
         <table className="w-full">
           <thead>
             <tr className="border-b">
-              <th className="text-left py-4 px-6 text-purple-600 font-medium">Property</th>
-              <th className="text-left py-4 px-6 text-purple-600 font-medium">Amount Due</th>
-              <th className="text-left py-4 px-6 text-purple-600 font-medium">Due Date</th>
-              <th className="text-left py-4 px-6 text-purple-600 font-medium">Status</th>
-              <th className="text-left py-4 px-6 text-purple-600 font-medium">Action</th>
+              <th className="text-left py-4 px-6 text-[#785DBA] font-medium">Property</th>
+              <th className="text-left py-4 px-6 text-[#785DBA] font-medium">Amount Due</th>
+              <th className="text-left py-4 px-6 text-[#785DBA] font-medium">Due Date</th>
+              <th className="text-left py-4 px-6 text-[#785DBA] font-medium">Status</th>
+              <th className="text-left py-4 px-6 text-[#785DBA] font-medium">Action</th>
             </tr>
           </thead>
           <tbody>

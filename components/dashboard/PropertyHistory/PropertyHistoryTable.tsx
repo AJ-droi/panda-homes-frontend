@@ -147,7 +147,7 @@ export default function PropertyHistory() {
                   <input
                     type="text"
                     placeholder="Search"
-                    className="pl-8 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-purple-500"
+                    className="pl-8 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-[#785DBA]"
                   />
                   <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
                 </div>
@@ -177,7 +177,7 @@ export default function PropertyHistory() {
                     <th className="w-10 py-3 px-4">
                       <input
                         type="checkbox"
-                        className="rounded text-purple-600 focus:ring-purple-500"
+                        className="rounded text-[#785DBA] focus:ring-[#785DBA]"
                       />
                     </th>
                     <th
@@ -233,7 +233,7 @@ export default function PropertyHistory() {
                       <td className="py-4 px-4">
                         <input
                           type="checkbox"
-                          className="rounded text-purple-600 focus:ring-purple-500"
+                          className="rounded text-[#785DBA] focus:ring-[#785DBA]"
                         />
                       </td>
                       <td className="py-4 px-4 text-sm text-gray-700">

@@ -1,4 +1,5 @@
 import Pagination from "@/components/PaginationComponent";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const PropertiesListTable = () => {
@@ -54,6 +55,8 @@ const PropertiesListTable = () => {
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = propertyData.slice(indexOfFirstItem, indexOfLastItem);
+
+    const router = useRouter()
 
   return (
     <div className="max-w-full text-[#6E7079] overflow-hidden ">
@@ -123,7 +126,7 @@ const PropertiesListTable = () => {
                   {item.rentOwed}
                 </td>
                 <td className="py-4 px-6 text-center">
-                <button className="bg-[#5E636614] text-[#8B8D97] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm">
+                <button onClick={() => router.push('/dashboard/view-property')} className="bg-[#5E636614] text-[#8B8D97] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm">
                     View Details
                   </button>
                 </td>

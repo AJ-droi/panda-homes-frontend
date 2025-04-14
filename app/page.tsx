@@ -21,6 +21,7 @@ export default function Home() {
         <meta name="description" content="Landing page for Panda App" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {/* background: linear-gradient(224.89deg, rgba(70, 95, 241, 0.0851) 12.36%, rgba(70, 95, 241, 0.23) 87.59%); */}
 
       <LandingNavbar />
 
@@ -44,7 +45,7 @@ export default function Home() {
             </div>
           )}
           <section className={`w-full flex flex-row sm:flex-row sm:items-start gap-[40px] sm:gap-[80px] lg:mt-[100px]`}
-            style={{ marginTop: isNotDesktop ? "50px" : "200px" }}
+            style={{ marginTop: isNotDesktop ? "50px" : "250px" }}
           >
             <div className="flex flex-col items-center sm:items-start">
               <div className="relative w-[50px] h-[50px]">

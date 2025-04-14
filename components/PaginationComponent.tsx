@@ -34,7 +34,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 //           onClick={() => onPageChange(page)}
 //           className={`w-10 h-10 hover:cursor-pointer rounded-lg bg-white border ${
 //             page === currentPage
-//               ? "border-purple-500 text-purple-500 font-bold"
+//               ? "border-[#785DBA] text-[#785DBA] font-bold"
 //               : "border-gray-300 text-[#212B36]"
 //           }`}
 //         >
