@@ -14,7 +14,7 @@ const Navbar = () => {
         <nav className="hover:cursor-pointer" onClick={() => router.push("/dashboard/notifications")}>
           <NavbarNotificationBell />
         </nav>
-        <nav className="hover:cursor-pointer">
+        <nav className="hover:cursor-pointer" onClick={() => router.push("/dashboard/settings")}>
           <NavbarSettingsIcon />
         </nav>
       </div>
