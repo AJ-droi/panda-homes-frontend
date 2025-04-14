@@ -41,7 +41,7 @@ export default function NotificationsPage() {
   ];
 
   return (
-    <div className="max-w-3xl py-4 px-10">
+    <div className="max-w-3xl min-h-screen py-4 px-10">
       <NotificationsList initialNotifications={sampleNotifications} />
     </div>
   );

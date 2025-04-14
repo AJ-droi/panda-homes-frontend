@@ -1,41 +1,46 @@
 import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-interface DropdownProps {
-  options: string[];
-  icon?: React.ReactNode;
+interface CalendarDropdownProps {
+  selectedDate?: Date | null;
   placeholder?: string;
-  selectedOption?: string
+  icon?: React.ReactNode;
   colorIcon?: boolean;
+  onChange?: (date: Date | null) => void;
 }
 
-const Dropdown2: React.FC<DropdownProps> = ({
-  options,
+const CalendarDropdown: React.FC<CalendarDropdownProps> = ({
+  selectedDate = null,
+  placeholder = "Select a date",
   icon,
-  placeholder = "Select an option",
-  colorIcon = false
+  colorIcon = false,
+  onChange
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
-
-  const handleOptionClick = (option: string) => {
-    setSelectedOption(option);
+  const handleDateChange = (date: Date | null) => {
+    if (onChange) {
+      onChange(date);
+    }
     setIsOpen(false);
   };
+
+  const toggleCalendar = () => setIsOpen(!isOpen);
 
   return (
     <div className="relative w-full text-[11.44px] leading-[150%] font-[500] text-[#999999]" style={{fontFamily: 'Plus Jakarta Sans'}}>
       <button
-        onClick={toggleDropdown}
+        type="button"
+        onClick={toggleCalendar}
         className="w-full px-[30px] py-[19px] border-1 h-[64px] hover:cursor-pointer border-[#8692A6] text-[#999999] rounded-[6px] flex items-center justify-between focus:outline-none focus:border-[#785DBA] transition-colors"
-        style={{fontFamily: 'Urbanist'}}
+        style={{fontFamily: 'Inter'}}
       >
         <div className="flex items-center text-sm">
           {icon && (
-            <span className="mr-2 pr-2 border-[#262626] border-r-1 py-1">{icon}</span>
+            <span className="mr-2 pr-2 border-[#8692A6] border-r-1 py-1">{icon}</span>
           )}
-          {selectedOption || placeholder}
+          {selectedDate ? selectedDate.toLocaleDateString() : placeholder}
         </div>
         <svg
           className={`ml-2 transition-transform ${isOpen ? "transform rotate-180" : ""}`}
@@ -62,21 +67,19 @@ const Dropdown2: React.FC<DropdownProps> = ({
           />
         </svg>
       </button>
+      
       {isOpen && (
-        <div className="absolute text-sm z-10 w-full mt-2 bg-white border border-gray-300 rounded-lg shadow-lg">
-          {options.map((option, index) => (
-            <div
-              key={index}
-              onClick={() => handleOptionClick(option)}
-              className="p-3 hover:bg-gray-100 cursor-pointer"
-            >
-              {option}
-            </div>
-          ))}
+        <div className="absolute z-10 mt-2">
+          <DatePicker
+            selected={selectedDate}
+            onChange={handleDateChange}
+            inline
+            calendarClassName="bg-white border border-gray-300 rounded-lg shadow-lg p-2"
+          />
         </div>
       )}
     </div>
   );
 };
 
-export default Dropdown2;
+export default CalendarDropdown;

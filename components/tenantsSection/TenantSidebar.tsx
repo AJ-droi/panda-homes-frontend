@@ -4,28 +4,24 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   SidebarHomeIcon,
-  SidebarPropertiesIcon,
-  SidebarTenantsIcon,
   SidebarServiceRequestsIcon,
   SidebarNoticeAndAgreementIcon,
   BreadcrumbIcon,
   HomeActiveIcon,
-  PropertyActiveIcon,
-  TenantActiveIcon,
   ServiceRequestsActiveIcon,
   SidebarNoticeAndAgreementActiveIcon,
-  SidebarPropertyHistoryIcon,
-  ActiveSidebarPropertyHistoryIcon,
 } from "@/layout/svgIconPaths";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
-import Loading from "./Loading";
+import Loading from "../Loading";
 
-const Sidebar = () => {
+const TenantSidebar = () => {
   const pathname = usePathname();
   const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+   const [loadingPath, setLoadingPath] = useState<string | null>(null);
+  
 
   const router = useRouter();
 
@@ -34,37 +30,19 @@ const Sidebar = () => {
       name: "Home",
       icon: <SidebarHomeIcon />,
       activeIcon: <HomeActiveIcon />,
-      path: "/dashboard",
-    },
-    {
-      name: "Properties",
-      icon: <SidebarPropertiesIcon />,
-      activeIcon: <PropertyActiveIcon />,
-      path: "/properties",
-    },
-    {
-      name: "Tenants",
-      icon: <SidebarTenantsIcon />,
-      activeIcon: <TenantActiveIcon />,
-      path: "/tenants",
+      path: "/tenants-section/tenant-dashboard",
     },
     {
       name: "Service Requests",
       icon: <SidebarServiceRequestsIcon />,
       activeIcon: <ServiceRequestsActiveIcon />,
-      path: "/service-requests",
+      path: "/tenants-section/tenant-service-requests",
     },
     {
       name: "Notices & Agreements",
       icon: <SidebarNoticeAndAgreementIcon />,
       activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
-      path: "/notices-agreements",
-    },
-    {
-      name: "Property History",
-      icon: <SidebarPropertyHistoryIcon />,
-     activeIcon: <ActiveSidebarPropertyHistoryIcon />,
-      path: "/dashboard/property-history",
+      path: "/tenants-section/tenant-notices-agreements",
     },
   ];
 
@@ -72,16 +50,25 @@ const Sidebar = () => {
     setIsOpen(!isOpen);
   };
 
-  const redirect = (path: string) => {
-    if (pathname === path) {
-      return;
-    }
-    setIsLoading(true);
+  const redirect = async (path: string) => {
+    if (pathname === path) return;
 
-    setTimeout(() => {
-      router.push(path);
-    }, 500);
-  };
+    setIsLoading(true);
+    setLoadingPath(path);
+
+    try {
+      setTimeout(() => {
+        router.push(path);
+      }, 500);
+    } catch (error) {
+      console.error("Navigation error:", error);
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+      setLoadingPath(null);
+    }
+  }
 
   const Breadcrumb = () => {
     const activeItem = iconData.find((item) => item.path === pathname);
@@ -141,11 +128,9 @@ const Sidebar = () => {
                 className={`flex gap-4 items-center px-4 py-4 hover:bg-gray-100 cursor-pointer ${
                   pathname === item.path ? "border-r-2 border-r-[#785DBA]" : ""
                 }`}
-                onClick={() => {
-                  if (item.path) {
-                    redirect(item.path);
-                  }
-                }}
+                onClick={() =>
+                  !isLoading && loadingPath !== item.path && redirect(item.path)
+                }
               >
                 <div>
                   {pathname === item.path ? item.activeIcon : item.icon}
@@ -160,20 +145,6 @@ const Sidebar = () => {
               </nav>
             ))}
           </section>
-
-          <button
-            className="text-sm font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-2 rounded-md w-[90%]"
-            onClick={() => router.push("/dashboard/add-property")}
-          >
-            Add New Property
-          </button>
-
-          <button
-            className="text-sm font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-2 rounded-md w-[90%]"
-            onClick={() => router.push("/dashboard/add-tenant")}
-          >
-           Register New Tenant
-          </button>
         </div>
       </div>
       {isLoading && <Loading />}
@@ -181,4 +152,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default TenantSidebar;
