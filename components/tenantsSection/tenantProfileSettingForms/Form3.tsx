@@ -3,6 +3,7 @@ import React from "react";
 import InputField from "@/components/InputField";
 import ColouredButton from "@/components/ColouredButton";
 import { TenantFormData } from "@/app/tenant-signup/page";
+import { usePathname } from "next/navigation";
 
 interface Form3Props {
   formData: TenantFormData;
@@ -24,6 +25,9 @@ const Form3: React.FC<Form3Props> = ({
     // Submit form data
     console.log("Form submitted:", formData);
   };
+
+
+    const pathname = usePathname();
 
   return (
     <div className="w-full p-12 shadow-lg bg-white rounded-[10px] border-1">
@@ -148,11 +152,11 @@ const Form3: React.FC<Form3Props> = ({
 
           <div className="flex gap-10 justify-between">
             <ColouredButton title="Previous" onClick={prevStep} />
-            <ColouredButton
+           {pathname !== "/dashboard/view-tenant" && <ColouredButton
               title="Submit"
               onClick={handleSubmit}
               // disabled={!formData.profession || !formData.nationality || !formData.maritalStatus}
-            />
+            />}
           </div>
         </div>
       </div>

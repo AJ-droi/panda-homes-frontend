@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
 import RentalHistory from "./RentalHistory";
 import PaymentRecords from "./PaymentRecords";
 import ServiceRequest from "./ServiceRequest";
 import NoticeAgreement from "./NoticeAgreement";
 import PropertyView from "./PropertyView";
+import PropertyHistory from "../PropertyHistory/PropertyHistoryTable";
 
 const PropertyViewHome: React.FC = () => {
   const [activeTab, setActiveTab] = useState("property-overview");
@@ -36,12 +36,16 @@ const PropertyViewHome: React.FC = () => {
             Rental History
           </button>
 
-          <Link
-            href="#"
-            className="px-4 py-4 text-gray-500 hover:text-gray-700"
+          <button
+            className={`px-6 py-4 font-medium text-sm md:text-base ${
+              activeTab === "property-history"
+                ? "text-[#785DBA] border-b-2 border-[#785DBA]"
+                : "text-gray-600 hover:text-gray-800"
+            }`}
+            onClick={() => setActiveTab("property-history")}
           >
             Property History
-          </Link>
+          </button>
 
           <button
             className={`px-6 py-4 font-medium text-sm md:text-base ${
@@ -85,11 +89,15 @@ const PropertyViewHome: React.FC = () => {
 
       {activeTab === "rental-history" && <RentalHistory />}
 
+      {activeTab === "property-history" && <PropertyHistory />}
+
       {activeTab === "payment-records" && <PaymentRecords />}
 
       {activeTab === "service-request" && <ServiceRequest />}
 
       {activeTab === "notice-agreement" && <NoticeAgreement />}
+
+
     </div>
   );
 };

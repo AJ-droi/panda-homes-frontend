@@ -1,4 +1,5 @@
-import React from "react";
+import Pagination from "@/components/PaginationComponent";
+import React, { useState } from "react";
 
 const PropertyPaymentTable = () => {
   const propertyPaymentData = [
@@ -46,6 +47,14 @@ const PropertyPaymentTable = () => {
     },
   ];
 
+      const [currentPage, setCurrentPage] = useState(1);
+      const itemsPerPage = 10;
+      
+      // Calculate items to display on current page
+      const indexOfLastItem = currentPage * itemsPerPage;
+      const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+      const currentItems = propertyPaymentData.slice(indexOfFirstItem, indexOfLastItem);
+
   return (
     <div className="max-w-full text-[#6E7079] overflow-hidden ">
     
@@ -86,7 +95,7 @@ const PropertyPaymentTable = () => {
             </tr>
           </thead>
           <tbody>
-            {propertyPaymentData.map((item, index) => (
+            {currentItems.map((item, index) => (
               <tr
                 key={item.id}
                 className={`${
@@ -126,6 +135,12 @@ const PropertyPaymentTable = () => {
           </tbody>
         </table>
       </div>
+      <Pagination 
+              itemsPerPage={itemsPerPage}
+              totalItems={propertyPaymentData.length}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
     </div>
   );
 };

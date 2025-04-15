@@ -1,4 +1,5 @@
-import React from "react";
+import Pagination from "@/components/PaginationComponent";
+import React, { useState } from "react";
 
 const ServiceRequestTable = () => {
   const serviceRequestData = [
@@ -30,6 +31,14 @@ const ServiceRequestTable = () => {
       action: "Escalate",
     },
   ];
+
+      const [currentPage, setCurrentPage] = useState(1);
+      const itemsPerPage = 10;
+      
+      // Calculate items to display on current page
+      const indexOfLastItem = currentPage * itemsPerPage;
+      const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+      const currentItems = serviceRequestData.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div className="w-full  text-[#6E7079] overflow-hidden">
@@ -64,7 +73,7 @@ const ServiceRequestTable = () => {
             </tr>
           </thead>
           <tbody>
-            {serviceRequestData.map((item) => (
+            {currentItems.map((item) => (
               <tr key={item.id} className="hover:bg-gray-50 bg-white">
                 <td className="py-4 px-6 text-center">
                   {item.requestid}
@@ -102,6 +111,12 @@ const ServiceRequestTable = () => {
           </tbody>
         </table>
       </div>
+       <Pagination 
+              itemsPerPage={itemsPerPage}
+              totalItems={serviceRequestData.length}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
     </div>
   );
 };

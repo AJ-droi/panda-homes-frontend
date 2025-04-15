@@ -14,18 +14,17 @@ import {
   TenantActiveIcon,
   ServiceRequestsActiveIcon,
   SidebarNoticeAndAgreementActiveIcon,
-  SidebarPropertyHistoryIcon,
-  ActiveSidebarPropertyHistoryIcon,
+  // SidebarPropertyHistoryIcon,
+  // ActiveSidebarPropertyHistoryIcon,
 } from "@/layout/svgIconPaths";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
-import Loading from "./Loading";
 
 const Sidebar = () => {
   const pathname = usePathname();
   const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -60,12 +59,6 @@ const Sidebar = () => {
       activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
       path: "/notices-agreements",
     },
-    {
-      name: "Property History",
-      icon: <SidebarPropertyHistoryIcon />,
-     activeIcon: <ActiveSidebarPropertyHistoryIcon />,
-      path: "/dashboard/property-history",
-    },
   ];
 
   const toggleSidebar = () => {
@@ -76,11 +69,8 @@ const Sidebar = () => {
     if (pathname === path) {
       return;
     }
-    setIsLoading(true);
-
-    setTimeout(() => {
-      router.push(path);
-    }, 500);
+    // setIsLoading(true);
+    router.push(path);
   };
 
   const Breadcrumb = () => {
@@ -176,7 +166,7 @@ const Sidebar = () => {
           </button>
         </div>
       </div>
-      {isLoading && <Loading />}
+      {/* {isLoading && <Loading />} */}
     </div>
   );
 };

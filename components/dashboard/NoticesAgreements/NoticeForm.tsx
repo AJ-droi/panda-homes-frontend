@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Dropdown2 from "@/components/Dropdown2";
 import ColouredButton from "@/components/ColouredButton";
+import { useRouter } from "next/navigation";
 
 interface noticeFormProps {
   onClose?: () => void;
@@ -43,6 +44,8 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
   };
+
+  const router = useRouter()
 
   return (
     <div className="w-full p-10 md:p-10 shadow-2xl bg-white rounded-lg">
@@ -141,7 +144,7 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
 
           <section className="flex flex-col-reverse sm:flex-row justify-end gap-3 md:gap-4">
             <div className="w-full sm:w-auto">
-              <ColouredButton title="Send Notice" />
+              <ColouredButton title="Send Notice" onClick={() => router.push('/notices-agreements/notice')}/>
             </div>
           </section>
         </form>

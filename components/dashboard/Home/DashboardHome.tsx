@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import DashboardHomeNav from "./Homenav";
 import PropertyPaymentTable from "./PropertyPaymentTable";
-import Pagination from "../../PaginationComponent";
 import ServiceRequestTable from "@/components/dashboard/Home/ServiceRequestTable";
 
 const DashboardHome = () => {
@@ -51,13 +50,6 @@ const DashboardHome = () => {
         >
           <div className="w-full">
             <PropertyPaymentTable />
-            <div className="mt-6 flex justify-center lg:justify-end">
-              <Pagination
-                totalPages={10}
-                currentPage={4}
-                onPageChange={() => ""}
-              />
-            </div>
           </div>
           {/* <div className="w-auto lg:w-auto">
             <ActionsCard />
@@ -74,13 +66,6 @@ const DashboardHome = () => {
         </div>
         <div className="mt-6 w-full">
           <ServiceRequestTable />
-          <div className="mt-6 flex justify-center lg:justify-end">
-            <Pagination
-              totalPages={10}
-              currentPage={4}
-              onPageChange={() => ""}
-            />
-          </div>
         </div>
       </section>
     </div>
