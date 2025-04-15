@@ -35,7 +35,6 @@ const TenantServiceRequestTable = () => {
       const [currentPage, setCurrentPage] = useState(1);
       const itemsPerPage = 10;
       
-      // Calculate items to display on current page
       const indexOfLastItem = currentPage * itemsPerPage;
       const indexOfFirstItem = indexOfLastItem - itemsPerPage;
       const currentItems = serviceRequestData.slice(indexOfFirstItem, indexOfLastItem);

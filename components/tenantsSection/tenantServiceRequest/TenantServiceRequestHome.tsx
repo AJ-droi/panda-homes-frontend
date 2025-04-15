@@ -2,10 +2,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import TenantServiceRequestTable from "./TenantServiceRequestTable";
+import TenantServiceRequestForm from "../TenantServiceRequestForm";
 
 const TenantServiceRequestHome = () => {
   const [useColumnLayout, setUseColumnLayout] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [newServiceRequest, setNewServiceRequest] = useState(false)
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -36,8 +38,19 @@ const TenantServiceRequestHome = () => {
               <TenantServiceRequestTable />
             </div>
           </section>
+          <div className="flex">
+          <button onClick={()=> setNewServiceRequest(true)} className="text-xs md:text-sm max-w-[140px] md:max-w-[161px] font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-1.5 md:p-2 rounded-[6px] md:rounded-[8px] w-full text-white">
+            Send a new request
+          </button>
+        </div>
         </section>
       </div>
+
+      {newServiceRequest && (
+      <div className="mt-4">
+        <TenantServiceRequestForm onClose={()=> {setNewServiceRequest(false); return null}}/>
+      </div>
+      )}
     </div>
   );
 };
