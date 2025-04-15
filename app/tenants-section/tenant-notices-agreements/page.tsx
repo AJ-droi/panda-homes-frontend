@@ -1,29 +1,19 @@
 "use client"
-import device from '@/constants/breakpoints';
-import { useMatchMediaQuery } from '@/hooks/useViewPort';
 import React from 'react';
-import Sidebar from '@/components/Sidebar';
-import Navbar from '@/components/Navbar';
-import RentRenewalNotice from '@/components/dashboard/NoticesAgreements/notice/RentRenewalNotice';
+import TenantNoticeAndAgreement from '@/components/tenantsSection/tenantNoticeAndAgreement/TenantNoticeAgreementHome';
 
 
-const NoticesAndAgreements = () => {
-    const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
+const TenantNotices = () => {
 
     return (
-        <div className="flex flex-col min-h-screen">
-          <Sidebar />
-          <div className={`flex-1 ${isTabletOrSmaller ? 'ml-0' : 'ml-[179px]'} transition-all duration-300`}>
-            <Navbar />
-            
+        <div className="flex flex-col min-h-screen">            
             <main className="p-4 sm:p-6 md:p-8 bg-[#fafafe] min-h-screen">
-                <section className=''>
-           <RentRenewalNotice />
+          <section className=''>
+            <TenantNoticeAndAgreement />
           </section>
             </main>
           </div>
-        </div>
       )
 }
 
-export default NoticesAndAgreements;
+export default TenantNotices;

@@ -1,7 +1,7 @@
 import Pagination from "@/components/PaginationComponent";
 import React, { useState } from "react";
 
-const NoticeTable = () => {
+const TenantNoticeTable = () => {
   const noticeData = [
     {
       id: 1,
@@ -65,12 +65,12 @@ const NoticeTable = () => {
               >
                 Notice Type
               </th>
-               <th
+               {/* <th
                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Tenant
-              </th>
+              </th> */}
                <th
                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
@@ -106,10 +106,10 @@ const NoticeTable = () => {
                 } text-sm`}
               >
                 <td className={`py-4 text-center px-6`}>{item.noticeType}</td>
-                <td className="py-4 px-6 text-center">{item.tenant}</td>
                 <td className="py-4 px-6 text-center">{item.property}</td>
-                <td className={`py-4 px-6 text-center`}>{item.dateSent}</td>
-                <td className={`py-4 text-center px-6`}>{item.status}</td>
+                <td className="py-4 px-6 text-center">{item.dateSent}</td>
+                <td className={`py-4 px-6 text-center`}>{item.status}</td>
+                {/* <td className={`py-4 text-center px-6`}>{item.status}</td> */}
                 <td className="py-4 px-6 text-center">
                 <button className="bg-[#5E636614] text-[#8B8D97] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm">
                     View Details
@@ -130,4 +130,4 @@ const NoticeTable = () => {
   );
 };
 
-export default NoticeTable;
+export default TenantNoticeTable;
