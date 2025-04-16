@@ -1,9 +1,16 @@
-import React from 'react'
+"use client";
+import TenantServiceRequestHome from "@/components/tenantsSection/tenantServiceRequest/TenantServiceRequestHome";
+import React from "react";
 
-const page = () => {
+const TenantServiceRequests = () => {
+
   return (
-    <div>page</div>
-  )
-}
+    <div className="flex flex-col min-h-screen">
+        <div className="p-4 sm:p-6 md:p-8 bg-[#fafafe] min-h-screen">
+          <TenantServiceRequestHome />
+        </div>
+      </div>
+  );
+};
 
-export default page
+export default TenantServiceRequests;
