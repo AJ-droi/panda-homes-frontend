@@ -151,7 +151,7 @@ const Sidebar = () => {
             ))}
           </section>
 
-          <button
+          {/* <button
             className="text-sm font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-2 rounded-md w-[90%]"
             onClick={() => router.push("/dashboard/add-property")}
           >
@@ -163,7 +163,7 @@ const Sidebar = () => {
             onClick={() => router.push("/dashboard/add-tenant")}
           >
            Register New Tenant
-          </button>
+          </button> */}
         </div>
       </div>
       {/* {isLoading && <Loading />} */}

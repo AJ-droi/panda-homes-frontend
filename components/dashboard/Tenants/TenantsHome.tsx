@@ -17,6 +17,7 @@ import OverdueRentsTable from "./OverdueTenantsTable";
 const TenantsHome = () => {
   const [useColumnLayout, setUseColumnLayout] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+   const [activeTab, setActiveTab] = useState('tenant-list')
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -71,34 +72,45 @@ const TenantsHome = () => {
           </div>
         </section>
 
-        <section className="flex flex-col xl:flex-row gap-6 sm:gap-8 md:gap-10 mt-6 sm:mt-8 md:mt-10 lg:mt-12">
+        <div className="flex flex-wrap my-5">
+          <button
+            className={`px-6 py-4 font-medium text-sm md:text-base ${
+              activeTab === 'tenant-list' 
+                ? 'text-[#785DBA] border-b-2 border-[#785DBA]' 
+                : 'text-gray-600 border-b-1 border-gray-200 hover:text-gray-800'
+            }`}
+            onClick={() => setActiveTab('tenant-list')}
+          >
+            Tenants List
+          </button>
+          <button
+            className={`px-6 py-4 font-medium text-sm md:text-base ${
+              activeTab === 'overdue-payment' 
+                ? 'text-[#785DBA] border-b-2 border-[#785DBA]' 
+                : 'text-gray-600 border-b-1 border-gray-200 hover:text-gray-800'
+            }`}
+            onClick={() => setActiveTab('overdue-payment')}
+          >
+            OverDue Payments
+          </button>
+        </div>
+
           <section className="w-full xl:w-[65%] flex flex-col gap-y-5">
-            <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] ">
-              <div
-                   className="text-[#4D4D4D] font-[600] text-[22px] leading-[145%] py-[2%]"
-                   style={{ fontFamily: "Plus Jakarta Sans" }}
-              >
-                Tenants List
-              </div>
+          {activeTab === "tenant-list" && <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] ">
               <div className="mt-3 sm:mt-4 md:mt-5 w-full">
                 <TenantsListTable />
               </div>
-            </section>
+            </section>}
 
-            <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] ">
-              <div
-                className="text-[#4D4D4D] font-[600] text-[22px] leading-[145%] py-[2%]"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-              >
-                Overdue Payments
-              </div>
+            {activeTab === "overdue-payment" &&<section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] ">
+             
               <div className="mt-3 sm:mt-4 md:mt-5 w-full">
                 <OverdueRentsTable />
               </div>
-            </section>
+            </section>}
           </section>
 
-        </section>
+  
       </div>
     </div>
   );

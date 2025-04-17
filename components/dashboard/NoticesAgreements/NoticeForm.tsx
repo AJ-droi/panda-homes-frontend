@@ -48,7 +48,7 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
   const router = useRouter()
 
   return (
-    <div className="w-full p-10 md:p-10 shadow-2xl bg-white rounded-lg">
+    <div className="w-full p-10 md:p-10 shadow-lg bg-white rounded-lg my-5">
       <h1
         className="text-xl md:text-2xl leading-[150%] font-[500] mb-2 md:mb-2 text-[#785DBA]"
         style={{ fontFamily: "Plus Jakarta Sans" }}

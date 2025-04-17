@@ -28,6 +28,10 @@ const NoticesAgreementHome = () => {
         </div>
       </section>
 
+      <section className="mt-6 flex flex-col gap-[14px] w-full">
+        <NoticeForm />
+      </section>
+
       <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] ">
             <div
               className="text-[#4D4D4D] font-[600] text-[22px] leading-[145%] py-[2%]"
@@ -47,9 +51,7 @@ const NoticesAgreementHome = () => {
         </div>
       </section>
 
-      <section className="mt-6 flex flex-col gap-[14px] w-full">
-        <NoticeForm />
-      </section>
+      
     </div>
   );
 };

@@ -18,6 +18,7 @@ import IssuesListTable from "./IssuesTable";
 
 const PropertiesHome = () => {
   const [useColumnLayout, setUseColumnLayout] = useState(false);
+    const [activeTab, setActiveTab] = useState('property-list')
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -71,48 +72,63 @@ const PropertiesHome = () => {
             </div>
           </section>
 
-        <section className="flex items-start py-5">
-          <div className="w-[65%]">
+          <div className="flex flex-wrap my-5">
+          <button
+            className={`px-6 py-4 font-medium text-sm md:text-base ${
+              activeTab === 'property-list' 
+                ? 'text-[#785DBA] border-b-2 border-[#785DBA]' 
+                : 'text-gray-600 border-b-1 border-gray-200 hover:text-gray-800'
+            }`}
+            onClick={() => setActiveTab('property-list')}
+          >
+            Property List
+          </button>
+          <button
+            className={`px-6 py-4 font-medium text-sm md:text-base ${
+              activeTab === 'maintenance-issues' 
+                ? 'text-[#785DBA] border-b-2 border-[#785DBA]' 
+                : 'text-gray-600 border-b-1 border-gray-200 hover:text-gray-800'
+            }`}
+            onClick={() => setActiveTab('maintenance-issues')}
+          >
+            Active Maintenance Issues
+          </button>
+          <button
+            className={`px-6 py-4 font-medium text-sm md:text-base ${
+              activeTab === 'lease-expiration' 
+                ? 'text-[#785DBA] border-b-2 border-[#785DBA]' 
+                : 'text-gray-600 border-b-1 border-gray-200 hover:text-gray-800'
+            }`}
+            onClick={() => setActiveTab('lease-expiration')}
+          >
+            Upcoming Lease Expiration
+          </button>
+        </div>
+
+
     
-          <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] ">
-            <div
-              className="text-[#4D4D4D] font-[600] text-[22px] leading-[145%] py-[2%]"
-              style={{ fontFamily: "Plus Jakarta Sans" }}
-            >
-              Properties List
-            </div>
+         {activeTab === "property-list" && <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] ">
             <div
               className={`flex ${
                 useColumnLayout ? "flex-col" : "flex-col lg:flex-row"
               } gap-10 w-full`}
               style={{ fontFamily: "Plus Jakarta Sans" }}
             >
-              <div className="mt-4 sm:mt-6 w-full lg:max-w-[780px]">
+              <div className="mt-4 sm:mt-6 w-full">
                 <PropertiesListTable />
               </div>
-              {/* <div className="w-full flex justify-center lg:justify-start lg:w-auto">
-                <RentCollectionSummary />
-              </div> */}
             </div>
-          </section>
+          </section>}
 
-          <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] my-[2%]">
+          {activeTab === "maintenance-issues" &&<section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] my-[2%]">
 
-              <div
-                className="text-[#4D4D4D] font-[600] text-[22px] leading-[145%] py-[2%]"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-              >
-                Active Maintenance Issues
-              </div>
-  
-
-            <div className="w-full max-w-[900px]">
+            <div className="w-full">
               <IssuesListTable />
             </div>
-          </section>
-          </div>
-          <LeaseExpirationTable />
-          </section>
+          </section>}
+
+          {activeTab === "lease-expiration" && <LeaseExpirationTable />}
+
         </div>
     </div>
   );

@@ -34,10 +34,8 @@ const LeaseExpirationTable = () => {
   const currentItems = leaseData.slice(indexOfFirstItem, indexOfLastItem);
   
   return (
-    <div className="bg-white rounded-lg shadow p-6 w-[55%] ">
-      <h2  className="text-[#4D4D4D] font-[600] text-[22px] leading-[145%] py-[2%]"
-              style={{ fontFamily: "Plus Jakarta Sans" }}>Upcoming Lease Expirations (30 Days)</h2>
-      
+    <div className="bg-white rounded-lg shadow p-6 ">
+
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
@@ -53,9 +51,9 @@ const LeaseExpirationTable = () => {
           <tbody>
             {currentItems.map((lease) => (
               <tr key={lease.id} className=" hover:bg-gray-50">
-                <td className="py-4 text-sm text-[#6E7079]">{lease.tenant}</td>
-                <td className="py-4 text-sm text-[#6E7079]">{lease.property}</td>
-                <td className="py-4 text-sm text-[#6E7079]">{lease.expiryDate}</td>
+                <td className="py-4 text-sm text-center text-[#6E7079]">{lease.tenant}</td>
+                <td className="py-4 text-sm text-center text-[#6E7079]">{lease.property}</td>
+                <td className="py-4 text-sm text-center text-[#6E7079]">{lease.expiryDate}</td>
               </tr>
             ))}
           </tbody>
