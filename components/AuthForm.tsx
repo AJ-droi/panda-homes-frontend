@@ -29,15 +29,19 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
   
   const handleLogin = async (e: React.FormEvent) => { 
     e.preventDefault();
-    mutate({email, password},
-    {
-      onSuccess: () => {
-        redirectUser()
-      },
-      onError: (error: any) => {
-        setError(error.message || "An error occurred during login.");
-      },  
-    })
+
+      redirectUser()
+    
+
+    // mutate({email, password},
+    // {
+    //   onSuccess: () => {
+    //     redirectUser()
+    //   },
+    //   onError: (error: any) => {
+    //     setError(error.message || "An error occurred during login.");
+    //   },  
+    // })
 
   }
 
@@ -91,7 +95,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
                 type="text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                required
+                // required
                 className="mt-1 text-black block w-full px-3 py-2 border border-[#66666659] h-[56px] rounded-[12px] shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               />
             </div>
@@ -104,7 +108,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                required
+                // required
                 className="mt-1 text-black block w-full px-3 py-2 border border-[#66666659] h-[56px] rounded-[12px] shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               />
             </div>
