@@ -7,7 +7,6 @@ import {
   NavbarSettingsIcon,
 } from "@/layout/svgIconPaths";
 import { usePathname, useRouter } from "next/navigation";
-import Loading from "../Loading";
 
 interface TenantNavbarProps {
   isTenantRegister?: boolean;

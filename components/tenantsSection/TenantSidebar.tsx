@@ -13,7 +13,6 @@ import {
 } from "@/layout/svgIconPaths";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
-import Loading from "../Loading";
 
 const TenantSidebar = () => {
   const pathname = usePathname();

@@ -1,4 +1,3 @@
-/* eslint-disable */
 "use client";
 import React from "react";
 import PropertiesHome from "@/components/dashboard/Properties/PropertiesHome";
