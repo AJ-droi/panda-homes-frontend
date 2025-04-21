@@ -144,7 +144,7 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
 
           <section className="flex flex-col-reverse sm:flex-row justify-end gap-3 md:gap-4">
             <div className="w-full sm:w-auto">
-              <ColouredButton title="Send Notice" onClick={() => router.push('/notices-agreements/notice')}/>
+              <ColouredButton title="Send Notice" onClick={() => router.push('/dashboard/notice-agreement/notice')}/>
             </div>
           </section>
         </form>

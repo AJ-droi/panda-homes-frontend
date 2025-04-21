@@ -15,7 +15,7 @@ const SuccessForm = ({}) => {
 
     try {
       setTimeout(() => {
-        router.push("/tenants-section/tenant-dashboard");
+        router.push("/tenant-dashboard/tenant-dashboard");
       }, 500);
     } catch (error) {
       console.error("Navigation error:", error);

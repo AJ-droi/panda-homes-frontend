@@ -73,7 +73,7 @@ const TenantServiceRequestCard = ({onClick}:{onClick: React.FC}) => {
       <div className="p-4 md:p-6 h-full flex flex-col">
         <h2
           className="text-[16px] md:text-[18px] text-[#785DBA] leading-[150%] font-bold mb-3 md:mb-4"
-          style={{ fontFamily: "urbanist" }}
+          style={{ fontFamily: "Plus Jakarta Sans" }}
         >
           Service Requests
         </h2>

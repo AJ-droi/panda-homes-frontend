@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function RentRenewalNotice() {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100 p-4 md:p-8">
+    <div className="flex flex-col min-h-screen bg-gray-100 p-4 md:p-8 text-[#000]">
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6 md:p-8 w-full">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-xl font-bold">Rent Renewal</h1>

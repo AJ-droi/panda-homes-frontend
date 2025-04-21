@@ -19,8 +19,8 @@ const TenantSidebar = () => {
   const pathname = usePathname();
   const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-   const [loadingPath, setLoadingPath] = useState<string | null>(null);
+  // const [isLoading, setIsLoading] = useState(false);
+  //  const [loadingPath, setLoadingPath] = useState<string | null>(null);
   
 
   const router = useRouter();
@@ -30,19 +30,19 @@ const TenantSidebar = () => {
       name: "Home",
       icon: <SidebarHomeIcon />,
       activeIcon: <HomeActiveIcon />,
-      path: "/tenants-section/tenant-dashboard",
+      path: "/tenant-dashboard",
     },
     {
       name: "Service Requests",
       icon: <SidebarServiceRequestsIcon />,
       activeIcon: <ServiceRequestsActiveIcon />,
-      path: "/tenants-section/tenant-service-requests",
+      path: "/tenant-dashboard/service-requests",
     },
     {
       name: "Notices & Agreements",
       icon: <SidebarNoticeAndAgreementIcon />,
       activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
-      path: "/tenants-section/tenant-notices-agreements",
+      path: "/tenant-dashboard/notice-agreement",
     },
   ];
 
@@ -50,25 +50,15 @@ const TenantSidebar = () => {
     setIsOpen(!isOpen);
   };
 
-  const redirect = async (path: string) => {
-    if (pathname === path) return;
-
-    setIsLoading(true);
-    setLoadingPath(path);
-
-    try {
-      setTimeout(() => {
-        router.push(path);
-      }, 500);
-    } catch (error) {
-      console.error("Navigation error:", error);
-    } finally {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
-      setLoadingPath(null);
+  const redirect = (path: string) => {
+    if (pathname === path) {
+      return;
     }
-  }
+    // setIsLoading(true);
+    toggleSidebar()
+    router.push(path);
+  };
+
 
   const Breadcrumb = () => {
     const activeItem = iconData.find((item) => item.path === pathname);
@@ -128,9 +118,11 @@ const TenantSidebar = () => {
                 className={`flex gap-4 items-center px-4 py-4 hover:bg-gray-100 cursor-pointer ${
                   pathname === item.path ? "border-r-2 border-r-[#785DBA]" : ""
                 }`}
-                onClick={() =>
-                  !isLoading && loadingPath !== item.path && redirect(item.path)
-                }
+                onClick={() => {
+                  if (item.path) {
+                    redirect(item.path);
+                  }
+                }}
               >
                 <div>
                   {pathname === item.path ? item.activeIcon : item.icon}
@@ -147,7 +139,7 @@ const TenantSidebar = () => {
           </section>
         </div>
       </div>
-      {isLoading && <Loading />}
+      {/* {isLoading && <Loading />} */}
     </div>
   );
 };

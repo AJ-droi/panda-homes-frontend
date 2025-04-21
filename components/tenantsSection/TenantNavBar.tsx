@@ -24,13 +24,13 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
       name: "Settings",
       icon: <NavbarNotificationBell />,
       activeIcon: <NavbarActiveNotificationBell />,
-      path: "/tenants-section/tenant-notifications",
+      path: "/tenant-dashboard/notifications",
     },
     {
       name: "Notifications",
       icon: <NavbarSettingsIcon />,
       activeIcon: <NavbarActiveSettingsIcon />,
-      path: "/tenants-section/tenant-settings",
+      path: "/tenant-dashboard/settings",
     },
   ];
 
@@ -77,7 +77,7 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
         </div>
       )}
 
-      {isLoading && <Loading />}
+      {/* {isLoading && <Loading />} */}
     </div>
   );
 };

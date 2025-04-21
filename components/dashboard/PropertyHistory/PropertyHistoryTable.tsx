@@ -131,7 +131,7 @@ export default function PropertyHistory() {
 
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-gray-50 overflow-x-auto w-full">
       {/* Main Content */}
       <div className="flex-1">
         {/* Page content */}

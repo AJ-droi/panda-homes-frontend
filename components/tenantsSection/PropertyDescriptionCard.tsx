@@ -9,7 +9,7 @@ const PropertyDescriptionCard = ({onClick}:{onClick: React.FC}) => {
         <div className="p-4 md:p-6 h-full flex flex-col">
           <h2
             className="text-[18px] md:text-xl text-[#785DBA] font-bold mb-3 md:mb-4 leading-[150%]"
-            style={{ fontFamily: "Urbanist" }}
+            style={{ fontFamily: "Plus Jakarta Sans" }}
           >
             Description
           </h2>

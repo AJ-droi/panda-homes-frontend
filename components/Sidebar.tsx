@@ -39,25 +39,25 @@ const Sidebar = () => {
       name: "Properties",
       icon: <SidebarPropertiesIcon />,
       activeIcon: <PropertyActiveIcon />,
-      path: "/properties",
+      path: "/dashboard/properties",
     },
     {
       name: "Tenants",
       icon: <SidebarTenantsIcon />,
       activeIcon: <TenantActiveIcon />,
-      path: "/tenants",
+      path: "/dashboard/tenants",
     },
     {
       name: "Service Requests",
       icon: <SidebarServiceRequestsIcon />,
       activeIcon: <ServiceRequestsActiveIcon />,
-      path: "/service-requests",
+      path: "/dashboard/service-requests",
     },
     {
       name: "Notices & Agreements",
       icon: <SidebarNoticeAndAgreementIcon />,
       activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
-      path: "/notices-agreements",
+      path: "/dashboard/notice-agreement",
     },
   ];
 
@@ -70,6 +70,7 @@ const Sidebar = () => {
       return;
     }
     // setIsLoading(true);
+    toggleSidebar()
     router.push(path);
   };
 
@@ -94,7 +95,7 @@ const Sidebar = () => {
       {isTabletOrSmaller && isOpen && (
         <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm shadow-xl bg-opacity-50 z-30"
-          onClick={toggleSidebar}
+          // onClick={toggleSidebar}
         />
       )}
 
@@ -132,9 +133,9 @@ const Sidebar = () => {
                   pathname === item.path ? "border-r-2 border-r-[#785DBA]" : ""
                 }`}
                 onClick={() => {
-                  if (item.path) {
+                 
                     redirect(item.path);
-                  }
+                 
                 }}
               >
                 <div>
@@ -150,20 +151,6 @@ const Sidebar = () => {
               </nav>
             ))}
           </section>
-
-          {/* <button
-            className="text-sm font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-2 rounded-md w-[90%]"
-            onClick={() => router.push("/dashboard/add-property")}
-          >
-            Add New Property
-          </button>
-
-          <button
-            className="text-sm font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-2 rounded-md w-[90%]"
-            onClick={() => router.push("/dashboard/add-tenant")}
-          >
-           Register New Tenant
-          </button> */}
         </div>
       </div>
       {/* {isLoading && <Loading />} */}

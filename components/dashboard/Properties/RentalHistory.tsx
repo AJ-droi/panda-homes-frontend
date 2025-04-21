@@ -60,7 +60,7 @@ export default function RentalHistory() {
       <div className="overflow-x-auto">
         <table className="min-w-full">
           <thead>
-            <tr className="text-left text-gray-500">
+            <tr className="text-left text-sm text-gray-500">
               <th className="py-3 px-4">Tenant Name</th>
               <th className="py-3 px-4">Move-in Date</th>
               <th className="py-3 px-4">Move-out Date</th>
@@ -70,7 +70,7 @@ export default function RentalHistory() {
               <th className="py-3 px-4">Lease Renewed?</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-gray-100 text-sm">
             {rentalData.map((tenant, index) => (
               <tr key={index} className="text-gray-700 hover:bg-gray-50">
                 <td className="py-3 px-4">{tenant.tenantName}</td>
