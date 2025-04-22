@@ -7,6 +7,7 @@ import WhiteButton from "@/components/WhiteButton";
 import Image from "next/image";
 import { useLoginMutation } from "@/services/users/mutation";
 import { useRouter } from "next/navigation";
+import { Role } from "@/constants/enums/role";
 
 type AuthFormProps = {
   isLogin: boolean;
@@ -21,8 +22,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
 
   const router = useRouter()
 
-  const redirectUser = () => {
-    isLogin ? router.push('/dashboard') : router.push('/login')
+  const redirectUser = (user:any) => {
+    user.role === Role.ADMIN ? router.push('/dashboard') : router.push('/tenant-dashboard')
   }
 
   const { mutate, isPending } = useLoginMutation();
@@ -30,18 +31,17 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
   const handleLogin = async (e: React.FormEvent) => { 
     e.preventDefault();
 
-      redirectUser()
-    
+      // redirectUser()
 
-    // mutate({email, password},
-    // {
-    //   onSuccess: () => {
-    //     redirectUser()
-    //   },
-    //   onError: (error: any) => {
-    //     setError(error.message || "An error occurred during login.");
-    //   },  
-    // })
+    mutate({email, password},
+    {
+      onSuccess: (data) => {
+        data.user && redirectUser(data.user)
+      },
+      onError: (error: any) => {
+        setError(error.message || "An error occurred during login.");
+      },  
+    })
 
   }
 
@@ -182,7 +182,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
             
           >
             <ColouredButton borderRadius="40px" height="64px" disabled={isPending}>
-              <div className="font-[500] text-base sm:text-lg md:text-xl lg:text-[24px] whitespace-nowrap">
+              <div className={ `font-[500] text-base sm:text-lg md:text-xl lg:text-[24px] whitespace-nowrap`}>
                 {isLogin ? "Login" : "Create an account"}
               </div>
             </ColouredButton>

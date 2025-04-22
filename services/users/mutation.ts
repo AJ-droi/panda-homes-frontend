@@ -20,13 +20,8 @@ export function useLoginMutation() {
     },
 
     onError: (error: any) => {
-      const errorMessage =
-        error?.response?.data?.message ||
-        error.message ||
-        "Unknown error occurred during login.";
-
-      console.error(`❌ Login error: ${errorMessage}`);
-      // Optionally: toast.error(errorMessage);
+      console.log({error})
+     return error.message || "An error occurred during login.";
     },
 
     onSuccess: async (data) => {
@@ -37,8 +32,8 @@ export function useLoginMutation() {
           sameSite: "strict",
         });
 
-        console.log("✅ Login successful! Token stored.");
         // Optionally redirect or refetch user info
+        return data
       } catch (error: any) {
         console.error("⚠️ Failed to store user token:", error.message);
       }

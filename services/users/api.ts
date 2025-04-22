@@ -9,20 +9,32 @@ export const loginUser = async (data: z.infer<typeof loginSchema>) => {
           "Content-Type": "application/json",
         }
       });
-
-      if (response.status !== 200) {
-        throw new Error("Login failed");
-      }
+// 
+      // if (response.status !== 200) {
+      //   throw new Error("Login failed");
+      // }
   
       return response.data
-    } catch (error: any) {
-      let errorMessage = error.message || "An error occurred";
-  
-      return {
-        success: false,
-        message: errorMessage,
-        error: error.response?.data || null,
-      };
+    } catch (error: any) {``
+       // Try to extract a useful message
+    let errorMessage = "An error occurred";
+
+    if (error?.response?.data?.message) {
+      if (Array.isArray(error.response.data.message)) {
+        // Validation error from class-validator
+        const constraints = error.response.data.message[0]?.constraints;
+        errorMessage = constraints
+          ? Object.values(constraints)[0] // pick first constraint message
+          : error.response.data.message[0];
+      } else if (typeof error.response.data.message === "string") {
+        errorMessage = error.response.data.message;
+      }
+    }
+
+    console.log({error})
+
+    throw new Error(errorMessage);
+    
     }
   };
 

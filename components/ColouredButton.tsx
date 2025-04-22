@@ -25,7 +25,7 @@ const ColouredButton: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={`hover:cursor-pointer bg-[#785DBA] ${
+      className={`hover:cursor-pointer ${disabled ? `bg-[#565454]` : `bg-[#785DBA]`}  ${
         hoverEffect
           ? "hover:border-[#E0DEF7] hover:border-2 hover:bg-white hover:text-black"
           : ""

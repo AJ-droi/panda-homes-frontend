@@ -18,8 +18,8 @@ const getToken = async () => {
 
 axiosInstance.interceptors.request.use(
   async (config) => {
-    const token = await getToken();
-    console.log({ config, token }); // If you want to log the token for debugging
+  await getToken();
+    // console.log({ config, token }); // If you want to log the token for debugging
 
     // You don't need to add cookies manually to the headers if the browser handles them
     return config;
