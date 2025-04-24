@@ -43,6 +43,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
             <Dropdown2
               options={propertyOptions}
               placeholder="Select Property"
+              onChange={() => console.log('hello')}
             />
           </section>
 
@@ -57,6 +58,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
               <Dropdown2
                 options={paymentFrequencyOptions}
                 placeholder="Select payment frequency"
+                onChange={() => console.log('hello')}
               />
             </div>
             <div className="gap-2 md:gap-[12.14px] flex flex-col">

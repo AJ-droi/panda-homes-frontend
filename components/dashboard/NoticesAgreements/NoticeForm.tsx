@@ -63,22 +63,25 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
               <Dropdown2
                 options={propertyOptions}
                 placeholder="Select Property"
+                onChange={() => console.log('hello')}
               />
             </div>
             <div className="gap-2 md:gap-[12.14px] flex flex-col">
               <Dropdown2
                 options={tenantOptions}
                 placeholder="Select Tenant(s)"
+                onChange={() => console.log('hello')}
               />
             </div>
             <div className="gap-2 md:gap-[12.14px] flex flex-col">
               <Dropdown2
                 options={noticeTypeOptions}
                 placeholder="Notice Type"
+                onChange={() => console.log('hello')}
               />
             </div>
             <div className="gap-2 md:gap-[12.14px] flex flex-col">
-              <Dropdown2 options={DateOptions} placeholder="Effective Date" />
+              <Dropdown2 options={DateOptions} placeholder="Effective Date" onChange={() => console.log('hello')} />
             </div>
           </section>
 
@@ -87,6 +90,7 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
               <Dropdown2
                 options={messageMediumOptions}
                 placeholder="Send Via"
+                onChange={() => console.log('hello')}
               />
             </div>
           </section>

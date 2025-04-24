@@ -1,4 +1,6 @@
+/*eslint-disable */
 import Pagination from "@/components/PaginationComponent";
+import { useActiveMaintenanceIssues } from "@/services/service-request/query";
 import React, { useState } from "react";
 
 const IssuesListTable = () => {
@@ -19,13 +21,14 @@ const IssuesListTable = () => {
     },
   ];
 
+    const { data: activeMaintenance, isLoading } = useActiveMaintenanceIssues();
    const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
     
     // Calculate items to display on current page
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = propertyData.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = activeMaintenance?.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div className="max-w-full text-[#6E7079] overflow-hidden ">
@@ -69,7 +72,29 @@ const IssuesListTable = () => {
             className="leading-[145%] "
             // style={{ fontFamily: "Plus Jakarta Sans" }}
           >
-            {currentItems.map((item, index) => (
+             {isLoading
+              ? (
+                Array.from({ length: 5 }).map((_, index) => (
+                  <tr key={index} className="animate-pulse">
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto" />
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-4 bg-gray-200 rounded w-2/3 mx-auto" />
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto" />
+                    </td>
+                  </tr>
+                ))
+              )
+              : currentItems?.map((item: any, index:number) => (
               <tr
                 key={item.id}
                 className={`${

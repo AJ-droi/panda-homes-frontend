@@ -9,11 +9,7 @@ export const loginUser = async (data: z.infer<typeof loginSchema>) => {
           "Content-Type": "application/json",
         }
       });
-// 
-      // if (response.status !== 200) {
-      //   throw new Error("Login failed");
-      // }
-  
+//
       return response.data
     } catch (error: any) {``
        // Try to extract a useful message
@@ -31,8 +27,6 @@ export const loginUser = async (data: z.infer<typeof loginSchema>) => {
       }
     }
 
-    console.log({error})
-
     throw new Error(errorMessage);
     
     }
@@ -48,6 +42,30 @@ export const loginUser = async (data: z.infer<typeof loginSchema>) => {
 
       if (response.status !== 200) {
         throw new Error("Error Fetching Users");
+      }
+  
+      return response.data
+    } catch (error: any) {
+      let errorMessage = error.message || "An error occurred";
+  console.log(error)
+      return {
+        success: false,
+        message: errorMessage,
+        error: error.response?.data || null,
+      };
+    }
+  }
+
+  export const getAdminDashboardAnalytics = async () => {
+    try {
+      const response = await axiosInstance.get("properties/admin/dashboard", {
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+
+      if (response.status !== 200) {
+        throw new Error("Error Fetching Dashbaord Analytics");
       }
   
       return response.data

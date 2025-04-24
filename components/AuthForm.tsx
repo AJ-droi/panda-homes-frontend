@@ -1,5 +1,5 @@
 /* eslint-disable */
-"use client"
+"use client";
 import Link from "next/link";
 import React, { useState } from "react";
 import ColouredButton from "@/components/ColouredButton";
@@ -20,35 +20,38 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
   const [lastName, setLastName] = useState("");
   const [error, setError] = useState("");
 
-  const router = useRouter()
+  const router = useRouter();
 
-  const redirectUser = (user:any) => {
-    user.role === Role.ADMIN ? router.push('/dashboard') : router.push('/tenant-dashboard')
-  }
+  const redirectUser = (user: any) => {
+    user.role === Role.ADMIN
+      ? router.push("/dashboard")
+      : router.push("/tenant-dashboard");
+  };
 
   const { mutate, isPending } = useLoginMutation();
-  
-  const handleLogin = async (e: React.FormEvent) => { 
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-      // redirectUser()
+    // redirectUser()
 
-    mutate({email, password},
-    {
-      onSuccess: (data) => {
-        data.user && redirectUser(data.user)
-      },
-      onError: (error: any) => {
-        setError(error.message || "An error occurred during login.");
-      },  
-    })
+    mutate(
+      { email, password },
+      {
+        onSuccess: (data) => {
+          data.user && redirectUser(data.user);
+        },
+        onError: (error: any) => {
+          setError(error.message || "An error occurred during login.");
+        },
+      }
+    );
+  };
 
-  }
-
-  const handleRegister = async (e: React.FormEvent) => { 
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     mutate(
-      {email, password},
+      { email, password },
       {
         onSuccess: (data) => {
           console.log("Login successful", data);
@@ -57,11 +60,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
         onError: (error: any) => {
           console.error("Login failed", error);
           setError(error.message || "An error occurred during login.");
-        },  
+        },
       }
-
-    )
-  }
+    );
+  };
 
   return (
     <div className="mx-auto p-6 bg-white">
@@ -83,7 +85,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
         </div>
       )}
 
-      <form className="space-y-4 mt-6 text-[#666666]"   onSubmit={isLogin ? handleLogin : handleRegister}>
+      <form
+        className="space-y-4 mt-6 text-[#666666]"
+        onSubmit={isLogin ? handleLogin : handleRegister}
+      >
         {!isLogin && (
           <>
             <div className="mt-6">
@@ -179,11 +184,20 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
         <div className="text-center mt-10">
           <div
             className={`flex lg:flex lg:flex-row gap-4 w-full items-center justify-center lg:w-auto mt-4 lg:mt-0`}
-            
           >
-            <ColouredButton borderRadius="40px" height="64px" disabled={isPending}>
-              <div className={ `font-[500] text-base sm:text-lg md:text-xl lg:text-[24px] whitespace-nowrap`}>
-                {isLogin ? "Login" : "Create an account"}
+            <ColouredButton
+              borderRadius="40px"
+              height="64px"
+              disabled={isPending}
+            >
+              <div
+                className={`font-[500] text-base sm:text-lg md:text-xl lg:text-[24px] whitespace-nowrap`}
+              >
+                {isLogin
+                  ? isPending
+                    ? "Logging in"
+                    : "Login"
+                  : "Create an account"}
               </div>
             </ColouredButton>
           </div>

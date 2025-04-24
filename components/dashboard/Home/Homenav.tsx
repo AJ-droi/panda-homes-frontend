@@ -7,6 +7,7 @@ import {
 } from "@/layout/svgIconPaths";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
+import { useAdminDashboardAnalytics } from "@/services/property/query";
 
 
 const DashboardHomeNav = () => {
@@ -20,23 +21,26 @@ const DashboardHomeNav = () => {
   };
 
   const layoutType = getLayoutType();
+  const {data} = useAdminDashboardAnalytics()
+
+ const {total_properties, total_tenants, unresolved_requests, due_tenants} = data || {}
 
   const navItems = [
     {
       icon: <DashboardNavProperties />,
-      text: "12 Properties Managed",
+      text: `${total_properties || 0} Properties Managed`,
     },
     {
       icon: <DashboardNavTenantRenting />,
-      text: "36 Tenants Currently Renting",
+      text: `${total_tenants || 0} Tenants Currently Renting`,
     },
     {
       icon: <DashboardNavTenantDue />,
-      text: "5 Tenants with Rent Due in 7 Days",
+      text: `${due_tenants || 0} Tenants with Rent Due in 7 Days `,
     },
     {
       icon: <DashboardNavComplaints />,
-      text: "3 Unresolved Complaints",
+      text: `${unresolved_requests || 0} Unresolved Complaints`,
     },
   ];
 

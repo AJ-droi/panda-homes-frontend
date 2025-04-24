@@ -1,24 +1,31 @@
 // services/property/query.ts
 import { useQuery } from "@tanstack/react-query";
 import { getProperties } from "./api";
+import { getAdminDashboardAnalytics } from "../users/api";
 
 export function useFetchPropertyDetails() {
   return useQuery({
-    queryKey: ["user"],
+    queryKey: ["get-properties"],   
     queryFn: getProperties,
     refetchOnMount: "always",
     refetchOnWindowFocus: true,
     select: (data:any) =>
-      data.users.map((user: any) => ({
-        id: user.id,
-        tenantName: `${user.first_name} ${user.last_name}`,
-        property: user.propertyName,
-        moveInDay: new Date(user.moveInDate).toLocaleDateString("en-US", {
-          month: "short",
-          day: "numeric",
-          year: "numeric",
-        }),
-        rentStatus: user.rentPaid ? "Paid" : "Overdue",
+      data.properties.map((property: any) => ({
+        id: property.id,
+        property: property.name,
+        location: property.location,
+        vacancy: property.property_status,
+        rentOwed: property.rental_price,
       })),
+  });
+}
+
+
+export function useAdminDashboardAnalytics() {
+  return useQuery({
+    queryKey: ["admin-dashboard-analytics"],
+    queryFn: getAdminDashboardAnalytics,
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
   });
 }

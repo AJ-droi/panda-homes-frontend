@@ -1,265 +1,322 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-"use client"
+"use client";
+/*eslint-disable */
 import React, { useState } from "react";
 import Dropdown2 from "@/components/Dropdown2";
 import InputField from "@/components/InputField";
-import ColouredButton from "@/components/ColouredButton";
+import { useCreatePropertyMutation } from "@/services/property/mutation";
+import { createPropertySchema } from "@/schemas/property.schemas";
 
-interface propertyFormProps {
-  onClose?: () => void;
-}
+const PropertyForm = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    location: "Lagos",  // Set default value for location
+    property_status: "vacant",  // Set default value for property_status
+    property_type: "Duplex",  // Set default value for property_type
+    property_images: [] as File[],
+    no_of_bedrooms: "",
+    rental_price: "",
+    payment_frequency: "monthly",  // Set default value for payment_frequency
+    lease_duration: "",
+    security_deposit: "",
+    service_charge: "",
+    comment: "",
+    move_in_date: "",
+  });
+  
+  // Add validation error state
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-const PropertyForm: React.FC<propertyFormProps> = ({ onClose }) => {
-  // Form state
-  const [propertyName, setPropertyName] = useState("");
-  const [rentalPrice, setRentalPrice] = useState("");
-  const [securityDeposit, setSecurityDeposit] = useState("");
-  const [serviceCharge, setServiceCharge] = useState("");
-  const [additionalNotes, setAdditionalNotes] = useState("");
-  const [files, setFiles] = useState<FileList | null>(null);
-
-  // Dropdown options
-  const locationOptions = [
-    "New York",
-    "Los Angeles",
-    "Chicago",
-    "Houston",
-    "Miami",
-  ];
-  const propertyTypeOptions = [
-    "Apartment",
-    "House",
-    "Condo",
-    "Townhouse",
-    "Studio",
-  ];
-  const bathroomOptions = ["1", "2", "3", "4", "5+"];
-  const bedroomOptions = ["1", "2", "3", "4", "5+"];
-  const paymentFrequencyOptions = ["Monthly", "Weekly", "Yearly"];
-  const leaseDurationOptions = [
-    "6 months",
-    "1 year",
-    "2 years",
-    "Month-to-month",
-  ];
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setFiles(e.target.files);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "number" ? parseInt(value) : value,
+    }));
+    // Clear error for this field when changed
+    if (errors[name]) {
+      setErrors(prev => ({...prev, [name]: ""}));
     }
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      setFormData((prev) => ({
+        ...prev,
+        property_images: Array.from(files),
+      }));
+      // Clear error for property_images when files selected
+      if (errors.property_images) {
+        setErrors(prev => ({...prev, property_images: ""}));
+      }
+    }
+  };
+
+  const handleDropdownChange = (e: { target: { name?: string; value: string } }) => {
+    const { name, value } = e.target;
+    if (name) {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+      // Clear error for this field when changed
+      if (errors[name]) {
+        setErrors(prev => ({...prev, [name]: ""}));
+      }
+    }
+  };
+
+  const { mutate, isPending } = useCreatePropertyMutation();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate required images first
+    if (formData.property_images.length === 0) {
+      setErrors(prev => ({...prev, property_images: "Property images are required"}));
+      return;
+    }
+
+    const submissionData = {
+      ...formData,
+      no_of_bedrooms: parseInt(formData.no_of_bedrooms),
+      rental_price: parseInt(formData.rental_price),
+      lease_duration: parseInt(formData.lease_duration),
+      security_deposit: parseInt(formData.security_deposit),
+      service_charge: parseInt(formData.service_charge),
+    };
+
+    const validation = createPropertySchema.safeParse(submissionData);
+
+    if (!validation.success) {
+      const newErrors: Record<string, string> = {};
+      validation.error.errors.forEach(err => {
+        const field = err.path[0] as string;
+        newErrors[field] = err.message;
+      });
+      setErrors(newErrors);
+      console.error("Validation failed:", validation.error.errors);
+      return;
+    }
+
+    const formPayload = new FormData();
+
+    // Append all fields to form data
+    for (const key in submissionData) {
+      const value = submissionData[key as keyof typeof submissionData];
+
+      if (key === "property_images" && Array.isArray(value)) {
+        // Ensure we're appending actual files
+        if (value.length > 0) {
+          value.forEach((file) => formPayload.append("property_images", file));
+        }
+      } else if (value !== undefined && value !== null) {
+        formPayload.append(key, String(value));
+      }
+    }
+
+    mutate(formPayload, {
+      onSuccess: () => {
+        window.location.reload();
+      },
+      onError: (error: any) => {
+        console.error("An error occurred: " + error.message);
+        if (error.response?.data?.message) {
+          // Handle specific API errors
+          if (error.response.data.message.includes("Property images")) {
+            setErrors(prev => ({...prev, property_images: error.response.data.message}));
+          } else {
+            // General error handling
+            alert(error.response.data.message);
+          }
+        }
+      },
+    });
   };
 
   return (
-    <div className="w-full p-4 md:p-6 shadow-2xl bg-white rounded-lg">
-      <h1
-        className="text-2xl md:text-3xl leading-[150%] font-bold mb-4 md:mb-6 text-[#000000]"
-        style={{ fontFamily: "Plus Jakarta Sans" }}
+    <form onSubmit={handleSubmit} className="space-y-6 text-[#000]">
+      <div>
+        <label>Property Name</label>
+        <InputField
+          name="name"
+          placeholder="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+        {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+      </div>
+
+      <section className="flex justify-between">
+        <div className="w-[30%]">
+          <label>Location</label>
+          <Dropdown2
+            name="location"
+            options={["Lagos", "Abuja", "Port Harcourt", "Kano", "Ibadan"]}
+            placeholder="Select location"
+            selectedOption={formData.location}
+            width="100%"
+            colorIcon
+            icon={null}
+            onChange={handleDropdownChange}
+          />
+          {errors.location && <p className="text-red-500 text-sm mt-1">{errors.location}</p>}
+        </div>
+
+        <div className="w-[30%]">
+          <label>Property Status</label>
+          <Dropdown2
+            name="property_status"
+            options={["vacant", "occupied", "under_maintenance"]}
+            placeholder="Select status"
+            selectedOption={formData.property_status}
+            width="100%"
+            colorIcon
+            icon={null}
+            onChange={handleDropdownChange}
+          />
+          {errors.property_status && <p className="text-red-500 text-sm mt-1">{errors.property_status}</p>}
+        </div>
+
+        <div className="w-[30%]">
+          <label>Property Type</label>
+          <Dropdown2
+            name="property_type"
+            options={["Duplex", "Flat", "Self-Contain"]}
+            placeholder="Select property type"
+            selectedOption={formData.property_type}
+            width="100%"
+            colorIcon
+            icon={null}
+            onChange={handleDropdownChange}
+          />
+          {errors.property_type && <p className="text-red-500 text-sm mt-1">{errors.property_type}</p>}
+        </div>
+      </section>
+
+      <section className="flex justify-between gap-4">
+        <div className="w-[30%]">
+          <label>Property Images <span className="text-red-500">*</span></label>
+          <InputField
+            name="property_images"
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={handleFileChange}
+          />
+          {errors.property_images && <p className="text-red-500 text-sm mt-1">{errors.property_images}</p>}
+          {formData.property_images.length > 0 && (
+            <p className="text-green-600 text-sm mt-1">{formData.property_images.length} images selected</p>
+          )}
+        </div>
+
+        <div className="w-[30%]">
+          <label>No of Bedrooms</label>
+          <InputField
+            name="no_of_bedrooms"
+            type="number"
+            value={formData.no_of_bedrooms}
+            onChange={handleChange}
+            placeholder="Number of bedrooms"
+          />
+          {errors.no_of_bedrooms && <p className="text-red-500 text-sm mt-1">{errors.no_of_bedrooms}</p>}
+        </div>
+
+        <div className="w-[30%]">
+          <label>Rental Price</label>
+          <InputField
+            name="rental_price"
+            type="number"
+            value={formData.rental_price}
+            onChange={handleChange}
+            placeholder="Rental price"
+          />
+          {errors.rental_price && <p className="text-red-500 text-sm mt-1">{errors.rental_price}</p>}
+        </div>
+      </section>
+
+      <section className="flex justify-between gap-4">
+        <div className="w-[30%]">
+          <label>Payment Frequency</label>
+          <Dropdown2
+            name="payment_frequency"
+            options={["monthly", "yearly"]}
+            placeholder="Select frequency"
+            selectedOption={formData.payment_frequency}
+            width="100%"
+            colorIcon
+            icon={null}
+            onChange={handleDropdownChange}
+          />
+          {errors.payment_frequency && <p className="text-red-500 text-sm mt-1">{errors.payment_frequency}</p>}
+        </div>
+
+        <div className="w-[30%]">
+          <label>Lease Duration (years)</label>
+          <InputField
+            name="lease_duration"
+            type="number"
+            value={formData.lease_duration}
+            onChange={handleChange}
+            placeholder="Lease duration"
+          />
+          {errors.lease_duration && <p className="text-red-500 text-sm mt-1">{errors.lease_duration}</p>}
+        </div>
+
+        <div className="w-[30%]">
+          <label>Security Deposit</label>
+          <InputField
+            name="security_deposit"
+            type="number"
+            value={formData.security_deposit}
+            onChange={handleChange}
+            placeholder="Security deposit"
+          />
+          {errors.security_deposit && <p className="text-red-500 text-sm mt-1">{errors.security_deposit}</p>}
+        </div>
+      </section>
+
+      <section className="flex justify-between gap-4">
+        <div className="w-[48%]">
+          <label>Service Charge</label>
+          <InputField
+            name="service_charge"
+            type="number"
+            value={formData.service_charge}
+            onChange={handleChange}
+            placeholder="Service charge"
+          />
+          {errors.service_charge && <p className="text-red-500 text-sm mt-1">{errors.service_charge}</p>}
+        </div>
+
+        <div className="w-[48%]">
+          <label>Move-in Date</label>
+          <InputField
+            name="move_in_date"
+            type="date"
+            value={formData.move_in_date}
+            onChange={handleChange}
+          />
+          {errors.move_in_date && <p className="text-red-500 text-sm mt-1">{errors.move_in_date}</p>}
+        </div>
+      </section>
+
+      <div>
+        <label>Comment</label>
+        <InputField
+          name="comment"
+          placeholder="Any comment?"
+          value={formData.comment}
+          onChange={handleChange}
+        />
+        {errors.comment && <p className="text-red-500 text-sm mt-1">{errors.comment}</p>}
+      </div>
+
+      <button
+        type="submit"
+        className="bg-[#785DBA] text-white px-6 py-3 rounded-lg font-semibold"
+        disabled={isPending}
       >
-        Add a new property
-      </h1>
-
-      <main className=" text-black">
-        <form onSubmit={handleSubmit}>
-          <section className="mb-4 md:mb-6 gap-2 md:gap-[12.14px] flex flex-col">
-            <label
-              className="block text-sm font-medium mb-1 md:mb-2"
-              style={{ fontFamily: "Plus Jakarta Sans" }}
-            >
-              Property name
-            </label>
-            <InputField
-              placeholder="Enter Property Name"
-              value={propertyName}
-              onChange={setPropertyName}
-            />
-          </section>
-
-          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-4 md:mb-6">
-            <div className="gap-2 md:gap-[12.14px] flex flex-col">
-              <label
-                className="block text-sm font-medium mb-1 md:mb-2"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-              >
-                Preferred Location
-              </label>
-              <Dropdown2
-                options={locationOptions}
-                placeholder="Select Location"
-              />
-            </div>
-            <div className="gap-2 md:gap-[12.14px] flex flex-col">
-              <label
-                className="block text-sm font-medium mb-1 md:mb-2"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-              >
-                Property Type
-              </label>
-              <Dropdown2
-                options={propertyTypeOptions}
-                placeholder="Select Property Type"
-              />
-            </div>
-            <div className="gap-2 md:gap-[12.14px] flex flex-col">
-              <label
-                className="block text-sm font-medium mb-1 md:mb-2"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-              >
-                No. of Bathrooms
-              </label>
-              <Dropdown2
-                options={bathroomOptions}
-                placeholder="Select no. of Bathrooms"
-              />
-            </div>
-            <div className="gap-2 md:gap-[12.14px] flex flex-col">
-              <label
-                className="block text-sm font-medium mb-1 md:mb-2"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-              >
-                No. of Bedrooms
-              </label>
-              <Dropdown2
-                options={bedroomOptions}
-                placeholder="Select no. of Bedrooms"
-              />
-            </div>
-          </section>
-
-          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 mb-4 md:mb-6">
-            <div className="gap-2 md:gap-[12.14px] flex flex-col">
-              <label
-                className="block text-sm font-medium mb-1 md:mb-2"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-              >
-                Rental Price
-              </label>
-              <InputField
-                placeholder="Enter Your Price"
-                value={rentalPrice}
-                onChange={setRentalPrice}
-                type="number"
-              />
-            </div>
-            <div className="gap-2 md:gap-[12.14px] flex flex-col">
-              <label
-                className="block text-sm font-medium mb-1 md:mb-2"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-              >
-                Payment Frequency
-              </label>
-              <Dropdown2
-                options={paymentFrequencyOptions}
-                placeholder="Select payment frequency"
-              />
-            </div>
-            <div className="gap-2 md:gap-[12.14px] flex flex-col">
-              <label
-                className="block text-sm font-medium mb-1 md:mb-2"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-              >
-                Lease Duration
-              </label>
-              <Dropdown2
-                options={leaseDurationOptions}
-                placeholder="Select lease duration"
-              />
-            </div>
-          </section>
-
-          <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-4 md:mb-6">
-            <div className="gap-2 md:gap-[12.14px] flex flex-col">
-              <label
-                className="block text-sm font-medium mb-1 md:mb-2"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-              >
-                Security Deposit
-              </label>
-              <InputField
-                placeholder="Enter amount"
-                value={securityDeposit}
-                onChange={setSecurityDeposit}
-                type="number"
-              />
-            </div>
-            <div className="gap-2 md:gap-[12.14px] flex flex-col">
-              <label
-                className="block text-sm font-medium mb-1 md:mb-2"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-              >
-                Service Charge
-              </label>
-              <InputField
-                placeholder="Enter amount"
-                value={serviceCharge}
-                onChange={setServiceCharge}
-                type="number"
-              />
-            </div>
-          </section>
-
-          <section className="mb-4 md:mb-6 gap-2 md:gap-[12.14px] flex flex-col">
-            <label
-              className="block text-sm font-medium mb-1 md:mb-2"
-              style={{ fontFamily: "Plus Jakarta Sans" }}
-            >
-              Additional Notes
-            </label>
-            <textarea
-              value={additionalNotes}
-              onChange={(e) => setAdditionalNotes(e.target.value)}
-              placeholder="Enter your Message here"
-              className="w-full p-2 md:p-3 border border-[#262626] text-[#000000] rounded-lg focus:outline-none focus:border-[#785DBA] transition-colors text-xs md:text-[11.44px] leading-[150%] font-[500] min-h-[100px]"
-              style={{ fontFamily: "Plus Jakarta Sans" }}
-            />
-          </section>
-
-          {/* <section className="flex justify-center items-center mb-6 md:mb-8">
-            <div className="gap-2 md:gap-[12.14px] w-full sm:w-[250px] h-auto sm:h-[232px] flex flex-col">
-              <label
-                className="block text-sm font-medium mb-1 md:mb-2"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-              >
-                Upload Image (Optional)
-              </label>
-              <div className="border-1 border-dashed border-[#785DBA] rounded-2xl p-4 md:p-6 text-center">
-                <p
-                  className="text-[#785DBA] text-sm md:text-base mb-1 md:mb-2"
-                  style={{ fontFamily: "Plus Jakarta Sans" }}
-                >
-                  Drop Your Files Here
-                </p>
-                <p
-                  className="text-xs md:text-[16px] font-[400] text-[#A4A8AB] mb-3 md:mb-4"
-                  style={{ fontFamily: "Montserrat" }}
-                >
-                  Maximum size of image 5mb
-                </p>
-                <label className="inline-block px-3 py-1 md:px-4 md:py-2 bg-white text-[#785DBA] rounded-2xl cursor-pointer border-1 hover:text-white border-[#785DBA] hover:bg-[#6a4fa8] transition-colors text-sm md:text-base">
-                  Browse
-                  <input
-                    type="file"
-                    className="hidden"
-                    onChange={handleFileChange}
-                    accept="image/*"
-                    multiple
-                  />
-                </label>
-              </div>
-            </div>
-          </section> */}
-
-          <section className="flex flex-col-reverse sm:flex-row justify-end gap-3 md:gap-4">
-            <div className="w-full sm:w-auto">
-              <ColouredButton title="Save" />
-            </div>
-          </section>
-        </form>
-      </main>
-    </div>
+        {isPending ? "Submitting..." : "Submit Property"}
+      </button>
+    </form>
   );
 };
 
