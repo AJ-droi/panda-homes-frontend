@@ -1,25 +1,26 @@
+/*eslint-disable */
 import Pagination from '@/components/PaginationComponent';
 import { useFetchDueRents } from '@/services/rents/query';
 import { useState } from 'react';
 
 
 // Sample data
-const leaseData = [
-  { id: 1, tenant: "Oakwood Apt, Unit 2B", property: "Lekki, Lagos", expiryDate: "Jan 1st, 2024" },
-  { id: 2, tenant: "Maple Residency, Unit 5C", property: "Wuse 2, Abuja", expiryDate: "May 3rd, 2024" },
-  { id: 3, tenant: "Greenview House, Flat 3", property: "Ikeja, Lagos", expiryDate: "April 22nd, 2026" },
-  { id: 4, tenant: "Lekki Flat A", property: "Ikeja Studio", expiryDate: "June 2nd, 2023" },
-  { id: 5, tenant: "Abuja Duplex", property: "Port Harcourt", expiryDate: "June 2nd, 2023" },
-  { id: 6, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
-  { id: 7, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
-  { id: 8, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
-  { id: 9, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
-  { id: 10, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
-  { id: 11, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
-  { id: 12, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
-  { id: 13, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
-  { id: 14, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
-];
+// const leaseData = [
+//   { id: 1, tenant: "Oakwood Apt, Unit 2B", property: "Lekki, Lagos", expiryDate: "Jan 1st, 2024" },
+//   { id: 2, tenant: "Maple Residency, Unit 5C", property: "Wuse 2, Abuja", expiryDate: "May 3rd, 2024" },
+//   { id: 3, tenant: "Greenview House, Flat 3", property: "Ikeja, Lagos", expiryDate: "April 22nd, 2026" },
+//   { id: 4, tenant: "Lekki Flat A", property: "Ikeja Studio", expiryDate: "June 2nd, 2023" },
+//   { id: 5, tenant: "Abuja Duplex", property: "Port Harcourt", expiryDate: "June 2nd, 2023" },
+//   { id: 6, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
+//   { id: 7, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
+//   { id: 8, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
+//   { id: 9, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
+//   { id: 10, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
+//   { id: 11, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
+//   { id: 12, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
+//   { id: 13, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
+//   { id: 14, tenant: "Ikeja Studio", property: "Ikoyi", expiryDate: "June 2nd, 2023" },
+// ];
 
 // Reusable Pagination Component
 

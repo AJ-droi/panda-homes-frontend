@@ -6,8 +6,7 @@ import ServiceRequest from "./ServiceRequest";
 import NoticeAgreement from "./NoticeAgreement";
 import PropertyView from "./PropertyView";
 import PropertyHistory from "../PropertyHistory/PropertyHistoryTable";
-import { useFetchPropertyById } from "@/services/property/query";
-import { useParams } from "next/navigation";
+
 
 const PropertyViewHome: React.FC = () => {
   const [activeTab, setActiveTab] = useState("property-overview");
