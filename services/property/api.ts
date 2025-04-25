@@ -28,6 +28,30 @@ import { AnyCnameRecord } from "dns";
     }
   }
 
+  export const getPropertiesById = async (id:string) => {
+    try {
+      const response = await axiosInstance.get(`/properties/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+
+      if (response.status !== 200) {
+        throw new Error("error fetching properties");
+      }
+  
+      return response.data
+    } catch (error: any) {
+      let errorMessage = error.message || "An error occurred";
+
+      return {
+        success: false,
+        message: errorMessage,
+        error: error.response?.data || null,
+      };
+    }
+  }
+
 
   
 export const createProperty = async (data:any) => {

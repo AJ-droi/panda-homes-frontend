@@ -5,8 +5,7 @@ import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
 export default function RentalHistory() {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  
-  // Sample data
+
   const rentalData = [
     {
       tenantName: "John Doe",
@@ -29,7 +28,6 @@ export default function RentalHistory() {
       rentIncreases: [],
       leaseRenewed: "No"
     },
-    // Multiple David Brown entries with identical data
     ...Array(7).fill({}).map(() => ({
       tenantName: "David Brown",
       moveInDate: "Dec 28, 2019",
@@ -45,32 +43,32 @@ export default function RentalHistory() {
   ];
 
   const totalPages = 44;
-  
+
   const handlePrevPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
-  
+
   const handleNextPage = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
 
   return (
     <div className="w-full p-4 bg-white">
-      {/* Table */}
+      {/* Responsive Table */}
       <div className="overflow-x-auto">
-        <table className="min-w-full">
+        <table className="min-w-[900px] w-full">
           <thead>
-            <tr className="text-left text-sm text-gray-500">
-              <th className="py-3 px-4">Tenant Name</th>
-              <th className="py-3 px-4">Move-in Date</th>
-              <th className="py-3 px-4">Move-out Date</th>
-              <th className="py-3 px-4">Initial Rent</th>
-              <th className="py-3 px-4">Current Rent</th>
-              <th className="py-3 px-4">Rent Increases</th>
-              <th className="py-3 px-4">Lease Renewed?</th>
+            <tr className="text-left text-sm text-gray-500 whitespace-nowrap">
+              <th className="py-3 px-4 min-w-[140px]">Tenant Name</th>
+              <th className="py-3 px-4 min-w-[130px]">Move-in Date</th>
+              <th className="py-3 px-4 min-w-[130px]">Move-out Date</th>
+              <th className="py-3 px-4 min-w-[120px]">Initial Rent</th>
+              <th className="py-3 px-4 min-w-[120px]">Current Rent</th>
+              <th className="py-3 px-4 min-w-[200px]">Rent Increases</th>
+              <th className="py-3 px-4 min-w-[120px]">Lease Renewed?</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100 text-sm">
+          <tbody className="divide-y divide-gray-100 text-sm whitespace-nowrap">
             {rentalData.map((tenant, index) => (
               <tr key={index} className="text-gray-700 hover:bg-gray-50">
                 <td className="py-3 px-4">{tenant.tenantName}</td>
@@ -82,7 +80,9 @@ export default function RentalHistory() {
                   {tenant.rentIncreases.length > 0 ? (
                     <ul className="list-disc pl-5">
                       {tenant.rentIncreases.map((increase, idx) => (
-                        <li key={idx}>{increase.amount}({increase.date})</li>
+                        <li key={idx}>
+                          {increase.amount} ({increase.date})
+                        </li>
                       ))}
                     </ul>
                   ) : (
@@ -96,11 +96,11 @@ export default function RentalHistory() {
         </table>
       </div>
 
-      {/* Pagination */}
+      {/* Pagination Controls */}
       <div className="flex flex-col sm:flex-row justify-between items-center mt-6 text-sm text-gray-500">
         <div className="flex items-center mb-4 sm:mb-0">
           <div className="relative">
-            <select 
+            <select
               className="appearance-none bg-white border border-gray-300 rounded px-3 py-1 pr-8"
               value={itemsPerPage}
               onChange={(e) => setItemsPerPage(Number(e.target.value))}
@@ -115,29 +115,31 @@ export default function RentalHistory() {
           </div>
           <span className="ml-2">Items per page</span>
         </div>
-        
+
         <div className="flex items-center">
           <span className="mr-4">1-10 of 200 items</span>
           <div className="flex items-center">
-            <select 
+            <select
               className="appearance-none bg-white border border-gray-300 rounded px-3 py-1 pr-8 mr-2"
               value={currentPage}
               onChange={(e) => setCurrentPage(Number(e.target.value))}
             >
               {Array.from({ length: totalPages }, (_, i) => (
-                <option key={i + 1} value={i + 1}>{i + 1}</option>
+                <option key={i + 1} value={i + 1}>
+                  {i + 1}
+                </option>
               ))}
             </select>
-            <span className="mr-2">of 44 pages</span>
-            <button 
-              onClick={handlePrevPage} 
+            <span className="mr-2">of {totalPages} pages</span>
+            <button
+              onClick={handlePrevPage}
               disabled={currentPage === 1}
               className="p-1 rounded border border-gray-300 disabled:opacity-50"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
-            <button 
-              onClick={handleNextPage} 
+            <button
+              onClick={handleNextPage}
               disabled={currentPage === totalPages}
               className="p-1 rounded border border-gray-300 ml-1 disabled:opacity-50"
             >

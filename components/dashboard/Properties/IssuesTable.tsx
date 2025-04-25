@@ -96,7 +96,7 @@ const IssuesListTable = () => {
               )
               : currentItems?.map((item: any, index:number) => (
               <tr
-                key={item.id}
+                key={index}
                 className={`${
                   index !== propertyData.length - 1 ? " " : ""
                 } text-sm`}

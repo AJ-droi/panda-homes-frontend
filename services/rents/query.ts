@@ -1,10 +1,33 @@
 import { useQuery } from "@tanstack/react-query";
-import { getDueRents } from "./api";
+import { getDueRents, getOverDueRents } from "./api";
 
 export function useFetchDueRents() {
     return useQuery({
       queryKey: ["due-rents"],
       queryFn: getDueRents,
+      refetchOnMount: "always",
+      refetchOnWindowFocus: true,
+      select:(data) => 
+        data.rents.map((rent: any) => ({
+            id: rent.id, 
+            tenant: rent.tenant.first_name,
+            property: rent.property.name,
+            amountDue: rent.amount_paid,
+            expiryDate: new Date(rent.expiry_date).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              }),
+            status:rent.status
+        }))  
+    });
+  }
+  
+
+  export function useFetchOverDueRents() {
+    return useQuery({
+      queryKey: ["due-rents"],
+      queryFn: getOverDueRents,
       refetchOnMount: "always",
       refetchOnWindowFocus: true,
       select:(data) => 

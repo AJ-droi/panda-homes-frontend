@@ -152,7 +152,7 @@ const PropertiesListTable = () => {
                   {item.rentOwed}
                 </td>
                 <td className="py-4 px-6 text-center">
-                <button onClick={() => router.push('/dashboard/view-property')} className="bg-[#5E636614] text-[#8B8D97] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm">
+                <button onClick={() => router.push(`/dashboard/view-property/${item.id}`)} className="bg-[#5E636614] text-[#8B8D97] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm">
                     View Details
                   </button>
                 </td>

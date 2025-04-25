@@ -1,4 +1,5 @@
 import Pagination from '@/components/PaginationComponent';
+import { useFetchDueRents } from '@/services/rents/query';
 import { useState } from 'react';
 
 
@@ -25,13 +26,16 @@ const leaseData = [
 
 // Main Component
 const LeaseExpirationTable = () => {
+
+    const { data: upcomingRentPayment, isLoading } = useFetchDueRents();
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   
   // Calculate items to display on current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = leaseData.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = upcomingRentPayment?.slice(indexOfFirstItem, indexOfLastItem);
   
   return (
     <div className="bg-white rounded-lg shadow p-6 ">
@@ -49,8 +53,30 @@ const LeaseExpirationTable = () => {
             </tr>
           </thead>
           <tbody>
-            {currentItems.map((lease) => (
-              <tr key={lease.id} className=" hover:bg-gray-50">
+          {isLoading
+              ? (
+                Array.from({ length: 5 }).map((_, index) => (
+                  <tr key={index} className="animate-pulse">
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto" />
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-4 bg-gray-200 rounded w-2/3 mx-auto" />
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto" />
+                    </td>
+                  </tr>
+                ))
+              )
+              : currentItems?.map((lease:any, index:string) => (
+              <tr key={index} className=" hover:bg-gray-50">
                 <td className="py-4 text-sm text-center text-[#6E7079]">{lease.tenant}</td>
                 <td className="py-4 text-sm text-center text-[#6E7079]">{lease.property}</td>
                 <td className="py-4 text-sm text-center text-[#6E7079]">{lease.expiryDate}</td>
@@ -62,7 +88,7 @@ const LeaseExpirationTable = () => {
       
       <Pagination 
         itemsPerPage={itemsPerPage}
-        totalItems={leaseData.length}
+        totalItems={upcomingRentPayment?.length}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />

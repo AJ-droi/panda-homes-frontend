@@ -1,6 +1,6 @@
 /*eslint-disable */
 import Pagination from "@/components/PaginationComponent";
-import { useFetchDueRents } from "@/services/rents/query";
+import { useFetchDueRents, useFetchOverDueRents } from "@/services/rents/query";
 import React, { useState } from "react";
 
 const PropertyPaymentTable = () => {
@@ -49,7 +49,7 @@ const PropertyPaymentTable = () => {
   //   },
   // ];
 
-  const { data: upcomingRentPayment, isLoading } = useFetchDueRents();
+  const { data: upcomingRentPayment, isLoading } = useFetchOverDueRents();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
