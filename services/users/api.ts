@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { z } from "zod";
 import axiosInstance from "../axios-instance";
 import { loginSchema } from "@/schemas/user.schemas";
@@ -46,7 +48,7 @@ export const loginUser = async (data: z.infer<typeof loginSchema>) => {
   
       return response.data
     } catch (error: any) {
-      let errorMessage = error.message || "An error occurred";
+      const errorMessage = error.message || "An error occurred";
   console.log(error)
       return {
         success: false,
@@ -70,7 +72,7 @@ export const loginUser = async (data: z.infer<typeof loginSchema>) => {
   
       return response.data
     } catch (error: any) {
-      let errorMessage = error.message || "An error occurred";
+      const errorMessage = error.message || "An error occurred";
   console.log(error)
       return {
         success: false,

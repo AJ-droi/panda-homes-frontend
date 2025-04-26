@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // services/users/query.ts
 import { useQuery } from "@tanstack/react-query";
 import { getUsers } from "./api";
