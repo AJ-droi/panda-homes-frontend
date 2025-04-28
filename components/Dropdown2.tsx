@@ -35,10 +35,16 @@ const Dropdown2: React.FC<DropdownProps> = ({
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const handleOptionClick = (option: string) => {
-    setInternalSelected(option);
-    setIsOpen(false);
-    onChange?.({ target: { name, value: option } });
+  const handleOptionClick = (option: any) => {
+    if (typeof option === "string") {
+      setInternalSelected(option);
+      setIsOpen(false);
+      onChange?.({ target: { name, value: option } });
+    } else {
+      setInternalSelected(option.label);
+      setIsOpen(false);
+      onChange?.({ target: { name, value: option.value } });
+    }
   };
 
   return (
@@ -90,15 +96,18 @@ const Dropdown2: React.FC<DropdownProps> = ({
 
       {isOpen && (
         <div className="absolute text-sm z-10 w-full mt-2 bg-white border border-gray-300 rounded-lg shadow-lg">
-          {options.map((option, index) => (
+          {options.map((option: any, index) => (
             <div
               key={index}
               onClick={() => handleOptionClick(option)}
               className={`p-3 hover:bg-gray-100 cursor-pointer ${
-                internalSelected === option ? "bg-gray-100 font-semibold" : ""
+                internalSelected ===
+                (typeof option === "string" ? option : option.label)
+                  ? "bg-gray-100 font-semibold"
+                  : ""
               }`}
             >
-              {option}
+              {typeof option === "string" ? option : option.label}
             </div>
           ))}
         </div>

@@ -36,7 +36,6 @@ import axiosInstance from "../axios-instance";
         throw new Error("Error fetcthing service requests");
       }
   
-      console.log(response.data)
       return response.data
     } catch (error: any) {
       let errorMessage = error.message || "An error occurred";

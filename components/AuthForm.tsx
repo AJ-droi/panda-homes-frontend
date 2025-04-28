@@ -19,6 +19,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [error, setError] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
   const router = useRouter();
 
@@ -145,18 +146,25 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
           />
         </div>
 
-        <div className="mt-6">
+  
+        <div className="mt-6 relative">
           <label htmlFor="password" className="block font-medium">
             Password
           </label>
           <input
             id="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            // required
             className="mt-1 text-black block w-full px-3 py-2 border border-[#66666659] h-[56px] rounded-[12px] shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword((prev) => !prev)}
+            className="absolute top-[45px] right-3 text-sm text-gray-600 focus:outline-none"
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
         </div>
 
         {!isLogin && (

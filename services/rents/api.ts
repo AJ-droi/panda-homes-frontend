@@ -24,7 +24,6 @@ import axiosInstance from "../axios-instance";
   }
 
 
-
   export const getOverDueRents = async () => {
     try {
       const response = await axiosInstance.get("rents/overdue", {
@@ -47,3 +46,5 @@ import axiosInstance from "../axios-instance";
       };
     }
   }
+
+
