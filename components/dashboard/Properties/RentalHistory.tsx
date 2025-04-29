@@ -99,7 +99,7 @@ export default function RentalHistory() {
           </thead>
           <tbody className="divide-y divide-gray-100 text-sm whitespace-nowrap">
             {isLoading
-              ? Array.from({ length: 5 }).map((_, index) => (
+              ? Array.from({ length: 7 }).map((_, index) => (
                   <tr key={index} className="animate-pulse">
                     <td className="py-4 px-6 text-center">
                       <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto" />
@@ -118,7 +118,14 @@ export default function RentalHistory() {
                     </td>
                   </tr>
                 ))
-              : currentItems?.map((tenant: any, index: string) => (
+                :currentItems?.length === 0 ? (
+                  <tr>
+                    <td colSpan={7} className="text-center py-6 text-gray-400">
+                      No rental history available
+                    </td>
+                  </tr>
+                ) : (
+                  currentItems?.map((tenant: any, index: string) => (
                   <tr key={index} className="text-gray-700 hover:bg-gray-50">
                     <td className="py-3 px-4">{tenant.tenantName}</td>
                     <td className="py-3 px-4">{tenant.moveInDate}</td>
@@ -142,7 +149,7 @@ export default function RentalHistory() {
                     </td>
                     <td className="py-3 px-4">{tenant.leaseRenewed}</td>
                   </tr>
-                ))}
+                )))}
           </tbody>
         </table>
       </div>

@@ -5,50 +5,50 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const PropertiesListTable = () => {
-  const propertyData = [
-    {
-      id: 1,
-      property: "Lekki Flat A",
-      location: "Lekki, Lagos",
-      vacancy: "Vacant",
-      rentOwed: "Nil",
-    },
-    {
-      id: 2,
-      property: "Abuja Duplex",
-      location: "Wuse2, Abuja",
-      vacancy: "Not Vacant",
-      rentOwed: "₦1,200,000",
-    },
-    {
-      id: 3,
-      property: "Abuja Duplex",
-      location: "Ikeja, Lagos",
-      vacancy: "Not Vacant",
-      rentOwed: "₦2,000,000",
-    },
-    {
-      id: 4,
-      property: "Abuja Duplex",
-      location: "Ikeja, Lagos",
-      vacancy: "Not Vacant",
-      rentOwed: "₦500,000",
-    },
-    {
-      id: 5,
-      property: "Abuja Duplex",
-      location: "Ikeja, Lagos",
-      vacancy: "Not Vacant",
-      rentOwed: "₦500,000",
-    },
-    {
-      id: 6,
-      property: "Ikeja Studio",
-      location: "Ikeja, Lagos",
-      vacancy: "Vacant",
-      rentOwed: "Nil",
-    },
-  ];
+  // const propertyData = [
+  //   {
+  //     id: 1,
+  //     property: "Lekki Flat A",
+  //     location: "Lekki, Lagos",
+  //     vacancy: "Vacant",
+  //     rentOwed: "Nil",
+  //   },
+  //   {
+  //     id: 2,
+  //     property: "Abuja Duplex",
+  //     location: "Wuse2, Abuja",
+  //     vacancy: "Not Vacant",
+  //     rentOwed: "₦1,200,000",
+  //   },
+  //   {
+  //     id: 3,
+  //     property: "Abuja Duplex",
+  //     location: "Ikeja, Lagos",
+  //     vacancy: "Not Vacant",
+  //     rentOwed: "₦2,000,000",
+  //   },
+  //   {
+  //     id: 4,
+  //     property: "Abuja Duplex",
+  //     location: "Ikeja, Lagos",
+  //     vacancy: "Not Vacant",
+  //     rentOwed: "₦500,000",
+  //   },
+  //   {
+  //     id: 5,
+  //     property: "Abuja Duplex",
+  //     location: "Ikeja, Lagos",
+  //     vacancy: "Not Vacant",
+  //     rentOwed: "₦500,000",
+  //   },
+  //   {
+  //     id: 6,
+  //     property: "Ikeja Studio",
+  //     location: "Ikeja, Lagos",
+  //     vacancy: "Vacant",
+  //     rentOwed: "Nil",
+  //   },
+  // ];
 
     const { data: properties, isLoading } = useFetchPropertyDetails()
 
@@ -126,11 +126,18 @@ const PropertiesListTable = () => {
                   </tr>
                 ))
               )
-              : currentItems?.map((item:any, index:number) => (
+              : currentItems?.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="text-center py-6 text-gray-400">
+                    No Property Listing available
+                  </td>
+                </tr>
+              ) : (
+                currentItems?.map((item:any, index:number) => (
               <tr
                 key={index}
                 className={`${
-                  index !== propertyData.length - 1 ? " " : ""
+                  index !== properties?.length - 1 ? " " : ""
                 } text-sm`}
               >
                 <td className="py-4 px-6 text-center">{item.property}</td>
@@ -157,14 +164,14 @@ const PropertiesListTable = () => {
                   </button>
                 </td>
               </tr>
-            ))}
+            )))}
           </tbody>
         </table>
       </div>
 
       <Pagination 
         itemsPerPage={itemsPerPage}
-        totalItems={propertyData.length}
+        totalItems={properties?.length}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />

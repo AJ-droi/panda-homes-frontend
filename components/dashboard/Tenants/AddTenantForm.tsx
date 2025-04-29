@@ -78,7 +78,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
       },
       {
         onSuccess: () => {
-          router.push("/dashboard");
+          router.push("/dashboard/tenants");
         },
         onError: (error: any) => {
           setError(error.message || "An error occurred during signup.");

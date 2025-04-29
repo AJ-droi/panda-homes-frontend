@@ -76,13 +76,20 @@ const LeaseExpirationTable = () => {
                   </tr>
                 ))
               )
-              : currentItems?.map((lease:any, index:string) => (
+              : currentItems?.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="text-center py-6 text-gray-400">
+                    No Upcoming Lease Expiration
+                  </td>
+                </tr>
+              ) : (
+                currentItems?.map((lease:any, index:string) => (
               <tr key={index} className=" hover:bg-gray-50">
                 <td className="py-4 text-sm text-center text-[#6E7079]">{lease.tenant}</td>
                 <td className="py-4 text-sm text-center text-[#6E7079]">{lease.property}</td>
                 <td className="py-4 text-sm text-center text-[#6E7079]">{lease.expiryDate}</td>
               </tr>
-            ))}
+            )))}
           </tbody>
         </table>
       </div>

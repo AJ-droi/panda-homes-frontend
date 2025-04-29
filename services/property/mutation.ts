@@ -6,7 +6,7 @@ import { createProperty } from "./api";
 
 export function useCreatePropertyMutation() {
     return useMutation({
-      mutationFn: async (formPayload: FormData) => {
+      mutationFn: async (formPayload: any) => {
         return await createProperty(formPayload);
       },
       onMutate: () => {

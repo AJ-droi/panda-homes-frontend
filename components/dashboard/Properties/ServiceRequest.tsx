@@ -70,7 +70,14 @@ export default function ServiceRequest() {
                     </td>
                   </tr>
                 ))
-              : currentItems?.map((request:any, index:string) => (
+                :currentItems?.length === 0 ? (
+                  <tr>
+                    <td colSpan={7} className="text-center py-6 text-gray-400">
+                      No service request available
+                    </td>
+                  </tr>
+                ) : (
+                  currentItems?.map((request:any, index:string) => (
                 <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
                   <td className="py-4 px-4 text-sm text-gray-600">{request.issueType}</td>
                   <td className="py-4 px-4 text-sm text-gray-600">{request.dateReported}</td>
@@ -83,7 +90,7 @@ export default function ServiceRequest() {
                   </td>
                   <td className="py-4 px-4 text-sm text-gray-600">{request.resolutionDate}</td>
                 </tr>
-              ))}
+              )))}
             </tbody>
           </table>
         </div>

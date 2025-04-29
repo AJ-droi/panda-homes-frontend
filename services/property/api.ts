@@ -102,9 +102,9 @@ import { AnyCnameRecord } from "dns";
 export const createProperty = async (data:any) => {
       try {
         const response = await axiosInstance.post("/properties", data, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          }
+          // headers: {
+          //   "Content-Type": "multipart/form-data",
+          // }
         });
   //
         return response.data

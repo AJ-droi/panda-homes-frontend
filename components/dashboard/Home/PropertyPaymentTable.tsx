@@ -122,7 +122,14 @@ const PropertyPaymentTable = () => {
                   </tr>
                 ))
               )
-              : currentItems?.map((item: any, index:string) => (
+              : currentItems?.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="text-center py-6 text-gray-400">
+                    No upcoming rent available
+                  </td>
+                </tr>
+              ) : (
+                currentItems?.map((item: any, index:string) => (
                   <tr key={index} className="text-sm">
                     <td className="py-4 px-6 text-center">{item.property}</td>
                     <td className="py-4 px-6 text-center">{item.amountDue}</td>
@@ -152,7 +159,7 @@ const PropertyPaymentTable = () => {
                       </button>
                     </td>
                   </tr>
-                ))}
+                )))}
           </tbody>
         </table>
       </div>

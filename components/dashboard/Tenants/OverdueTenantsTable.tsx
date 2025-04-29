@@ -116,7 +116,14 @@ const OverdueRentsTable = () => {
                   </tr>
                 ))
               )
-              : currentItems?.map((item:any, index:number) => (
+              : currentItems?.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="text-center py-6 text-gray-400">
+                    No Overdue Payments
+                  </td>
+                </tr>
+              ) : (
+                currentItems?.map((item:any, index:number) => (
               <tr
                 key={index}
                 className={`${
@@ -140,7 +147,7 @@ const OverdueRentsTable = () => {
                   {item.overdueDuration}
                 </td>
               </tr>
-            ))}
+            )))}
           </tbody>
         </table>
       </div>

@@ -79,6 +79,7 @@ const PropertyPaymentTable = () => {
       const indexOfFirstItem = indexOfLastItem - itemsPerPage;
       const currentItems = serviceRequest?.slice(indexOfFirstItem, indexOfLastItem);
 
+      console.log(serviceRequest)
   return (
     <div className="max-w-full text-[#6E7079] overflow-hidden ">
       <div className="overflow-x-auto">
@@ -165,7 +166,7 @@ const PropertyPaymentTable = () => {
                   index !== serviceRequest.length - 1 ? "" : ""
                 } text-sm`}
               >
-                <td className="py-4 px-6 text-center">{item.requestId}</td>
+                <td className="py-4 px-6 text-center">{item.requestid}</td>
                 <td className="py-4 px-6 text-center">{item.tenant}</td>
                 <td className="py-4 px-6 text-center">{item.property}</td>
                 <td className="py-4 px-6 text-center">{item.issue}</td>

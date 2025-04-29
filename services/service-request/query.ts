@@ -31,6 +31,7 @@ export function useFetchServiceRequest() {
       refetchOnWindowFocus: true,
       select:(data) => 
         data.service_requests.map((service: any) => ({
+  
             property: service.property.name, 
             tenant: service.tenant_name,
             issue: "leaking pipe",
