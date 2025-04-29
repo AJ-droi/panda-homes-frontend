@@ -4,35 +4,35 @@ import { useFetchServiceRequest } from "@/services/service-request/query";
 import React, { useState } from "react";
 
 const ServiceRequestTable = () => {
-  const serviceRequestData = [
-    {
-      id: 1,
-      requestid: "#SR001",
-      tenantname: "John Doe",
-      issue: "Broken Pipe",
-      date: "01 Mar",
-      status: "Pending",
-      action: "Assign Technician",
-    },
-    {
-      id: 2,
-      requestid: "#SR002",
-      tenantname: "Jane Doe",
-      issue: "Electrical Issues",
-      date: "28 Feb",
-      status: "Resolved",
-      action: "View Report",
-    },
-    {
-      id: 3,
-      requestid: "#SR003",
-      tenantname: "Peter Rex",
-      issue: "Leaking Roof",
-      date: "02 Mar",
-      status: "Urgent",
-      action: "Escalate",
-    },
-  ];
+  // const serviceRequestData = [
+  //   {
+  //     id: 1,
+  //     requestid: "#SR001",
+  //     tenantname: "John Doe",
+  //     issue: "Broken Pipe",
+  //     date: "01 Mar",
+  //     status: "Pending",
+  //     action: "Assign Technician",
+  //   },
+  //   {
+  //     id: 2,
+  //     requestid: "#SR002",
+  //     tenantname: "Jane Doe",
+  //     issue: "Electrical Issues",
+  //     date: "28 Feb",
+  //     status: "Resolved",
+  //     action: "View Report",
+  //   },
+  //   {
+  //     id: 3,
+  //     requestid: "#SR003",
+  //     tenantname: "Peter Rex",
+  //     issue: "Leaking Roof",
+  //     date: "02 Mar",
+  //     status: "Urgent",
+  //     action: "Escalate",
+  //   },
+  // ];
 
     const { data:serviceRequest, isLoading } = useFetchServiceRequest();
       const [currentPage, setCurrentPage] = useState(1);
@@ -97,19 +97,26 @@ const ServiceRequestTable = () => {
                     </td>
                   </tr>
                 ))
-              ): currentItems.map((item:any, index:string) => (
+              ): currentItems?.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="text-center py-6 text-gray-400">
+                    No service request available
+                  </td>
+                </tr>
+              ) : (
+                currentItems?.map((item:any, index:string) => (
               <tr key={index} className="hover:bg-gray-50 bg-white">
                 <td className="py-4 px-6 text-center">
                   {item.requestid}
                 </td>
                 <td className="py-4 px-6 text-center">
-                  {item.tenantname}
+                  {item.tenant}
                 </td>
                 <td className="py-4 px-6 text-center">
                   {item.issue}
                 </td>
                 <td className="py-4 px-6 text-center">
-                  {item.date}
+                  {item.dateReported}
                 </td>
                 <td
                   className={`py-4 px-6 text-center ${
@@ -131,13 +138,13 @@ const ServiceRequestTable = () => {
                   </button>
                 </td>
               </tr>
-            ))}
+            )))}
           </tbody>
         </table>
       </div>
        <Pagination 
               itemsPerPage={itemsPerPage}
-              totalItems={serviceRequestData.length}
+              totalItems={serviceRequest?.length}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
             />

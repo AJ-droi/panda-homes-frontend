@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "@tanstack/react-query";
-import { loginUser } from "./api";
+import {  createUser, loginUser, resetPassword } from "./api";
 import { loginSchema } from "@/schemas/user.schemas";
 import { z } from "zod";
 import Cookies from "js-cookie";
@@ -38,6 +38,44 @@ export function useLoginMutation() {
       } catch (error: any) {
         console.error("⚠️ Failed to store user token:", error.message);
       }
+    },
+  });
+}
+
+export function useCreateUserMutation() {
+  return useMutation({
+    mutationFn: async (formPayload: any) => {
+      return await createUser(formPayload);
+    },
+    onMutate: () => {
+      console.log("🔐 user creation started...");
+    },
+    onError: (error: any) => {
+      console.error(error.message);
+      return error.message || "An error occurred during user creation.";
+    },
+    onSuccess: async (data) => {
+      return data;
+    },
+  });
+}
+
+
+
+export function useResetPasswordMutation() {
+  return useMutation({
+    mutationFn: async (formPayload: any) => {
+      return await resetPassword(formPayload);
+    },
+    onMutate: () => {
+      console.log("🔐 reset password started...");
+    },
+    onError: (error: any) => {
+      console.error(error.message);
+      return error.message || "An error occurred during reset password.";
+    },
+    onSuccess: async (data) => {
+      return data;
     },
   });
 }

@@ -1,24 +1,34 @@
+/*eslint-disable */
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
+import { useParams } from 'next/navigation';
+import { useFetchServiceRequestById } from '@/services/property/query';
+import Pagination from '@/components/PaginationComponent';
 
 export default function ServiceRequest() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
-  
-  // Sample data
-  const serviceRequests = [
-    { id: 1, issueType: 'Plumbing', dateReported: 'Feb 28, 2025', status: 'Resolved', resolutionDate: 'March 12, 2025' },
-    { id: 2, issueType: 'Electrical', dateReported: 'Jan 20, 2022', status: 'Pending', resolutionDate: 'Nil' },
-    { id: 3, issueType: 'Structural', dateReported: 'Dec 28, 2019', status: 'Resolved', resolutionDate: 'Dec 28, 2019' },
-    { id: 4, issueType: 'Structural', dateReported: 'Dec 28, 2019', status: 'Resolved', resolutionDate: 'Dec 28, 2019' },
-    { id: 5, issueType: 'Structural', dateReported: 'Dec 28, 2019', status: 'Resolved', resolutionDate: 'Dec 28, 2019' },
-    { id: 6, issueType: 'Structural', dateReported: 'Dec 28, 2019', status: 'Resolved', resolutionDate: 'Dec 28, 2019' },
-    { id: 7, issueType: 'Structural', dateReported: 'Dec 28, 2019', status: 'Resolved', resolutionDate: 'Dec 28, 2019' },
-    { id: 8, issueType: 'Structural', dateReported: 'Dec 28, 2019', status: 'Resolved', resolutionDate: 'Dec 28, 2019' },
-    { id: 9, issueType: 'Structural', dateReported: 'Dec 28, 2019', status: 'Resolved', resolutionDate: 'Dec 28, 2019' },
-  ];
 
-  const totalPages = 44;
+  // Sample data
+  // const serviceRequests = [
+  //   { id: 1, issueType: 'Plumbing', dateReported: 'Feb 28, 2025', status: 'Resolved', resolutionDate: 'March 12, 2025' },
+  //   { id: 2, issueType: 'Electrical', dateReported: 'Jan 20, 2022', status: 'Pending', resolutionDate: 'Nil' },
+  //   { id: 3, issueType: 'Structural', dateReported: 'Dec 28, 2019', status: 'Resolved', resolutionDate: 'Dec 28, 2019' },
+  //   { id: 4, issueType: 'Structural', dateReported: 'Dec 28, 2019', status: 'Resolved', resolutionDate: 'Dec 28, 2019' },
+  //   { id: 5, issueType: 'Structural', dateReported: 'Dec 28, 2019', status: 'Resolved', resolutionDate: 'Dec 28, 2019' },
+  //   { id: 6, issueType: 'Structural', dateReported: 'Dec 28, 2019', status: 'Resolved', resolutionDate: 'Dec 28, 2019' },
+  //   { id: 7, issueType: 'Structural', dateReported: 'Dec 28, 2019', status: 'Resolved', resolutionDate: 'Dec 28, 2019' },
+  //   { id: 8, issueType: 'Structural', dateReported: 'Dec 28, 2019', status: 'Resolved', resolutionDate: 'Dec 28, 2019' },
+  //   { id: 9, issueType: 'Structural', dateReported: 'Dec 28, 2019', status: 'Resolved', resolutionDate: 'Dec 28, 2019' },
+  // ];
+
+    const { id } = useParams() as { id: string };
+    const { data: serviceRequests, isLoading } = useFetchServiceRequestById(id);
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
+  
+    // Calculate items to display on current page
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = serviceRequests?.slice(indexOfFirstItem, indexOfLastItem);
 
 
   return (
@@ -40,8 +50,35 @@ export default function ServiceRequest() {
               </tr>
             </thead>
             <tbody>
-              {serviceRequests.map((request) => (
-                <tr key={request.id} className="border-b border-gray-100 hover:bg-gray-50">
+            {isLoading
+              ? Array.from({ length: 5 }).map((_, index) => (
+                  <tr key={index} className="animate-pulse">
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto" />
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-4 bg-gray-200 rounded w-2/3 mx-auto" />
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto" />
+                    </td>
+                  </tr>
+                ))
+                :currentItems?.length === 0 ? (
+                  <tr>
+                    <td colSpan={7} className="text-center py-6 text-gray-400">
+                      No service request available
+                    </td>
+                  </tr>
+                ) : (
+                  currentItems?.map((request:any, index:string) => (
+                <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
                   <td className="py-4 px-4 text-sm text-gray-600">{request.issueType}</td>
                   <td className="py-4 px-4 text-sm text-gray-600">{request.dateReported}</td>
                   <td className="py-4 px-4 text-sm">
@@ -53,54 +90,18 @@ export default function ServiceRequest() {
                   </td>
                   <td className="py-4 px-4 text-sm text-gray-600">{request.resolutionDate}</td>
                 </tr>
-              ))}
+              )))}
             </tbody>
           </table>
         </div>
 
         {/* Pagination */}
-        <div className="flex flex-col sm:flex-row justify-between items-center mt-6 text-sm text-gray-600">
-          <div className="flex items-center mb-4 sm:mb-0">
-            <div className="relative mr-4">
-              <select 
-                className="appearance-none bg-gray-100 border border-gray-200 rounded py-2 pl-3 pr-8 text-sm"
-                value={itemsPerPage}
-                onChange={(e) => setItemsPerPage(Number(e.target.value))}
-              >
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-              </select>
-              <ChevronDown className="absolute right-2 top-2.5 h-4 w-4 text-gray-500 pointer-events-none" />
-            </div>
-            <span>Items per page</span>
-          </div>
-
-          <div className="flex items-center">
-            <span className="mr-4">1-10 of 200 items</span>
-            <div className="flex items-center">
-              <div className="relative mr-2">
-                <select 
-                  className="appearance-none bg-gray-100 border border-gray-200 rounded py-2 pl-3 pr-8 text-sm"
-                  value={currentPage}
-                  onChange={(e) => setCurrentPage(Number(e.target.value))}
-                >
-                  {[...Array(totalPages)].map((_, i) => (
-                    <option key={i} value={i + 1}>{i + 1}</option>
-                  ))}
-                </select>
-                <ChevronDown className="absolute right-2 top-2.5 h-4 w-4 text-gray-500 pointer-events-none" />
-              </div>
-              <span className="mr-2">of {totalPages} pages</span>
-              <button className="p-1 rounded border border-gray-200 mr-1">
-                <ChevronLeft className="h-4 w-4 text-gray-500" />
-              </button>
-              <button className="p-1 rounded border border-gray-200">
-                <ChevronRight className="h-4 w-4 text-gray-500" />
-              </button>
-            </div>
-          </div>
-        </div>
+        <Pagination
+        itemsPerPage={itemsPerPage}
+        totalItems={serviceRequests?.length}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
       </div>
 
       {/* Action Buttons */}

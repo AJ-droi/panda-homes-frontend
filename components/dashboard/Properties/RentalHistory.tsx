@@ -1,56 +1,56 @@
 // RentalHistoryComponent.jsx
-import { useState } from 'react';
-import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
+/*eslint-disable */
+import { useState } from "react";
+import { useParams } from "next/navigation";
+import { useFetchPropertyRentById } from "@/services/property/query";
+import Pagination from "@/components/PaginationComponent";
 
 export default function RentalHistory() {
+  // const rentalData = [
+  //   {
+  //     tenantName: "John Doe",
+  //     moveInDate: "Feb 28, 2025",
+  //     moveOutDate: "Feb 28, 2028",
+  //     initialRent: "₦500,000",
+  //     currentRent: "₦1,500,000",
+  //     rentIncreases: [
+  //       { amount: "₦500,000", date: "4th July,2021" },
+  //       { amount: "₦200,000", date: "2nd March,2020" }
+  //     ],
+  //     leaseRenewed: "Yes"
+  //   },
+  //   {
+  //     tenantName: "Sarah Smith",
+  //     moveInDate: "Jan 20, 2022",
+  //     moveOutDate: "April 15, 2026",
+  //     initialRent: "₦300,000",
+  //     currentRent: "₦1,500,000",
+  //     rentIncreases: [],
+  //     leaseRenewed: "No"
+  //   },
+  //   ...Array(7).fill({}).map(() => ({
+  //     tenantName: "David Brown",
+  //     moveInDate: "Dec 28, 2019",
+  //     moveOutDate: "Feb 2, 2018",
+  //     initialRent: "₦2,500,000",
+  //     currentRent: "₦1,500,000",
+  //     rentIncreases: [
+  //       { amount: "₦500,000", date: "4th July,2021" },
+  //       { amount: "₦200,000", date: "2nd March,2020" }
+  //     ],
+  //     leaseRenewed: "Yes"
+  //   }))
+  // ];
+  const { id } = useParams() as { id: string };
+  const { data: rentalData, isLoading } = useFetchPropertyRentById(id);
+
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const itemsPerPage = 10;
 
-  const rentalData = [
-    {
-      tenantName: "John Doe",
-      moveInDate: "Feb 28, 2025",
-      moveOutDate: "Feb 28, 2028",
-      initialRent: "₦500,000",
-      currentRent: "₦1,500,000",
-      rentIncreases: [
-        { amount: "₦500,000", date: "4th July,2021" },
-        { amount: "₦200,000", date: "2nd March,2020" }
-      ],
-      leaseRenewed: "Yes"
-    },
-    {
-      tenantName: "Sarah Smith",
-      moveInDate: "Jan 20, 2022",
-      moveOutDate: "April 15, 2026",
-      initialRent: "₦300,000",
-      currentRent: "₦1,500,000",
-      rentIncreases: [],
-      leaseRenewed: "No"
-    },
-    ...Array(7).fill({}).map(() => ({
-      tenantName: "David Brown",
-      moveInDate: "Dec 28, 2019",
-      moveOutDate: "Feb 2, 2018",
-      initialRent: "₦2,500,000",
-      currentRent: "₦1,500,000",
-      rentIncreases: [
-        { amount: "₦500,000", date: "4th July,2021" },
-        { amount: "₦200,000", date: "2nd March,2020" }
-      ],
-      leaseRenewed: "Yes"
-    }))
-  ];
-
-  const totalPages = 44;
-
-  const handlePrevPage = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-  };
+  // Calculate items to display on current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = rentalData?.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div className="w-full p-4 bg-white">
@@ -59,95 +59,108 @@ export default function RentalHistory() {
         <table className="min-w-[900px] w-full">
           <thead>
             <tr className="text-left text-sm text-gray-500 whitespace-nowrap">
-              <th className="py-3 px-4 min-w-[140px]">Tenant Name</th>
-              <th className="py-3 px-4 min-w-[130px]">Move-in Date</th>
-              <th className="py-3 px-4 min-w-[130px]">Move-out Date</th>
-              <th className="py-3 px-4 min-w-[120px]">Initial Rent</th>
-              <th className="py-3 px-4 min-w-[120px]">Current Rent</th>
-              <th className="py-3 px-4 min-w-[200px]">Rent Increases</th>
-              <th className="py-3 px-4 min-w-[120px]">Lease Renewed?</th>
+              <th
+                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
+                Tenant Name
+              </th>
+              <th    className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+                style={{ fontFamily: "Plus Jakarta Sans" }}>
+                Move-in Date
+              </th>
+              <th    className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+                style={{ fontFamily: "Plus Jakarta Sans" }}>Move-out Date</th>
+              <th
+                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
+                Initial Rent
+              </th>
+              <th
+                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
+                Current Rent
+              </th>
+              <th
+                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
+                Rent Increases
+              </th>
+              <th
+                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
+                Lease Renewed?
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 text-sm whitespace-nowrap">
-            {rentalData.map((tenant, index) => (
-              <tr key={index} className="text-gray-700 hover:bg-gray-50">
-                <td className="py-3 px-4">{tenant.tenantName}</td>
-                <td className="py-3 px-4">{tenant.moveInDate}</td>
-                <td className="py-3 px-4">{tenant.moveOutDate}</td>
-                <td className="py-3 px-4">{tenant.initialRent}</td>
-                <td className="py-3 px-4">{tenant.currentRent}</td>
-                <td className="py-3 px-4">
-                  {tenant.rentIncreases.length > 0 ? (
-                    <ul className="list-disc pl-5">
-                      {tenant.rentIncreases.map((increase, idx) => (
-                        <li key={idx}>
-                          {increase.amount} ({increase.date})
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    "None"
-                  )}
-                </td>
-                <td className="py-3 px-4">{tenant.leaseRenewed}</td>
-              </tr>
-            ))}
+            {isLoading
+              ? Array.from({ length: 7 }).map((_, index) => (
+                  <tr key={index} className="animate-pulse">
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto" />
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-4 bg-gray-200 rounded w-2/3 mx-auto" />
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
+                    </td>
+                    <td className="py-4 px-6 text-center">
+                      <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto" />
+                    </td>
+                  </tr>
+                ))
+                :currentItems?.length === 0 ? (
+                  <tr>
+                    <td colSpan={7} className="text-center py-6 text-gray-400">
+                      No rental history available
+                    </td>
+                  </tr>
+                ) : (
+                  currentItems?.map((tenant: any, index: string) => (
+                  <tr key={index} className="text-gray-700 hover:bg-gray-50">
+                    <td className="py-3 px-4">{tenant.tenantName}</td>
+                    <td className="py-3 px-4">{tenant.moveInDate}</td>
+                    <td className="py-3 px-4">{tenant.moveOutDate}</td>
+                    <td className="py-3 px-4">{tenant.initialRent}</td>
+                    <td className="py-3 px-4">{tenant.currentRent}</td>
+                    <td className="py-3 px-4">
+                      {tenant.rentIncreases.length > 0 ? (
+                        <ul className="list-disc pl-5">
+                          {tenant.rentIncreases.map(
+                            (increase: any, idx: string) => (
+                              <li key={idx}>
+                                {increase.amount} ({increase.date})
+                              </li>
+                            )
+                          )}
+                        </ul>
+                      ) : (
+                        "None"
+                      )}
+                    </td>
+                    <td className="py-3 px-4">{tenant.leaseRenewed}</td>
+                  </tr>
+                )))}
           </tbody>
         </table>
       </div>
 
       {/* Pagination Controls */}
-      <div className="flex flex-col sm:flex-row justify-between items-center mt-6 text-sm text-gray-500">
-        <div className="flex items-center mb-4 sm:mb-0">
-          <div className="relative">
-            <select
-              className="appearance-none bg-white border border-gray-300 rounded px-3 py-1 pr-8"
-              value={itemsPerPage}
-              onChange={(e) => setItemsPerPage(Number(e.target.value))}
-            >
-              <option value="10">10</option>
-              <option value="25">25</option>
-              <option value="50">50</option>
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
-              <ChevronDown className="h-4 w-4 text-gray-500" />
-            </div>
-          </div>
-          <span className="ml-2">Items per page</span>
-        </div>
-
-        <div className="flex items-center">
-          <span className="mr-4">1-10 of 200 items</span>
-          <div className="flex items-center">
-            <select
-              className="appearance-none bg-white border border-gray-300 rounded px-3 py-1 pr-8 mr-2"
-              value={currentPage}
-              onChange={(e) => setCurrentPage(Number(e.target.value))}
-            >
-              {Array.from({ length: totalPages }, (_, i) => (
-                <option key={i + 1} value={i + 1}>
-                  {i + 1}
-                </option>
-              ))}
-            </select>
-            <span className="mr-2">of {totalPages} pages</span>
-            <button
-              onClick={handlePrevPage}
-              disabled={currentPage === 1}
-              className="p-1 rounded border border-gray-300 disabled:opacity-50"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </button>
-            <button
-              onClick={handleNextPage}
-              disabled={currentPage === totalPages}
-              className="p-1 rounded border border-gray-300 ml-1 disabled:opacity-50"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
-          </div>
-        </div>
-      </div>
+      <Pagination
+        itemsPerPage={itemsPerPage}
+        totalItems={rentalData?.length}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
 
       {/* Action Buttons */}
       <div className="flex justify-end mt-8 space-x-4">

@@ -12,6 +12,8 @@ import device from "@/constants/breakpoints";
 import Footer from "@/components/Footer";
 
 
+
+
 export default function Home() {
   const isNotDesktop = useMatchMediaQuery(device.desktop);
   return (

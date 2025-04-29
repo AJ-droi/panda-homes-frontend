@@ -11,9 +11,10 @@ export function useFetchServiceRequest() {
       select:(data) => 
         data.service_requests.map((service: any) => ({
             requestid: service.request_id, 
-            tenantname: service.tenant_name,
-            issue: "leaking pipe",
-            date: new Date(service.created_at).toLocaleDateString("en-US", {
+            tenant: service.tenant_name,
+            property: service.property.name,
+            issue: service.description,
+            dateReported: new Date(service.created_at).toLocaleDateString("en-US", {
                 month: "short",
                 day: "numeric",
                 year: "numeric",
@@ -31,6 +32,7 @@ export function useFetchServiceRequest() {
       refetchOnWindowFocus: true,
       select:(data) => 
         data.service_requests.map((service: any) => ({
+  
             property: service.property.name, 
             tenant: service.tenant_name,
             issue: "leaking pipe",

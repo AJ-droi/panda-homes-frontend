@@ -4,22 +4,22 @@ import { useActiveMaintenanceIssues } from "@/services/service-request/query";
 import React, { useState } from "react";
 
 const IssuesListTable = () => {
-  const propertyData = [
-    {
-      id: 1,
-      property: "Lekki Flat A",
-      tenant: "John Doe",
-      issue: "Broken Pipe",
-      dateReported: "3 Days Ago",
-    },
-    {
-      id: 2,
-      property: "Abuja Duplex",
-      tenant: "Peter Okon",
-      issue: "Power Outage",
-      dateReported: "5 Days Ago",
-    },
-  ];
+  // const propertyData = [
+  //   {
+  //     id: 1,
+  //     property: "Lekki Flat A",
+  //     tenant: "John Doe",
+  //     issue: "Broken Pipe",
+  //     dateReported: "3 Days Ago",
+  //   },
+  //   {
+  //     id: 2,
+  //     property: "Abuja Duplex",
+  //     tenant: "Peter Okon",
+  //     issue: "Power Outage",
+  //     dateReported: "5 Days Ago",
+  //   },
+  // ];
 
     const { data: activeMaintenance, isLoading } = useActiveMaintenanceIssues();
    const [currentPage, setCurrentPage] = useState(1);
@@ -94,11 +94,18 @@ const IssuesListTable = () => {
                   </tr>
                 ))
               )
-              : currentItems?.map((item: any, index:number) => (
+              : currentItems?.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="text-center py-6 text-gray-400">
+                    No Active Maintenance Issue available
+                  </td>
+                </tr>
+              ) : (
+                currentItems?.map((item: any, index:number) => (
               <tr
                 key={index}
                 className={`${
-                  index !== propertyData.length - 1 ? " " : ""
+                  index !== activeMaintenance?.length - 1 ? " " : ""
                 } text-sm`}
               >
                 <td className="py-4 px-6 text-center">{item.property}</td>
@@ -113,14 +120,14 @@ const IssuesListTable = () => {
                   </button>
                 </td>
               </tr>
-            ))}
+            )))}
           </tbody>
         </table>
       </div>
 
        <Pagination 
               itemsPerPage={itemsPerPage}
-              totalItems={propertyData.length}
+              totalItems={activeMaintenance?.length}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
             />
