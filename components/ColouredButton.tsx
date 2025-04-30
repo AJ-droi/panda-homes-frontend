@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 
  export interface ButtonProps {
@@ -8,7 +9,7 @@ import React from "react";
   width?: string;
   padding?: string;
   hoverEffect?: boolean;
-  onClick?: () => void;
+  onClick?: (e?:any) => void;
   disabled?: boolean;
 }
 

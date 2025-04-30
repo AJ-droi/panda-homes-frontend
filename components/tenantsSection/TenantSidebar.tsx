@@ -10,6 +10,7 @@ import {
   HomeActiveIcon,
   ServiceRequestsActiveIcon,
   SidebarNoticeAndAgreementActiveIcon,
+  LogoutIcon
 } from "@/layout/svgIconPaths";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
@@ -43,6 +44,11 @@ const TenantSidebar = () => {
       activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
       path: "/tenant-dashboard/notice-agreement",
     },
+    {
+      name: "Logout",
+      icon: <LogoutIcon />,
+      path: "/"
+    }
   ];
 
   const toggleSidebar = () => {
@@ -119,6 +125,9 @@ const TenantSidebar = () => {
                 }`}
                 onClick={() => {
                   if (item.path) {
+                    if(item.path === '/'){
+                      localStorage.removeItem('tenant')
+                    }
                     redirect(item.path);
                   }
                 }}

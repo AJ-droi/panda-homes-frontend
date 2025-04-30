@@ -10,6 +10,7 @@ interface InputFieldProps {
   className?: string;
   icon?: React.ReactNode;
   multiple?: boolean;
+  disabled?: boolean;
   accept?: string;
 }
 
@@ -22,6 +23,7 @@ const InputField: React.FC<InputFieldProps> = ({
   className = "",
   icon,
   multiple = false,
+  disabled = false,
   accept
 }) => {
   return (
@@ -38,6 +40,7 @@ const InputField: React.FC<InputFieldProps> = ({
         style={{ fontFamily: 'Inter' }}
         multiple={multiple}
         accept={accept}
+        disabled={disabled}
       />
     </div>
   );

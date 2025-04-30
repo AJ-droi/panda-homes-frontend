@@ -5,13 +5,12 @@ import axiosInstance from "../axios-instance";
 import { loginSchema } from "@/schemas/user.schemas";
 
 export const loginUser = async (data: z.infer<typeof loginSchema>) => {
-    try {
-      const response = await axiosInstance.post("/users/login", data, {
-        headers: {
-          "Content-Type": "application/json",
-        }
-      });
-//
+  try {
+    const response = await axiosInstance.post("/users/login", data, {
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
       return response.data
     } catch (error: any) {``
        // Try to extract a useful message
