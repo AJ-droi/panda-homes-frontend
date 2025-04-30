@@ -8,7 +8,6 @@ import { createPropertySchema } from "@/schemas/property.schemas";
 import GeoSearchMap from "@/components/GeoSearchMap";
 import { useRouter } from "next/navigation";
 
-
 const PropertyForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -71,6 +70,8 @@ const PropertyForm = () => {
       }
     }
   };
+
+  console.log(formData);
 
   const { mutate, isPending } = useCreatePropertyMutation();
 
@@ -152,7 +153,7 @@ const PropertyForm = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6 text-[#000]">
       <section className="flex justify-between">
-        <div className="w-[48%]">
+        <div className="w-[100%]">
           <label>Property Name</label>
           <InputField
             name="name"
@@ -184,24 +185,25 @@ const PropertyForm = () => {
       </section>
 
       <div className="w-full mb-4">
-          <label className="block mb-1 font-medium">Location</label>
-          <GeoSearchMap
-            onLocationSelect={(coords:any) => {
-              setFormData((prev) => ({
-                ...prev,
-                location: `${coords.lat},${coords.lng}`,
-              }));
-            }}
-          />
-          {formData.location && (
-            <p className="text-green-600 text-sm mt-1">
-              Location selected: {formData.location}
-            </p>
-          )}
-          {errors.location && (
-            <p className="text-red-500 text-sm mt-1">{errors.location}</p>
-          )}
-        </div>
+        <label className="block mb-1 font-medium">Location</label>
+        <GeoSearchMap
+          onLocationSelect={(coords: any, address: string) => {
+            setFormData((prev) => ({
+              ...prev,
+              location: address, // <- set to the full address instead of lat/lng
+            }));
+          }}
+        />
+
+        {formData.location && (
+          <p className="text-green-600 text-sm mt-1">
+            Location selected: {formData.location}
+          </p>
+        )}
+        {errors.location && (
+          <p className="text-red-500 text-sm mt-1">{errors.location}</p>
+        )}
+      </div>
 
       <section className="flex justify-between gap-4">
         {/* <div className="w-[30%]">
