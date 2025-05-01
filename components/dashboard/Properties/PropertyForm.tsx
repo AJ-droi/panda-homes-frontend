@@ -312,16 +312,17 @@ const PropertyForm = () => {
           <label>Rental Price</label>
           <InputField
             name="rental_price"
-            type="number"
-            value={formData.rental_price}
-            onChange={handleChange}
+            type="text"
+            value={formatCurrency(formData.rental_price)}
+            onChange={(e) => {
+              const raw = e.target.value.replace(/[^\d]/g, "");
+              setFormData((prev) => ({
+                ...prev,
+                rental_price: raw,
+              }));
+            }}
             placeholder="Rental price"
           />
-          {formData.rental_price && (
-            <p className="text-gray-500 text-sm mt-1">
-              {formatCurrency(formData.rental_price.toString())}
-            </p>
-          )}
           {errors.rental_price && (
             <p className="text-red-500 text-sm mt-1">{errors.rental_price}</p>
           )}
@@ -331,16 +332,17 @@ const PropertyForm = () => {
           <label>Security Deposit</label>
           <InputField
             name="security_deposit"
-            type="number"
-            value={formData.security_deposit}
-            onChange={handleChange}
+            type="text"
+            value={formatCurrency(formData.security_deposit)}
+            onChange={(e) => {
+              const raw = e.target.value.replace(/[^\d]/g, "");
+              setFormData((prev) => ({
+                ...prev,
+                security_deposit: raw,
+              }));
+            }}
             placeholder="Security deposit"
           />
-          {formData.security_deposit && (
-            <p className="text-gray-500 text-sm mt-1">
-              {formatCurrency(formData.security_deposit.toString())}
-            </p>
-          )}
           {errors.security_deposit && (
             <p className="text-red-500 text-sm mt-1">
               {errors.security_deposit}
@@ -352,16 +354,17 @@ const PropertyForm = () => {
           <label>Service Charge</label>
           <InputField
             name="service_charge"
-            type="number"
-            value={formData.service_charge}
-            onChange={handleChange}
+            type="text"
+            value={formatCurrency(formData.service_charge)}
+            onChange={(e) => {
+              const raw = e.target.value.replace(/[^\d]/g, "");
+              setFormData((prev) => ({
+                ...prev,
+                service_charge: raw,
+              }));
+            }}
             placeholder="Service charge"
           />
-          {formData.service_charge && (
-            <p className="text-gray-500 text-sm mt-1">
-              {formatCurrency(formData.service_charge.toString())}
-            </p>
-          )}
           {errors.service_charge && (
             <p className="text-red-500 text-sm mt-1">{errors.service_charge}</p>
           )}
