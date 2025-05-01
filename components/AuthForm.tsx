@@ -26,7 +26,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
   const redirectUser = (user: any) => {
     user.role === Role.ADMIN
       ? router.push("/dashboard")
-      : router.push("/tenant-dashboard");
+      : (router.push("/tenant-dashboard"), localStorage.setItem('tenant', JSON.stringify(user)))
   };
 
   const { mutate, isPending } = useLoginMutation();
@@ -40,6 +40,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
       { email, password },
       {
         onSuccess: (data) => {
+          console.log('dat', data.user)
           data.user && redirectUser(data.user);
         },
         onError: (error: any) => {

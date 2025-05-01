@@ -8,6 +8,7 @@ interface CalendarDropdownProps {
   icon?: React.ReactNode;
   colorIcon?: boolean;
   onChange?: (date: Date | null) => void;
+  disablePastDates?: boolean;
 }
 
 const CalendarDropdown: React.FC<CalendarDropdownProps> = ({
@@ -15,7 +16,8 @@ const CalendarDropdown: React.FC<CalendarDropdownProps> = ({
   placeholder = "Select a date",
   icon,
   colorIcon = false,
-  onChange
+  onChange,
+  disablePastDates = false
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -74,6 +76,7 @@ const CalendarDropdown: React.FC<CalendarDropdownProps> = ({
             selected={selectedDate}
             onChange={handleDateChange}
             inline
+            minDate={disablePastDates ? new Date() : undefined}
             calendarClassName="bg-white border border-gray-300 rounded-lg shadow-lg p-2"
           />
         </div>

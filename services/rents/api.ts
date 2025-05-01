@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosInstance from "../axios-instance";
 
   export const getDueRents = async () => {
@@ -14,7 +15,7 @@ import axiosInstance from "../axios-instance";
   
       return response.data
     } catch (error: any) {
-      let errorMessage = error.message || "An error occurred";
+      const errorMessage = error.message || "An error occurred";
       return {
         success: false,
         message: errorMessage,
@@ -38,7 +39,7 @@ import axiosInstance from "../axios-instance";
   
       return response.data
     } catch (error: any) {
-      let errorMessage = error.message || "An error occurred";
+      const errorMessage = error.message || "An error occurred";
       return {
         success: false,
         message: errorMessage,

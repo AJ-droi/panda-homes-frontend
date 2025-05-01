@@ -1,5 +1,5 @@
 "use client";
-import AuthGuard from "@/components/AuthGuard";
+// import AuthGuard from "@/components/AuthGuard";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import device from "@/constants/breakpoints";
@@ -10,7 +10,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
 
   return (
-    <AuthGuard>
+    // <AuthGuard>
       <div className="flex flex-col min-h-screen">
         <Sidebar />
         <div
@@ -22,7 +22,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <main style={{ flex: 1 }}>{children}</main>
         </div>
       </div>
-    </AuthGuard>
+    // {/* </AuthGuard> */}
   );
 };
 

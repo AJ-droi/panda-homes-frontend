@@ -6,10 +6,21 @@ import RentCountdown from "@/components/tenantsSection/RentExpiryProgressBar";
 import PropertyHistoryCard from "@/components/tenantsSection/PropertyHistoryCard";
 import TenantServiceRequestForm from "@/components/tenantsSection/TenantServiceRequestForm";
 import ColouredButton from "@/components/ColouredButton";
+import { useGetTenantRent, useGetPropertyHistory, useGetTenantProperty } from "@/services/tenants/query";
 
 const TenantDashboard = () => {
   const [propertyHistory, setPropertyHistory] = useState(false);
   const [newServiceRequest, setNewServiceRequest] = useState(false);
+
+  const jsonTenantDetails = localStorage.getItem('tenant')
+  const tenantDetails = JSON.parse(`${jsonTenantDetails}`)
+
+  const { data:rentDetails, isLoading: isRentLoading } = useGetTenantRent(tenantDetails?.id)
+
+  // const { data:propertyHistoryData, isLoading: isPropertyHistoryDataLoading } = useGetPropertyHistory(tenantDetails?.property_id)
+
+  const { data:tenantPropertyData, isLoading: isPropertyDataLoading } = useGetTenantProperty(tenantDetails?.property_id)
+
   return (
     <div className="flex px-4 sm:px-8 md:px-16 py-6 md:py-10 bg-[#fafafe] flex-col min-h-screen">
       {!propertyHistory && !newServiceRequest && (
@@ -23,7 +34,7 @@ const TenantDashboard = () => {
                 Your Rent Price
               </div>
               <div className="text-[#785DBA] font-[600] text-[20px] md:text-[24px] leading-[150%]">
-                $1,250,000
+                ${isPropertyDataLoading ? 'loading...' : tenantPropertyData?.rental_price}
               </div>
             </div>
           </section>
@@ -33,10 +44,10 @@ const TenantDashboard = () => {
               className="font-[600] text-[#666666] text-[20px] md:text-[24px] leading-[150%]"
               style={{ fontFamily: "Plus Jakarta Sans" }}
             >
-              Seaside Serenity Villa
+              {isPropertyDataLoading ? 'loading apartment details...' : tenantPropertyData?.name}
             </div>
             <div className="mt-6 md:mt-10 max-w-[823.611328125px]">
-              <RentCountdown expirationDate={"2025-12-05T15:30:00.000Z"} />
+              { isRentLoading ? <p className="text-[16px] md:text-[13.95px] leading-[100%] text-[#000000] font-[400]">Fetching rent details...</p> : <RentCountdown expirationDate={rentDetails?.lease_end_date} /> }
             </div>
           </section>
 
