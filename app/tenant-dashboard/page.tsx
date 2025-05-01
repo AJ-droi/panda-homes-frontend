@@ -1,19 +1,32 @@
 "use client";
-import React, { useState } from "react";
+/* eslint-disable */
+import React, { useEffect, useState } from "react";
 import PropertyDescriptionCard from "@/components/tenantsSection/PropertyDescriptionCard";
 import TenantServiceRequestCard from "@/components/tenantsSection/ServiceRequestCard";
 import RentCountdown from "@/components/tenantsSection/RentExpiryProgressBar";
 import PropertyHistoryCard from "@/components/tenantsSection/PropertyHistoryCard";
 import TenantServiceRequestForm from "@/components/tenantsSection/TenantServiceRequestForm";
 import ColouredButton from "@/components/ColouredButton";
-import { useGetTenantRent, useGetPropertyHistory, useGetTenantProperty } from "@/services/tenants/query";
+import { useGetTenantRent, useGetTenantProperty } from "@/services/tenants/query";
 
 const TenantDashboard = () => {
   const [propertyHistory, setPropertyHistory] = useState(false);
   const [newServiceRequest, setNewServiceRequest] = useState(false);
 
-  const jsonTenantDetails = localStorage.getItem('tenant')
-  const tenantDetails = JSON.parse(`${jsonTenantDetails}`)
+  // const jsonTenantDetails = localStorage.getItem('tenant')
+  // const tenantDetails = JSON.parse(`${jsonTenantDetails}`)
+
+  const [tenantDetails, setTenantDetails] = useState<any>(null);
+
+  useEffect(() => {
+    const jsonTenantDetails = localStorage.getItem("tenant");
+    if (jsonTenantDetails) {
+      const parsed = JSON.parse(jsonTenantDetails);
+      setTenantDetails(parsed);
+      // setTenantId(parsed?.id);
+      // setPropertyId(parsed?.property_id);
+    }
+  }, []);
 
   const { data:rentDetails, isLoading: isRentLoading } = useGetTenantRent(tenantDetails?.id)
 
