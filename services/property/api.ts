@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createPropertySchema } from "@/schemas/property.schemas";
 import axiosInstance from "../axios-instance";
 import { z } from "zod";
@@ -18,7 +21,7 @@ import { AnyCnameRecord } from "dns";
   
       return response.data
     } catch (error: any) {
-      let errorMessage = error.message || "An error occurred";
+      const errorMessage = error.message || "An error occurred";
 
       return {
         success: false,
@@ -42,7 +45,7 @@ import { AnyCnameRecord } from "dns";
   
       return response.data
     } catch (error: any) {
-      let errorMessage = error.message || "An error occurred";
+      const errorMessage = error.message || "An error occurred";
 
       return {
         success: false,

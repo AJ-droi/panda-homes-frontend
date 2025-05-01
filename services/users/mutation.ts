@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "@tanstack/react-query";
 import {  createUser, loginUser, resetPassword, updateUser } from "./api";
 import { loginSchema } from "@/schemas/user.schemas";

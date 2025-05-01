@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // services/property/query.ts
 import { useQuery } from "@tanstack/react-query";
 import { getProperties, getPropertiesById, getPropertyRent, getPropertyServiceRequests } from "./api";

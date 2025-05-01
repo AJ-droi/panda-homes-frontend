@@ -930,3 +930,21 @@ export const HistoriesPageBulletIcon = () => (
     />
   </svg>
 );
+
+export const LogoutIcon = () => (
+  <svg
+    className="h-6 w-6"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    stroke="#000000"
+  >
+    <path
+      d="M17 16L21 12M21 12L17 8M21 12H7M13 16V17C13 18.1046 12.1046 19 11 19H7C5.89543 19 5 18.1046 5 17V7C5 5.89543 5.89543 5 7 5H11C12.1046 5 13 5.89543 13 7V8"
+      stroke="#000000"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
