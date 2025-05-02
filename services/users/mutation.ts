@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "@tanstack/react-query";
-import {  createUser, loginUser, resetPassword } from "./api";
+import {  createUser, loginUser, resetPassword, updateUser } from "./api";
 import { loginSchema } from "@/schemas/user.schemas";
 import { z } from "zod";
 import Cookies from "js-cookie";
@@ -66,6 +66,26 @@ export function useResetPasswordMutation() {
   return useMutation({
     mutationFn: async (formPayload: any) => {
       return await resetPassword(formPayload);
+    },
+    onMutate: () => {
+      console.log("🔐 reset password started...");
+    },
+    onError: (error: any) => {
+      console.error(error.message);
+      return error.message || "An error occurred during reset password.";
+    },
+    onSuccess: async (data) => {
+      return data;
+    },
+  });
+}
+
+
+
+export function useUpdateUserMutation() {
+  return useMutation({
+    mutationFn: async (formPayload: any) => {
+      return await updateUser(formPayload);
     },
     onMutate: () => {
       console.log("🔐 reset password started...");

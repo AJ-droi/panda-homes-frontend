@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable */
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropertyDescriptionCard from "@/components/tenantsSection/PropertyDescriptionCard";
 import TenantServiceRequestCard from "@/components/tenantsSection/ServiceRequestCard";
 import RentCountdown from "@/components/tenantsSection/RentExpiryProgressBar";
 import PropertyHistoryCard from "@/components/tenantsSection/PropertyHistoryCard";
 import TenantServiceRequestForm from "@/components/tenantsSection/TenantServiceRequestForm";
 import ColouredButton from "@/components/ColouredButton";
-import { useGetTenantRent, useGetPropertyHistory, useGetTenantProperty } from "@/services/tenants/query";
+import { useGetTenantRent, useGetTenantProperty } from "@/services/tenants/query";
 
 const TenantDashboard = () => {
   const [propertyHistory, setPropertyHistory] = useState(false);

@@ -22,7 +22,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <main style={{ flex: 1 }}>{children}</main>
         </div>
       </div>
-     </AuthGuard> 
+    </AuthGuard>
   );
 };
 
