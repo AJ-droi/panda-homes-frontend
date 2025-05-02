@@ -1,5 +1,5 @@
-import NotificationsPage from '@/components/dashboard/Notifications/Notifications'
 import React from 'react'
+import NotificationsPage from '@/components/dashboard/Notifications/Notifications'
 
 const page = () => {
   return (

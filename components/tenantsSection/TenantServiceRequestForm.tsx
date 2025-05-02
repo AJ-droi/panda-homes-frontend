@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Dropdown2 from "@/components/Dropdown2";
 import ColouredButton from "@/components/ColouredButton";
 import CalendarDropdown from "../CalendarDropdown";
@@ -29,8 +29,21 @@ const TenantServiceRequestForm: React.FC<propertyFormProps> = ({ onClose }) => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const jsonTenantDetails = localStorage.getItem("tenant");
-  const tenantDetails = JSON.parse(`${jsonTenantDetails}`);
+    const [tenantDetails, setTenantDetails] = useState<any>({})
+    
+    useEffect(() => {
+      const isClient = typeof window !== 'undefined';
+      if (isClient) {
+        const jsonTenantDetails = localStorage.getItem('tenant')
+        if (jsonTenantDetails) {
+          try {
+            setTenantDetails(JSON.parse(jsonTenantDetails))
+          } catch (error) {
+            console.error('Failed to parse tenant details', error)
+          }
+        }
+      }
+    }, [])
   const { data: tenantPropertyData } = useGetTenantProperty(
     tenantDetails?.property_id
   );
@@ -133,7 +146,7 @@ const TenantServiceRequestForm: React.FC<propertyFormProps> = ({ onClose }) => {
     submissionData.append('status', 'pending')
     submissionData.append("tenant_id", tenantDetails?.id);
     submissionData.append("property_id", tenantDetails?.property_id);
-    submissionData.append("date_reported", `${new Date()}`);
+    submissionData.append("date_reported", `${new Date().toISOString()}`);
 
     createServiceRequest(submissionData, {
       onSuccess: () => {

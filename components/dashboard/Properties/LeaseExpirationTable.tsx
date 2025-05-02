@@ -98,8 +98,7 @@ const LeaseExpirationTable = () => {
         itemsPerPage={itemsPerPage}
         totalItems={upcomingRentPayment?.length}
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+        setCurrentPage={setCurrentPage} totalPages={undefined}      />
     </div>
   );
 };

@@ -151,8 +151,7 @@ const TenantsListTable = () => {
         itemsPerPage={itemsPerPage}
         totalItems={users?.length}
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+        setCurrentPage={setCurrentPage} totalPages={undefined}      />
     </div>
   );
 };

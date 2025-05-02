@@ -126,11 +126,10 @@ const IssuesListTable = () => {
       </div>
 
        <Pagination 
-              itemsPerPage={itemsPerPage}
-              totalItems={activeMaintenance?.length}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
+        itemsPerPage={itemsPerPage}
+        totalItems={activeMaintenance?.length}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage} totalPages={undefined}            />
     </div>
   );
 };

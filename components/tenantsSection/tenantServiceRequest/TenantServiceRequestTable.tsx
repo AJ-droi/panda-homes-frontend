@@ -1,43 +1,43 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 import Pagination from "@/components/PaginationComponent";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useFetchTenantServiceRequest } from "@/services/tenants/query";
+import { formatDate } from "@/utilities/utilities";
 
 const TenantServiceRequestTable = () => {
-  const serviceRequestData = [
-    {
-      id: 1,
-      requestid: "#SR001",
-      tenantname: "John Doe",
-      issue: "Broken Pipe",
-      date: "01 Mar",
-      status: "Pending",
-      action: "Assign Technician",
-    },
-    {
-      id: 2,
-      requestid: "#SR002",
-      tenantname: "Jane Doe",
-      issue: "Electrical Issues",
-      date: "28 Feb",
-      status: "Resolved",
-      action: "View Report",
-    },
-    {
-      id: 3,
-      requestid: "#SR003",
-      tenantname: "Peter Rex",
-      issue: "Leaking Roof",
-      date: "02 Mar",
-      status: "Urgent",
-      action: "Escalate",
-    },
-  ];
 
-      const [currentPage, setCurrentPage] = useState(1);
-      const itemsPerPage = 10;
-      
-      const indexOfLastItem = currentPage * itemsPerPage;
-      const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-      const currentItems = serviceRequestData.slice(indexOfFirstItem, indexOfLastItem);
+   const [tenantDetails, setTenantDetails] = useState<any>({})
+   
+   useEffect(() => {
+     const isClient = typeof window !== 'undefined';
+     if (isClient) {
+       const jsonTenantDetails = localStorage.getItem('tenant')
+       if (jsonTenantDetails) {
+         try {
+           setTenantDetails(JSON.parse(jsonTenantDetails))
+         } catch (error) {
+           console.error('Failed to parse tenant details', error)
+         }
+       }
+     }
+   }, [])
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const itemsPerPage = 10;
+
+  const {
+    data: tenantServiceRequest,
+    isLoading: isRequestLoading,
+    isFetching: isFetchingRequests,
+  } = useFetchTenantServiceRequest(
+    tenantDetails?.property_id,
+    currentPage,
+    itemsPerPage,
+  );
+  const currentItems = tenantServiceRequest?.service_requests;
 
   return (
     <div className="w-full  text-[#6E7079] overflow-hidden">
@@ -45,24 +45,32 @@ const TenantServiceRequestTable = () => {
         <table className="w-full">
           <thead>
             <tr className="border-y border-[#E1E2E9]">
-              <th  className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
-                style={{ fontFamily: "Plus Jakarta Sans" }}>
+              <th
+                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
                 Request ID
               </th>
               {/* <th  className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}>
                 Tenant Name
               </th> */}
-              <th  className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
-                style={{ fontFamily: "Plus Jakarta Sans" }}>
+              <th
+                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
                 Issue
               </th>
-              <th  className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
-                style={{ fontFamily: "Plus Jakarta Sans" }}>
+              <th
+                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
                 Date
               </th>
-              <th  className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
-                style={{ fontFamily: "Plus Jakarta Sans" }}>
+              <th
+                className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
                 Status
               </th>
               {/* <th  className="text-center text-[18px] leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
@@ -72,49 +80,66 @@ const TenantServiceRequestTable = () => {
             </tr>
           </thead>
           <tbody>
-            {currentItems.map((item) => (
-              <tr key={item.id} className="hover:bg-gray-50 bg-white">
-                <td className="py-4 px-6 text-center">
-                  {item.requestid}
-                </td>
-                {/* <td className="py-4 px-6 text-center">
-                  {item.tenantname}
-                </td> */}
-                <td className="py-4 px-6 text-center">
-                  {item.issue}
-                </td>
-                <td className="py-4 px-6 text-center">
-                  {item.date}
-                </td>
-                <td
-                  className={`py-4 px-6 text-center ${
-                    item.status === "Urgent"
-                      ? "text-red-500 font-medium"
-                      : item.status === "Pending"
-                      ? "text-[#FBBC05] font-medium"
-                      : item.status === "Resolved"
-                      ? "text-green-500 font-medium"
-                      : ""
-                  }`}
-                >
-                  {item.status}
-                </td>
-                {/* <td className="py-4 px-6 text-center">
-                  <button className="bg-[#5E636614] text-[#8B8D97] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm">
-                    View Details
-                  </button>
-                </td> */}
-              </tr>
-            ))}
+          {isRequestLoading || isFetchingRequests ? (
+    Array.from({ length: 5 }).map((_, index) => (
+      <tr key={index} className="animate-pulse">
+        <td className="py-4 px-6 text-center">
+          <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto" />
+        </td>
+        <td className="py-4 px-6 text-center">
+          <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
+        </td>
+        <td className="py-4 px-6 text-center">
+          <div className="h-4 bg-gray-200 rounded w-2/3 mx-auto" />
+        </td>
+        <td className="py-4 px-6 text-center">
+          <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
+        </td>
+      </tr>
+    ))
+  ) : !currentItems || !currentItems.length ? (
+    <tr>
+      <td colSpan={4} className="py-4 px-6 text-center text-black">
+        No Data Available
+      </td>
+    </tr>
+  ) : (
+    currentItems.map((item: any, index: number) => (
+      <tr key={item?.id} className="hover:bg-gray-50 bg-white">
+        <td className="py-4 px-6 text-center">{item?.request_id}</td>
+        <td className="py-4 px-6 text-center">{item?.description}</td>
+        <td className="py-4 px-6 text-center">
+          {formatDate(item?.date_reported)}
+        </td>
+        <td
+          className={`py-4 px-6 text-center ${
+            item.status === "urgent"
+              ? "text-red-500 font-medium"
+              : item.status === "pending"
+              ? "text-[#FBBC05] font-medium"
+              : item.status === "resolved"
+              ? "text-green-500 font-medium"
+              : ""
+          }`}
+        >
+          {item.status}
+        </td>
+      </tr>
+    ))
+  )
+  }
           </tbody>
         </table>
       </div>
-       <Pagination 
-              itemsPerPage={itemsPerPage}
-              totalItems={serviceRequestData.length}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
+      {tenantServiceRequest?.pagination && (
+        <Pagination
+          itemsPerPage={itemsPerPage}
+          totalItems={tenantServiceRequest.pagination.totalRows}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalPages={tenantServiceRequest.pagination.totalPages}
+        />
+      )}
     </div>
   );
 };

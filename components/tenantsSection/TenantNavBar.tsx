@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   NavbarActiveNotificationBell,
   NavbarActiveSettingsIcon,
@@ -13,6 +14,23 @@ interface TenantNavbarProps {
 }
 
 const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
+
+  const [tenantDetails, setTenantDetails] = useState<any>({})
+  
+  useEffect(() => {
+    const isClient = typeof window !== 'undefined';
+    if (isClient) {
+      const jsonTenantDetails = localStorage.getItem('tenant')
+      if (jsonTenantDetails) {
+        try {
+          setTenantDetails(JSON.parse(jsonTenantDetails))
+        } catch (error) {
+          console.error('Failed to parse tenant details', error)
+        }
+      }
+    }
+  }, [])
+
   const pathname = usePathname();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +73,7 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
 
   return (
     <div className="bg-white text-[#785DBA] text-[22px] leading-[145%] font-[700] px-4 sm:px-6 md:px-8 lg:px-20 h-[76px] border-b border-[#66666659] shadow-lg flex justify-between items-center w-full">
-      <div>Hello Tunji</div>
+      <div>Hello {tenantDetails?.first_name ? tenantDetails?.first_name : 'There'}</div>
       {!isTenantRegister && (
         <div className="gap-[24px] items-center justify-between flex">
           {iconData.map((item) => (
