@@ -60,6 +60,7 @@ export function useFetchPropertyById(id: string) {
         occupancyStatus: data.property_tenants[0].status,
         rentalPrice: data.rental_price,
         serviceCharge: data.service_charge,
+        property_tenants: data.property_tenants
       };
     },
   });

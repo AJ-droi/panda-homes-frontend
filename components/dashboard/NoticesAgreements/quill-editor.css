@@ -1,0 +1,58 @@
+/* quill-editor.css */
+
+.ql-editor {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    color: #1f2937; /* text-gray-800 */
+    line-height: 1.75;
+    padding: 1.25rem;
+  }
+  
+  /* Headings */
+  .ql-editor h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  .ql-editor h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Paragraphs */
+  .ql-editor p {
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Lists */
+  .ql-editor ul {
+    padding-left: 1.5rem;
+    list-style-type: disc;
+  }
+  .ql-editor li {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Bold & Italics */
+  .ql-editor strong {
+    font-weight: 600;
+  }
+  .ql-editor em {
+    font-style: italic;
+  }
+  
+  /* Links */
+  .ql-editor a {
+    color: #3b82f6;
+    text-decoration: underline;
+  }
+  
+  /* Horizontal Rule */
+  .ql-editor hr {
+    margin: 2rem 0;
+    border: none;
+    border-top: 1px solid #d1d5db;
+  }
+  

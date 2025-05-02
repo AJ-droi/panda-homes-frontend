@@ -1,12 +1,15 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import NoticesAgreementHome from "@/components/dashboard/NoticesAgreements/NoticesAgreementHome";
 
 const NoticesAndAgreements = () => {
   return (
-    <section className="">
+    <Suspense fallback={<p> loading....</p>}>
+        <section className="">
       <NoticesAgreementHome />
     </section>
+    </Suspense>
+  
   );
 };
 
