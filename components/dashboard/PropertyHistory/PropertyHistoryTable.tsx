@@ -268,11 +268,10 @@ export default function PropertyHistory() {
 
             {/* Pagination */}
             <Pagination 
-        itemsPerPage={itemsPerPage}
-        totalItems={properties.length}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+              itemsPerPage={itemsPerPage}
+              totalItems={properties.length}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage} totalPages={undefined}      />
           </div>
         </main>
       </div>

@@ -159,8 +159,7 @@ export default function RentalHistory() {
         itemsPerPage={itemsPerPage}
         totalItems={rentalData?.length}
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+        setCurrentPage={setCurrentPage} totalPages={undefined}      />
 
       {/* Action Buttons */}
       <div className="flex justify-end mt-8 space-x-4">

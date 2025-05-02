@@ -97,11 +97,10 @@ export default function ServiceRequest() {
 
         {/* Pagination */}
         <Pagination
-        itemsPerPage={itemsPerPage}
-        totalItems={serviceRequests?.length}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+          itemsPerPage={itemsPerPage}
+          totalItems={serviceRequests?.length}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage} totalPages={undefined}      />
       </div>
 
       {/* Action Buttons */}

@@ -194,11 +194,11 @@ const PropertyPaymentTable = () => {
           </tbody>
         </table>
           <Pagination 
-                itemsPerPage={itemsPerPage}
-                totalItems={serviceRequest?.length}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-              />
+          itemsPerPage={itemsPerPage}
+          totalItems={serviceRequest?.length}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage} 
+          totalPages={undefined}              />
       </div>
     </div>
   );

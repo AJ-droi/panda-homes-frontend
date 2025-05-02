@@ -143,11 +143,10 @@ const ServiceRequestTable = () => {
         </table>
       </div>
        <Pagination 
-              itemsPerPage={itemsPerPage}
-              totalItems={serviceRequest?.length}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
+        itemsPerPage={itemsPerPage}
+        totalItems={serviceRequest?.length}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage} totalPages={undefined}            />
     </div>
   );
 };

@@ -173,8 +173,7 @@ const PropertiesListTable = () => {
         itemsPerPage={itemsPerPage}
         totalItems={properties?.length}
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+        setCurrentPage={setCurrentPage} totalPages={undefined}      />
     </div>
   );
 };

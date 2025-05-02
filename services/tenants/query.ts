@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getTenantRentDetails, getTenantPropertyHistory, getTenantProperty } from './api';
+import { getTenantRentDetails, getTenantServiceRequest, getTenantPropertyHistory, getTenantProperty } from './api';
 import { queryKeys } from './queryKeys';
 
 
@@ -43,4 +43,13 @@ export function useGetTenantRent(tenant_id:string) {
     });
   }
 
-
+export function useFetchTenantServiceRequest(property_id:string, page: number = 1, limit: number = 10) {
+    return useQuery({
+      queryKey: queryKeys.getTenantServiceRequests(property_id),
+      queryFn: () => getTenantServiceRequest(property_id, page, limit),
+      refetchOnMount: true,
+      refetchOnWindowFocus: true,
+      staleTime: 0,
+      enabled: !!property_id
+    });
+  }

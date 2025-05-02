@@ -1,11 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosInstance from "../axios-instance";
 
-export const getTenantServiceRequest = async (property_id:string) => {
+export const getTenantServiceRequest = async (property_id:string, page: number = 1, limit: number = 10) => {
     try {
-      const response = await axiosInstance.get(`/service-requests/tenant/${property_id}`, {
+      const response = await axiosInstance.get(`/service-requests/tenant-property/${property_id}`, {
         headers: {
           "Content-Type": "application/json",
+        },
+        params: {
+          page,
+          limit
         }
       });
 
@@ -103,3 +107,28 @@ export const createServiceRequest = async(data:object) => {
     });
     return response.data
 }
+
+
+
+// export const getTenantServiceRequest = async () => {
+//   try {
+//     const response = await axiosInstance.get("service-requests", {
+//       headers: {
+//         "Content-Type": "application/json",
+//       }
+//     });
+
+//     if (response.status !== 200) {
+//       throw new Error("Error fetcthing service requests");
+//     }
+
+//     return response.data
+//   } catch (error: any) {
+//     const errorMessage = error.message || "An error occurred";
+//     return {
+//       success: false,
+//       message: errorMessage,
+//       error: error.response?.data || null,
+//     };
+//   }
+// }

@@ -1,4 +1,3 @@
-// components/Notifications/NotificationsList.tsx
 /* eslint-disable */
 "use client"
 import { useState } from 'react';

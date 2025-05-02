@@ -130,8 +130,7 @@ const NoticeTable = () => {
         itemsPerPage={itemsPerPage}
         totalItems={noticeData?.length}
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+        setCurrentPage={setCurrentPage} totalPages={undefined}      />
     </div>
   );
 };
