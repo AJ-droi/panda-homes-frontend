@@ -19,14 +19,15 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [error, setError] = useState("");
-    const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const router = useRouter();
 
   const redirectUser = (user: any) => {
     user.role === Role.ADMIN
       ? router.push("/dashboard")
-      : (router.push("/tenant-dashboard"), localStorage.setItem('tenant', JSON.stringify(user)))
+      : (router.push("/tenant-dashboard"),
+        localStorage.setItem("tenant", JSON.stringify(user)));
   };
 
   const { mutate, isPending } = useLoginMutation();
@@ -146,7 +147,6 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
           />
         </div>
 
-  
         <div className="mt-6 relative">
           <label htmlFor="password" className="block font-medium">
             Password

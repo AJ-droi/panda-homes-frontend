@@ -2,7 +2,16 @@
 import React from "react";
 import Card from "../Card";
 
-const PropertyDescriptionCard = ({onClick}:{onClick: React.FC}) => {
+interface PropertyCardProps {
+  onClick: () => void;
+  adminNumber?: string;
+  adminNumberLoading?: boolean;
+}
+const PropertyDescriptionCard: React.FC<PropertyCardProps> = ({
+  onClick,
+  adminNumber,
+  adminNumberLoading,
+}) => {
   return (
     <div className="h-full">
       <Card>
@@ -41,10 +50,17 @@ const PropertyDescriptionCard = ({onClick}:{onClick: React.FC}) => {
               <span className="text-[#785DBA]">
                 Landlord/Caretaker Contact:
               </span>{" "}
-              08123456789
+              {adminNumberLoading
+                ? "loading..."
+                : adminNumber
+                ? adminNumber
+                : "No Data"}
             </h3>
             <div>
-              <button onClick={onClick} className="text-xs md:text-sm max-w-[140px] md:max-w-[161px] font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-1.5 md:p-2 rounded-[6px] md:rounded-[8px] w-full mt-4 md:mt-6 text-white">
+              <button
+                onClick={onClick}
+                className="text-xs md:text-sm max-w-[140px] md:max-w-[161px] font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-1.5 md:p-2 rounded-[6px] md:rounded-[8px] w-full mt-4 md:mt-6 text-white"
+              >
                 View Property History
               </button>
             </div>

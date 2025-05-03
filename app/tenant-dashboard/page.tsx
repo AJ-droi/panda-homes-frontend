@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable */
 "use client";
 import React, { useEffect, useState } from "react";
@@ -9,32 +7,47 @@ import RentCountdown from "@/components/tenantsSection/RentExpiryProgressBar";
 import PropertyHistoryCard from "@/components/tenantsSection/PropertyHistoryCard";
 import TenantServiceRequestForm from "@/components/tenantsSection/TenantServiceRequestForm";
 import ColouredButton from "@/components/ColouredButton";
-import { useGetTenantRent, useGetTenantProperty } from "@/services/tenants/query";
+import {
+  useGetTenantRent,
+  useGetTenantProperty,
+  useGetPropertyHistory,
+  useGetAdminPhoneNumber,
+} from "@/services/tenants/query";
 
 const TenantDashboard = () => {
   const [propertyHistory, setPropertyHistory] = useState(false);
   const [newServiceRequest, setNewServiceRequest] = useState(false);
-  const [tenantDetails, setTenantDetails] = useState<any>({})
-  
+  const [tenantDetails, setTenantDetails] = useState<any>({});
+
   useEffect(() => {
-    const isClient = typeof window !== 'undefined';
+    const isClient = typeof window !== "undefined";
     if (isClient) {
-      const jsonTenantDetails = localStorage.getItem('tenant')
+      const jsonTenantDetails = localStorage.getItem("tenant");
       if (jsonTenantDetails) {
         try {
-          setTenantDetails(JSON.parse(jsonTenantDetails))
+          setTenantDetails(JSON.parse(jsonTenantDetails));
         } catch (error) {
-          console.error('Failed to parse tenant details', error)
+          console.error("Failed to parse tenant details", error);
         }
       }
     }
-  }, [])
-  const { data:rentDetails, isLoading: isRentLoading } = useGetTenantRent(tenantDetails?.id)
+  }, []);
+  const { data: rentDetails, isLoading: isRentLoading } = useGetTenantRent(
+    tenantDetails?.id
+  );
 
   // const { data:propertyHistoryData, isLoading: isPropertyHistoryDataLoading } = useGetPropertyHistory(tenantDetails?.property_id)
 
-  const { data:tenantPropertyData, isLoading: isPropertyDataLoading } = useGetTenantProperty(tenantDetails?.property_id)
+  const { data: tenantPropertyData, isLoading: isPropertyDataLoading } =
+    useGetTenantProperty(tenantDetails?.property_id);
 
+  const { data: adminData, isLoading: isAdminNumberLoading } =
+    useGetAdminPhoneNumber(tenantPropertyData?.owner_id, [
+      "phone_number",
+      "first_name",
+    ]);
+
+  // console.log('property', propertyHistoryData)
   return (
     <div className="flex px-4 sm:px-8 md:px-16 py-6 md:py-10 bg-[#fafafe] flex-col min-h-screen">
       {!propertyHistory && !newServiceRequest && (
@@ -48,7 +61,12 @@ const TenantDashboard = () => {
                 Your Rent Price
               </div>
               <div className="text-[#785DBA] font-[600] text-[20px] md:text-[24px] leading-[150%]">
-                ${isPropertyDataLoading ? 'loading...' : !tenantPropertyData?.rental_price ? 'No data available' : tenantPropertyData?.rental_price}
+                $
+                {isPropertyDataLoading
+                  ? "loading..."
+                  : !tenantPropertyData?.rental_price
+                  ? "No data available"
+                  : tenantPropertyData?.rental_price}
               </div>
             </div>
           </section>
@@ -58,10 +76,24 @@ const TenantDashboard = () => {
               className="font-[600] text-[#666666] text-[20px] md:text-[24px] leading-[150%]"
               style={{ fontFamily: "Plus Jakarta Sans" }}
             >
-              {isPropertyDataLoading ? 'loading apartment details...' : !tenantPropertyData?.name ? 'No data available' : tenantPropertyData?.name}
+              {isPropertyDataLoading
+                ? "loading apartment details..."
+                : !tenantPropertyData?.name
+                ? "No data available"
+                : tenantPropertyData?.name}
             </div>
             <div className="mt-6 md:mt-10 max-w-[823.611328125px]">
-              { isRentLoading ? <p className="text-[16px] md:text-[13.95px] leading-[100%] text-[#000000] font-[400]">Fetching rent details...</p> : !rentDetails?.lease_end_date ? <p className="text-[16px] md:text-[13.95px] leading-[100%] text-[#000000] font-[400]">No data found</p> : <RentCountdown expirationDate={rentDetails?.lease_end_date} /> }
+              {isRentLoading ? (
+                <p className="text-[16px] md:text-[13.95px] leading-[100%] text-[#000000] font-[400]">
+                  Fetching rent details...
+                </p>
+              ) : !rentDetails?.lease_end_date ? (
+                <p className="text-[16px] md:text-[13.95px] leading-[100%] text-[#000000] font-[400]">
+                  No data found
+                </p>
+              ) : (
+                <RentCountdown expirationDate={rentDetails?.lease_end_date} />
+              )}
             </div>
           </section>
 
@@ -81,6 +113,8 @@ const TenantDashboard = () => {
                   setPropertyHistory(true);
                   return null;
                 }}
+                adminNumber={adminData?.phone_number}
+                adminNumberLoading={isAdminNumberLoading}
               />
               <TenantServiceRequestCard
                 onClick={() => {
