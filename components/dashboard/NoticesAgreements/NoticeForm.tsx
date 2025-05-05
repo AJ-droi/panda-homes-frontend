@@ -145,7 +145,8 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
         },
         {
           onSuccess: () => {
-            router.push("/dashboard/notice-agreement");
+            // router.push("/dashboard/notice-agreement");
+            window.location.reload()
           },
           onError: (error: any) => {
             setError(error.message || "An error occurred during notice creation.");
