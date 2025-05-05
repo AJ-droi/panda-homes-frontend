@@ -1,35 +1,14 @@
 /* eslint-disable */
 import Pagination from "@/components/PaginationComponent";
-import { useFetchUserDetails } from "@/services/users/query";
+import { UserFilter } from "@/services/interface/filter";
+import { useFetchTenantDetails} from "@/services/users/query";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-const TenantsListTable = () => {
-  // const tenantsList = [
-  //   {
-  //     id: 1,
-  //     property: "Lekki Villa",
-  //     tenantName: "John Doe",
-  //     moveInDay: "Jan 1, 2024",
-  //     rentStatus: "Paid",
-  //   },
-  //   {
-  //     id: 2,
-  //     property: "Abuja Heights",
-  //     tenantName: "Jane Smith",
-  //     moveInDay: "Feb 15, 2024",
-  //     rentStatus: "Overdue",
-  //   },
-  //   {
-  //     id: 3,
-  //     property: "Ikeja Studio",
-  //     tenantName: "Peter Okon",
-  //     moveInDay: "Mar 10, 2023",
-  //     rentStatus: "Overdue",
-  //   },
-  // ];
+const TenantsListTable = ({params}: {params:UserFilter}) => {
+
   const router = useRouter();
-  const { data: users, isLoading } = useFetchUserDetails();
+  const { data: users, isLoading } = useFetchTenantDetails(params);
   // const tenants = users ?? tenantsList;
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -61,23 +40,23 @@ const TenantsListTable = () => {
               >
                 Property
               </th>
-              <th
+              {/* <th
                 className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Move-in Date
+              </th> */}
+              <th
+                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
+                Rent 
               </th>
               <th
                 className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
-                Rent Status
-              </th>
-              <th
-                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-              >
-                Action
+                Expiry Date
               </th>
             </tr>
           </thead>
@@ -120,27 +99,23 @@ const TenantsListTable = () => {
                 className={`${
                   index !== users.length - 1 ? "" : ""
                 } text-sm`}
+                onClick={() => router.push(`/dashboard/view-tenant/${item.id}`)}
               >
                 <td className="py-4 px-6 text-center">{item.tenantName}</td>
                 <td className="py-4 px-6 text-center">{item.property}</td>
-                <td className={`py-4 px-6 text-center`}>{item.moveInDay}</td>
+                {/* <td className={`py-4 px-6 text-center`}>{item.moveInDay}</td> */}
                 <td
                   className={`py-4 text-center px-6 ${
-                    item.rentStatus === "Overdue"
+                    item.rent === "N/A"
                       ? "text-[#EB4335]"
-                      : "text-black"
+                      : "text-[#34A853]"
                   }`}
                 >
-                  {item.rentStatus}
+                  {item.rent}
                 </td>
-                <td className="py-4 px-6 text-center">
-                  <button
-                    onClick={() => router.push("/dashboard/view-tenant")}
-                    className="bg-[#5E636614] text-[#8B8D97] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm"
-                  >
-                    View Details
-                  </button>
-                </td>
+
+                <td className="py-4 px-6 text-center">{item.expiryDate}</td>
+               
               </tr>
             )))}
           </tbody>

@@ -3,6 +3,7 @@
 import { z } from "zod";
 import axiosInstance from "../axios-instance";
 import { loginSchema } from "@/schemas/user.schemas";
+import { UserFilter } from "../interface/filter";
 
 export const loginUser = async (data: z.infer<typeof loginSchema>) => {
   try {
@@ -39,6 +40,31 @@ export const loginUser = async (data: z.infer<typeof loginSchema>) => {
         headers: {
           "Content-Type": "application/json",
         }
+      });
+
+      if (response.status !== 200) {
+        throw new Error("Error Fetching Users");
+      }
+  
+      return response.data
+    } catch (error: any) {
+      const errorMessage = error.message || "An error occurred";
+  console.log(error)
+      return {
+        success: false,
+        message: errorMessage,
+        error: error.response?.data || null,
+      };
+    }
+  }
+
+  export const getTenants = async (params?: UserFilter) => {
+    try {
+      const response = await axiosInstance.get("/users/tenants", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        params, // ✅ pass query params
       });
 
       if (response.status !== 200) {

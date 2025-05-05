@@ -1,10 +1,11 @@
 /*eslint-disable */
 import Pagination from "@/components/PaginationComponent";
+import { PropertyFilter } from "@/services/interface/filter";
 import { useFetchPropertyDetails } from "@/services/property/query";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-const PropertiesListTable = () => {
+const PropertiesListTable = ({params}: {params:PropertyFilter}) => {
   // const propertyData = [
   //   {
   //     id: 1,
@@ -50,7 +51,7 @@ const PropertiesListTable = () => {
   //   },
   // ];
 
-    const { data: properties, isLoading } = useFetchPropertyDetails()
+    const { data: properties, isLoading } = useFetchPropertyDetails(params)
 
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
@@ -72,32 +73,39 @@ const PropertiesListTable = () => {
                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
-                Property
+                Property Name
               </th>
-              <th
+              {/* <th
                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Location
+              </th> */}
+              <th
+               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+                style={{ fontFamily: "Plus Jakarta Sans" }}
+              >
+                Status
               </th>
               <th
                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
-                Vacancy
+                Rent 
               </th>
+
               <th
                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
-                Rent Owed
+                Expiry Date 
               </th>
-              <th
+              {/* <th
                className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Action
-              </th>
+              </th> */}
             </tr>
           </thead>
           <tbody
@@ -120,9 +128,9 @@ const PropertiesListTable = () => {
                     <td className="py-4 px-6 text-center">
                       <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
                     </td>
-                    <td className="py-4 px-6 text-center">
+                    {/* <td className="py-4 px-6 text-center">
                       <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto" />
-                    </td>
+                    </td> */}
                   </tr>
                 ))
               )
@@ -139,9 +147,11 @@ const PropertiesListTable = () => {
                 className={`${
                   index !== properties?.length - 1 ? " " : ""
                 } text-sm`}
+
+                onClick={() => router.push(`/dashboard/view-property/${item.id}`)}
               >
                 <td className="py-4 px-6 text-center">{item.property}</td>
-                <td className="py-4 px-6 text-center">{item.location}</td>
+                {/* <td className="py-4 px-6 text-center">{item.location}</td> */}
                 <td
                   className={`py-4 px-6 text-center ${
                     item.vacancy === "Not Vacant"
@@ -153,16 +163,17 @@ const PropertiesListTable = () => {
                 </td>
                 <td
                   className={`py-4 text-center px-6 ${
-                    item.rentOwed === "Nil" ? "text-black" : "text-[#EB4335]"
+                    item.rent === "N/A" ? "text-[#EB4335]" : "text-[#34A853]"
                   }`}
                 >
-                  {item.rentOwed}
+                  {item.rent}
                 </td>
-                <td className="py-4 px-6 text-center">
+                <td className="py-4 px-6 text-center">{item.expiryDate}</td>
+                {/* <td className="py-4 px-6 text-center">
                 <button onClick={() => router.push(`/dashboard/view-property/${item.id}`)} className="bg-[#5E636614] text-[#8B8D97] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm">
                     View Details
                   </button>
-                </td>
+                </td> */}
               </tr>
             )))}
           </tbody>

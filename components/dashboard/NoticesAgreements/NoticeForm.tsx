@@ -28,6 +28,7 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
   // State for preview content
   const [previewHtml, setPreviewHtml] = useState("");
 
+   
   const {data: propertyData} = useFetchPropertyDetails()
 
   const [formData, setFormData] = useState({

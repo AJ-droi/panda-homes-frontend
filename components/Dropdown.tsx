@@ -4,14 +4,16 @@ interface DropdownProps {
   options: string[];
   icon?: React.ReactNode;
   placeholder?: string;
-  selectedOption?: string
+  selectedOption?: string;
   height?: string;
+  onChange?: (value: string) => void; // ✅ Add this
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
   options,
   icon,
   placeholder = "Select an option",
+  onChange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -21,23 +23,31 @@ const Dropdown: React.FC<DropdownProps> = ({
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
     setIsOpen(false);
+    onChange?.(option); // ✅ Notify parent
   };
 
   return (
-    <div className="relative w-full sm:w-[200px] text-[11.44px] leading-[150%] font-[500] text-[#999999]" style={{fontFamily: 'Plus Jakarta Sans'}}>
+    <div
+      className="relative w-full sm:w-[200px] text-[11.44px] leading-[150%] font-[500] text-[#999999]"
+      style={{ fontFamily: "Plus Jakarta Sans" }}
+    >
       <button
         onClick={toggleDropdown}
         className="w-full p-3 border hover:cursor-pointer border-[#8B8D97] text-[#999999] rounded-lg flex items-center justify-between focus:outline-none focus:border-[#785DBA] transition-colors"
-        style={{fontFamily: 'Urbanist'}}
+        style={{ fontFamily: "Urbanist" }}
       >
         <div className="flex items-center">
           {icon && (
-            <span className="mr-2 pr-2 border-[#8B8D97] border-r-1 py-1">{icon}</span>
+            <span className="mr-2 pr-2 border-[#8B8D97] border-r-1 py-1">
+              {icon}
+            </span>
           )}
           {selectedOption || placeholder}
         </div>
         <svg
-          className={`ml-2 transition-transform ${isOpen ? "transform rotate-180" : ""}`}
+          className={`ml-2 transition-transform ${
+            isOpen ? "transform rotate-180" : ""
+          }`}
           width="21"
           height="22"
           viewBox="0 0 21 22"
@@ -61,6 +71,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           />
         </svg>
       </button>
+
       {isOpen && (
         <div className="absolute z-10 w-full mt-2 bg-white border border-gray-300 rounded-lg shadow-lg">
           {options.map((option, index) => (

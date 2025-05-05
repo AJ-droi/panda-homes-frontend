@@ -4,32 +4,33 @@
 import { createPropertySchema } from "@/schemas/property.schemas";
 import axiosInstance from "../axios-instance";
 import { z } from "zod";
-import { AnyCnameRecord } from "dns";
+import { PropertyFilter } from "../interface/filter";
 
 
-  export const getProperties = async () => {
-    try {
-      const response = await axiosInstance.get("/properties", {
-        headers: {
-          "Content-Type": "application/json",
-        }
-      });
+export const getProperties = async (params?: PropertyFilter) => {
+  try {
+    const response = await axiosInstance.get("/properties", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      params, // ✅ pass query params
+    });
 
-      if (response.status !== 200) {
-        throw new Error("error fetching properties");
-      }
-  
-      return response.data
-    } catch (error: any) {
-      const errorMessage = error.message || "An error occurred";
-
-      return {
-        success: false,
-        message: errorMessage,
-        error: error.response?.data || null,
-      };
+    if (response.status !== 200) {
+      throw new Error("error fetching properties");
     }
+
+    return response.data;
+  } catch (error: any) {
+    const errorMessage = error.message || "An error occurred";
+    return {
+      success: false,
+      message: errorMessage,
+      error: error.response?.data || null,
+    };
   }
+};
+
 
   export const getPropertiesById = async (id:string) => {
     try {

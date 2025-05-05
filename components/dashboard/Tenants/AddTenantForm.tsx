@@ -29,7 +29,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
   });
 
   const { mutate, isPending } = useCreateUserMutation();
-
+  
   const { data } = useFetchPropertyDetails();
 
   useMemo(() => {
@@ -116,6 +116,46 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
             />
           </section>
 
+                {/* First Name, Last Name, Phone Number */}
+                <section className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+            <div className="flex flex-col gap-2">
+              <label className="block text-sm font-medium mb-2">
+                First Name
+              </label>
+              <InputField
+                name="first_name"
+                placeholder="First Name"
+                value={formData.first_name}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="block text-sm font-medium mb-2">
+                Last Name
+              </label>
+              <InputField
+                name="last_name"
+                placeholder="Last Name"
+                value={formData.last_name}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="block text-sm font-medium mb-2">
+                Phone Number
+              </label>
+              <InputField
+                name="phone_number"
+                type="tel"
+                placeholder="Phone Number"
+                value={formData.phone_number}
+                onChange={handleChange}
+              />
+            </div>
+          </section>
+
           {/* Payment Frequency and Lease Dates */}
           <section className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
             {/* <div className="flex flex-col gap-2">
@@ -129,7 +169,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
                 onChange={handleDropdownChange}
               />
             </div> */}
-             <section className="">
+             <section className="flex flex-col gap-2">
             <label className="block text-sm font-medium mb-2">
               Email Address
             </label>
@@ -168,45 +208,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
           {/* Email */}
          
 
-          {/* First Name, Last Name, Phone Number */}
-          <section className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
-            <div className="flex flex-col gap-2">
-              <label className="block text-sm font-medium mb-2">
-                First Name
-              </label>
-              <InputField
-                name="first_name"
-                placeholder="First Name"
-                value={formData.first_name}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label className="block text-sm font-medium mb-2">
-                Last Name
-              </label>
-              <InputField
-                name="last_name"
-                placeholder="Last Name"
-                value={formData.last_name}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label className="block text-sm font-medium mb-2">
-                Phone Number
-              </label>
-              <InputField
-                name="phone_number"
-                type="tel"
-                placeholder="Phone Number"
-                value={formData.phone_number}
-                onChange={handleChange}
-              />
-            </div>
-          </section>
+    
 
           {/* Submit Button */}
           <section className="flex flex-col-reverse sm:flex-row justify-end gap-4">
