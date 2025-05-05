@@ -57,7 +57,7 @@ const NoticesAgreementHome = () => {
         <NoticeForm />
       </section>}
 
-      {activeTab === "view-na" && <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] ">
+      {activeTab === "view-na" && <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] min-h-[100vh] ">
             <div
               className="text-[#4D4D4D] font-[600] text-[22px] leading-[145%] py-[2%]"
               style={{ fontFamily: "Plus Jakarta Sans" }}

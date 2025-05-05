@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getNoticeAgreements } from "./api";
+import { getNoticeAgreements, NoticeAnalytics } from "./api";
 
 export function useFetchNoticeAgreements() {
     return useQuery({
@@ -22,3 +22,13 @@ export function useFetchNoticeAgreements() {
         })),
     });
   }
+
+  export function useNoticeAnalytics(){
+    return useQuery({
+      queryKey: ["notice-analytics"],   
+      queryFn: NoticeAnalytics,
+      refetchOnMount: "always",
+      refetchOnWindowFocus: true,
+      // select:data
+  })
+}
