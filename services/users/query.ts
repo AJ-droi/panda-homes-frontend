@@ -1,19 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // services/users/query.ts
 import { useQuery } from "@tanstack/react-query";
-import { getUsers } from "./api";
+import { getTenants} from "./api";
+import { UserFilter } from "../interface/filter";
 
-export function useFetchUserDetails() {
+export function useFetchTenantDetails(params:UserFilter) {
   return useQuery({
-    queryKey: ["user"],
-    queryFn: getUsers,
+    queryKey: ["tenants", params],
+    queryFn:() => getTenants(params),
     refetchOnMount: "always",
     refetchOnWindowFocus: true,
     select: (data: any) =>
       data?.users?.map((user: any) => ({
         id: user?.id,
         tenantName: `${user?.first_name ?? ""} ${user?.last_name ?? ""}`,
-        property: user?.propert_tenants?.[0]?.property?.name ?? "No Property",
+        property: user?.property_tenants?.[0]?.property?.name || "No Property",
         moveInDay: user?.moveInDate
           ? new Date(user.moveInDate).toLocaleDateString("en-US", {
               month: "short",
@@ -22,6 +23,12 @@ export function useFetchUserDetails() {
             })
           : "N/A",
         rentStatus: user?.rentPaid ? "Paid" : "Overdue",
+        rent:user?.property_tenants?.[0]?.property?.rental_price || "N/A",
+        expiryDate: new Date(user?.rents?.[0]?.lease_end_date).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        }),
       })) ?? [],
   });
 }

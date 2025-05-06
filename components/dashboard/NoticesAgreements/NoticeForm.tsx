@@ -28,13 +28,15 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
   // State for preview content
   const [previewHtml, setPreviewHtml] = useState("");
 
+   
   const {data: propertyData} = useFetchPropertyDetails()
 
+  const [error, setError] = useState("")
   const [formData, setFormData] = useState({
     notice_type: '', // e.g., 'rent_increase'
     effective_date: null as Date | null, // e.g., '2025-05-01T00:00:00.000Z'
-    send_via: [], // e.g., ['email', 'whatsapp']
-    additional_notes: '',
+    // send_via: [], // e.g., ['email', 'whatsapp']
+    // additional_notes: '',
     property_id: '',
     tenant_id: '',
     html_content: '', // HTML string to be generated from the editor
@@ -95,8 +97,6 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
   ];
   
 
-  const messageMediumOptions = ["whatsapp", "email"];
-
   const router = useRouter();
 
 
@@ -136,21 +136,20 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
 
       console.log( {
         ...formData,
-        send_via: [formData.send_via],
         html_content: editorHtml
        })
       mutate(
         {
          ...formData,
-         send_via: [formData.send_via],
          html_content: editorHtml
         },
         {
           onSuccess: () => {
-            router.push("/dashboard/notice-agreement");
+            // router.push("/dashboard/notice-agreement");
+            window.location.reload()
           },
           onError: (error: any) => {
-            // setError(error.message || "An error occurred during signup.");
+            setError(error.message || "An error occurred during notice creation.");
           },
         }
       );
@@ -269,7 +268,12 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="w-full p-10 md:p-10 shadow-lg bg-white rounded-lg my-5">
+    <div className="w-full p-10 md:p-10 shadow-lg bg-white rounded-lg my-5 min-h-[100vh]">
+       {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          {error}
+        </div>
+      )}
       <h1
         className="text-xl md:text-2xl leading-[150%] font-[500] mb-2 md:mb-2 text-[#785DBA]"
         style={{ fontFamily: "Plus Jakarta Sans" }}
@@ -319,7 +323,7 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
             </div>
           </section>
 
-          <section className="gap-3 md:gap-4 mb-4 md:mb-6">
+          {/* <section className="gap-3 md:gap-4 mb-4 md:mb-6">
             <div className="gap-2 md:gap-[12.14px] flex flex-col">
               <Dropdown2
                 name="send_via"
@@ -328,7 +332,7 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
                 onChange={handleChange}
               />
             </div>
-          </section>
+          </section> */}
 
           {/* Notice Editor - Main content */}
           <section className="mb-4 md:mb-6">
@@ -382,24 +386,7 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
               onContentChange={setNoticeContent}
             />
           </section>
-
-          {/* Additional Notes - Secondary content */}
-          <section className="mb-4 md:mb-6 gap-2 md:gap-[12.14px] flex flex-col">
-            <label
-              className="block text-sm font-medium mb-1 md:mb-2"
-              style={{ fontFamily: "Plus Jakarta Sans" }}
-            >
-              Additional Notes
-            </label>
-            <textarea
-              name="additional_notes"
-              value={formData.additional_notes}
-              onChange={handleChange}
-              placeholder="Enter any additional notes here"
-              className="w-full p-2 md:p-3 border border-[#262626] text-[#000000] rounded-lg focus:outline-none focus:border-[#785DBA] transition-colors text-xs md:text-[11.44px] leading-[150%] font-[500] min-h-[100px]"
-              style={{ fontFamily: "Plus Jakarta Sans" }}
-            />
-          </section>
+        
 
           <section className="flex flex-col-reverse sm:flex-row justify-end gap-3 md:gap-4">
             <div className="w-full sm:w-auto">

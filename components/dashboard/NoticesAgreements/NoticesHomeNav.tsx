@@ -1,6 +1,8 @@
+/*eslint-disable */
 import React from "react";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
+import { useNoticeAnalytics } from "@/services/notice-agreement/query";
 
 const NoticesHomeNav = () => {
   const isMobile = useMatchMediaQuery(device.mobile);
@@ -14,18 +16,22 @@ const NoticesHomeNav = () => {
 
   const layoutType = getLayoutType();
 
+  const {data}= useNoticeAnalytics()
+
+  console.log({data})
+
   const navItems = [
     {
-      text: "Total Notices Sent (This Month):",
-      data: "12 Notices",
+      text: "Total Notices Sent:",
+      data: (data as any)?.totalNotices || 0,
     },
     {
       text: "Acknowledged Notices:",
-      data: "8 Tenants Confirmed",
+      data: (data as any)?.acknowledgedNotices || 0,
     },
     {
-      text: "Upcoming Lease Expirations:",
-      data: "5 Tenants in 30 Days",
+      text: "Unacknowledged Notices:",
+      data:(data as any)?.unacknowledgedNotices || 0,
     },
   ];
 

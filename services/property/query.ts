@@ -3,20 +3,25 @@
 import { useQuery } from "@tanstack/react-query";
 import { getProperties, getPropertiesById, getPropertyRent, getPropertyServiceRequests } from "./api";
 import { getAdminDashboardAnalytics } from "../users/api";
+import { PropertyFilter } from "../interface/filter";
 
-export function useFetchPropertyDetails() {
+export function useFetchPropertyDetails(params?:PropertyFilter) {
   return useQuery({
-    queryKey: ["get-properties"],   
-    queryFn: getProperties,
+    queryKey: ["get-properties", params], // ✅ include params here
+    queryFn: () => getProperties(params),
     refetchOnMount: "always",
     refetchOnWindowFocus: true,
     select: (data:any) =>
       data.properties.map((property: any) => ({
         id: property.id,
         property: property.name,
-        location: property.location,
         vacancy: property.property_status,
-        rentOwed: property.rental_price,
+        rent: property?.rents[0]?.amount_paid || "N/A",
+        expiryDate: new Date(property?.rents[0]?.lease_end_date).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        }),
       })),
   });
 }

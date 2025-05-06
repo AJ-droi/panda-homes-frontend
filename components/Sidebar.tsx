@@ -14,6 +14,7 @@ import {
   TenantActiveIcon,
   ServiceRequestsActiveIcon,
   SidebarNoticeAndAgreementActiveIcon,
+  LogoutIcon,
   // SidebarPropertyHistoryIcon,
   // ActiveSidebarPropertyHistoryIcon,
 } from "@/layout/svgIconPaths";
@@ -59,6 +60,11 @@ const Sidebar = () => {
       activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
       path: "/dashboard/notice-agreement",
     },
+     {
+          name: "Logout",
+          icon: <LogoutIcon />,
+          path: "/"
+      }
   ];
 
   const toggleSidebar = () => {

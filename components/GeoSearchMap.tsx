@@ -40,7 +40,8 @@ function SearchControl({
   const [errorMessage, setErrorMessage] = useState("");
   const provider = new OpenStreetMapProvider({ params: { countrycodes: "NG" } });
 
-  const handleSearch = async (query = searchTerm) => {
+  const handleSearch = async (e:any, query = searchTerm) => {
+    e.preventDefault()
     try {
       const results = await provider.search({ query });
       if (results.length > 0) {
@@ -90,11 +91,11 @@ function SearchControl({
           placeholder="Search address in Nigeria"
           value={searchTerm}
           onChange={(e) => handleInputChange(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+          onKeyDown={(e) => e.key === "Enter" && handleSearch(e)}
         />
         <button
-          onClick={() => handleSearch()}
-          className="px-3 py-1 bg-blue-600 text-white rounded"
+          onClick={(e) => handleSearch(e)}
+          className="px-3 py-1 bg-[#785DBA] text-white rounded"
         >
           Enter
         </button>
@@ -128,10 +129,9 @@ function MapClickHandler({
     const { lat, lng } = e.latlng;
     const address = await reverseGeocode(lat, lng);
     if (address) {
+      console.log({address})
       onSelect({ lat, lng }, address);
-    } else {
-      alert("Could not find address for this location.");
-    }
+    } 
   });
   return null;
 }
@@ -145,6 +145,7 @@ export default function GeoSearchMap({
   const [address, setAddress] = useState<string>("");
 
   if (typeof window === "undefined") return null;
+
 
   return (
     <div className="relative w-full">
