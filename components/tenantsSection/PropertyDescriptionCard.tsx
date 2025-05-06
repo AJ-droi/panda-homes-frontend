@@ -44,7 +44,7 @@ const PropertyDescriptionCard: React.FC<PropertyCardProps> = ({
           </div>
           <div className="border-t border-[#E3E3E3] pt-3 md:pt-4">
             <h3
-              className="font-[400] text-[14px] md:text-[16px] text-black leading-[100%] mb-2"
+              className="font-[400] text-[10px] md:text-[16px] lg:text-[13px] text-black leading-[100%] mb-2"
               style={{ fontFamily: "Plus Jakarta Sans" }}
             >
               <span className="text-[#785DBA]">

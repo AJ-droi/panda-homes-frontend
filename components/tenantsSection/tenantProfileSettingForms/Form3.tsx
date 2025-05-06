@@ -30,14 +30,14 @@ const Form3: React.FC<Form3Props> = ({
     const pathname = usePathname();
 
   return (
-    <div className="w-full p-12 shadow-lg bg-white rounded-[10px] border-1">
+    <div className="w-full lg:shadow-lg rounded-[10px] lg:border-1">
       <h1
-        className="text-[20px] font-[700] max-w-[279px] py-2 flex justify-center leading-[145%] text-[#785DBA] border-b mb-6"
+        className="text-[20px] ml-6 font-[700] max-w-[279px] lg:mt-10 flex lg:justify-center leading-[145%] text-[#785DBA] border-b-2 mb-6"
         style={{ fontFamily: "Plus Jakarta Sans" }}
       >
         Profile & Account Settings
       </h1>
-      <div className="flex mt-20 min-h-[784px] justify-center">
+      <div className="flex p-6 mt-6 lg:mt-20 min-h-[784px] justify-center">
         <div className="space-y-6 w-full max-w-[890px] flex gap-[38px] flex-col">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-[14px]">
@@ -102,20 +102,7 @@ const Form3: React.FC<Form3Props> = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="flex flex-col gap-[14px]">
-              <h2
-                className="mb-2 font-[500] text-[16px] leading-[100%] text-[#696F79]"
-                style={{ fontFamily: "Inter" }}
-              >
-                WHAT IS YOUR ANNUAL INCOME
-              </h2>
-              <InputField
-                value={formData.annualIncome}
-                onChange={(value) => handleChange("annualIncome", value)}
-                placeholder="500000"
-                type="number"
-              />
-            </div>
+
 
             <div className="flex flex-col gap-[14px]">
               <h2

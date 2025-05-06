@@ -52,25 +52,6 @@ const TenantDashboard = () => {
     <div className="flex px-4 sm:px-8 md:px-16 py-6 md:py-10 bg-[#fafafe] flex-col min-h-screen">
       {!propertyHistory && !newServiceRequest && (
         <div>
-          <section className="flex flex-col items-end w-full">
-            <div
-              className="w-full md:w-auto"
-              style={{ fontFamily: "Plus Jakarta Sans" }}
-            >
-              <div className="font-[500] text-[16px] md:text-[18px] text-[#999999] leading-[150%]">
-                Your Rent Price
-              </div>
-              <div className="text-[#785DBA] font-[600] text-[20px] md:text-[24px] leading-[150%]">
-                $
-                {isPropertyDataLoading
-                  ? "loading..."
-                  : !tenantPropertyData?.rental_price
-                  ? "No data available"
-                  : tenantPropertyData?.rental_price}
-              </div>
-            </div>
-          </section>
-
           <section className="mt-6 md:mt-10">
             <div
               className="font-[600] text-[#666666] text-[20px] md:text-[24px] leading-[150%]"
@@ -92,7 +73,7 @@ const TenantDashboard = () => {
                   No data found
                 </p>
               ) : (
-                <RentCountdown expirationDate={rentDetails?.lease_end_date} />
+                <RentCountdown property_id={tenantDetails?.property_id} expirationDate={rentDetails?.lease_end_date} />
               )}
             </div>
           </section>
@@ -133,7 +114,7 @@ const TenantDashboard = () => {
           <div className="w-auto mb-10 sm:w-auto flex justify-end">
             <div className="max-w-[110px]">
               <ColouredButton onClick={() => setPropertyHistory(false)}>
-                Cancel
+                Close
               </ColouredButton>
             </div>
           </div>

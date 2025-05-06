@@ -12,7 +12,7 @@ const NotificationsList = ({ initialNotifications = [] }: any) => {
 
   return (
     <div className="">
-      <h1 className="text-3xl font-bold px-6 pt-6 pb-4 text-[#000]">Notifications</h1>
+      <h1 className="text-3xl font-bold px-2 pt-6 pb-4 text-[#000]">Notifications</h1>
       <div className="divide-y divide-gray-200">
         {notifications.length > 0 ? (
           notifications.map((notification:any) => (

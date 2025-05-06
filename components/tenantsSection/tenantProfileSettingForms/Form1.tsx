@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React from "react";
 import InputField from "@/components/InputField";
@@ -5,6 +6,7 @@ import ColouredButton from "@/components/ColouredButton";
 import CalendarDropdown from "@/components/CalendarDropdown";
 import { TenantFormData } from "@/app/tenant-signup/page";
 import PhoneInputCustom from "@/components/PhoneNumberInput";
+// import { toast } from "react-toastify";
 
 interface Form1Props {
   formData: TenantFormData;
@@ -30,16 +32,16 @@ const Form1: React.FC<Form1Props> = ({
   };
 
   return (
-    <div className="w-full p-12 shadow-lg rounded-[10px] border-1">
+    <div className="w-full lg:shadow-lg rounded-[10px] lg:border-1">
       <h1
-        className="text-[20px] font-[700] max-w-[279px] py-2 flex justify-center leading-[145%] text-[#785DBA] border-b mb-6"
+        className="text-[20px] ml-6 font-[700] max-w-[279px] lg:mt-10 flex lg:justify-center leading-[145%] text-[#785DBA] border-b-2 mb-6"
         style={{ fontFamily: "Plus Jakarta Sans" }}
       >
         Profile & Account Settings
       </h1>
 
-      <div className="flex mt-20 min-h-[784px] justify-center">
-        <div className="space-y-6 max-w-[890px] w-full flex gap-[38px] flex-col">
+      <div className="flex p-6 mt-6 lg:mt-20 min-h-[784px] justify-center">
+        <div className="space-y-6 max-w-[890px] w-full flex gap-[20px] flex-col">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-[14px]">
               <h2
@@ -169,7 +171,6 @@ const Form1: React.FC<Form1Props> = ({
             <ColouredButton
               title="Next"
               onClick={nextStep}
-              // disabled={!formData.fullName || !formData.phoneNumber || !formData.email}
             />
           </div>
         </div>

@@ -91,7 +91,7 @@ const TenantServiceRequestCard = ({ onClick }: { onClick: React.FC }) => {
             )}
           </ul>
         </div>
-        <div className="flex justify-end mt-4 md:mt-6">
+        <div className="flex justify-start sm:justify-start md:justify-start lg:justify-end mt-4 md:mt-6">
           <button
             onClick={onClick}
             className="text-xs md:text-sm max-w-[140px] md:max-w-[161px] font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-1.5 md:p-2 rounded-[6px] md:rounded-[8px] w-full text-white"

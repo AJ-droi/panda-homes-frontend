@@ -121,7 +121,7 @@ export const BreadcrumbIcon = () => (
     className="h-6 w-6"
     fill="none"
     viewBox="0 0 24 24"
-    stroke="black"
+    stroke="#696969"
   >
     <path
       strokeLinecap="round"
@@ -948,3 +948,4 @@ export const LogoutIcon = () => (
     />
   </svg>
 );
+

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React from "react";
 import InputField from "@/components/InputField";
@@ -23,15 +24,15 @@ const Form2: React.FC<Form2Props> = ({
   };
 
   return (
-    <div className="w-full p-12 shadow-lg bg-white rounded-[10px] border-1">
+    <div className="w-full lg:shadow-lg rounded-[10px] lg:border-1">
       <h1
-        className="text-[20px] font-[700] max-w-[279px] py-2 flex justify-center leading-[145%] text-[#785DBA] border-b mb-6"
+        className="text-[20px] ml-6 font-[700] max-w-[279px] lg:mt-10 flex lg:justify-center leading-[145%] text-[#785DBA] border-b-2 mb-6"
         style={{ fontFamily: "Plus Jakarta Sans" }}
       >
         Profile & Account Settings
       </h1>
-      <div className="flex mt-20 min-h-[784px] justify-center">
-        <div className="space-y-6 w-full max-w-[890px] flex gap-[38px] flex-col">
+      <div className="flex p-6 mt-6 lg:mt-20 min-h-[784px] justify-center">
+        <div className="space-y-6 w-full max-w-[890px] flex gap-[20px] flex-col">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col gap-[14px]">
               <h2
@@ -41,7 +42,7 @@ const Form2: React.FC<Form2Props> = ({
                 PROFESSION/OCCUPATION
               </h2>
               <InputField
-                value={formData.fullName}
+                value={formData.profession}
                 onChange={(value) => handleChange("profession", value)}
                 placeholder="eg Doctor"
               />
@@ -55,7 +56,7 @@ const Form2: React.FC<Form2Props> = ({
                 NAME & ADDRESS OF EMPLOYERS/BUSINESS
               </h2>
               <InputField
-                value={formData.presentAddress}
+                value={formData.employerAddress}
                 onChange={(value) => handleChange("employerAddress", value)}
                 placeholder="eg John Doe, Lekki Phase 1, Lagos"
               />
@@ -63,7 +64,7 @@ const Form2: React.FC<Form2Props> = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="flex flex-col gap-[14px]">
+            {/* <div className="flex flex-col gap-[14px]">
               <h2
                 className="mb-2 font-[500] text-[16px] leading-[100%] text-[#696F79]"
                 style={{ fontFamily: "Inter" }}
@@ -74,6 +75,21 @@ const Form2: React.FC<Form2Props> = ({
                 value={formData.dateMovedIn}
                 onChange={(value) => handleChange("dateMovedIn", value)}
                 placeholder="eg 20th Feb 2023"
+                error={errors.dateMovedIn}
+              />
+            </div> */}
+            <div className="flex flex-col gap-[14px]">
+              <h2
+                className="mb-2 font-[500] text-[16px] leading-[100%] text-[#696F79]"
+                style={{ fontFamily: "Inter" }}
+              >
+                WHAT IS YOUR ANNUAL INCOME
+              </h2>
+              <InputField
+                value={formData.annualIncome}
+                onChange={(value) => handleChange("annualIncome", value)}
+                placeholder="500000"
+                type="number"
               />
             </div>
 
@@ -143,7 +159,7 @@ const Form2: React.FC<Form2Props> = ({
                 className="mb-2 font-[500] text-[16px] leading-[100%] text-[#696F79]"
                 style={{ fontFamily: "Inter" }}
               >
-                NAME OF SPOUSE (IF MARRIED)
+                NAME OF SPOUSE (IF NOT MARRIED TYPE NONE)
               </h2>
               <InputField
                 value={formData.spouseName}
@@ -158,7 +174,6 @@ const Form2: React.FC<Form2Props> = ({
             <ColouredButton
               title="Next"
               onClick={nextStep}
-              // disabled={!formData.profession || !formData.nationality || !formData.maritalStatus}
             />
           </div>
         </div>

@@ -7,3 +7,8 @@ export const formatDate = (dateString:Date) => {
     const year = date.getFullYear();
     return `${month} ${day}, ${year}`;
   }
+
+
+  export const formatNumberWithCommas = (num: number): string => {
+    return num.toLocaleString('en-US');
+  }
