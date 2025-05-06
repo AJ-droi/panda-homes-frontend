@@ -1,4 +1,5 @@
 "use client";
+/*eslint-disable */
 import React, { useState } from "react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -10,7 +11,7 @@ import {
   HomeActiveIcon,
   ServiceRequestsActiveIcon,
   SidebarNoticeAndAgreementActiveIcon,
-  LogoutIcon
+  LogoutIcon,
 } from "@/layout/svgIconPaths";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
@@ -19,11 +20,12 @@ const TenantSidebar = () => {
   const pathname = usePathname();
   const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
   const [isOpen, setIsOpen] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
-  //  const [loadingPath, setLoadingPath] = useState<string | null>(null);
-  
-
   const router = useRouter();
+
+  const handleLogout = () => {
+    localStorage.removeItem("tenant");
+    router.push("/");
+  };
 
   const iconData = [
     {
@@ -47,8 +49,8 @@ const TenantSidebar = () => {
     {
       name: "Logout",
       icon: <LogoutIcon />,
-      path: "/"
-    }
+      onClick: handleLogout,
+    },
   ];
 
   const toggleSidebar = () => {
@@ -56,14 +58,11 @@ const TenantSidebar = () => {
   };
 
   const redirect = (path: string) => {
-    if (pathname === path) {
-      return;
+    if (pathname !== path) {
+      toggleSidebar();
+      router.push(path);
     }
-    // setIsLoading(true);
-    toggleSidebar()
-    router.push(path);
   };
-
 
   const Breadcrumb = () => {
     const activeItem = iconData.find((item) => item.path === pathname);
@@ -117,23 +116,22 @@ const TenantSidebar = () => {
           </section>
 
           <section className="flex flex-col gap-4 w-full">
-            {iconData.map((item, index) => (
+            {iconData.map((item:any, index) => (
               <nav
                 key={index}
                 className={`flex gap-4 items-center px-4 py-4 hover:bg-gray-100 cursor-pointer ${
                   pathname === item.path ? "border-r-2 border-r-[#785DBA]" : ""
                 }`}
                 onClick={() => {
-                  if (item.path) {
-                    if(item.path === '/'){
-                      localStorage.removeItem('tenant')
-                    }
-                    redirect(item.path);
+                  if (item.onClick) {
+                    item.onClick(); // Trigger logout
+                  } else if (item.path) {
+                    redirect(item.path); // Navigate to page
                   }
                 }}
               >
                 <div>
-                  {pathname === item.path ? item.activeIcon : item.icon}
+                  {pathname === item.path ? item.activeIcon ?? item.icon : item.icon}
                 </div>
                 <div
                   className={`text-base font-plus-jakarta ${
@@ -147,7 +145,6 @@ const TenantSidebar = () => {
           </section>
         </div>
       </div>
-      {/* {isLoading && <Loading />} */}
     </div>
   );
 };

@@ -10,13 +10,13 @@ const TenantServiceRequestCard = ({onClick}:{onClick: React.FC}) => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "In Progress":
-        return "text-[#FBBC05]";
+        return "text-[#FBBC05] font-inter";
       case "pending":
-        return "text-[#EB4335]";
+        return "text-[#EB4335 font-inter";
       case "Resolved":
-        return "text-[#34A853]";
+        return "text-[#34A853] font-inter";
       default:
-        return "text-gray-500";
+        return "text-gray-500 font-inter";
     }
   };
 
@@ -72,7 +72,7 @@ const TenantServiceRequestCard = ({onClick}:{onClick: React.FC}) => {
             className="text-xs md:text-sm text-[#212121] leading-[20px] flex items-center justify-center gap-1 md:leading-[22px] font-[400]"
             style={{ fontFamily: 'plusJakarta' }}
           >
-            <span className="font-[700] text-[10px]">
+            <span className="font-[700] text-[10px] font-inter">
               {formatDate(request?.date_reported)}
             </span>
             {" • "}

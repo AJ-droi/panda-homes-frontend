@@ -24,8 +24,9 @@ const token = searchParams.get('token');
         newPassword: password,
       },
       {
-        onSuccess: () => {
-          router.push("/dashboard");
+        onSuccess: (data) => {
+          router.push(`/kyc/${data.user_id}`);
+          localStorage.setItem('user_id', data.user_id)
         },
         onError: (error: any) => {
           setError(error.message || "An error occurred during signup.");

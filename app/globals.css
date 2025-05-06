@@ -41,3 +41,13 @@ body {
 .font-plus-jakarta {
   font-family: var(--font-plus-jakarta);
 }
+
+
+input:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 0px;
+}
+
+.checkbox:checked {
+  background-color: var(--primary);
+}

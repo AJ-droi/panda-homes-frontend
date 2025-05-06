@@ -1,7 +1,9 @@
 "use client";
+/*eslint-disable */
 import React, { useState } from "react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 import {
   SidebarHomeIcon,
   SidebarPropertiesIcon,
@@ -15,8 +17,6 @@ import {
   ServiceRequestsActiveIcon,
   SidebarNoticeAndAgreementActiveIcon,
   LogoutIcon,
-  // SidebarPropertyHistoryIcon,
-  // ActiveSidebarPropertyHistoryIcon,
 } from "@/layout/svgIconPaths";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
@@ -25,9 +25,15 @@ const Sidebar = () => {
   const pathname = usePathname();
   const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
   const [isOpen, setIsOpen] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
-
   const router = useRouter();
+
+  const handleLogout = () => {
+    Cookies.remove("token");
+    Cookies.remove("user_id");
+    Cookies.remove("session");
+    localStorage.clear();
+    router.push("/login");
+  };
 
   const iconData = [
     {
@@ -60,11 +66,11 @@ const Sidebar = () => {
       activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
       path: "/dashboard/notice-agreement",
     },
-     {
-          name: "Logout",
-          icon: <LogoutIcon />,
-          path: "/"
-      }
+    {
+      name: "Logout",
+      icon: <LogoutIcon />,
+      onClick: handleLogout, // Logout logic here
+    },
   ];
 
   const toggleSidebar = () => {
@@ -72,12 +78,10 @@ const Sidebar = () => {
   };
 
   const redirect = (path: string) => {
-    if (pathname === path) {
-      return;
+    if (pathname !== path) {
+      toggleSidebar();
+      router.push(path);
     }
-    // setIsLoading(true);
-    toggleSidebar()
-    router.push(path);
   };
 
   const Breadcrumb = () => {
@@ -99,10 +103,7 @@ const Sidebar = () => {
       {isTabletOrSmaller && <Breadcrumb />}
 
       {isTabletOrSmaller && isOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm shadow-xl bg-opacity-50 z-30"
-          // onClick={toggleSidebar}
-        />
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm shadow-xl bg-opacity-50 z-30" />
       )}
 
       <div
@@ -132,20 +133,22 @@ const Sidebar = () => {
           </section>
 
           <section className="flex flex-col gap-4 w-full">
-            {iconData.map((item, index) => (
+            {iconData.map((item:any, index) => (
               <nav
                 key={index}
                 className={`flex gap-4 items-center px-4 py-4 hover:bg-gray-100 cursor-pointer ${
                   pathname === item.path ? "border-r-2 border-r-[#785DBA]" : ""
                 }`}
                 onClick={() => {
-                 
-                    redirect(item.path);
-                 
+                  if (item.onClick) {
+                    item.onClick(); // Logout action
+                  } else if (item.path) {
+                    redirect(item.path); // Navigate to page
+                  }
                 }}
               >
                 <div>
-                  {pathname === item.path ? item.activeIcon : item.icon}
+                  {pathname === item.path ? item.activeIcon ?? item.icon : item.icon}
                 </div>
                 <div
                   className={`text-base font-plus-jakarta ${
@@ -159,7 +162,6 @@ const Sidebar = () => {
           </section>
         </div>
       </div>
-      {/* {isLoading && <Loading />} */}
     </div>
   );
 };
