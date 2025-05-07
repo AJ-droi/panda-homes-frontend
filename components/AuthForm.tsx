@@ -73,12 +73,12 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
         <div className="text-[32px] font-[500] text-[#333333]">
           {isLogin ? "Login" : "Create an account"}
         </div>
-        <Link
+        {/* <Link
           href={isLogin ? "signup" : "login"}
           className="underline font-[400] text-[#111111]"
         >
           {isLogin ? "Sign up" : "log in instead"}
-        </Link>
+        </Link> */}
       </div>
 
       {error && (
@@ -213,7 +213,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
       </form>
 
       {/* Google login button */}
-      <div className="flex mt-10 gap-2 justify-between items-center">
+      {/* <div className="flex mt-10 gap-2 justify-between items-center">
         <div className="bg-[#66666640] w-1/2 h-0.5"></div>
         <div className="text-[#666666]">OR</div>
         <div className="bg-[#66666640] w-1/2 h-0.5"></div>
@@ -225,7 +225,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
             borderRadius="40px"
             height={{ base: "48px", sm: "56px", md: "64px" }}
           >
-            {/* className="w-full sm:max-w-md" */}
+            
             <div className="flex gap-2 sm:gap-3 md:gap-[16px] justify-center items-center py-2 px-3 sm:px-4">
               <div>
                 <Image
@@ -244,7 +244,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
             </div>
           </WhiteButton>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*eslint-disable */
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import Dropdown2 from "@/components/Dropdown2";
 import ColouredButton from "@/components/ColouredButton";
 import CalendarDropdown from "../CalendarDropdown";
 import { toast } from "react-toastify";
-import Image from "next/image";
 import {
   // useGetTenantRent,
   // useGetPropertyHistory,
@@ -20,11 +19,11 @@ interface propertyFormProps {
 
 const TenantServiceRequestForm: React.FC<propertyFormProps> = ({ onClose }) => {
   const [formData, setFormData] = useState({
-    propertyName: "",
-    issueCategory: "",
-    effectiveDate: null as Date | null,
-    additionalNotes: "",
-    attachments: [] as File[],
+    // propertyName: "",
+    issue_category: "",
+    date_reported: null as Date | null,
+    description: "",
+    // attachments: [] as File[],
   });
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -48,105 +47,92 @@ const TenantServiceRequestForm: React.FC<propertyFormProps> = ({ onClose }) => {
     tenantDetails?.property_id
   );
 
+  console.log(tenantPropertyData)
+
   const categoryOptions = ["Plumbing", "Electricity", "Leaking Roof", "Other"];
 
   const { mutate: createServiceRequest, isPending: createRequestLoading } =
     useCreateServiceRequest();
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const newFiles = Array.from(e.target.files);
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.files && e.target.files.length > 0) {
+  //     const newFiles = Array.from(e.target.files);
 
-      if (selectedFiles.length + newFiles.length > 3) {
-        toast.error("You can upload a maximum of 3 images", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        return;
-      }
+  //     if (selectedFiles.length + newFiles.length > 3) {
+  //       toast.error("You can upload a maximum of 3 images", {
+  //         position: "top-right",
+  //         autoClose: 5000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //       });
+  //       return;
+  //     }
 
-      const oversizedFiles = newFiles.filter((file) => file.size > 3145728);
-      if (oversizedFiles.length > 0) {
-        toast.error(
-          `Some files exceed 3MB limit: ${oversizedFiles
-            .map((f) => f.name)
-            .join(", ")}`,
-          {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          }
-        );
-        return;
-      }
+  //     const oversizedFiles = newFiles.filter((file) => file.size > 3145728);
+  //     if (oversizedFiles.length > 0) {
+  //       toast.error(
+  //         `Some files exceed 3MB limit: ${oversizedFiles
+  //           .map((f) => f.name)
+  //           .join(", ")}`,
+  //         {
+  //           position: "top-right",
+  //           autoClose: 5000,
+  //           hideProgressBar: false,
+  //           closeOnClick: true,
+  //           pauseOnHover: true,
+  //           draggable: true,
+  //           progress: undefined,
+  //         }
+  //       );
+  //       return;
+  //     }
 
-      setSelectedFiles([...selectedFiles, ...newFiles]);
-      setFormData({
-        ...formData,
-        attachments: [...formData.attachments, ...newFiles],
-      });
+  //     setSelectedFiles([...selectedFiles, ...newFiles]);
+  //     setFormData({
+  //       ...formData,
+  //       attachments: [...formData.attachments, ...newFiles],
+  //     });
 
-      if (e.target) {
-        e.target.value = "";
-      }
-    }
-  };
+  //     if (e.target) {
+  //       e.target.value = "";
+  //     }
+  //   }
+  // };
 
-  const removeFile = (index: number) => {
-    const updatedFiles = [...selectedFiles];
-    updatedFiles.splice(index, 1);
-    setSelectedFiles(updatedFiles);
-    setFormData({
-      ...formData,
-      attachments: updatedFiles,
-    });
-  };
+  // const removeFile = (index: number) => {
+  //   const updatedFiles = [...selectedFiles];
+  //   updatedFiles.splice(index, 1);
+  //   setSelectedFiles(updatedFiles);
+  //   setFormData({
+  //     ...formData,
+  //     attachments: updatedFiles,
+  //   });
+  // };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (
       !tenantPropertyData?.name ||
-      !formData.issueCategory ||
-      !formData.effectiveDate ||
-      !formData.additionalNotes
+      !formData.issue_category ||
+      !formData.date_reported ||
+      !formData.description
     ) {
       toast.error("Please fill all required fields");
       return;
     }
 
     try{
-    const submissionData = new FormData();
-    submissionData.append(
-      "tenant_name",
-      `${tenantDetails?.first_name} ${tenantDetails?.last_name}`
-    );
-    submissionData.append("property_name", tenantPropertyData.name);
-    submissionData.append("issue_category", formData.issueCategory);
-    submissionData.append(
-      "effectiveDate",
-      formData.effectiveDate?.toISOString() || ""
-    );
-    submissionData.append("description", formData.additionalNotes);
-
-    // if (formData?.attachments?.length > 0) {
-    //   formData.attachments.forEach((file) => {
-    //     submissionData.append('issue_images[]', file);
-    //   });
-    // }
-    submissionData.append('status', 'pending')
-    submissionData.append("tenant_id", tenantDetails?.id);
-    submissionData.append("property_id", tenantDetails?.property_id);
-    submissionData.append("date_reported", `${new Date().toISOString()}`);
+    const submissionData = {
+      tenant_name: tenantDetails.first_name + " " + tenantDetails.last_name,
+      property_name: tenantPropertyData.name,
+      tenant_id: tenantDetails.id,
+      property_id: tenantPropertyData.id,
+      ...formData
+    }
 
     createServiceRequest(submissionData, {
       onSuccess: () => {
@@ -166,11 +152,11 @@ const TenantServiceRequestForm: React.FC<propertyFormProps> = ({ onClose }) => {
 
   const handleCancel = () => {
     setFormData({
-      propertyName: "",
-      issueCategory: "",
-      effectiveDate: null,
-      additionalNotes: "",
-      attachments: [],
+      // propertyName: "",
+      issue_category: "",
+      date_reported: null,
+      description: "",
+      // attachments: [],
     });
     setSelectedFiles([]);
     if (fileInputRef.current) {
@@ -220,16 +206,16 @@ const TenantServiceRequestForm: React.FC<propertyFormProps> = ({ onClose }) => {
                         onChange={(e) =>
                           setFormData({
                             ...formData,
-                            issueCategory: e.target.value,
+                            issue_category: e.target.value,
                           })
                         }
                       />
                     </div>
                     <div className="gap-2 md:gap-[12.14px] flex flex-col">
                       <CalendarDropdown
-                        selectedDate={formData.effectiveDate}
+                        selectedDate={formData.date_reported}
                         onChange={(date) =>
-                          setFormData({ ...formData, effectiveDate: date })
+                          setFormData({ ...formData, date_reported: date })
                         }
                         disablePastDates={true}
                         placeholder="Effective Date"
@@ -245,11 +231,11 @@ const TenantServiceRequestForm: React.FC<propertyFormProps> = ({ onClose }) => {
                       Additional Notes
                     </label>
                     <textarea
-                      value={formData.additionalNotes}
+                      value={formData.description}
                       onChange={(e) =>
                         setFormData({
                           ...formData,
-                          additionalNotes: e.target.value,
+                          description: e.target.value,
                         })
                       }
                       placeholder="Enter your Message here"
@@ -258,7 +244,7 @@ const TenantServiceRequestForm: React.FC<propertyFormProps> = ({ onClose }) => {
                     />
                   </section>
 
-                  <section className="mb-6 md:mb-8">
+                  {/* <section className="mb-6 md:mb-8">
                     <div className="gap-2 md:gap-[12.14px] w-full flex flex-col">
                       <label
                         className="block text-sm font-medium mb-1 md:mb-2"
@@ -327,7 +313,7 @@ const TenantServiceRequestForm: React.FC<propertyFormProps> = ({ onClose }) => {
                         </div>
                       )}
                     </div>
-                  </section>
+                  </section> */}
 
                   <section className="flex flex-col-reverse sm:flex-row justify-between gap-3 md:gap-4">
                     <div className="w-full sm:w-auto">

@@ -1,17 +1,9 @@
 "use client";
+/*eslint-disable */
 import React from "react";
 import Card from "../Card";
 
-interface PropertyCardProps {
-  onClick: () => void;
-  adminNumber?: string;
-  adminNumberLoading?: boolean;
-}
-const PropertyDescriptionCard: React.FC<PropertyCardProps> = ({
-  onClick,
-  adminNumber,
-  adminNumberLoading,
-}) => {
+const PropertyDescriptionCard = ({onClick, property}:{onClick: React.FC, property:any}) => {
   return (
     <div className="h-full">
       <Card>
@@ -23,24 +15,7 @@ const PropertyDescriptionCard: React.FC<PropertyCardProps> = ({
             Description
           </h2>
           <div className="text-black overflow-y-auto max-h-[180px] md:max-h-[200px] font-[400] text-[14px] md:text-[16px] leading-[140%] md:leading-[150%] mb-3 md:mb-4">
-            <p className="mb-3 md:mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
-            <p className="mb-3 md:mb-4">
-              Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-              cupidatat non proident, sunt in culpa qui officia deserunt mollit
-              anim id est laborum.
-            </p>
-            <p className="">
-              Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-              cupidatat non proident, sunt in culpa qui officia deserunt mollit
-              anim id est laborum.
-            </p>
+          {property?.description || "N/A"}
           </div>
           <div className="border-t border-[#E3E3E3] pt-3 md:pt-4">
             <h3
@@ -50,11 +25,7 @@ const PropertyDescriptionCard: React.FC<PropertyCardProps> = ({
               <span className="text-[#785DBA]">
                 Landlord/Caretaker Contact:
               </span>{" "}
-              {adminNumberLoading
-                ? "loading..."
-                : adminNumber
-                ? adminNumber
-                : "No Data"}
+              {property?.owner?.phone_number || "N/A"}
             </h3>
             <div>
               <button

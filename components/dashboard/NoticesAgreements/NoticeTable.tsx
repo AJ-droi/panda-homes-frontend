@@ -4,7 +4,7 @@ import { useFetchNoticeAgreements } from "@/services/notice-agreement/query";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-const DocumentPreviewModal = ({ documentUrl, onClose }: any) => {
+export const DocumentPreviewModal = ({ documentUrl, onClose }: any) => {
   const [isPdfLoading, setIsPdfLoading] = useState(true);
   const [isImageLoading, setIsImageLoading] = useState(true);
   

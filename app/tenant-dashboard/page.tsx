@@ -94,8 +94,7 @@ const TenantDashboard = () => {
                   setPropertyHistory(true);
                   return null;
                 }}
-                adminNumber={adminData?.phone_number}
-                adminNumberLoading={isAdminNumberLoading}
+                property={tenantPropertyData}
               />
               <TenantServiceRequestCard
                 onClick={() => {

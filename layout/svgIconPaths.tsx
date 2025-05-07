@@ -949,3 +949,39 @@ export const LogoutIcon = () => (
   </svg>
 );
 
+
+export const PropertyHistoryIcon = () => (
+<svg width="20" height="35" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M30 15L15 27.5V45H22.5V35H37.5V45H45V27.5L30 15Z" fill="#000000"/>
+  
+  <path d="M15 27.5L30 15L45 27.5" stroke="#000000" stroke-width="2"/>
+  
+  <rect x="27.5" y="35" width="5" height="10" fill="#000000"/>
+  
+  <path d="M10 50H50" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="15" cy="50" r="3" fill="#000000"/>
+  <circle cx="30" cy="50" r="3" fill="#000000"/>
+  <circle cx="45" cy="50" r="3" fill="#000000"/>
+  
+  <circle cx="32.5" cy="27.5" r="5" fill="white"/>
+  <path d="M32.5 25V27.5H35" stroke="#000000" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
+)
+
+export const ActivePropertyHistoryIcon = () => (
+  <svg width="20" height="35" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M30 15L15 27.5V45H22.5V35H37.5V45H45V27.5L30 15Z" fill="#785DBA"/>
+    
+    <path d="M15 27.5L30 15L45 27.5" stroke="#785DBA" stroke-width="2"/>
+    
+    <rect x="27.5" y="35" width="5" height="10" fill="#785DBA"/>
+    
+    <path d="M10 50H50" stroke="#785DBA" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="15" cy="50" r="3" fill="#785DBA"/>
+    <circle cx="30" cy="50" r="3" fill="#785DBA"/>
+    <circle cx="45" cy="50" r="3" fill="#785DBA"/>
+    
+    <circle cx="32.5" cy="27.5" r="5" fill="white"/>
+    <path d="M32.5 25V27.5H35" stroke="#785DBA" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  )

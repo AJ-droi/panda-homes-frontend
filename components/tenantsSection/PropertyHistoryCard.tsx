@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // pages/history.tsx
+"use client"
 import { useState } from "react";
 import {
   ChevronDown,
@@ -22,7 +23,7 @@ interface HistoryItem {
   status: "Completed" | "In Progress" | "Pending";
 }
 
-export default function History() {
+export default function TenantPropertyHistoryCard() {
   const [searchTerm, setSearchTerm] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
@@ -106,8 +107,8 @@ export default function History() {
               </div>
             </div>
 
-            {/* Filter Icon Container (visible only on small screens) */}
-            <div className="sm:hidden flex items-center justify-center">
+            {/* Filter Icon Container */}
+            <div className="lg:hidden flex items-center justify-center">
               <button
                 className="w-13 h-13 flex items-center justify-center"
                 onClick={() => setShowFilterDropdown(!showFilterDropdown)}
@@ -125,29 +126,27 @@ export default function History() {
             </div>
           </div>
 
-          {/* Filter Buttons (hidden on small screens) */}
-          <div className="hidden sm:flex  text-[#53545C] font-[400] leading-[100%] gap-2">
-            <button className="flex items-center px-4 py-2 border border-[#53545C] rounded-md bg-white hover:bg-gray-50">
-              <Filter className="h-5 w-5 mr-1" />
+          <div className="hidden lg:flex text-[#53545C] text-sm font-[400] leading-[100%] gap-1">
+            <button className="flex items-center px-2 py-1.5 border border-[#53545C] rounded-md bg-white hover:bg-gray-50">
+              <Filter className="h-4 w-4 mr-1" />
               <span>Filter</span>
             </button>
 
-            <button className="flex items-center px-4 py-2 border border-[#53545C] rounded-md bg-white hover:bg-gray-50">
-              <Grid className="h-5 w-5 mr-1" />
+            <button className="flex items-center px-2 py-1.5 border border-[#53545C] rounded-md bg-white hover:bg-gray-50">
+              <Grid className="h-4 w-4 mr-1" />
               <span>Filter</span>
             </button>
 
             <div className="relative">
-              <button className="flex items-center px-4 py-4 border border-[#53545C] rounded-md bg-white hover:bg-gray-50">
+              <button className="flex items-center px-2 py-5 border border-[#53545C] rounded-md bg-white hover:bg-gray-50">
                 <span>Bulk Action</span>
-                <ChevronDown className="h-5 w-5 ml-1" />
+                <ChevronDown className="h-4 w-4 ml-1" />
               </button>
             </div>
           </div>
 
-          {/* Filter Dropdown (visible only on small screens when toggled) */}
           {showFilterDropdown && (
-            <div className="sm:hidden absolute mt-12 right-4 w-48 bg-white rounded-md shadow-lg z-10 border border-gray-200">
+            <div className="lg:hidden absolute mt-12 right-4 w-40 bg-white rounded-md shadow-lg z-10 border border-gray-200">
               <button className="flex items-center w-full px-4 py-2 text-left text-[#53545C] hover:bg-gray-100">
                 <Filter className="h-5 w-5 mr-2" />
                 <span>Filter</span>
@@ -165,7 +164,6 @@ export default function History() {
         </div>
       </div>
 
-      {/* Rest of the component remains the same */}
       {/* History Timeline */}
       <div className="">
         {Object.keys(groupedItems).map((date, dateIndex) => (

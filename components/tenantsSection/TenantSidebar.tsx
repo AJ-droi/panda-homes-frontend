@@ -11,7 +11,9 @@ import {
   HomeActiveIcon,
   ServiceRequestsActiveIcon,
   SidebarNoticeAndAgreementActiveIcon,
-  LogoutIcon
+  LogoutIcon,
+  PropertyHistoryIcon,
+  ActivePropertyHistoryIcon,
 } from "@/layout/svgIconPaths";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
@@ -46,6 +48,11 @@ const TenantSidebar = () => {
 
   const router = useRouter();
 
+  const handleLogout = () => {
+    localStorage.removeItem("tenant");
+    router.push("/");
+  };
+
   const iconData = [
     {
       name: "Home",
@@ -66,10 +73,16 @@ const TenantSidebar = () => {
       path: "/tenant-dashboard/notice-agreement",
     },
     {
+      name: "Property History",
+      icon: <PropertyHistoryIcon />,
+      activeIcon: <ActivePropertyHistoryIcon />,
+      path: "/tenant-dashboard/property-history",
+    },
+    {
       name: "Logout",
       icon: <LogoutIcon />,
-      path: "/"
-    }
+      onClick: handleLogout,
+    },
   ];
 
   const toggleSidebar = () => {
@@ -77,15 +90,15 @@ const TenantSidebar = () => {
   };
 
   const redirect = (path: string) => {
-    if (pathname === path) {
-      return;
+    if (pathname !== path) {
+      toggleSidebar();
+      router.push(path);
     }
     if (isTabletOrSmaller) {
       toggleSidebar();
     }
     router.push(path);
   };
-
 
   const Breadcrumb = () => {
     const pathname = usePathname();
@@ -198,23 +211,22 @@ const TenantSidebar = () => {
           </section>
 
           <section className="flex flex-col gap-4 w-full">
-            {iconData.map((item, index) => (
+            {iconData.map((item:any, index) => (
               <nav
                 key={index}
                 className={`flex gap-4 items-center px-4 py-4 hover:bg-gray-100 cursor-pointer ${
                   pathname === item.path ? "border-r-2 border-r-[#785DBA]" : ""
                 }`}
                 onClick={() => {
-                  if (item.path) {
-                    if(item.path === '/'){
-                      localStorage.removeItem('tenant')
-                    }
+                  if (item.onClick) {
+                    item.onClick();
+                  } else if (item.path) {
                     redirect(item.path);
                   }
                 }}
               >
                 <div>
-                  {pathname === item.path ? item.activeIcon : item.icon}
+                  {pathname === item.path ? item.activeIcon ?? item.icon : item.icon}
                 </div>
                 <div
                   className={`text-base font-plus-jakarta ${
@@ -228,7 +240,6 @@ const TenantSidebar = () => {
           </section>
         </div>
       </div>
-      {/* {isLoading && <Loading />} */}
     </div>
   );
 };

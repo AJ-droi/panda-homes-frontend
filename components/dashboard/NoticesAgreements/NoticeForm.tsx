@@ -124,20 +124,15 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
 
     // Get content from editor (using the window hack we set up)
     const editorHtml = (window as any).noticeEditor?.getContent() || "";
-    const editorText = (window as any).noticeEditor?.getText() || "";
+    // const editorText = (window as any).noticeEditor?.getText() || "";
 
-    console.log(editorHtml)
+    // console.log(editorHtml)
 
     // Validate for
 
     setIsSending(true);
 
     try {
-
-      console.log( {
-        ...formData,
-        html_content: editorHtml
-       })
       mutate(
         {
          ...formData,

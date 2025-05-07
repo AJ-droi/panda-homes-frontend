@@ -9,13 +9,13 @@ const TenantServiceRequestCard = ({ onClick }: { onClick: React.FC }) => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "In Progress":
-        return "text-[#FBBC05]";
+        return "text-[#FBBC05] font-inter";
       case "pending":
-        return "text-[#EB4335]";
+        return "text-[#EB4335 font-inter";
       case "Resolved":
-        return "text-[#34A853]";
+        return "text-[#34A853] font-inter";
       default:
-        return "text-gray-500";
+        return "text-gray-500 font-inter";
     }
   };
 

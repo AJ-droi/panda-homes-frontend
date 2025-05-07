@@ -1,7 +1,7 @@
 import React from 'react'
 import NotificationsPage from '@/components/dashboard/Notifications/Notifications'
 
-const page = () => {
+const TenantNotification = () => {
   return (
     <div className='bg-[#ffffff]'>
        <NotificationsPage />
@@ -10,4 +10,4 @@ const page = () => {
   )
 }
 
-export default page
+export default TenantNotification
