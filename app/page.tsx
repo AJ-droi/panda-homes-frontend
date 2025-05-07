@@ -32,22 +32,21 @@ export default function Home() {
           <div className="w-full max-w-[600px]">
             <div className="">
               <h1 className="font-[700] font-plus-jakarta leading-[110%] tracking-[-0.01em] text-[32px] sm:text-[48px] lg:text-[64px] flex justify-start">
-                Manage Your Rentals with Ease!
+              Automate and Simplify property management.
               </h1>
-              <h3 className="mt-6 md:mt-10 font-[500] font-plus-jakarta w-full max-w-[448px] leading-[160%] tracking-[-0.005em] text-[16px] sm:text-[18px] lg:text-lg flex justify-start">
-                Track rent payments, service requests, and tenant history—all in
-                one place.
+              <h3 className="my-6 md:my-10 font-[500] font-plus-jakarta w-full max-w-[448px] leading-[160%] tracking-[-0.005em] text-[16px] sm:text-[18px] lg:text-lg flex justify-start">
+              Easily manage tenants, rent collections and services - all  in one platform.
               </h3>
             </div>
           </div>
 
           {!isNotDesktop && (
-            <div className="absolute animate__animated animate__slideInLeft left-0 right-100 mt-[350px] flex justify-center z-20">
+            <div className="absolute animate__animated animate__slideInLeft left-0 right-100 mt-[400px] flex justify-center z-20">
               <LandingPageTrackCard />
             </div>
           )}
-          <section className={`w-full flex flex-row sm:flex-row sm:items-start gap-[40px] sm:gap-[80px] lg:mt-[100px]`}
-            style={{ marginTop: isNotDesktop ? "50px" : "250px" }}
+          <section className={`w-full flex flex-row sm:flex-row sm:items-start gap-[40px] sm:gap-[80px]`}
+            style={{ marginTop: isNotDesktop ? "50px" : "120px" }}
           >
             <div className="flex flex-col items-center sm:items-start">
               <div className="relative w-[50px] h-[50px]">
