@@ -9,6 +9,7 @@ interface CalendarDropdownProps {
   colorIcon?: boolean;
   onChange?: (date: Date | null) => void;
   disablePastDates?: boolean;
+  error?: string;
 }
 
 const CalendarDropdown: React.FC<CalendarDropdownProps> = ({
@@ -17,7 +18,8 @@ const CalendarDropdown: React.FC<CalendarDropdownProps> = ({
   icon,
   colorIcon = false,
   onChange,
-  disablePastDates = false
+  disablePastDates = false,
+  error
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -35,7 +37,11 @@ const CalendarDropdown: React.FC<CalendarDropdownProps> = ({
       <button
         type="button"
         onClick={toggleCalendar}
-        className="w-full px-[30px] py-[19px] border-1 h-[64px] hover:cursor-pointer border-[#8692A6] text-[#999999] rounded-[6px] flex items-center justify-between focus:outline-none focus:border-[#785DBA] transition-colors"
+        className={`w-full px-[30px] py-[19px] border-1 h-[64px] hover:cursor-pointer border-[#8692A6] text-[#999999] rounded-[6px] flex items-center justify-between focus:outline-none ${
+          error 
+            ? "border-[#D42620] focus:border-[#D42620]" 
+            : "border-[#8692A6] focus:border-[#785DBA]"
+        } transition-colors`}
         style={{fontFamily: 'Inter'}}
       >
         <div className="flex items-center text-sm">
@@ -80,6 +86,9 @@ const CalendarDropdown: React.FC<CalendarDropdownProps> = ({
             calendarClassName="bg-white border border-gray-300 rounded-lg shadow-lg p-2"
           />
         </div>
+      )}
+      {error && (
+        <p className="text-[#D42620] text-xs mt-1 font-medium">{error}</p>
       )}
     </div>
   );

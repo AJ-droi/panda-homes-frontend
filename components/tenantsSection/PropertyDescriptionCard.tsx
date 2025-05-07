@@ -2,8 +2,11 @@
 /*eslint-disable */
 import React from "react";
 import Card from "../Card";
+import { usePathname, useRouter } from "next/navigation";
+
 
 const PropertyDescriptionCard = ({onClick, property}:{onClick: React.FC, property:any}) => {
+    const router = useRouter();
   return (
     <div className="h-full">
       <Card>
@@ -19,7 +22,7 @@ const PropertyDescriptionCard = ({onClick, property}:{onClick: React.FC, propert
           </div>
           <div className="border-t border-[#E3E3E3] pt-3 md:pt-4">
             <h3
-              className="font-[400] text-[14px] md:text-[16px] text-black leading-[100%] mb-2"
+              className="font-[400] text-[10px] md:text-[16px] lg:text-[13px] text-black leading-[100%] mb-2"
               style={{ fontFamily: "Plus Jakarta Sans" }}
             >
               <span className="text-[#785DBA]">
@@ -28,7 +31,10 @@ const PropertyDescriptionCard = ({onClick, property}:{onClick: React.FC, propert
               {property?.owner?.phone_number || "N/A"}
             </h3>
             <div>
-              <button onClick={onClick} className="text-xs md:text-sm max-w-[140px] md:max-w-[161px] font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-1.5 md:p-2 rounded-[6px] md:rounded-[8px] w-full mt-4 md:mt-6 text-white">
+              <button
+                onClick={()=> router.push('/tenant-dashboard/property-history')}
+                className="text-xs md:text-sm max-w-[140px] md:max-w-[161px] font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-1.5 md:p-2 rounded-[6px] md:rounded-[8px] w-full mt-4 md:mt-6 text-white"
+              >
                 View Property History
               </button>
             </div>

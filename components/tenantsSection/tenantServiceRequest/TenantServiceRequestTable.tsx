@@ -7,22 +7,21 @@ import { useFetchTenantServiceRequest } from "@/services/tenants/query";
 import { formatDate } from "@/utilities/utilities";
 
 const TenantServiceRequestTable = () => {
+  const [tenantDetails, setTenantDetails] = useState<any>({});
 
-   const [tenantDetails, setTenantDetails] = useState<any>({})
-   
-   useEffect(() => {
-     const isClient = typeof window !== 'undefined';
-     if (isClient) {
-       const jsonTenantDetails = localStorage.getItem('tenant')
-       if (jsonTenantDetails) {
-         try {
-           setTenantDetails(JSON.parse(jsonTenantDetails))
-         } catch (error) {
-           console.error('Failed to parse tenant details', error)
-         }
-       }
-     }
-   }, [])
+  useEffect(() => {
+    const isClient = typeof window !== "undefined";
+    if (isClient) {
+      const jsonTenantDetails = localStorage.getItem("tenant");
+      if (jsonTenantDetails) {
+        try {
+          setTenantDetails(JSON.parse(jsonTenantDetails));
+        } catch (error) {
+          console.error("Failed to parse tenant details", error);
+        }
+      }
+    }
+  }, []);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -35,7 +34,7 @@ const TenantServiceRequestTable = () => {
   } = useFetchTenantServiceRequest(
     tenantDetails?.property_id,
     currentPage,
-    itemsPerPage,
+    itemsPerPage
   );
   const currentItems = tenantServiceRequest?.service_requests;
 
@@ -80,54 +79,53 @@ const TenantServiceRequestTable = () => {
             </tr>
           </thead>
           <tbody>
-          {isRequestLoading || isFetchingRequests ? (
-    Array.from({ length: 5 }).map((_, index) => (
-      <tr key={index} className="animate-pulse">
-        <td className="py-4 px-6 text-center">
-          <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto" />
-        </td>
-        <td className="py-4 px-6 text-center">
-          <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
-        </td>
-        <td className="py-4 px-6 text-center">
-          <div className="h-4 bg-gray-200 rounded w-2/3 mx-auto" />
-        </td>
-        <td className="py-4 px-6 text-center">
-          <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
-        </td>
-      </tr>
-    ))
-  ) : !currentItems || !currentItems.length ? (
-    <tr>
-      <td colSpan={4} className="py-4 px-6 text-center text-black">
-        No Data Available
-      </td>
-    </tr>
-  ) : (
-    currentItems.map((item: any, index: number) => (
-      <tr key={item?.id} className="hover:bg-gray-50 bg-white">
-        <td className="py-4 px-6 text-center">{item?.request_id}</td>
-        <td className="py-4 px-6 text-center">{item?.description}</td>
-        <td className="py-4 px-6 text-center">
-          {formatDate(item?.date_reported)}
-        </td>
-        <td
-          className={`py-4 px-6 text-center ${
-            item.status === "urgent"
-              ? "text-red-500 font-medium"
-              : item.status === "pending"
-              ? "text-[#FBBC05] font-medium"
-              : item.status === "resolved"
-              ? "text-green-500 font-medium"
-              : ""
-          }`}
-        >
-          {item.status}
-        </td>
-      </tr>
-    ))
-  )
-  }
+            {isRequestLoading || isFetchingRequests ? (
+              Array.from({ length: 5 }).map((_, index) => (
+                <tr key={index} className="animate-pulse">
+                  <td className="py-4 px-6 text-center">
+                    <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto" />
+                  </td>
+                  <td className="py-4 px-6 text-center">
+                    <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
+                  </td>
+                  <td className="py-4 px-6 text-center">
+                    <div className="h-4 bg-gray-200 rounded w-2/3 mx-auto" />
+                  </td>
+                  <td className="py-4 px-6 text-center">
+                    <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
+                  </td>
+                </tr>
+              ))
+            ) : !currentItems || !currentItems.length ? (
+              <tr>
+                <td colSpan={4} className="py-4 px-6 text-center text-black">
+                  No Data Available
+                </td>
+              </tr>
+            ) : (
+              currentItems.map((item: any, index: number) => (
+                <tr key={item?.id} className="hover:bg-gray-50 bg-white">
+                  <td className="py-4 px-6 text-center">{item?.request_id}</td>
+                  <td className="py-4 px-6 text-center">{item?.description}</td>
+                  <td className="py-4 px-6 text-center">
+                    {formatDate(item?.date_reported)}
+                  </td>
+                  <td
+                    className={`py-4 px-6 text-center ${
+                      item.status === "urgent"
+                        ? "text-red-500 font-medium"
+                        : item.status === "pending"
+                        ? "text-[#FBBC05] font-medium"
+                        : item.status === "resolved"
+                        ? "text-green-500 font-medium"
+                        : ""
+                    }`}
+                  >
+                    {item.status}
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

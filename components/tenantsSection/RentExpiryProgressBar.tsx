@@ -1,13 +1,19 @@
 import React from "react";
+import {
+  useGetTenantProperty,
+} from "@/services/tenants/query";
+import { formatNumberWithCommas } from "@/utilities/utilities";
 
 interface RentCountdownProps {
   expirationDate: string;
   currentDate?: string;
+  property_id:string;
 }
 
 const RentCountdown: React.FC<RentCountdownProps> = ({
   expirationDate,
   currentDate = new Date().toISOString(),
+  property_id
 }) => {
   const endDate = new Date(expirationDate);
   const startDate = new Date(currentDate);
@@ -26,34 +32,49 @@ const RentCountdown: React.FC<RentCountdownProps> = ({
   const progressPercentage = Math.min(
     100,
     Math.max(0, (1 - daysLeft / 365) * 100)
-  );
+
+  )
+      const { data: tenantPropertyData, isLoading: isPropertyDataLoading } =
+        useGetTenantProperty(property_id);
 
   return (
-    <div
-      className="bg-white rounded-[8px] md:rounded-[10.3px] flex flex-col gap-[4px] md:gap-[5.15px] shadow-md p-4 md:p-6 w-full"
-      style={{ fontFamily: "Plus Jakarta Sans" }}
-    >
-      <div className="mb-3 md:mb-4 flex flex-col space-y-[8px] md:space-y-[10px]">
-        <h3 className="text-[12px] md:text-[13.95px] leading-[100%] text-[#000000] font-[400]">
-          Your rent is expiring in
-        </h3>
-        <p className="text-[12px] md:text-[13.95px] leading-[100%] text-[#000000] font-[400]">
-          {formattedDate}
-        </p>
-      </div>
-
-      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-0">
-        <div className="w-full sm:w-[75%] md:w-[85%] border-[#785DBA] border-1 bg-white rounded-full h-2 md:h-2.5">
-          <div
-            className="bg-[#785DBA] h-1.5 md:h-2 rounded-full"
-            style={{ width: `${progressPercentage}%` }}
-          ></div>
-        </div>
-        <div className="flex justify-end sm:justify-between text-xs md:text-sm text-gray-600">
-          <span className="text-[#785DBA]">{daysLeft} days left</span>
-        </div>
-      </div>
+<div 
+  className="bg-white rounded-lg shadow-md p-3 sm:p-4 md:p-6 w-full"
+  style={{ fontFamily: "Plus Jakarta Sans" }}
+>
+  <div className="flex flex-row justify-between items-start mb-3 sm:mb-4">
+    <div className="flex flex-col mb-2 gap-1 sm:mb-0">
+      <p className="text-[#999999] leading-[100%] text-xs sm:text-[11.91px] md:text-sm font-medium">
+        Your Rent Price
+      </p>
+      <p className="text-[#785DBA] leading-[150%] text-sm sm:text-[15.88px] md:text-xl font-semibold">
+        ${isPropertyDataLoading
+          ? "loading..."
+          : !tenantPropertyData?.rental_price
+          ? "No data available"
+          : formatNumberWithCommas(tenantPropertyData?.rental_price)
+        }
+      </p>
     </div>
+    <div className="text-right flex">
+      <p className="text-[9px] sm:text-[4px] md:text-[12px] lg:text-[16px]  leading-[100%] text-black font-normal">
+        Your rent is expiring on {formattedDate}
+      </p>
+    </div>
+  </div>
+
+  <div className="relative w-full flex justify-between items-center gap-2 sm:gap-3">
+    <div className="w-full max-w-[70%] sm:max-w-[75%] md:max-w-[75%] lg:max-w-[85%] bg-[white] border flex items-center border-[#785DBA] rounded-full h-1.5 sm:h-2">
+      <div
+        className="bg-[#785DBA] h-[4px] sm:h-[6px] rounded-full"
+        style={{ width: `${progressPercentage}%` }}
+      ></div>
+    </div>
+    <div className="flex justify-end items-center">
+      <span className="text-[#785DBA] font-[400] text-xs sm:text-sm">{daysLeft} days left</span>
+    </div>
+  </div>
+</div>
   );
 };
 

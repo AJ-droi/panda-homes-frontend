@@ -92,7 +92,7 @@ const PhoneInputCustom: React.FC<PhoneInputProps> = ({
     <div className="w-full relative">
       <div
         className={`flex text-[14px] text-[#999999] bg-white items-center px-[10px] sm:px-[10px] md:px-[20px] lg:px-[20px] xl:px-[30px] py-[19px] border h-[64px] rounded-md overflow-hidden ${
-          error ? "border-[#D42620]" : "border-[#80838D]"
+          error ? "border-[#D42620] focus:border-[#D42620]" : "border-[#8692A6] focus:border-[#785DBA]"
         }`}
         style={{ fontFamily: "Inter" }}
       >
