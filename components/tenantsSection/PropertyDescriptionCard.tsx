@@ -2,8 +2,11 @@
 /*eslint-disable */
 import React from "react";
 import Card from "../Card";
+import { usePathname, useRouter } from "next/navigation";
+
 
 const PropertyDescriptionCard = ({onClick, property}:{onClick: React.FC, property:any}) => {
+    const router = useRouter();
   return (
     <div className="h-full">
       <Card>
@@ -29,7 +32,7 @@ const PropertyDescriptionCard = ({onClick, property}:{onClick: React.FC, propert
             </h3>
             <div>
               <button
-                onClick={onClick}
+                onClick={()=> router.push('/tenant-dashboard/property-history')}
                 className="text-xs md:text-sm max-w-[140px] md:max-w-[161px] font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-1.5 md:p-2 rounded-[6px] md:rounded-[8px] w-full mt-4 md:mt-6 text-white"
               >
                 View Property History

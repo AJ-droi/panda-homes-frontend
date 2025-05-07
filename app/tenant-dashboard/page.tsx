@@ -91,7 +91,6 @@ const TenantDashboard = () => {
               <PropertyDescriptionCard
                 onClick={() => {
                   setNewServiceRequest(false);
-                  setPropertyHistory(true);
                   return null;
                 }}
                 property={tenantPropertyData}
@@ -108,7 +107,7 @@ const TenantDashboard = () => {
         </div>
       )}
 
-      {propertyHistory && (
+      {/* {propertyHistory && (
         <div className="mt-4">
           <div className="w-auto mb-10 sm:w-auto flex justify-end">
             <div className="max-w-[110px]">
@@ -119,7 +118,7 @@ const TenantDashboard = () => {
           </div>
           <PropertyHistoryCard />
         </div>
-      )}
+      )} */}
 
       {newServiceRequest && (
         <div className="mt-4">
