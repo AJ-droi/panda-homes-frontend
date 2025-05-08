@@ -13,6 +13,7 @@ interface Form2Props {
   updateFormData: (data: Partial<any>) => void;
   nextStep: () => void;
   prevStep?: () => void;
+  handleSubmit?: any;
 }
 
 const Form2: React.FC<Form2Props> = ({
@@ -20,6 +21,7 @@ const Form2: React.FC<Form2Props> = ({
   updateFormData,
   nextStep,
   prevStep,
+  handleSubmit
 }) => {
   // const handleChange = (field: keyof TenantFormData, value: string) => {
   //   updateFormData({ [field]: value });
@@ -34,7 +36,7 @@ const Form2: React.FC<Form2Props> = ({
         <span className="flex gap-[9px] text-[#8692A6] hover:cursor-pointer" onClick={prevStep}>
           <BackArrow /> Back
         </span>{" "}
-        <span>STEP 02/03</span>
+        <span>STEP 02/02</span>
       </div>
       <div className="w-full flex flex-col items-center py-4 sm:py-8 md:py-12 px-4 sm:px-6 md:px-8 lg:px-12">
         <section className="w-full max-w-6xl flex justify-center flex-col items-center">
@@ -128,7 +130,7 @@ const Form2: React.FC<Form2Props> = ({
                 />
               </div>
 
-              <div className="flex flex-col gap-[14px]">
+              {/* <div className="flex flex-col gap-[14px]">
                 <h2
                   className="mb-2 font-[500] text-[16px] leading-[100%] text-[#696F79]"
                   style={{ fontFamily: "Inter" }}
@@ -141,9 +143,9 @@ const Form2: React.FC<Form2Props> = ({
                   onChange={updateFormData}
                   placeholder="Ikeja"
                 />
-              </div>
+              </div> */}
 
-              <div className="flex flex-col gap-[14px]">
+              {/* <div className="flex flex-col gap-[14px]">
                 <h2
                   className="mb-2 font-[500] text-[16px] leading-[100%] text-[#696F79]"
                   style={{ fontFamily: "Inter" }}
@@ -156,7 +158,7 @@ const Form2: React.FC<Form2Props> = ({
                   onChange={updateFormData}
                   placeholder="Surulere"
                 />
-              </div>
+              </div> */}
 
               <div className="flex flex-col gap-[14px]">
                 <h2
@@ -233,15 +235,21 @@ const Form2: React.FC<Form2Props> = ({
         </div>
       </div>
 
-      <div className="w-full max-w-6xl flex flex-col mt-2 sm:mt-2 gap-3 sm:gap-[14px]">
-        {/* <div className="flex justify-start gap-2 sm:gap-[14px] items-center">
-          <input type="checkbox" />
+      <div className="w-full justify-center items-center flex flex-col mt-2 sm:mt-2 gap-3 sm:gap-[14px]">
+      
+      <div className="flex justify-start gap-2 sm:gap-[14px] items-center">
+          <input
+            type="checkbox"
+            name="accept_terms_and_condition"
+            checked={formData.accept_terms_and_condition}
+            onChange={updateFormData}
+          />
           <span className="font-[500] text-[14px] sm:text-[16px] leading-[100%] text-[#696F79]">
             I agree to terms and conditions
           </span>
-        </div> */}
+        </div>
         <div className="w-full max-w-[426px]">
-          <ColouredButton title="Save & Continue" onClick={nextStep} />
+          <ColouredButton title="Complete KYC" onClick={handleSubmit} />
         </div>
       </div>
     </div>

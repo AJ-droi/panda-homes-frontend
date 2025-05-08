@@ -142,14 +142,18 @@ const PropertiesListTable = ({params}: {params:PropertyFilter}) => {
                 </tr>
               ) : (
                 currentItems?.map((item:any, index:number) => (
-              <tr
-                key={index}
-                className={`${
-                  index !== properties?.length - 1 ? " " : ""
-                } text-sm`}
-
-                onClick={() => router.push(`/dashboard/view-property/${item.id}`)}
-              >
+                  
+                  <tr
+                    role="button"
+                  key={index}
+                  title="Click to view property"
+                  className="text-sm cursor-pointer transition-all duration-200 ease-in-out
+                             active:bg-gray-100
+                             lg:hover:bg-gray-100 lg:hover:shadow-sm lg:hover:scale-[1.05]"
+                  onClick={() => router.push(`/dashboard/view-property/${item.id}`)}
+                >
+                
+                
                 <td className="py-4 px-6 text-center">{item.property}</td>
                 {/* <td className="py-4 px-6 text-center">{item.location}</td> */}
                 <td

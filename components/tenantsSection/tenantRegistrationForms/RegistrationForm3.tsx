@@ -97,7 +97,7 @@ const Form3: React.FC<Form3Props> = ({
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-              <div className="flex flex-col gap-2 sm:gap-[14px]">
+              {/* <div className="flex flex-col gap-2 sm:gap-[14px]">
                 <h2 className="mb-1 sm:mb-2 font-[500] text-[14px] sm:text-[16px] leading-[100%] text-[#696F79]">
                   NAME OF NEXT OF KIN
                 </h2>
@@ -119,9 +119,9 @@ const Form3: React.FC<Form3Props> = ({
                   onChange={updateFormData}
                   placeholder="eg Lekki Lagos"
                 />
-              </div>
+              </div> */}
 
-              <div className="flex flex-col gap-2 sm:gap-[14px]">
+              {/* <div className="flex flex-col gap-2 sm:gap-[14px]">
                 <h2 className="mb-1 sm:mb-2 font-[500] text-[14px] sm:text-[16px] leading-[100%] text-[#696F79]">
                   NAME OF GUARANTOR
                 </h2>
@@ -143,9 +143,9 @@ const Form3: React.FC<Form3Props> = ({
                   onChange={updateFormData}
                   placeholder="Lekki Lagos"
                 />
-              </div>
+              </div> */}
 
-              <div className="flex flex-col gap-2 sm:gap-[14px]">
+              {/* <div className="flex flex-col gap-2 sm:gap-[14px]">
                 <h2 className="mb-1 sm:mb-2 font-[500] text-[14px] sm:text-[16px] leading-[100%] text-[#696F79]">
                   GUARANTOR&apos;S OCCUPATION/PROFESSION
                 </h2>
@@ -168,7 +168,7 @@ const Form3: React.FC<Form3Props> = ({
                   placeholder="08123456789"
                   type="number"
                 />
-              </div>
+              </div> */}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">

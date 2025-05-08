@@ -130,8 +130,8 @@ const PropertyForm = () => {
           )}
         </div>
 
-        <div className="flex gap-4">
-          <div className="w-1/2">
+        <div className="flex flex-col lg:flex-row gap-4">
+          <div className="lg:w-1/2">
             <label>Property Type</label>
             <Dropdown2
               name="property_type"
@@ -145,7 +145,7 @@ const PropertyForm = () => {
             )}
           </div>
 
-          <div className="w-1/2">
+          <div className="lg:w-1/2">
             <label>Bedrooms</label>
             <InputField
               name="no_of_bedrooms"
@@ -174,8 +174,8 @@ const PropertyForm = () => {
           </div> */}
         </div>
 
-        <div className="flex gap-4">
-          <div className="w-1/3">
+        <div className="flex flex-col lg:flex-row gap-4">
+          <div className="lg:w-1/3">
             <label>Rental Price (₦)</label>
             <InputField
               name="rental_price"
@@ -189,7 +189,7 @@ const PropertyForm = () => {
             )}
           </div>
 
-          <div className="w-1/3">
+          <div className="lg:w-1/3">
             <label>Security Deposit</label>
             <InputField
               name="security_deposit"
@@ -202,7 +202,7 @@ const PropertyForm = () => {
             )}
           </div>
 
-          <div className="w-1/3">
+          <div className="lg:w-1/3">
             <label>Service Charge</label>
             <InputField
               name="service_charge"

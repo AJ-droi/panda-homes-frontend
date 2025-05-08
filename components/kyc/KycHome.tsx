@@ -6,6 +6,7 @@ import Form2 from "../tenantsSection/tenantRegistrationForms/RegistrationForm2";
 import Form3 from "../tenantsSection/tenantRegistrationForms/RegistrationForm3";
 import { useCreateUserKYCMutation } from "@/services/users/mutation";
 import { useParams, useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function KycHome() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -16,25 +17,25 @@ export default function KycHome() {
   const [user_id, setUserId] = useState<string | null>(null);
 
   const [formData, setFormData] = useState<any>({
-    former_house_address: "",
-    reason_for_leaving: "",
-    former_accomodation_type: "",
+    // former_house_address: "",
+    // reason_for_leaving: "",
+    // former_accomodation_type: "",
     occupation: "",
     employers_name:"",
     employers_address: "",
     state_of_origin: "",
-    lga_of_origin:"",
-    home_town:"",
+    // lga_of_origin:"",
+    // home_town:"",
     nationality: "",
     religion: "",
     marital_status: "",
     name_of_spouse: "",
-    next_of_kin: "",
-    next_of_kin_address:"",
-    guarantor: "",
-    guarantor_address:"",
-    guarantor_occupation:"",
-    guarantor_phone_number:"",
+    // next_of_kin: "",
+    // next_of_kin_address:"",
+    // guarantor: "",
+    // guarantor_address:"",
+    // guarantor_occupation:"",
+    // guarantor_phone_number:"",
     annual_income: "",
     accept_terms_and_condition: false
   });
@@ -66,25 +67,20 @@ export default function KycHome() {
     let requiredFields: any = [];
 
     if (currentStep === 1) {
-      requiredFields = ["former_house_address", "reason_for_leaving", "former_accomodation_type", "occupation", "employers_name", " employers_address"];
+      requiredFields = [ "occupation", "annual_income", "employers_name", " employers_address"];
     } else if (currentStep === 2) {
       requiredFields = [
-        "state_of_origin", "lga_of_origin", "home_town", "nationality",
-        "religion", "marital_status", "name_of_spouse"
+        "state_of_origin",  "nationality",
+        "religion", "marital_status", "name_of_spouse", "accept_terms_and_condition"
       ];
-    } else if (currentStep === 3) {
-      requiredFields = [
-        "next_of_kin", "next_of_kin_address", "guarantor", "guarantor_address",
-        "guarantor_occupation", "guarantor_phone_number", "annual_income", "accept_terms_and_condition"
-      ];
-    }
+    } 
 
     return requiredFields.every((field:any) => formData[field]?.toString().trim() !== "");
   };
 
   const nextStep = () => {
     if (!validateStep()) {
-      alert("Please complete all required fields before proceeding.");
+      toast.error("Please complete all required fields before proceeding.");
       return;
     }
     setCurrentStep((prev) => Math.min(prev + 1, 3));
@@ -134,6 +130,7 @@ export default function KycHome() {
           updateFormData={updateFormData}
           nextStep={nextStep}
           prevStep={prevStep}
+          handleSubmit={handleSubmit}
         />
       )}
 

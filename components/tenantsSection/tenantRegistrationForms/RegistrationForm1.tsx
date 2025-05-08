@@ -33,8 +33,8 @@ const Form1: React.FC<Form1Props> = ({
 
   return (
     <div className="bg-white min-h-screen rounded-lg py-4 sm:py-8  px-4 sm:px-6 md:px-8 lg:px-12" style={{fontFamily: 'Inter'}}>
-      <div className="flex justify-end items-end text-[14px] font-[500] text-[#BDBDBD] leading-[100%]">STEP 01/03</div>
-    <div className="w-full flex flex-col items-center py-4 sm:py-8 md:py-12 px-4 sm:px-6 md:px-8 lg:px-12">
+      <div className="flex justify-end items-end text-[14px] font-[500] text-[#BDBDBD] leading-[100%]">STEP 01/02</div>
+    <div className="w-full flex flex-col items-center py-4 sm:py-8 md:py-12 ">
       <section className="w-full max-w-6xl flex justify-center flex-col items-center">
         <div className="w-full max-w-md flex flex-col justify-center items-center py-4 px-4 sm:px-6 rounded-[10px] mb-4 sm:mb-6">
           <div className="w-[100px] sm:w-[133px] mb-6 sm:mb-10 p-0 h-[28px] sm:h-[38px] hover:cursor-pointer">
@@ -61,7 +61,7 @@ const Form1: React.FC<Form1Props> = ({
 
       <div className="w-full max-w-6xl flex justify-center">
         <div className="w-full flex gap-4 sm:gap-6 md:gap-[28px] flex-col">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
 
             <div className="flex flex-col gap-2 sm:gap-[14px]">
               <h2 className="mb-1 sm:mb-2 font-[500] text-[14px] sm:text-[16px] leading-[100%] text-[#696F79]">
@@ -86,7 +86,7 @@ const Form1: React.FC<Form1Props> = ({
                 placeholder="E.g. Bad road"
               />
             </div>
-          </div>
+          </div> */}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {/* <div className="flex flex-col gap-2 sm:gap-[14px]">
@@ -102,7 +102,7 @@ const Form1: React.FC<Form1Props> = ({
                 />
               </div>
             </div> */}
-             <div className="flex flex-col gap-2 sm:gap-[14px]">
+             {/* <div className="flex flex-col gap-2 sm:gap-[14px]">
               <h2 className="mb-1 sm:mb-2 font-[500] text-[14px] sm:text-[16px] leading-[100%] text-[#696F79]">
                 TYPE OF ACCOMMODATION PRESENTLY OCCUPIED
               </h2>
@@ -112,7 +112,7 @@ const Form1: React.FC<Form1Props> = ({
                 onChange={updateFormData}
                 placeholder="E.g. Mini flat"
               />
-            </div>
+            </div> */}
 
             <div className="flex flex-col gap-2 sm:gap-[14px]">
                 <h2
@@ -128,6 +128,20 @@ const Form1: React.FC<Form1Props> = ({
                   placeholder="eg Doctor"
                 />
               </div>
+
+  
+              <div className="flex flex-col gap-2 sm:gap-[14px]">
+                <h2 className="mb-1 sm:mb-2 font-[500] text-[14px] sm:text-[16px] leading-[100%] text-[#696F79]">
+                  WHAT IS YOUR ANNUAL INCOME
+                </h2>
+                <InputField
+                  name="annual_income"
+                  value={ Number(formData.annual_income).toLocaleString("en-NG")}
+                  onChange={updateFormData}
+                  placeholder="500000"
+                  type="text"
+                />
+            </div>
             
           </div>
 
@@ -168,13 +182,7 @@ const Form1: React.FC<Form1Props> = ({
       </div>
       
     </div>
-      <div className="w-full max-w-6xl flex flex-col mt-2 sm:mt-2 gap-3 sm:gap-[14px]">
-        {/* <div className="flex justify-start gap-2 sm:gap-[14px] items-center">
-          <input type="checkbox" /> 
-          <span className="font-[500] text-[14px] sm:text-[16px] leading-[100%] text-[#696F79]">
-            I agree to terms and conditions
-          </span>
-        </div> */}
+      <div className="w-full justify-center items-center flex flex-col mt-2 sm:mt-2 gap-3 sm:gap-[14px]">
         <div className="w-full max-w-[426px]">
           <ColouredButton
             title="Save & Continue"

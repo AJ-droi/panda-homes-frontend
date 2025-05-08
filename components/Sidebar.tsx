@@ -173,6 +173,12 @@ const Sidebar = () => {
                 >
                   Add Property
                 </button>
+                <button
+                onClick={() => handleAction("/dashboard/notice-agreement")}
+                className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
+              >
+                Send Notice
+              </button>
               </div>
             )}
           </div>
