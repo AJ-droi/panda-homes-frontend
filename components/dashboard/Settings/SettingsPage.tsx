@@ -64,7 +64,7 @@ const SettingsPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center items-start p-4">
-      <div className="w-full bg-white rounded border-2  overflow-hidden h-[95vh]">
+      <div className="w-full bg-white rounded border-2  overflow-hidden min-h-[95vh]">
         {/* Tabs */}
         <div className="flex flex-wrap border-b">
           <button

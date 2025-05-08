@@ -2,6 +2,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Cookies from "js-cookie";
 import { usePathname, useRouter } from "next/navigation";
 import {
   SidebarHomeIcon,
@@ -50,7 +51,8 @@ const TenantSidebar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("tenant");
-    router.push("/");
+    Cookies.remove("token");
+    router.push("/login");
   };
 
   const iconData = [
