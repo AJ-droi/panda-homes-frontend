@@ -170,7 +170,7 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
     if (!showPreview) return null;
 
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 text-[#000]">
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm shadow-xl bg-opacity-50 flex items-center justify-center z-[1700] text-[#000]">
         <div className="bg-white rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-auto">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold text-[#785DBA]">

@@ -107,7 +107,7 @@ const DocumentBranding = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
               </svg>
             </div>
-            <p className="text-center mb-2">Drag & drop files or <button onClick={handleBrowseLogo} className="text-[#785DBA] font-medium">Browse</button></p>
+            <p className="text-center text-gray-500 mb-2">Drag & drop files or <button onClick={handleBrowseLogo} className="text-[#785DBA] font-medium">Browse</button></p>
             <p className="text-sm text-gray-500">Supported formats: JPEG, PNG, GIF, MP4, PDF, PSD, AI, Word, PPT</p>
             <input 
               type="file" 
@@ -177,7 +177,7 @@ const DocumentBranding = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
               </svg>
             </div>
-            <p className="text-center mb-2">Drag & drop files or <button onClick={handleBrowseLetterhead} className="text-[#785DBA] font-medium">Browse</button></p>
+            <p className="text-center text-gray-500 mb-2">Drag & drop files or <button onClick={handleBrowseLetterhead} className="text-[#785DBA] font-medium">Browse</button></p>
             <p className="text-sm text-gray-500">Supported formats: JPEG, PNG, GIF, MP4, PDF, PSD, AI, Word, PPT</p>
             <input 
               type="file" 
