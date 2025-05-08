@@ -68,11 +68,7 @@ const TenantDashboard = () => {
                 <p className="text-[16px] md:text-[13.95px] leading-[100%] text-[#000000] font-[400]">
                   Fetching rent details...
                 </p>
-              ) : !rentDetails?.lease_end_date ? (
-                <p className="text-[16px] md:text-[13.95px] leading-[100%] text-[#000000] font-[400]">
-                  No data found
-                </p>
-              ) : (
+              )  : (
                 <RentCountdown property_id={tenantDetails?.property_id} expirationDate={rentDetails?.lease_end_date} />
               )}
             </div>

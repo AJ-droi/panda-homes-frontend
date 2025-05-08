@@ -5,7 +5,7 @@ import Head from "next/head";
 import ColouredButton from "@/components/ColouredButton";
 import WhiteButton from "@/components/WhiteButton";
 import LandingNavbar from "@/components/LandingPageNavbar";
-import LandingPageTrackCard from "@/components/landingPage/LandingPageTrackCard";
+// import LandingPageTrackCard from "@/components/landingPage/LandingPageTrackCard";
 import Link from "next/link";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
@@ -40,7 +40,7 @@ export default function Home() {
             </div>
           </div>
 
-          {!isNotDesktop && (
+          {/* {!isNotDesktop && (
             <div className="absolute animate__animated animate__slideInLeft left-0 right-100 mt-[400px] flex justify-center z-20">
               <LandingPageTrackCard />
             </div>
@@ -89,7 +89,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
 
           {isNotDesktop && (
             <div className="flex mt-10 gap-6 flex-row md:flex-row">

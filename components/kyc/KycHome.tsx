@@ -36,7 +36,7 @@ export default function KycHome() {
     // guarantor_address:"",
     // guarantor_occupation:"",
     // guarantor_phone_number:"",
-    annual_income: "",
+    monthly_income: "",
     accept_terms_and_condition: false
   });
 
@@ -49,10 +49,20 @@ export default function KycHome() {
   const updateFormData = (e: any) => {
     const { name, type, value, checked } = e.target;
   
-    setFormData((prev: any) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value
-    }));
+    const isCurrencyField = ["annual_income"].includes(name);
+    const rawValue = value.replace(/,/g, "");
+  
+    if (isCurrencyField) {
+      if (/^\d*$/.test(rawValue)) {
+        const formatted = Number(rawValue).toLocaleString("en-NG");
+        setFormData((prev:any) => ({ ...prev, [name]: formatted }));
+      }
+    } else {
+      setFormData((prev: any) => ({
+        ...prev,
+        [name]: type === "checkbox" ? checked : value
+      }));
+    }
   };
   
 
@@ -63,20 +73,36 @@ export default function KycHome() {
 //     }));
 //   };
 
-  const validateStep = () => {
-    let requiredFields: any = [];
+const validateStep = () => {
+  let requiredFields: string[] = [];
 
-    if (currentStep === 1) {
-      requiredFields = [ "occupation", "annual_income", "employers_name", " employers_address"];
-    } else if (currentStep === 2) {
-      requiredFields = [
-        "state_of_origin",  "nationality",
-        "religion", "marital_status", "name_of_spouse", "accept_terms_and_condition"
-      ];
-    } 
+  if (currentStep === 1) {
+    requiredFields = [
+      "occupation",
+      "monthly_income",
+      "employers_name",
+      "employers_address", // ✅ fixed typo
+      "state_of_origin",
+      "nationality",
+      "religion",
+      "marital_status",
+      // "name_of_spouse",
+      "accept_terms_and_condition",
+    ];
+  }
 
-    return requiredFields.every((field:any) => formData[field]?.toString().trim() !== "");
-  };
+  return requiredFields.every((field) => {
+    const value = formData[field];
+
+    // Special case for checkbox/boolean
+    if (typeof value === "boolean") {
+      return value === true;
+    }
+
+    return value?.toString().trim() !== "";
+  });
+};
+
 
   const nextStep = () => {
     if (!validateStep()) {
@@ -92,20 +118,23 @@ export default function KycHome() {
 
   const userId = id || user_id as string
 
-   const { mutate} = useCreateUserKYCMutation(userId);
+   const { mutate, isPending} = useCreateUserKYCMutation(userId);
 
-   const handleSubmit = (e:any) => {
-    e.preventDefault()
-
+   const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+  
+    if (!validateStep()) {
+      toast.error("Please complete all required fields before submitting.");
+      return;
+    }
+  
     mutate(formData, {
-        onSuccess: () => {
-            router.push(`/kyc/success`);
-          },
-          onError: (error: any) => {
-            setError(error.message || "An error occurred during kyc verification.");
-          },
-    })
-   }
+      onSuccess: () => router.push("/kyc/success"),
+      onError: (error: any) =>
+        setError(error.message || "An error occurred during KYC verification."),
+    });
+  };
+  
 
   return (
     <div className="min-h-[90vh] bg-gray-50  px-4 sm:px-6 lg:px-8">
@@ -119,12 +148,14 @@ export default function KycHome() {
         <Form1
           formData={formData}
           updateFormData={updateFormData}
-          nextStep={nextStep}
+          isPending={isPending}
+          // nextStep={nextStep}
+          handleSubmit={handleSubmit}
           
         />
       )}
 
-      {currentStep === 2 && (
+      {/* {currentStep === 2 && (
         <Form2
           formData={formData}
           updateFormData={updateFormData}
@@ -149,7 +180,7 @@ export default function KycHome() {
           prevStep={prevStep}
           handleSubmit={handleSubmit}
         />
-      )}
+      )} */}
     </div>
   );
 }

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.20.6",
     "@tanstack/react-query": "^5.72.1",
     "@tanstack/react-query-devtools": "^5.72.1",
     "@types/js-cookie": "^3.0.6",

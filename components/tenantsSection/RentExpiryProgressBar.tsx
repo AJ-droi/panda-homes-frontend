@@ -21,13 +21,13 @@ const RentCountdown: React.FC<RentCountdownProps> = ({
   const totalDays = Math.ceil(
     (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
   );
-  const daysLeft = Math.max(0, totalDays);
+  const daysLeft = Math.max(0, totalDays) || 0;
 
   const formattedDate = endDate.toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
-  });
+  }) || "No"
 
   const progressPercentage = Math.min(
     100,
@@ -48,10 +48,10 @@ const RentCountdown: React.FC<RentCountdownProps> = ({
         Your Rent Price
       </p>
       <p className="text-[#785DBA] leading-[150%] text-sm sm:text-[15.88px] md:text-xl font-semibold">
-        ${isPropertyDataLoading
+        NGN{isPropertyDataLoading
           ? "loading..."
           : !tenantPropertyData?.rental_price
-          ? "No data available"
+          ? "0"
           : formatNumberWithCommas(tenantPropertyData?.rental_price)
         }
       </p>

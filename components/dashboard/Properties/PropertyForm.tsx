@@ -7,6 +7,7 @@ import GeoSearchMap from "@/components/GeoSearchMap";
 import { useCreatePropertyMutation } from "@/services/property/mutation";
 import { createPropertySchema } from "@/schemas/property.schemas";
 import { useRouter } from "next/navigation";
+import AddressAutocomplete from "@/components/AddressAutoComplete";
 
 const PropertyForm = () => {
   const [formData, setFormData] = useState({
@@ -25,12 +26,18 @@ const PropertyForm = () => {
   const { mutate, isPending } = useCreatePropertyMutation();
   const router = useRouter();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-  
-    const isCurrencyField = ["rental_price", "security_deposit", "service_charge"].includes(name);
+
+    const isCurrencyField = [
+      "rental_price",
+      "security_deposit",
+      "service_charge",
+    ].includes(name);
     const rawValue = value.replace(/,/g, "");
-  
+
     if (isCurrencyField) {
       if (/^\d*$/.test(rawValue)) {
         const formatted = Number(rawValue).toLocaleString("en-NG");
@@ -39,15 +46,15 @@ const PropertyForm = () => {
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
-  
+
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
-  
 
-
-  const handleDropdownChange = (e: { target: { name?: string; value: string } }) => {
+  const handleDropdownChange = (e: {
+    target: { name?: string; value: string };
+  }) => {
     const { name, value } = e.target;
     if (name) {
       setFormData((prev) => ({ ...prev, [name]: value }));
@@ -63,7 +70,15 @@ const PropertyForm = () => {
     rental_price: parseInt(formData.rental_price.replace(/,/g, "")),
     security_deposit: parseInt(formData.security_deposit.replace(/,/g, "")),
     service_charge: parseInt(formData.service_charge.replace(/,/g, "")),
-    description: `Property "${formData.name}" is a ${formData.no_of_bedrooms}-bedroom ${formData.property_type.toLowerCase()} located in ${formData.location} with a rental price of ₦${formData.rental_price}, a security deposit of ₦${formData.security_deposit}, and a service charge of ₦${formData.service_charge}.`,
+    description: `Property "${formData.name}" is a ${
+      formData.no_of_bedrooms
+    }-bedroom ${formData.property_type.toLowerCase()} located in ${
+      formData.location
+    } with a rental price of ₦${
+      formData.rental_price
+    }, a security deposit of ₦${
+      formData.security_deposit
+    }, and a service charge of ₦${formData.service_charge}.`,
   });
 
   const handleShowSummary = () => {
@@ -97,6 +112,13 @@ const PropertyForm = () => {
     });
   };
 
+  const handlePlaceSelected = (
+    place: google.maps.places.PlaceResult | null
+  ) => {
+    console.log("Selected place:", place);
+    setFormData((prev) => ({ ...prev, location: place?.formatted_address || "" }));
+  };
+
   return (
     <>
       <form className="space-y-6 text-[#000]">
@@ -113,13 +135,17 @@ const PropertyForm = () => {
 
         <div>
           <label>Location</label>
-          {!showSummary && (
+          {/* {!showSummary && (
             <GeoSearchMap
               onLocationSelect={(_, address: string) =>
                 setFormData((prev) => ({ ...prev, location: address }))
               }
             />
-          )}
+
+        
+          )} */}
+
+          <AddressAutocomplete onPlaceSelected={handlePlaceSelected} />
           {formData.location && (
             <p className="text-green-600 text-sm mt-1">
               Selected: {formData.location}
@@ -228,16 +254,32 @@ const PropertyForm = () => {
       {showSummary && (
         <div className="fixed inset-0 bg-[#fff] bg-opacity-40 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
-            <h2 className="text-xl font-bold mb-4 text-[#000]">Property Summary</h2>
+            <h2 className="text-xl font-bold mb-4 text-[#000]">
+              Property Summary
+            </h2>
             <ul className="space-y-2 text-gray-800">
-              <li><strong>Name:</strong> {formData.name}</li>
-              <li><strong>Location:</strong> {formData.location}</li>
-              <li><strong>Type:</strong> {formData.property_type}</li>
+              <li>
+                <strong>Name:</strong> {formData.name}
+              </li>
+              <li>
+                <strong>Location:</strong> {formData.location}
+              </li>
+              <li>
+                <strong>Type:</strong> {formData.property_type}
+              </li>
               {/* <li><strong>Status:</strong> {formData.property_status}</li> */}
-              <li><strong>Bedrooms:</strong> {formData.no_of_bedrooms}</li>
-              <li><strong>Rental Price:</strong> ₦{formData.rental_price}</li>
-              <li><strong>Security Deposit:</strong> ₦{formData.security_deposit}</li>
-              <li><strong>Service Charge:</strong> ₦{formData.service_charge}</li>
+              <li>
+                <strong>Bedrooms:</strong> {formData.no_of_bedrooms}
+              </li>
+              <li>
+                <strong>Rental Price:</strong> ₦{formData.rental_price}
+              </li>
+              <li>
+                <strong>Security Deposit:</strong> ₦{formData.security_deposit}
+              </li>
+              <li>
+                <strong>Service Charge:</strong> ₦{formData.service_charge}
+              </li>
             </ul>
             <div className="mt-6 flex justify-end gap-4">
               <button
