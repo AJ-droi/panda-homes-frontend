@@ -122,7 +122,7 @@ const TenantsHome = () => {
           </button>
         </div>
 
-        <section className="w-full xl:w-[65%] flex flex-col gap-y-5">
+        <section className="w-full flex flex-col gap-y-5">
           {activeTab === "tenant-list" && (
             <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] ">
               <div className="mt-3 sm:mt-4 md:mt-5 w-full">

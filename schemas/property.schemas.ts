@@ -15,11 +15,11 @@ export const createPropertySchema = z.object({
   // .nonempty('Property images are required'),
 
   no_of_bedrooms: z.number().int().min(1, 'Number of bedrooms must be at least 1'),
-  rental_price: z.number().min(0, 'Rental price must be a positive number'),
+  // rental_price: z.number().min(0, 'Rental price must be a positive number'),
   // payment_frequency: z.string().nonempty('Payment frequency is required'),
   // lease_duration: z.number().int().min(1, 'Lease duration is required'),
-  security_deposit: z.number().nonnegative('Security deposit must be a positive number'),
-  service_charge: z.number().nonnegative('Service charge must be a positive number'),
+  // security_deposit: z.number().nonnegative('Security deposit must be a positive number'),
+  // service_charge: z.number().nonnegative('Service charge must be a positive number'),
   // comment: z.string().nullable().optional(),
   // move_in_date: z.union([z.string().nullable(), z.date().nullable()]).optional(),
 });

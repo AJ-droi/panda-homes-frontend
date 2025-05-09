@@ -26,10 +26,13 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
     first_name: "",
     last_name: "",
     phone_number: "",
+    rental_price: "",
+    security_deposit: "",
+    service_charge: "",
   });
 
   const { mutate, isPending } = useCreateUserMutation();
-  
+
   const { data } = useFetchPropertyDetails();
 
   useMemo(() => {
@@ -42,13 +45,25 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
     }
   }, [data]);
 
-  const handleChange = (e: { target: { name?: string; value: any } }) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    if (name) {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+
+    const isCurrencyField = [
+      "rental_price",
+      "security_deposit",
+      "service_charge",
+    ].includes(name);
+    const rawValue = value.replace(/,/g, "");
+
+    if (isCurrencyField) {
+      if (/^\d*$/.test(rawValue)) {
+        const formatted = Number(rawValue).toLocaleString("en-NG");
+        setFormData((prev) => ({ ...prev, [name]: formatted }));
+      }
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
 
@@ -75,6 +90,9 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
         ...formData,
         lease_start_date: formData.lease_start_date?.toISOString(), // if API expects ISO string
         lease_end_date: formData.lease_end_date?.toISOString(),
+        rental_price: parseInt(formData.rental_price.replace(/,/g, "")),
+        security_deposit: parseInt(formData.security_deposit.replace(/,/g, "")),
+        service_charge: parseInt(formData.service_charge.replace(/,/g, "")),
       },
       {
         onSuccess: () => {
@@ -116,8 +134,8 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
             />
           </section>
 
-                {/* First Name, Last Name, Phone Number */}
-                <section className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+          {/* First Name, Last Name, Phone Number */}
+          <section className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
             <div className="flex flex-col gap-2">
               <label className="block text-sm font-medium mb-2">
                 First Name
@@ -169,18 +187,18 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
                 onChange={handleDropdownChange}
               />
             </div> */}
-             <section className="flex flex-col gap-2">
-            <label className="block text-sm font-medium mb-2">
-              Email Address
-            </label>
-            <InputField
-              name="email"
-              type="email"
-              placeholder="Enter email address"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </section>
+            <section className="flex flex-col gap-2">
+              <label className="block text-sm font-medium mb-2">
+                Email Address
+              </label>
+              <InputField
+                name="email"
+                type="email"
+                placeholder="Enter email address"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </section>
 
             <div className="flex flex-col gap-2">
               <label className="block text-sm font-medium mb-2">
@@ -206,9 +224,41 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
           </section>
 
           {/* Email */}
-         
 
-    
+          <div className="flex flex-col lg:flex-row gap-4 mb-[3%]">
+            <div className="lg:w-1/3">
+              <label>Rental Price (₦)</label>
+              <InputField
+                name="rental_price"
+                type="text"
+                value={formData.rental_price}
+                onChange={handleChange}
+                placeholder="e.g. 150000"
+              />
+            </div>
+
+            <div className="lg:w-1/3">
+              <label>Security Deposit</label>
+              <InputField
+                name="security_deposit"
+                type="text"
+                value={formData.security_deposit}
+                onChange={handleChange}
+                placeholder="e.g. 50000"
+              />
+            </div>
+
+            <div className="lg:w-1/3">
+              <label>Service Charge</label>
+              <InputField
+                name="service_charge"
+                type="text"
+                value={formData.service_charge}
+                onChange={handleChange}
+                placeholder="e.g. 15000"
+              />
+            </div>
+          </div>
 
           {/* Submit Button */}
           <section className="flex flex-col-reverse sm:flex-row justify-end gap-4">

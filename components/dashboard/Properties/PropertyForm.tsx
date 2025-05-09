@@ -16,9 +16,9 @@ const PropertyForm = () => {
     // property_status: "vacant",
     property_type: "Duplex",
     no_of_bedrooms: "",
-    rental_price: "",
-    security_deposit: "",
-    service_charge: "",
+    // rental_price: "",
+    // security_deposit: "",
+    // service_charge: "",
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -67,18 +67,18 @@ const PropertyForm = () => {
   const getSubmissionData = () => ({
     ...formData,
     no_of_bedrooms: parseInt(formData.no_of_bedrooms),
-    rental_price: parseInt(formData.rental_price.replace(/,/g, "")),
-    security_deposit: parseInt(formData.security_deposit.replace(/,/g, "")),
-    service_charge: parseInt(formData.service_charge.replace(/,/g, "")),
+    // rental_price: parseInt(formData.rental_price.replace(/,/g, "")),
+    // security_deposit: parseInt(formData.security_deposit.replace(/,/g, "")),
+    // service_charge: parseInt(formData.service_charge.replace(/,/g, "")),
     description: `Property "${formData.name}" is a ${
       formData.no_of_bedrooms
     }-bedroom ${formData.property_type.toLowerCase()} located in ${
-      formData.location
-    } with a rental price of ₦${
-      formData.rental_price
-    }, a security deposit of ₦${
-      formData.security_deposit
-    }, and a service charge of ₦${formData.service_charge}.`,
+      formData.location}`
+    // } with a rental price of ₦${
+    //   formData.rental_price
+    // }, a security deposit of ₦${
+    //   formData.security_deposit
+    // }, and a service charge of ₦${formData.service_charge}.`,
   });
 
   const handleShowSummary = () => {
@@ -98,6 +98,8 @@ const PropertyForm = () => {
     setErrors({});
     setShowSummary(true);
   };
+
+  console.log(errors)
 
   const handleSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -122,6 +124,12 @@ const PropertyForm = () => {
   return (
     <>
       <form className="space-y-6 text-[#000]">
+      {/* {errors && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          {errors}
+        </div>
+      )} */}
+
         <div>
           <label>Property Name</label>
           <InputField
@@ -173,13 +181,20 @@ const PropertyForm = () => {
 
           <div className="lg:w-1/2">
             <label>Bedrooms</label>
-            <InputField
+            <Dropdown2
+              name="no_of_bedrooms"
+              options={["1", "2", "3", "4", "5", "6+"]}
+              selectedOption={formData.no_of_bedrooms}
+              placeholder="Select type"
+              onChange={handleDropdownChange}
+            />
+            {/* <InputField
               name="no_of_bedrooms"
               type="number"
               placeholder="e.g. 3"
               value={formData.no_of_bedrooms}
               onChange={handleChange}
-            />
+            /> */}
             {errors.no_of_bedrooms && (
               <p className="text-red-500 text-sm">{errors.no_of_bedrooms}</p>
             )}
@@ -200,7 +215,7 @@ const PropertyForm = () => {
           </div> */}
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-4">
+        {/* <div className="flex flex-col lg:flex-row gap-4">
           <div className="lg:w-1/3">
             <label>Rental Price (₦)</label>
             <InputField
@@ -240,7 +255,7 @@ const PropertyForm = () => {
               <p className="text-red-500 text-sm">{errors.service_charge}</p>
             )}
           </div>
-        </div>
+        </div> */}
 
         <button
           type="button"
@@ -271,7 +286,7 @@ const PropertyForm = () => {
               <li>
                 <strong>Bedrooms:</strong> {formData.no_of_bedrooms}
               </li>
-              <li>
+              {/* <li>
                 <strong>Rental Price:</strong> ₦{formData.rental_price}
               </li>
               <li>
@@ -279,7 +294,7 @@ const PropertyForm = () => {
               </li>
               <li>
                 <strong>Service Charge:</strong> ₦{formData.service_charge}
-              </li>
+              </li> */}
             </ul>
             <div className="mt-6 flex justify-end gap-4">
               <button

@@ -49,7 +49,7 @@ export default function KycHome() {
   const updateFormData = (e: any) => {
     const { name, type, value, checked } = e.target;
   
-    const isCurrencyField = ["annual_income"].includes(name);
+    const isCurrencyField = ["monthly_income"].includes(name);
     const rawValue = value.replace(/,/g, "");
   
     if (isCurrencyField) {

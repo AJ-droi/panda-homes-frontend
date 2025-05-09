@@ -96,9 +96,10 @@ const TenantsListTable = ({params}: {params:UserFilter}) => {
                 currentItems?.map((item: any, index: any) => (
               <tr
                 key={item.id}
-                className={`${
-                  index !== users.length - 1 ? "" : ""
-                } text-sm`}
+                title="Click to view tenant"
+                className="cursor-pointer transition-all duration-200 ease-in-out
+                active:bg-gray-100
+                lg:hover:bg-gray-100 lg:hover:shadow-sm lg:hover:scale-[1.05]"
                 onClick={() => router.push(`/dashboard/view-tenant/${item.id}`)}
               >
                 <td className="py-4 px-6 text-center">{item.tenantName}</td>

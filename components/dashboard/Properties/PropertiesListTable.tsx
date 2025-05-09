@@ -147,9 +147,9 @@ const PropertiesListTable = ({params}: {params:PropertyFilter}) => {
                     role="button"
                   key={index}
                   title="Click to view property"
-                  className="text-sm cursor-pointer transition-all duration-200 ease-in-out
-                             active:bg-gray-100
-                             lg:hover:bg-gray-100 lg:hover:shadow-sm lg:hover:scale-[1.05]"
+                  className="cursor-pointer transition-all duration-200 ease-in-out
+                  active:bg-gray-100
+                  lg:hover:bg-gray-100 lg:hover:shadow-sm lg:hover:scale-[1.05]"
                   onClick={() => router.push(`/dashboard/view-property/${item.id}`)}
                 >
                 

@@ -145,7 +145,7 @@ const Form1: React.FC<Form1Props> = ({
                   WHAT IS YOUR MONTHLY INCOME
                 </h2>
                 <InputField
-                  name="annual_income"
+                  name="monthly_income"
                   value={formData.monthly_income}
                   onChange={updateFormData}
                   placeholder="500,000"
