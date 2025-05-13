@@ -5,7 +5,8 @@ import React, { useState } from "react";
 // import ServiceRequest from "./ServiceRequest";
 // import NoticeAgreement from "./NoticeAgreement";
 import PropertyView from "./PropertyView";
-import PropertyHistory from "../PropertyHistory/PropertyHistoryTable";
+// import PropertyHistory from "../PropertyHistory/PropertyHistoryTable";
+import PropertyHistoryCard from "./PropertyHistoryCard";
 
 
 const PropertyViewHome: React.FC = () => {
@@ -91,7 +92,7 @@ const PropertyViewHome: React.FC = () => {
 
       {/* {activeTab === "rental-history" && <RentalHistory />} */}
 
-      {activeTab === "property-history" && <PropertyHistory />}
+      {activeTab === "property-history" && <PropertyHistoryCard/>}
 
       {/* {activeTab === "payment-records" && <PaymentRecords />}
 
