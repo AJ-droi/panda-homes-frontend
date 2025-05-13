@@ -6,6 +6,7 @@ import { z } from 'zod';
 export const createPropertySchema = z.object({
   name: z.string().nonempty('Property name is required'),
   location: z.string().nonempty('Location is required'),
+   description: z.string().nonempty('Location is required'),
   // property_status: z.enum(PropertyStatusEnum),
 //   owner_id: z.string().nonempty('Owner ID is required'),
   property_type: z.string().nonempty('Property type is required'),

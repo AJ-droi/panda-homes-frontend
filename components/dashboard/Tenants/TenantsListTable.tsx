@@ -2,6 +2,7 @@
 import Pagination from "@/components/PaginationComponent";
 import { UserFilter } from "@/services/interface/filter";
 import { useFetchTenantDetails} from "@/services/users/query";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -102,12 +103,12 @@ const TenantsListTable = ({params}: {params:UserFilter}) => {
                 lg:hover:bg-gray-100 lg:hover:shadow-sm lg:hover:scale-[1.05]"
                 onClick={() => router.push(`/dashboard/view-tenant/${item.id}`)}
               >
-                <td className="py-4 px-6 text-center">{item.tenantName}</td>
+                <td className="py-4 px-6 text-center"><Link href={`/dashboard/view-tenant/${item.id}`} className="hover:text-blue-600 hover:underline">{item.tenantName}</Link></td>
                 <td className="py-4 px-6 text-center">{item.property}</td>
                 {/* <td className={`py-4 px-6 text-center`}>{item.moveInDay}</td> */}
                 <td
                   className={`py-4 text-center px-6 ${
-                    item.rent === "N/A"
+                    item.rent === "-"
                       ? "text-[#EB4335]"
                       : "text-[#34A853]"
                   }`}

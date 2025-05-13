@@ -21,14 +21,14 @@ export function useFetchTenantDetails(params:UserFilter) {
               day: "numeric",
               year: "numeric",
             })
-          : "N/A",
+          : "-",
         rentStatus: user?.rentPaid ? "Paid" : "Overdue",
-        rent:user?.property_tenants?.[0]?.property?.rental_price || "N/A",
-        expiryDate: new Date(user?.rents?.[0]?.lease_end_date).toLocaleDateString("en-US", {
+        rent:user?.property_tenants?.[0]?.property?.rental_price || "-",
+        expiryDate:user?.rents?.[0]?.lease_end_date ? new Date(user?.rents?.[0]?.lease_end_date).toLocaleDateString("en-US", {
           month: "short",
           day: "numeric",
           year: "numeric",
-        }),
+        }) : "-"
       })) ?? [],
   });
 }

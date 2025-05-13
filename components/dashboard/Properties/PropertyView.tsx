@@ -5,6 +5,8 @@ import Image from "next/image";
 import { Calendar, Edit2, Edit3 } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useFetchPropertyById } from "@/services/property/query";
+import { useUpdatePropertyMutation } from "@/services/property/mutation";
+import { toast } from "react-toastify";
 
 const Skeleton = ({ className }: { className?: string }) => (
   <div className={`animate-pulse bg-gray-200 rounded ${className}`} />
@@ -18,13 +20,13 @@ const PropertyView: React.FC = () => {
 
   const [editMode, setEditMode] = useState<any>({
     description: false,
-    propertyName: false,
-    tenantName: false,
-    leaseStartDate: false,
-    leaseEndDate: false,
-    rentalPrice: false,
-    phoneNumber: false,
-    serviceCharge: false,
+    name: false,
+    tenant_name: false,
+    lease_start_date: false,
+    lease_end_date: false,
+    rental_price: false,
+    phone_number: false,
+    service_charge: false,
   });
 
   useMemo(() => {
@@ -40,10 +42,28 @@ const PropertyView: React.FC = () => {
   const handleChange = (field: string, value: any) => {
     setPropertyData((prev: any) => ({ ...prev, [field]: value }));
   };
-
+  const { mutate } = useUpdatePropertyMutation(id);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     console.log("Updated Data Submitted:", propertyData);
+
+    mutate(
+      {
+        ...propertyData,
+        lease_start_date: new Date(propertyData?.lease_start_date)?.toISOString(), // if API expects ISO string
+        lease_end_date: new Date(propertyData?.lease_end_date)?.toISOString(),
+        // rental_price: parseInt(propertyData?.rental_price.replace(/,/g, "")),
+        // service_charge: parseInt(propertyData?.service_charge.replace(/,/g, "")),
+      },
+      {
+        onSuccess: () => window.location.reload(),
+        onError: (error: any) => {
+          console.error("An error occurred: " + error.message);
+          toast.error(error.response?.data?.message || "Submission failed");
+        },
+      }
+    );
   };
 
   if (isLoading) {
@@ -102,9 +122,7 @@ const PropertyView: React.FC = () => {
               {editMode.description ? (
                 <textarea
                   value={propertyData.description || ""}
-                  onChange={(e) =>
-                    handleChange("description", e.target.value)
-                  }
+                  onChange={(e) => handleChange("description", e.target.value)}
                   placeholder="Enter a description..."
                   className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                   rows={4}
@@ -121,13 +139,15 @@ const PropertyView: React.FC = () => {
         {/* Property Details */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {[
-            { label: "Property Name", field: "propertyName" },
-            { label: "Tenant's Name", field: "tenantName" },
-            { label: "Lease Start Date", field: "leaseStartDate" },
-            { label: "Lease End Date", field: "leaseEndDate" },
-            { label: "Rental Price", field: "rentalPrice" },
-            { label: "Phone Number", field: "phoneNumber" },
-            { label: "Service Charge", field: "serviceCharge" },
+            { label: "Property Name", field: "name" },
+            { label: "Tenant's Name", field: "tenant_name" },
+            { label: "Lease Start Date", field: "lease_start_date" },
+            { label: "Lease End Date", field: "lease_end_date" },
+            { label: "Rental Price", field: "rental_price" },
+            { label: "Phone Number", field: "phone_number" },
+            { label: "Service Charge", field: "service_charge" },
+            { label: "No of Bedrooms", field: "no_of_bedrooms" },
+            { label: "Location", field: "location" },
           ].map(({ label, field }) => (
             <div key={field}>
               <label className="block text-sm font-medium text-gray-700 mb-2">

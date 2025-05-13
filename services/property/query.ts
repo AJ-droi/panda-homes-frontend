@@ -16,12 +16,12 @@ export function useFetchPropertyDetails(params?:PropertyFilter) {
         id: property.id,
         property: property.name,
         vacancy: property.property_status,
-        rent: property?.rents[0]?.amount_paid || "N/A",
-        expiryDate: new Date(property?.rents[0]?.lease_end_date).toLocaleDateString("en-US", {
+        rent: property?.rents[0]?.amount_paid || "-",
+        expiryDate: property?.rents[0]?.lease_end_date ? new Date(property?.rents[0]?.lease_end_date).toLocaleDateString("en-US", {
           month: "short",
           day: "numeric",
           year: "numeric",
-        }),
+        }) :  "-"
       })),
   });
 }
@@ -33,39 +33,46 @@ export function useFetchPropertyById(id: string) {
     refetchOnMount: "always",
     refetchOnWindowFocus: true,
     select: (data: any) => {
-      const leaseStart = new Date(data.move_in_date);
+
+      const activeRent = data.rents.find((item:any) => item.rent_status == 'active')
+      const activeTenant = data.property_tenants.find((item:any) => item.status == 'active')
+      const leaseStart = new Date(activeRent.lease_start_date);
       const leaseDuration = data.lease_duration;
 
       // Calculate leaseEndDate by adding leaseDuration (in months) to leaseStart
-      const leaseEnd = new Date(leaseStart);
-      leaseEnd.setMonth(leaseEnd.getMonth() + leaseDuration);
+      const leaseEnd = new Date(activeRent.lease_end_date);
+   
 
       return {
-        id: data.id,
-        propertyName: data.name,
-        description:"property info",
+        // id: data.id,
+        name: data.name,
+         description: `Property ${data.name} is a ${
+      data.no_of_bedrooms
+    }-bedroom ${data.property_type.toLowerCase()} located in ${
+      data.location}`,
         location: data.location,
-        rentStatus: data.property_status,
-        tenantName:
-          data.property_tenants[0].tenant.first_name +
+        occupancyStatus: data.property_status,
+        tenant_name:
+         activeTenant.tenant.first_name +
           " " +
-          data.property_tenants[0].tenant.last_name,
+         activeTenant.tenant.last_name,
+        phone_number: activeTenant.tenant.phone_number,
         propertyType: data.property_type,
-        leaseStartDate: leaseStart.toLocaleDateString("en-US", {
+        lease_start_date: leaseStart.toLocaleDateString("en-US", {
           month: "short",
           day: "numeric",
           year: "numeric",
         }),
-        leaseDuration,
-        leaseEndDate: leaseEnd.toLocaleDateString("en-US", {
+        lease_end_date: leaseEnd.toLocaleDateString("en-US", {
           month: "short",
           day: "numeric",
           year: "numeric",
         }),
-        occupancyStatus: data.property_tenants[0].status,
-        rentalPrice: data.rental_price,
-        serviceCharge: data.service_charge,
-        property_tenants: data.property_tenants
+      rentStatus: data.property_tenants[0].status,
+        rental_price: activeRent.rental_price,
+        service_charge: activeRent.service_charge,
+        property_tenants: data.property_tenants,
+        no_of_bedrooms: data.no_of_bedrooms,
       };
     },
   });

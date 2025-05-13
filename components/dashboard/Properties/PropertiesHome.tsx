@@ -3,14 +3,6 @@ import React, { useEffect, useState } from "react";
 import LeaseExpirationTable from "./LeaseExpirationTable";
 import PropertiesListTable from "./PropertiesListTable";
 import SearchBar from "@/components/SearchBar";
-import Dropdown from "@/components/Dropdown";
-import {
-  LocationIcon,
-  PropertyTypeIcon,
-  OccupantStatusIcon,
-  PropertyStatusIcon,
-  // BuildYearCalendarIcon,
-} from "@/layout/svgIconPaths";
 import IssuesListTable from "./IssuesTable";
 
 const PropertiesHome = () => {
@@ -62,7 +54,7 @@ const PropertiesHome = () => {
               onSearchClick={(value) => handleSearchChange("search", value)}
             />
           </div>
-          <div className="flex flex-wrap justify-center items-center gap-1.5 sm:gap-2 md:gap-3 lg:gap-[12.71px] p-2 md:p-[6.35px] mt-2 rounded-[7.62px] shadow-md">
+          {/* <div className="flex flex-wrap justify-center items-center gap-1.5 sm:gap-2 md:gap-3 lg:gap-[12.71px] p-2 md:p-[6.35px] mt-2 rounded-[7.62px] shadow-md">
             <Dropdown
               options={["", "Lagos", "Abia", "Benue", "Benin"]}
               placeholder="Location"
@@ -87,12 +79,12 @@ const PropertiesHome = () => {
               icon={<PropertyStatusIcon />}
               onChange={(value) => handleSearchChange("property_status", value)}
             />
-            {/* <Dropdown
+            <Dropdown
                 options={["", "2024", "2025", "2001", "1992"]}
                 placeholder="Build Year"
                 icon={<BuildYearCalendarIcon />}
-              /> */}
-          </div>
+              />
+          </div> */}
         </section>
 
         <div className="flex flex-wrap my-5">

@@ -2,7 +2,6 @@
 import React from "react";
 import Image from "next/image";
 import Head from "next/head";
-import ColouredButton from "@/components/ColouredButton";
 import WhiteButton from "@/components/WhiteButton";
 import LandingNavbar from "@/components/LandingPageNavbar";
 // import LandingPageTrackCard from "@/components/landingPage/LandingPageTrackCard";
@@ -95,14 +94,14 @@ export default function Home() {
             <div className="flex mt-10 gap-6 flex-row md:flex-row">
               <div>
                 <Link href="/login" className="w-full md:w-auto">
-                  <WhiteButton title="Login" />
+                  <WhiteButton title="Client Login" />
                 </Link>
               </div>
-              <div className="md:mt-0">
+              {/* <div className="md:mt-0">
                 <Link href="/signup" className="w-full md:w-auto">
                   <ColouredButton title="Sign up" />
                 </Link>
-              </div>
+              </div> */}
             </div>
           )}
         </div>

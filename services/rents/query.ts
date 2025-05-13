@@ -49,7 +49,7 @@ export function useFetchOverDueRents() {
             year: "numeric",
           }),
           overdueDuration: diffInDays > 0 ? `${diffInDays} day(s)` : "Not overdue",
-          status: rent?.status ?? "Unknown",
+          status: rent?.rent_status ?? "Unknown",
         };
       }) ?? [],
   });

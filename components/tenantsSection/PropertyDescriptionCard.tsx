@@ -18,7 +18,7 @@ const PropertyDescriptionCard = ({onClick, property}:{onClick: React.FC, propert
             Description
           </h2>
           <div className="text-black overflow-y-auto max-h-[180px] md:max-h-[200px] font-[400] text-[14px] md:text-[16px] leading-[140%] md:leading-[150%] mb-3 md:mb-4">
-          {property?.description || "N/A"}
+          {property?.description || "-"}
           </div>
           <div className="border-t border-[#E3E3E3] pt-3 md:pt-4">
             <h3
@@ -28,7 +28,7 @@ const PropertyDescriptionCard = ({onClick, property}:{onClick: React.FC, propert
               <span className="text-[#785DBA]">
                 Landlord/Caretaker Contact:
               </span>{" "}
-              {property?.owner?.phone_number || "N/A"}
+              {property?.owner?.phone_number || "-"}
             </h3>
             <div>
               <button

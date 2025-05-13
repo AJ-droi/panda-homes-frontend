@@ -2,6 +2,7 @@
 import Pagination from "@/components/PaginationComponent";
 import { PropertyFilter } from "@/services/interface/filter";
 import { useFetchPropertyDetails } from "@/services/property/query";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -154,7 +155,7 @@ const PropertiesListTable = ({params}: {params:PropertyFilter}) => {
                 >
                 
                 
-                <td className="py-4 px-6 text-center">{item.property}</td>
+                <td className="py-4 px-6 text-center"><Link href={`/dashboard/view-property/${item.id}`} className="hover:text-blue-600 hover:underline">{item.property}</Link></td>
                 {/* <td className="py-4 px-6 text-center">{item.location}</td> */}
                 <td
                   className={`py-4 px-6 text-center ${
@@ -167,12 +168,12 @@ const PropertiesListTable = ({params}: {params:PropertyFilter}) => {
                 </td>
                 <td
                   className={`py-4 text-center px-6 ${
-                    item.rent === "N/A" ? "text-[#EB4335]" : "text-[#34A853]"
+                    item.rent === "-" ? "text-[#EB4335]" : "text-[#34A853]"
                   }`}
                 >
                   {item.rent}
                 </td>
-                <td className="py-4 px-6 text-center">{item.expiryDate}</td>
+                <td className="py-4 px-6 text-center">{item.expiryDate || "-"}</td>
                 {/* <td className="py-4 px-6 text-center">
                 <button onClick={() => router.push(`/dashboard/view-property/${item.id}`)} className="bg-[#5E636614] text-[#8B8D97] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm">
                     View Details
