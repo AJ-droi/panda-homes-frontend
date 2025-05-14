@@ -139,7 +139,7 @@ const PropertyView: React.FC = () => {
         {/* Property Details */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {[
-            { label: "Property Name", field: "name" },
+            { label: "Property", field: "name" },
             { label: "Tenant's Name", field: "tenant_name" },
             { label: "Lease Start Date", field: "lease_start_date" },
             { label: "Lease End Date", field: "lease_end_date" },

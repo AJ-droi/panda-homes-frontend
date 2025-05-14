@@ -131,7 +131,7 @@ const PropertyForm = () => {
       )} */}
 
         <div>
-          <label>Property Name</label>
+          <label>Property</label>
           <InputField
             name="name"
             placeholder="Enter name"

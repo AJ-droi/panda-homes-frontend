@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from "react";
 import NoticesHomeNav from "@/components/dashboard/NoticesAgreements/NoticesHomeNav";
 import NoticeTable from "./NoticeTable";
-import NoticeForm from "./NoticeForm";
+// import NoticeForm from "./NoticeForm";
 
 const NoticesAgreementHome = () => {
   const [useColumnLayout, setUseColumnLayout] = useState(false);
-  const [activeTab, setActiveTab] = useState('send-new-notice')
+  const [activeTab, setActiveTab] = useState('view-na')
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -30,7 +30,7 @@ const NoticesAgreementHome = () => {
       </section>
 
       <div className="flex flex-wrap my-5">
-          <button
+          {/* <button
             className={`px-6 py-4 font-medium text-sm md:text-base ${
               activeTab === 'send-new-notice' 
                 ? 'text-[#785DBA] border-b-2 border-[#785DBA]' 
@@ -39,7 +39,7 @@ const NoticesAgreementHome = () => {
             onClick={() => setActiveTab('send-new-notice')}
           >
             Send New Notice
-          </button>
+          </button> */}
           <button
             className={`px-6 py-4 font-medium text-sm md:text-base ${
               activeTab === 'view-na' 
@@ -52,10 +52,10 @@ const NoticesAgreementHome = () => {
           </button>
          
         </div>
-
+{/* 
       {activeTab === "send-new-notice" &&<section className="mt-6 flex flex-col gap-[14px] w-full">
         <NoticeForm />
-      </section>}
+      </section>} */}
 
       {activeTab === "view-na" && <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] min-h-[100vh] ">
             <div

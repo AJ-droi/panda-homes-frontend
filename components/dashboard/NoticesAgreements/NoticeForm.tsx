@@ -263,7 +263,7 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="w-full p-10 md:p-10 shadow-lg bg-white rounded-lg my-5 min-h-[100vh]">
+    <div className="w-full p-10 md:p-10 shadow-lg bg-white  min-h-[100vh]">
        {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
           {error}

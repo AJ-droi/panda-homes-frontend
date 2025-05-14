@@ -184,7 +184,7 @@ export default function PropertyHistory() {
                       className="text-center text-sm leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                       style={{ fontFamily: "Plus Jakarta Sans" }}
                     >
-                      Property Name
+                      Property
                     </th>
                     <th
                       className="text-center text-sm leading-[145%] py-4 px-6 text-[#785DBA] font-normal"

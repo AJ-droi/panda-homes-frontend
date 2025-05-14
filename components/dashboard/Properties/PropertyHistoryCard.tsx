@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable */
 // pages/history.tsx
 "use client"
 import { useState } from "react";
 import {
   ChevronDown,
-  ChevronLeft,
-  ChevronRight,
+//   ChevronLeft,
+//   ChevronRight,
   Filter,
   Grid,
   Search,
@@ -14,6 +14,8 @@ import {
   HistoriesPageBulletIcon,
 } from "@/layout/svgIconPaths";
 import Image from "next/image";
+import { useFetchHistoryByPropertyId } from "@/services/property/query";
+import { useParams } from "next/navigation";
 
 interface HistoryItem {
   id: number;
@@ -28,57 +30,60 @@ export default function PropertyHistoryCard() {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+  const {id} = useParams() as {id:string}
+
+  const {data} = useFetchHistoryByPropertyId(id)
 
   // Sample data
-  const historyItems: HistoryItem[] = [
-    {
-      id: 1,
-      date: "March 20, 2025",
-      type: "Lease Signed",
-      description: "You signed rental agreement.",
-      status: "Completed",
-    },
-    {
-      id: 2,
-      date: "April 1, 2025",
-      type: "Rent Payment",
-      description: "Paid N500,000 for April - June rent.",
-      status: "Completed",
-    },
-    {
-      id: 3,
-      date: "April 10, 2025",
-      type: "Service Request",
-      description: '"Leaking bathroom pipe" reported.',
-      status: "In Progress",
-    },
-    {
-      id: 4,
-      date: "April 15, 2025",
-      type: "Agreement Update",
-      description: "Downloaded lease agreement document.",
-      status: "Completed",
-    },
-    {
-      id: 5,
-      date: "May 2, 2025",
-      type: "Rent Payment",
-      description: "Paid N500,000 for July - Sept rent.",
-      status: "Pending",
-    },
-  ];
+//   const historyItems: HistoryItem[] = [
+//     {
+//       id: 1,
+//       date: "March 20, 2025",
+//       type: "Lease Signed",
+//       description: "You signed rental agreement.",
+//       status: "Completed",
+//     },
+//     {
+//       id: 2,
+//       date: "April 1, 2025",
+//       type: "Rent Payment",
+//       description: "Paid N500,000 for April - June rent.",
+//       status: "Completed",
+//     },
+//     {
+//       id: 3,
+//       date: "April 10, 2025",
+//       type: "Service Request",
+//       description: '"Leaking bathroom pipe" reported.',
+//       status: "In Progress",
+//     },
+//     {
+//       id: 4,
+//       date: "April 15, 2025",
+//       type: "Agreement Update",
+//       description: "Downloaded lease agreement document.",
+//       status: "Completed",
+//     },
+//     {
+//       id: 5,
+//       date: "May 2, 2025",
+//       type: "Rent Payment",
+//       description: "Paid N500,000 for July - Sept rent.",
+//       status: "Pending",
+//     },
+//   ];
 
   // 1107.017578125px
   const groupedItems: { [key: string]: HistoryItem[] } = {};
-  historyItems.forEach((item) => {
+ data?.forEach((item:any) => {
     if (!groupedItems[item.date]) {
       groupedItems[item.date] = [];
     }
     groupedItems[item.date].push(item);
   });
 
-  const totalPages = 44;
-  const totalItems = 200;
+//   const totalPages = 44;
+//   const totalItems = 200;
 
   return (
     <div
@@ -165,6 +170,8 @@ export default function PropertyHistoryCard() {
       </div>
 
       {/* History Timeline */}
+
+      {data?.length <1 && <h3 className="text-[#000]"> No History for this property</h3>}
       <div className="">
         {Object.keys(groupedItems).map((date, dateIndex) => (
           <div key={date}>
@@ -203,7 +210,7 @@ export default function PropertyHistoryCard() {
       </div>
 
       {/* Pagination */}
-      <div className="flex border-t-1 border-[#37352F29] py-6 flex-col sm:flex-row justify-between items-center mt-4 text-sm text-gray-600">
+      {/* <div className="flex border-t-1 border-[#37352F29] py-6 flex-col sm:flex-row justify-between items-center mt-4 text-sm text-gray-600">
         <div className="flex items-center space-x-2 mb-4 sm:mb-0">
           <span>Items per page</span>
           <div className="relative">
@@ -252,7 +259,7 @@ export default function PropertyHistoryCard() {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

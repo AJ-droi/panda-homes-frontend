@@ -163,4 +163,26 @@ export const updateProperty = async (data:any, id:string) => {
       
       }
     };
+     export const getHistoryByPropertyId = async (id:string) => {
+    try {
+      const response = await axiosInstance.get(`/notifications/property/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+
+      if (response.status !== 200) {
+        throw new Error("error fetching properties history");
+      }
   
+      return response.data
+    } catch (error: any) {
+      const errorMessage = error.message || "An error occurred";
+
+      return {
+        success: false,
+        message: errorMessage,
+        error: error.response?.data || null,
+      };
+    }
+  }

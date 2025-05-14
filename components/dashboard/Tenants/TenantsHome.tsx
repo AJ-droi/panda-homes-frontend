@@ -70,7 +70,7 @@ const TenantsHome = () => {
                 <Dropdown2
                   colorIcon={true}
                   options={["Bungalow", "3-Storey", "Duplex", "Hall"]}
-                  placeholder="Property Name"
+                  placeholder="Property"
                   icon={<PropertyTypeIcon />}
                 />
 

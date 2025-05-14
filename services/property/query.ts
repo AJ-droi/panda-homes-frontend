@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // services/property/query.ts
 import { useQuery } from "@tanstack/react-query";
-import { getProperties, getPropertiesById, getPropertyRent, getPropertyServiceRequests } from "./api";
+import { getHistoryByPropertyId, getProperties, getPropertiesById, getPropertyRent, getPropertyServiceRequests } from "./api";
 import { getAdminDashboardAnalytics } from "../users/api";
 import { PropertyFilter } from "../interface/filter";
 
@@ -146,4 +146,26 @@ export function useAdminDashboardAnalytics() {
     refetchOnWindowFocus: true,
   });
 }
+
+export function useFetchHistoryByPropertyId(id:string) {
+  return useQuery({
+    queryKey: ["fetch-property-history"],
+    queryFn: () => getHistoryByPropertyId(id),
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
+    select: (data: any) => 
+      data.map((item:any) => ({
+        id:item.id,
+        date: new Date(item.date).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      }),
+      type: item.type,
+      description: item.description,
+      status: item.status
+      }))
+  });
+}
+
 

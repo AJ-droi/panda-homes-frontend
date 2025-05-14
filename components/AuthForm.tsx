@@ -204,7 +204,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
                 {isLogin
                   ? isPending
                     ? "Logging in"
-                    : "Client Login"
+                    : "Login"
                   : "Create an account"}
               </div>
             </ColouredButton>

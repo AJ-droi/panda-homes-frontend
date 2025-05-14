@@ -17,11 +17,11 @@ const Pagination = ({
   setCurrentPage, 
   totalPages,
 }: PaginationProps) => {
-  const handlePageChange = (page: number) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
+  // const handlePageChange = (page: number) => {
+  //   if (page >= 1 && page <= totalPages) {
+  //     setCurrentPage(page);
+  //   }
+  // };
 
   const pageOptions = Array.from({ length: totalPages }, (_, i) => i + 1);
 
@@ -50,7 +50,7 @@ const Pagination = ({
       
       {/* Page selector */}
       <div className="flex items-center order-2 sm:order-none">
-        <select 
+        {/* <select 
           className="appearance-none bg-white border border-gray-300 rounded px-2 sm:px-3 py-1 ml-0 sm:ml-2 focus:outline-none text-xs sm:text-sm"
           value={currentPage}
           onChange={(e) => handlePageChange(Number(e.target.value))}
@@ -58,12 +58,12 @@ const Pagination = ({
           {pageOptions.map(page => (
             <option key={page} value={page}>{page}</option>
           ))}
-        </select>
+        </select> */}
         <span className="ml-1 sm:ml-2 text-xs sm:text-sm">of {totalPages} pages</span>
       </div>
       
       {/* Navigation buttons */}
-      <div className="flex items-center space-x-1 order-4 sm:order-none">
+      {/* <div className="flex items-center space-x-1 order-4 sm:order-none">
         <button 
           onClick={() => handlePageChange(currentPage - 1)}
           className={`p-1 border border-gray-300 rounded ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100'}`}
@@ -78,7 +78,7 @@ const Pagination = ({
         >
           <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
