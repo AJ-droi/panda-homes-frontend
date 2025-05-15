@@ -94,7 +94,7 @@ export default function Home() {
             <div className="flex mt-10 gap-6 flex-row md:flex-row">
               <div>
                 <Link href="/login" className="w-full md:w-auto">
-                  <WhiteButton title="Login" />
+                  <WhiteButton title="Client Login" />
                 </Link>
               </div>
               {/* <div className="md:mt-0">

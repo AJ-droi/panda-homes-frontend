@@ -4,6 +4,7 @@ import LeaseExpirationTable from "./LeaseExpirationTable";
 import PropertiesListTable from "./PropertiesListTable";
 import SearchBar from "@/components/SearchBar";
 import IssuesListTable from "./IssuesTable";
+import BackButton from "@/components/Backbutton";
 
 const PropertiesHome = () => {
   const [useColumnLayout, setUseColumnLayout] = useState(false);
@@ -44,9 +45,10 @@ const PropertiesHome = () => {
 
   return (
     <div className=" px-3 sm:px-4 md:px-6 lg:px-0 w-full">
+      <BackButton />
       <div>
         <section className="flex flex-col justify-center">
-          <div className="mt-3 sm:mt-4 w-full flex justify-center">
+          <div className="mt-3 sm:mt-4 w-full flex justify-start">
             <SearchBar
               placeholder="Search for a property"
               buttonTitle="Find Property"

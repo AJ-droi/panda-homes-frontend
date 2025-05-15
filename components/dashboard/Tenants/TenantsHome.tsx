@@ -14,6 +14,7 @@ import TenantsListTable from "./TenantsListTable";
 import LeaseExpirationsTable from "./LeaseExpirationsTable";
 import OverdueRentsTable from "./OverdueTenantsTable";
 import { UserFilter } from "@/services/interface/filter";
+import BackButton from "@/components/Backbutton";
 
 const TenantsHome = () => {
   const [useColumnLayout, setUseColumnLayout] = useState(false);
@@ -56,9 +57,10 @@ const TenantsHome = () => {
   };
   return (
     <div className="bg-[#fafafe] px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10 w-full overflow-x-hidden">
+      <BackButton />
       <div>
-        <section className="flex flex-col justify-center">
-          <div className="mt-3 sm:mt-4 w-full flex justify-center">
+        <section className="flex flex-col justify-start">
+          <div className="mt-3 sm:mt-4 w-full flex justify-start">
             <SearchBar
               placeholder="Search by tenant name, apartment, or phone number"
               onChange={(value) => handleSearchChange("search", value)}

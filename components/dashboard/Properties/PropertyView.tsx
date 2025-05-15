@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import { useFetchPropertyById } from "@/services/property/query";
 import { useUpdatePropertyMutation } from "@/services/property/mutation";
 import { toast } from "react-toastify";
+import BackButton from "@/components/Backbutton";
 
 const Skeleton = ({ className }: { className?: string }) => (
   <div className={`animate-pulse bg-gray-200 rounded ${className}`} />
@@ -42,7 +43,7 @@ const PropertyView: React.FC = () => {
   const handleChange = (field: string, value: any) => {
     setPropertyData((prev: any) => ({ ...prev, [field]: value }));
   };
-  const { mutate } = useUpdatePropertyMutation(id);
+  const { mutate, isPending } = useUpdatePropertyMutation(id);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -185,7 +186,7 @@ const PropertyView: React.FC = () => {
             type="submit"
             className="px-6 py-2 bg-[#785DBA] text-white rounded-md hover:bg-[#666666]"
           >
-            Save Changes
+            {isPending?'Updating...' :'Save Changes'}
           </button>
         </div>
       </form>

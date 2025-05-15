@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import NoticesHomeNav from "@/components/dashboard/NoticesAgreements/NoticesHomeNav";
 import NoticeTable from "./NoticeTable";
+import BackButton from "@/components/Backbutton";
 // import NoticeForm from "./NoticeForm";
 
 const NoticesAgreementHome = () => {
@@ -24,6 +25,7 @@ const NoticesAgreementHome = () => {
   return (
     <div className="bg-[#fafafe] p-4 w-full">
       <section>
+           <BackButton />
         <div className="py-5">
           <NoticesHomeNav />
         </div>

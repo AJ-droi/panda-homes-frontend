@@ -4,6 +4,7 @@ import Head from "next/head";
 import Form1 from "@/components/tenantsSection/tenantProfileSettingForms/Form1";
 import Form2 from "@/components/tenantsSection/tenantProfileSettingForms/Form2";
 import Form3 from "@/components/tenantsSection/tenantProfileSettingForms/Form3";
+import BackButton from "@/components/Backbutton";
 
 export interface TenantFormData {
   fullName: string;
@@ -88,8 +89,9 @@ const TenantAccontSettings = () => {
         <meta name="description" content="Tenant Registration page" />
       </Head>
 
-      <div className="w-full py-10 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 mt-4">
-        <div className="max-w-[1189px] mx-auto">          
+      <div className="w-full py-10 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40">
+           <BackButton />
+        <div className="max-w-[1189px] mx-auto mt-4">          
           {renderStep()}
         </div>
       </div>

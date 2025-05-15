@@ -8,6 +8,7 @@ import CalendarDropdown from "@/components/CalendarDropdown";
 import { useCreateUserMutation } from "@/services/users/mutation";
 import { useRouter } from "next/navigation";
 import { useFetchPropertyDetails } from "@/services/property/query";
+import BackButton from "@/components/Backbutton";
 
 interface addTenantProps {
   onClose?: () => void;
@@ -107,6 +108,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
 
   return (
     <div className="w-full p-4 md:p-6 shadow-2xl bg-white rounded-lg">
+         <BackButton />
       <h1 className="text-2xl md:text-3xl leading-[150%] font-bold mb-4 md:mb-6 text-[#000000]">
         Register a new Tenant
       </h1>

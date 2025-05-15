@@ -11,6 +11,7 @@ import CalendarDropdown from "@/components/CalendarDropdown";
 import { useCreateNoticeAgreement } from "@/services/notice-agreement/mutation";
 
 import dynamic from 'next/dynamic';
+import BackButton from "@/components/Backbutton";
 
 const NoticeEditor = dynamic(() => import('@/components/dashboard/NoticesAgreements/NoticeEditor'), { ssr: false });
 
@@ -269,8 +270,9 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
           {error}
         </div>
       )}
+         <BackButton />
       <h1
-        className="text-xl md:text-2xl leading-[150%] font-[500] mb-2 md:mb-2 text-[#785DBA]"
+        className="text-xl md:text-2xl leading-[150%] font-[500] mb-2 md:mb-2 text-[#785DBA] pt-[2%]"
         style={{ fontFamily: "Plus Jakarta Sans" }}
       >
         Send New Notice

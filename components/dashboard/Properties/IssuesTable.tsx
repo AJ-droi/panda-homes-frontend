@@ -1,4 +1,5 @@
 /*eslint-disable */
+import BackButton from "@/components/Backbutton";
 import Pagination from "@/components/PaginationComponent";
 import { useActiveMaintenanceIssues } from "@/services/service-request/query";
 import React, { useState } from "react";
@@ -32,6 +33,7 @@ const IssuesListTable = () => {
 
   return (
     <div className="max-w-full text-[#6E7079] overflow-hidden ">
+       <BackButton />
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>

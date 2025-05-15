@@ -5,11 +5,13 @@ import ColouredButton from "@/components/ColouredButton";
 import WhiteButton from "@/components/WhiteButton";
 import Image from "next/image";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 //fixed top-0 left-0
 
 const LandingNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname()
   return (
     <nav className="w-full bg-white shadow-md p-4 flex flex-wrap justify-between items-center z-50">
       <div className="flex justify-between animate__animated animate__slideInLeft items-center w-full lg:w-auto">
@@ -52,18 +54,18 @@ const LandingNavbar = () => {
               </svg>
             </button> */}
       </div>
-      <div
+      {pathname == "/" && <div
         className={`${
           isMenuOpen ? "flex" : "hidden"
         } lg:flex flex-col animate__animated animate__slideInRight  lg:flex-row gap-4 w-full lg:w-auto mt-4 lg:mt-0`}
       >
         <Link href="/login" className="w-full lg:w-auto">
-          <ColouredButton title="Login" />
+          <ColouredButton title="Client Login" />
         </Link>
         {/* <Link href="/signup" className="w-full lg:w-auto">
           <ColouredButton title="Sign up" />
         </Link> */}
-      </div>
+      </div>}
     </nav>
   );
 };

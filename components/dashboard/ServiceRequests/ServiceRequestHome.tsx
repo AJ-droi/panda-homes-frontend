@@ -7,6 +7,7 @@ import ServiceRequestTable from "./RequestTable";
 import Card from "@/components/Card";
 import ColouredButton from "@/components/ColouredButton";
 import WhiteButton from "@/components/WhiteButton";
+import BackButton from "@/components/Backbutton";
 
 const ServiceRequestHome = () => {
   const [useColumnLayout, setUseColumnLayout] = useState(false);
@@ -27,6 +28,7 @@ const ServiceRequestHome = () => {
 
   return (
     <div className="bg-[#fafafe] flex flex-col px-3 xs:px-4 sm:px-5 md:px-6 lg:px-8 xl:px-10 2xl:px-12 w-full overflow-x-hidden min-h-screen">
+      <BackButton />
       <div className="w-full max-w-[1920px] mx-auto">
         <section className="flex flex-col gap-4 xs:gap-5 sm:gap-6 md:gap-8 lg:gap-10 mt-4 xs:mt-5 sm:mt-6 md:mt-8 lg:mt-10 xl:mt-12">
           <section className="flex w-full">

@@ -71,7 +71,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
     <div className="mx-auto p-6 bg-white">
       <div className="flex flex-row justify-between items-center">
         <div className="text-[32px] font-[500] text-[#333333]">
-          {isLogin ? "Login" : "Create an account"}
+          {isLogin ? " " : "Create an account"}
         </div>
         {/* <Link
           href={isLogin ? "signup" : "login"}
@@ -203,8 +203,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
               >
                 {isLogin
                   ? isPending
-                    ? "Logging in"
-                    : "Login"
+                    ? "Signing In"
+                    : "Sign In"
                   : "Create an account"}
               </div>
             </ColouredButton>

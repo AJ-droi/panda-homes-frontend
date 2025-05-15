@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import PropertyView from "./PropertyView";
 // import PropertyHistory from "../PropertyHistory/PropertyHistoryTable";
 import PropertyHistoryCard from "./PropertyHistoryCard";
+import BackButton from "@/components/Backbutton";
 
 
 const PropertyViewHome: React.FC = () => {
@@ -83,7 +84,11 @@ const PropertyViewHome: React.FC = () => {
               Notices & Agreements
           </button> */}
         </div>
+      </div>  
+      <div className="px-[2%] py-[1%]">
+      <BackButton />
       </div>
+
 
       {/* Main Content */}
       {activeTab === "property-overview" && (
