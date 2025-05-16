@@ -106,22 +106,22 @@ const NoticeTable = () => {
         <table className="w-full">
           <thead>
             <tr className="border-y border-[#E1E2E9]">
-              <th className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal" style={{ fontFamily: "Plus Jakarta Sans" }}>
+              <th className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal" style={{ fontFamily: "Plus Jakarta Sans" }}>
                 Notice Type
               </th>
-              <th className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal" style={{ fontFamily: "Plus Jakarta Sans" }}>
+              <th className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal" style={{ fontFamily: "Plus Jakarta Sans" }}>
                 Tenant
               </th>
-              <th className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal" style={{ fontFamily: "Plus Jakarta Sans" }}>
+              <th className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal" style={{ fontFamily: "Plus Jakarta Sans" }}>
                 Property
               </th>
-              <th className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal" style={{ fontFamily: "Plus Jakarta Sans" }}>
+              <th className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal" style={{ fontFamily: "Plus Jakarta Sans" }}>
                 Date Sent
               </th>
-              <th className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal" style={{ fontFamily: "Plus Jakarta Sans" }}>
+              <th className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal" style={{ fontFamily: "Plus Jakarta Sans" }}>
                 Status
               </th>
-              <th className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal" style={{ fontFamily: "Plus Jakarta Sans" }}>
+              <th className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal" style={{ fontFamily: "Plus Jakarta Sans" }}>
                 Action
               </th>
             </tr>
@@ -129,13 +129,13 @@ const NoticeTable = () => {
           <tbody>
             {currentItems?.map((item: any, index: number) => (
               <tr key={item.id} className={`${index !== noticeData?.length - 1 ? "" : ""} text-sm`}>
-                <td className="py-4 text-center px-6">{item.noticeType}</td>
-                <td className="py-4 px-6 text-center">{item.tenant}</td>
-                <td className="py-4 px-6 text-center">{item.property}</td>
-                <td className="py-4 px-6 text-center">{item.dateSent}</td>
-                <td className="py-4 text-center px-6">{item.status}</td>
-                <td className="py-4 px-6 text-center">
-                  <div className="flex justify-center space-x-2">
+                <td className="py-4 text-left px-6">{item.noticeType}</td>
+                <td className="py-4 px-6 text-left">{item.tenant}</td>
+                <td className="py-4 px-6 text-left">{item.property}</td>
+                <td className="py-4 px-6 text-left">{item.dateSent}</td>
+                <td className="py-4 text-left px-6">{item.status}</td>
+                <td className="py-4 px-6 text-left">
+                  <div className="flex justify-start space-x-2">
                     <button
                       onClick={() => handlePreview(item.notice_document)}
                       className="bg-[#785DBA] text-white hover:cursor-pointer hover:bg-[#624a94] px-[16px] py-[10px] rounded-[12px] text-sm"

@@ -136,7 +136,7 @@ const PropertyPaymentTable = () => {
                     <td
                       className={`py-4 px-6 text-center ${
                         item.dueDate === "Overdue"
-                          ? "text-[#EB4335] font-medium"
+                          ? " font-medium"
                           : ""
                       }`}
                     >
@@ -145,7 +145,7 @@ const PropertyPaymentTable = () => {
                     <td
                       className={`py-4 text-center px-6 ${
                         item.status === "Late"
-                          ? "text-[#EB4335] font-medium"
+                          ? "'' font-medium"
                           : item.status === "Paid"
                           ? "text-[#34A853] font-medium"
                           : "text-[#FBBC05]"

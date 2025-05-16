@@ -158,17 +158,13 @@ const PropertiesListTable = ({params}: {params:PropertyFilter}) => {
                 <td className="py-4 px-6 text-left"><Link href={`/dashboard/view-property/${item.id}`} className="hover:text-blue-600 hover:underline">{item.property}</Link></td>
                 {/* <td className="py-4 px-6 text-left">{item.location}</td> */}
                 <td
-                  className={`py-4 px-6 text-left ${
-                    item.vacancy === "Not Vacant"
-                      ? "text-[#EB4335]"
-                      : "text-[#34A853]"
-                  }`}
+                  className={`py-4 px-6 text-left `}
                 >
                   {item.vacancy}
                 </td>
                 <td
                   className={`py-4 text-left px-6 ${
-                    item.rent === "-" ? "text-[#EB4335]" : "text-[#34A853]"
+                    item.rent === "-" ? "''" : "text-[#34A853]"
                   }`}
                 >
                   {item.rent}

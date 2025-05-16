@@ -47,7 +47,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         value={inputValue}
         onChange={handleInputChange}
       />
-      <div className="w-full md:w-auto">
+      {/* <div className="w-full md:w-auto">
         <div className="w-full md:w-auto min-w-[140px]">
           <ColouredButton hoverEffect={false} onClick={handleButtonClick}>
             <div className="flex items-center gap-[7px] flex-nowrap">
@@ -58,7 +58,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             </div>
           </ColouredButton>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

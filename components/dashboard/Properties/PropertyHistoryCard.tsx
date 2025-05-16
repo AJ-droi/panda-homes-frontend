@@ -90,20 +90,20 @@ export default function PropertyHistoryCard() {
       className="container bg-white overflow-y-scroll max-h-[1107.017578125px] mx-auto p-4 border border-gray-200 rounded-lg"
       style={{ fontFamily: "Plus Jakarta Sans" }}
     >
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+      <div className="flex flex-col  justify-between items-start  mb-6">
         <h1 className="text-2xl font-bold leading-[145%] text-[#45464E]">
           History
         </h1>
 
-        <div className="flex flex-col sm:flex-row gap-2 mt-4 sm:mt-0 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row gap-2 mt-4 sm:mt-0 w-1/2">
           {/* Search Bar */}
-          <div className="relative flex justify-between items-center w-full px-4 py-2">
+          <div className="relative flex justify-between items-center w-full py-2">
             {/* Search Input */}
-            <div className="relative flex-grow mr-4">
+            <div className="relative flex-grow mr-4 ">
               <input
                 type="text"
                 placeholder="Search"
-                className="pl-10 pr-4 font-[400] text-[14.53px] leading-[100%] bg-white shadow-lg text-[#ABAFB1] py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full sm:w-64"
+                className="pl-10 pr-4 font-[400] text-[14.53px] leading-[100%] bg-white shadow-lg text-[#ABAFB1] py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full "
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -130,7 +130,7 @@ export default function PropertyHistoryCard() {
               </button>
             </div>
           </div>
-
+{/* 
           <div className="hidden lg:flex text-[#53545C] text-sm font-[400] leading-[100%] gap-1">
             <button className="flex items-center px-2 py-1.5 border border-[#53545C] rounded-md bg-white hover:bg-gray-50">
               <Filter className="h-4 w-4 mr-1" />
@@ -165,7 +165,7 @@ export default function PropertyHistoryCard() {
                 <ChevronDown className="h-5 w-5 ml-2" />
               </button>
             </div>
-          )}
+          )} */}
         </div>
       </div>
 

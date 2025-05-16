@@ -87,43 +87,43 @@ const PropertyPaymentTable = () => {
           <thead>
           <tr className="border-y border-[#E1E2E9]">
                <th
-               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+               className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Request ID
               </th>
                <th
-               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+               className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Tenant
               </th>
                <th
-               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+               className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Property
               </th>
                <th
-               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+               className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Issue
               </th>
                <th
-               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+               className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Date Reported
               </th>
                <th
-               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+               className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Status
               </th>
                <th
-               className="text-center text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+               className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Action
@@ -135,25 +135,25 @@ const PropertyPaymentTable = () => {
               ? (
                 Array.from({ length: 5 }).map((_, index) => (
                   <tr key={index} className="animate-pulse">
-                    <td className="py-4 px-6 text-center">
+                    <td className="py-4 px-6 text-left">
                       <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto" />
                     </td>
-                    <td className="py-4 px-6 text-center">
+                    <td className="py-4 px-6 text-left">
                       <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
                     </td>
-                    <td className="py-4 px-6 text-center">
+                    <td className="py-4 px-6 text-left">
                       <div className="h-4 bg-gray-200 rounded w-2/3 mx-auto" />
                     </td>
-                    <td className="py-4 px-6 text-center">
+                    <td className="py-4 px-6 text-left">
                       <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
                     </td>
-                    <td className="py-4 px-6 text-center">
+                    <td className="py-4 px-6 text-left">
                       <div className="h-4 bg-gray-200 rounded w-2/3 mx-auto" />
                     </td>
-                    <td className="py-4 px-6 text-center">
+                    <td className="py-4 px-6 text-left">
                       <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto" />
                     </td>
-                    <td className="py-4 px-6 text-center">
+                    <td className="py-4 px-6 text-left">
                       <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto" />
                     </td>
                   </tr>
@@ -166,15 +166,15 @@ const PropertyPaymentTable = () => {
                   index !== serviceRequest.length - 1 ? "" : ""
                 } text-sm`}
               >
-                <td className="py-4 px-6 text-center">{item.requestid}</td>
-                <td className="py-4 px-6 text-center">{item.tenant}</td>
-                <td className="py-4 px-6 text-center">{item.property}</td>
-                <td className="py-4 px-6 text-center">{item.issue}</td>
-                <td className={`py-4 px-6 text-center`}>{item.dateReported}</td>
+                <td className="py-4 px-6 text-left">{item.requestid}</td>
+                <td className="py-4 px-6 text-left">{item.tenant}</td>
+                <td className="py-4 px-6 text-left">{item.property}</td>
+                <td className="py-4 px-6 text-left">{item.issue}</td>
+                <td className={`py-4 px-6 text-left`}>{item.dateReported}</td>
                 <td
-                  className={`py-4 text-center px-6 ${
+                  className={`py-4 text-left px-6 ${
                     item.status === "Pending"
-                      ? "text-[#EB4335] font-medium"
+                      ? "'' font-medium"
                       : item.status === "In Progress"
                       ? "text-[#FBBC05] font-medium"
                       : item.status === "Resolved"
@@ -184,7 +184,7 @@ const PropertyPaymentTable = () => {
                 >
                   {item.status}
                 </td>
-                <td className="py-4 px-6 text-center">
+                <td className="py-4 px-6 text-left">
                 <button className="bg-[#5E636614] text-[#8B8D97] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm">
                     View Details
                   </button>

@@ -66,7 +66,7 @@ const TenantsHome = () => {
               onChange={(value) => handleSearchChange("search", value)}
             />
           </div>
-          {activeTab === "overdue-payment" && (
+          {/* {activeTab === "overdue-payment" && (
             <div className="mt-3 sm:mt-4">
               <div className="flex flex-col sm:flex-row lg:flex-nowrap md:flex-wrap sm:flex-wrap  gap-2 w-full justify-center items-center sm:gap-3 md:gap-4 lg:gap-2 p-2 md:p-[6.35px] rounded-[7.62px] shadow-sm sm:shadow-md md:shadow-lg overflow-x-auto">
                 <Dropdown2
@@ -98,7 +98,7 @@ const TenantsHome = () => {
                 />
               </div>
             </div>
-          )}
+          )} */}
         </section>
 
         <div className="flex flex-wrap my-5">
@@ -112,7 +112,7 @@ const TenantsHome = () => {
           >
             Tenants List
           </button>
-          <button
+          {/* <button
             className={`px-6 py-4 font-medium text-sm md:text-base ${
               activeTab === "overdue-payment"
                 ? "text-[#785DBA] border-b-2 border-[#785DBA]"
@@ -121,7 +121,7 @@ const TenantsHome = () => {
             onClick={() => setActiveTab("overdue-payment")}
           >
             OverDue Payments
-          </button>
+          </button> */}
         </div>
 
         <section className="w-full flex flex-col gap-y-5">
