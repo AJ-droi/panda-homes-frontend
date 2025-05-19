@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import NoticesHomeNav from "@/components/dashboard/NoticesAgreements/NoticesHomeNav";
+// import NoticesHomeNav from "@/components/dashboard/NoticesAgreements/NoticesHomeNav";
 import NoticeTable from "./NoticeTable";
 import BackButton from "@/components/Backbutton";
 // import NoticeForm from "./NoticeForm";
