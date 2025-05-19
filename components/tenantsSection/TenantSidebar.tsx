@@ -58,16 +58,16 @@ const TenantSidebar = () => {
   function handleSwitchAccount() {
     const parentoken = localStorage.getItem("parent_token") as string;
 
-       if(!parentoken){
-          toast.error('No Admin account is linked to this account')
-        }
+    if (!parentoken) {
+      toast.error("No Admin account is linked to this account");
+      return;
+    }
     // Replace token in cookies or localStorage
     Cookies.set("access_token", parentoken, {
       expires: 7, // days
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
     });
-   
 
     // Update app state or trigger revalidation
     // setUser(subAccount); // or trigger SWR/NextAuth update
@@ -112,8 +112,6 @@ const TenantSidebar = () => {
       onClick: handleLogout,
     },
   ];
-
-
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);

@@ -27,6 +27,11 @@ export function useLoginMutation() {
 
     onSuccess: async (data) => {
       try {
+        Cookies.set("access_token",data.access_token, {
+          expires: 7, // days
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "strict",
+        });
 
         // console.log("🔐 Login successful:", data) ;
         data.user.role == 'tenant'?
@@ -39,11 +44,6 @@ export function useLoginMutation() {
           localStorage.setItem('tenant', JSON.stringify(data.related_accounts[0])),
           localStorage.setItem('parent_token', data.access_token)
       )
-        Cookies.set("access_token",data.access_token, {
-          expires: 7, // days
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "strict",
-        });
 
         // Optionally redirect or refetch user info
         return data

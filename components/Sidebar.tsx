@@ -84,6 +84,7 @@ const Sidebar = () => {
 
     if(!subtoken){
       toast.error('No Tenant account is linked to this account')
+      return;
     }
     // Replace token in cookies or localStorage
     Cookies.set("access_token", subtoken, {
