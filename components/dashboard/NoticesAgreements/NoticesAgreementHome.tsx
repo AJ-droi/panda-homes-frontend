@@ -26,9 +26,9 @@ const NoticesAgreementHome = () => {
     <div className="bg-[#fafafe] p-4 w-full">
       <section>
            <BackButton />
-        <div className="py-5">
+        {/* <div className="py-5">
           <NoticesHomeNav />
-        </div>
+        </div> */}
       </section>
 
       <div className="flex flex-wrap my-5">
