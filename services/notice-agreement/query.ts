@@ -40,7 +40,7 @@ export function useFetchNoticeAgreementByTenant() {
     refetchOnMount: "always",
     refetchOnWindowFocus: true,
     select: (data:any) =>
-      data.map((notice: any) => ({
+      data.notice_agreements.map((notice: any) => ({
         noticeType: notice.notice_type,
         tenant: notice.tenant_name,
         property: notice.property_name,

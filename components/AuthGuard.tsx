@@ -17,7 +17,9 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   useEffect(() => {
-    const token = Cookies.get('access_token');
+    const token = Cookies.get('access_token')
+
+    console.log({token})
 
     if (!token) {
       router.replace('/login');
@@ -26,6 +28,10 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
 
     const decoded = parseJwt(token);
     const expired = !decoded?.exp || decoded.exp * 1000 < Date.now();
+  
+    // if(decoded.role =='tenant' && !expired){
+    //   router.replace('/tenant-dashboard')
+    // }
 
     if (expired) {
       Cookies.remove('access_token');

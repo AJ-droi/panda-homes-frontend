@@ -23,6 +23,7 @@ import {
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
 import { ChevronDown } from "lucide-react";
+import { toast } from "react-toastify";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -45,11 +46,12 @@ const Sidebar = () => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        isTabletOrSmaller && 
-        isOpen && 
-        sidebarRef.current && 
+        isTabletOrSmaller &&
+        isOpen &&
+        sidebarRef.current &&
         !sidebarRef.current.contains(event.target as Node) &&
-        (!dropdownRef.current || !dropdownRef.current.contains(event.target as Node))
+        (!dropdownRef.current ||
+          !dropdownRef.current.contains(event.target as Node))
       ) {
         setIsOpen(false);
       }
@@ -76,6 +78,24 @@ const Sidebar = () => {
     router.push(path);
     setDropdownOpen(false);
   };
+
+  function handleSwitchAccount() {
+    const subtoken = localStorage.getItem("sub_account_token") as string;
+
+    if(!subtoken){
+      toast.error('No Tenant account is linked to this account')
+    }
+    // Replace token in cookies or localStorage
+    Cookies.set("access_token", subtoken, {
+      expires: 7, // days
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+
+    // Update app state or trigger revalidation
+    // setUser(subAccount); // or trigger SWR/NextAuth update
+    router.push("/tenant-dashboard");
+  }
 
   const iconData = [
     {
@@ -109,6 +129,12 @@ const Sidebar = () => {
       path: "/dashboard/notice-agreement",
     },
     {
+      name: "Switch To Tenant Account",
+      icon: <SidebarNoticeAndAgreementIcon />,
+      // activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
+      onClick: handleSwitchAccount,
+    },
+    {
       name: "Logout",
       icon: <LogoutIcon />,
       onClick: handleLogout,
@@ -137,7 +163,10 @@ const Sidebar = () => {
             Hello Tunji
           </span>
         </div>
-        <div className="gap-[24px] items-center justify-between flex relative" ref={dropdownRef}>
+        <div
+          className="gap-[24px] items-center justify-between flex relative"
+          ref={dropdownRef}
+        >
           <nav
             className="hover:cursor-pointer"
             onClick={() => router.push("/dashboard/notifications")}
@@ -174,11 +203,11 @@ const Sidebar = () => {
                   Add Property
                 </button>
                 <button
-                onClick={() => handleAction("/dashboard/notice-agreement")}
-                className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
-              >
-                Send Notice
-              </button>
+                  onClick={() => handleAction("/dashboard/notice-agreement")}
+                  className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
+                >
+                  Send Notice
+                </button>
               </div>
             )}
           </div>
@@ -241,7 +270,9 @@ const Sidebar = () => {
                 }}
               >
                 <div>
-                  {pathname === item.path ? item.activeIcon ?? item.icon : item.icon}
+                  {pathname === item.path
+                    ? item.activeIcon ?? item.icon
+                    : item.icon}
                 </div>
                 <div
                   className={`text-base font-plus-jakarta ${

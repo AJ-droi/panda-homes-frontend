@@ -72,7 +72,6 @@ const TenantServiceRequestCard = ({ onClick }: { onClick: React.FC }) => {
                     <div>
                       <p
                         className="text-xs md:text-sm text-[#212121] leading-[20px] flex items-center justify-center gap-1 md:leading-[22px] font-[400]"
-                        style={{ fontFamily: "plusJakarta" }}
                       >
                         <span className="font-[700] text-[10px]">
                           {formatDate(request?.date_reported)}

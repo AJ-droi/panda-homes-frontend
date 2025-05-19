@@ -69,7 +69,7 @@ const TenantDashboard = () => {
                   Fetching rent details...
                 </p>
               )  : (
-                <RentCountdown property_id={tenantDetails?.property_id} expirationDate={rentDetails?.lease_end_date} />
+                <RentCountdown expirationDate={rentDetails?.lease_end_date} isPropertyDataLoading={isPropertyDataLoading} rental_price={rentDetails?.rental_price} />
               )}
             </div>
           </section>

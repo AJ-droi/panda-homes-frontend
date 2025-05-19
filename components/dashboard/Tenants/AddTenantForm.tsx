@@ -30,6 +30,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
     rental_price: "",
     security_deposit: "",
     service_charge: "",
+    is_sub_account: false,
   });
 
   const { mutate, isPending } = useCreateUserMutation();
@@ -47,9 +48,10 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
   }, [data]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement >
   ) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target as HTMLInputElement | HTMLSelectElement;
+    const checked = (e.target as HTMLInputElement).checked;
 
     const isCurrencyField = [
       "rental_price",
@@ -64,7 +66,10 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
         setFormData((prev) => ({ ...prev, [name]: formatted }));
       }
     } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      setFormData((prev: any) => ({
+        ...prev,
+        [name]: type === "checkbox" ? checked : value
+      }))
     }
   };
 
@@ -260,7 +265,21 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
                 placeholder="e.g. 15000"
               />
             </div>
+
           </div>
+
+
+              <div className="flex justify-start gap-2 sm:gap-[14px] items-center">
+          <input
+            type="checkbox"
+            name="is_sub_account"
+            checked={formData.is_sub_account}
+            onChange={handleChange}
+          />
+          <span className="font-[500] text-[14px] sm:text-[16px] leading-[100%] text-[#696F79]">
+            Choose as a sub account
+          </span>
+        </div>
 
           {/* Submit Button */}
           <section className="flex flex-col-reverse sm:flex-row justify-end gap-4">

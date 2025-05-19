@@ -24,28 +24,28 @@ import {
   NavbarNotificationBell,
   NavbarSettingsIcon,
 } from "@/layout/svgIconPaths";
-
+import { toast } from "react-toastify";
 
 const TenantSidebar = () => {
   const pathname = usePathname();
   const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
   const [isOpen, setIsOpen] = useState(false);
-  
-  const [tenantDetails, setTenantDetails] = useState<any>({})
-    
+
+  const [tenantDetails, setTenantDetails] = useState<any>({});
+
   useEffect(() => {
-    const isClient = typeof window !== 'undefined';
+    const isClient = typeof window !== "undefined";
     if (isClient) {
-      const jsonTenantDetails = localStorage.getItem('tenant')
+      const jsonTenantDetails = localStorage.getItem("tenant");
       if (jsonTenantDetails) {
         try {
-          setTenantDetails(JSON.parse(jsonTenantDetails))
+          setTenantDetails(JSON.parse(jsonTenantDetails));
         } catch (error) {
-          console.error('Failed to parse tenant details', error)
+          console.error("Failed to parse tenant details", error);
         }
       }
     }
-  }, [])
+  }, []);
 
   const router = useRouter();
 
@@ -54,6 +54,25 @@ const TenantSidebar = () => {
     Cookies.remove("token");
     router.push("/login");
   };
+
+  function handleSwitchAccount() {
+    const parentoken = localStorage.getItem("parent_token") as string;
+
+       if(!parentoken){
+          toast.error('No Admin account is linked to this account')
+        }
+    // Replace token in cookies or localStorage
+    Cookies.set("access_token", parentoken, {
+      expires: 7, // days
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+   
+
+    // Update app state or trigger revalidation
+    // setUser(subAccount); // or trigger SWR/NextAuth update
+    router.push("/dashboard");
+  }
 
   const iconData = [
     {
@@ -80,12 +99,21 @@ const TenantSidebar = () => {
       activeIcon: <ActivePropertyHistoryIcon />,
       path: "/tenant-dashboard/property-history",
     },
+
+    {
+      name: "Switch to Admin Account",
+      icon: <SidebarNoticeAndAgreementIcon />,
+      // activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
+      onClick: handleSwitchAccount,
+    },
     {
       name: "Logout",
       icon: <LogoutIcon />,
       onClick: handleLogout,
     },
   ];
+
+
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -107,7 +135,7 @@ const TenantSidebar = () => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const [loadingPath, setLoadingPath] = useState<string | null>(null);
-  
+
     const smallScreenIconData = [
       {
         name: "Settings",
@@ -125,10 +153,10 @@ const TenantSidebar = () => {
 
     const redirect = async (path: string) => {
       if (pathname === path) return;
-  
+
       setIsLoading(true);
       setLoadingPath(path);
-  
+
       try {
         setTimeout(() => {
           router.push(path);
@@ -146,32 +174,33 @@ const TenantSidebar = () => {
     // const activeItem = iconData.find((item) => item.path === pathname);
     return (
       <div className="flex items-center justify-between px-4 md:px-6 lg:px-8 py-10 bg-white">
-      <div className="flex items-center gap-2">
-      <button onClick={toggleSidebar} className="flex items-center">
-        <BreadcrumbIcon />
-      </button>
-      <span className="font-medium text-[#785DBA] text-[16px] font-plus-jakarta">
-      Hello {tenantDetails?.first_name ? tenantDetails?.first_name : 'There'}
-      </span>
+        <div className="flex items-center gap-2">
+          <button onClick={toggleSidebar} className="flex items-center">
+            <BreadcrumbIcon />
+          </button>
+          <span className="font-medium text-[#785DBA] text-[16px] font-plus-jakarta">
+            Hello{" "}
+            {tenantDetails?.first_name ? tenantDetails?.first_name : "There"}
+          </span>
+        </div>
+        <div className="gap-[24px] items-center justify-between flex">
+          {smallScreenIconData.map((item) => (
+            <div
+              key={item.name}
+              className={`hover:cursor-pointer ${
+                isLoading && loadingPath === item.path
+                  ? "opacity-50 pointer-events-none"
+                  : ""
+              }`}
+              onClick={() =>
+                !isLoading && loadingPath !== item.path && redirect(item.path)
+              }
+            >
+              {pathname === item.path ? item.activeIcon : item.icon}
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="gap-[24px] items-center justify-between flex">
-        {smallScreenIconData.map((item) => (
-          <div
-            key={item.name}
-            className={`hover:cursor-pointer ${
-              isLoading && loadingPath === item.path
-                ? "opacity-50 pointer-events-none"
-                : ""
-            }`}
-            onClick={() =>
-              !isLoading && loadingPath !== item.path && redirect(item.path)
-            }
-          >
-            {pathname === item.path ? item.activeIcon : item.icon}
-          </div>
-        ))}
-      </div>
-    </div>
     );
   };
 
@@ -185,7 +214,7 @@ const TenantSidebar = () => {
           onClick={toggleSidebar}
         />
       )}
-      
+
       <div
         className={`
           fixed left-0 top-0 h-full bg-white border-r border-r-[#66666659] z-40
@@ -213,7 +242,7 @@ const TenantSidebar = () => {
           </section>
 
           <section className="flex flex-col gap-4 w-full">
-            {iconData.map((item:any, index) => (
+            {iconData.map((item: any, index) => (
               <nav
                 key={index}
                 className={`flex gap-4 items-center px-4 py-4 hover:bg-gray-100 cursor-pointer ${
@@ -228,7 +257,9 @@ const TenantSidebar = () => {
                 }}
               >
                 <div>
-                  {pathname === item.path ? item.activeIcon ?? item.icon : item.icon}
+                  {pathname === item.path
+                    ? item.activeIcon ?? item.icon
+                    : item.icon}
                 </div>
                 <div
                   className={`text-base font-plus-jakarta ${

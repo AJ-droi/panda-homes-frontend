@@ -1,19 +1,18 @@
 import React from "react";
-import {
-  useGetTenantProperty,
-} from "@/services/tenants/query";
 import { formatNumberWithCommas } from "@/utilities/utilities";
 
 interface RentCountdownProps {
   expirationDate: string;
   currentDate?: string;
-  property_id:string;
+  isPropertyDataLoading: boolean;
+  rental_price:number;
 }
 
 const RentCountdown: React.FC<RentCountdownProps> = ({
   expirationDate,
   currentDate = new Date().toISOString(),
-  property_id
+  isPropertyDataLoading,
+  rental_price
 }) => {
   const endDate = new Date(expirationDate);
   const startDate = new Date(currentDate);
@@ -34,8 +33,7 @@ const RentCountdown: React.FC<RentCountdownProps> = ({
     Math.max(0, (1 - daysLeft / 365) * 100)
 
   )
-      const { data: tenantPropertyData, isLoading: isPropertyDataLoading } =
-        useGetTenantProperty(property_id);
+
 
   return (
 <div 
@@ -50,9 +48,9 @@ const RentCountdown: React.FC<RentCountdownProps> = ({
       <p className="text-[#785DBA] leading-[150%] text-sm sm:text-[15.88px] md:text-xl font-semibold">
         NGN{isPropertyDataLoading
           ? "loading..."
-          : !tenantPropertyData?.rental_price
+          : !rental_price
           ? "0"
-          : formatNumberWithCommas(tenantPropertyData?.rental_price)
+          : formatNumberWithCommas(rental_price)
         }
       </p>
     </div>

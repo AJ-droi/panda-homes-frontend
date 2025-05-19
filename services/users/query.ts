@@ -11,20 +11,20 @@ export function useFetchTenantDetails(params:UserFilter) {
     refetchOnMount: "always",
     refetchOnWindowFocus: true,
     select: (data: any) =>
-      data?.users?.map((user: any) => ({
-        id: user?.id,
-        tenantName: `${user?.first_name ?? ""} ${user?.last_name ?? ""}`,
-        property: user?.property_tenants?.[0]?.property?.name || "No Property",
-        moveInDay: user?.moveInDate
-          ? new Date(user.moveInDate).toLocaleDateString("en-US", {
+      data?.users?.map((item: any) => ({
+        id: item?.id,
+        tenantName: `${item?.user?.first_name ?? ""} ${item?.user?.last_name ?? ""}`,
+        property: item?.property_tenants?.[0]?.property?.name || "No Property",
+        moveInDay: item?.moveInDate
+          ? new Date(item.moveInDate).toLocaleDateString("en-US", {
               month: "short",
               day: "numeric",
               year: "numeric",
             })
           : "-",
-        rentStatus: user?.rentPaid ? "Paid" : "Overdue",
-        rent:user?.property_tenants?.[0]?.property?.rental_price || "-",
-        expiryDate:user?.rents?.[0]?.lease_end_date ? new Date(user?.rents?.[0]?.lease_end_date).toLocaleDateString("en-US", {
+        rentStatus: item?.rentPaid ? "Paid" : "Overdue",
+        rent:item?.rents[0].rental_price || "-",
+        expiryDate:item?.rents?.[0]?.lease_end_date ? new Date(item?.rents?.[0]?.lease_end_date).toLocaleDateString("en-US", {
           month: "short",
           day: "numeric",
           year: "numeric",

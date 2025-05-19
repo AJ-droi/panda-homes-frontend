@@ -96,7 +96,7 @@ const Dropdown2: React.FC<DropdownProps> = ({
 
       {isOpen && (
         <div className="absolute text-sm z-10 w-full mt-2 bg-white border border-gray-300 rounded-lg shadow-lg">
-          {options.map((option: any, index) => (
+          {options?.map((option: any, index) => (
             <div
               key={index}
               onClick={() => handleOptionClick(option)}

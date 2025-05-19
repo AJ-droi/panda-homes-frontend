@@ -59,7 +59,7 @@ export const loginUser = async (data: z.infer<typeof loginSchema>) => {
 
   export const getTenants = async (params?: UserFilter) => {
     try {
-      const response = await axiosInstance.get("/users/tenants", {
+      const response = await axiosInstance.get("/users/tenant-list", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -227,3 +227,4 @@ export const loginUser = async (data: z.infer<typeof loginSchema>) => {
     
     }
   };
+

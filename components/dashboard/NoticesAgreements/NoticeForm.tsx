@@ -66,7 +66,7 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
 
     const tenantOption = (singleProperty as any)?.property_tenants?.map((item:any) => {
       return {
-        label: item.tenant.first_name + " " + item.tenant.last_name,
+        label: item.tenant?.profile_name,
         value: item.tenant.id
       }
     })
