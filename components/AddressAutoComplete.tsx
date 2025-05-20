@@ -58,7 +58,7 @@ export default function AddressAutocomplete({
           <input
             type="text"
             placeholder="Enter a location"
-            className="border p-2 w-full"
+            className="border p-2 w-full text-[#000]"
           />
         </Autocomplete>
 

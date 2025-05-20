@@ -8,6 +8,7 @@ import { useFetchPropertyById } from "@/services/property/query";
 import { useUpdatePropertyMutation } from "@/services/property/mutation";
 import { toast } from "react-toastify";
 import BackButton from "@/components/Backbutton";
+import AddressAutocomplete from "@/components/AddressAutoComplete";
 
 const Skeleton = ({ className }: { className?: string }) => (
   <div className={`animate-pulse bg-gray-200 rounded ${className}`} />
@@ -40,6 +41,16 @@ const PropertyView: React.FC = () => {
     setEditMode((prev: any) => ({ ...prev, [field]: !prev[field] }));
   };
 
+  const handlePlaceSelected = (
+    place: google.maps.places.PlaceResult | null
+  ) => {
+
+    setPropertyData((prev: any) => ({
+      ...prev,
+      location: place?.formatted_address || "",
+    }));
+  };
+
   const handleChange = (field: string, value: any) => {
     setPropertyData((prev: any) => ({ ...prev, [field]: value }));
   };
@@ -52,7 +63,9 @@ const PropertyView: React.FC = () => {
     mutate(
       {
         ...propertyData,
-        lease_start_date: new Date(propertyData?.lease_start_date)?.toISOString(), // if API expects ISO string
+        lease_start_date: new Date(
+          propertyData?.lease_start_date
+        )?.toISOString(), // if API expects ISO string
         lease_end_date: new Date(propertyData?.lease_end_date)?.toISOString(),
         // rental_price: parseInt(propertyData?.rental_price.replace(/,/g, "")),
         // service_charge: parseInt(propertyData?.service_charge.replace(/,/g, "")),
@@ -155,20 +168,31 @@ const PropertyView: React.FC = () => {
                 {label}
               </label>
               <div className="relative">
-                <input
-                  type="text"
-                  value={propertyData[field] || ""}
-                  onChange={(e) => handleChange(field, e.target.value)}
-                  disabled={!editMode[field]}
-                  placeholder={
-                    editMode[field] ? `Enter ${label.toLowerCase()}...` : ""
-                  }
-                  className={`w-full p-3 rounded-md border ${
-                    editMode[field]
-                      ? "bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-[#666666]"
-                      : "bg-gray-100 border-gray-200 text-[#000]"
-                  }`}
-                />
+          {editMode[field] && field === "location" ? (
+            <>
+              <AddressAutocomplete onPlaceSelected={handlePlaceSelected} />
+              {propertyData.location && (
+                <p className="text-green-600 text-sm mt-1">
+                  Selected: {propertyData.location}
+                </p>
+              )}
+            </>
+          ) : (
+            <input
+              type="text"
+              value={propertyData[field] || ""}
+              onChange={(e) => handleChange(field, e.target.value)}
+              disabled={!editMode[field]}
+              placeholder={
+                editMode[field] ? `Enter ${label.toLowerCase()}...` : ""
+              }
+              className={`w-full p-3 rounded-md border ${
+                editMode[field]
+                  ? "bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-[#666666]"
+                  : "bg-gray-100 border-gray-200 text-[#000]"
+              }`}
+            />
+          )}
                 <button
                   type="button"
                   onClick={() => toggleEditMode(field)}
@@ -186,7 +210,7 @@ const PropertyView: React.FC = () => {
             type="submit"
             className="px-6 py-2 bg-[#785DBA] text-white rounded-md hover:bg-[#666666]"
           >
-            {isPending?'Updating...' :'Save Changes'}
+            {isPending ? "Updating..." : "Save Changes"}
           </button>
         </div>
       </form>

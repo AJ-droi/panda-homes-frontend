@@ -118,7 +118,6 @@ const PropertyForm = () => {
   const handlePlaceSelected = (
     place: google.maps.places.PlaceResult | null
   ) => {
-    console.log("Selected place:", place);
     setFormData((prev) => ({ ...prev, location: place?.formatted_address || "" }));
   };
 
