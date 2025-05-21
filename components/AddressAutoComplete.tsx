@@ -5,8 +5,8 @@ import React, { useRef, useState } from 'react';
 import {
   LoadScript,
   Autocomplete,
-  GoogleMap,
-  Marker
+  // GoogleMap,
+  // Marker
 } from '@react-google-maps/api';
 
 const libraries = ['places'] as any;
@@ -62,13 +62,13 @@ export default function AddressAutocomplete({
           />
         </Autocomplete>
 
-        <GoogleMap
+        {/* <GoogleMap
           mapContainerStyle={containerStyle}
           center={mapCenter}
           zoom={14}
         >
           {markerPosition && <Marker position={markerPosition} />}
-        </GoogleMap>
+        </GoogleMap> */}
       </div>
     </LoadScript>
   );
