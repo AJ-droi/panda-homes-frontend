@@ -5,10 +5,15 @@ import PropertiesListTable from "./PropertiesListTable";
 import SearchBar from "@/components/SearchBar";
 import IssuesListTable from "./IssuesTable";
 import BackButton from "@/components/Backbutton";
+import { useFetchPropertyDetails } from "@/services/property/query";
+import PropertyMobileCard from "./PropertyMobileCard";
+import { useMatchMediaQuery } from "@/hooks/useViewPort";
+import device from "@/constants/breakpoints";
 
 const PropertiesHome = () => {
   const [useColumnLayout, setUseColumnLayout] = useState(false);
   const [activeTab, setActiveTab] = useState("property-list");
+  const isMobile = useMatchMediaQuery(device.mobile);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -42,6 +47,8 @@ const PropertiesHome = () => {
       page: 1, // optional: reset page on new search/filter
     }));
   };
+
+  const { data: properties, isLoading } = useFetchPropertyDetails(params);
 
   return (
     <div className=" px-3 sm:px-4 md:px-6 lg:px-0 w-full">
@@ -103,18 +110,28 @@ const PropertiesHome = () => {
         </div>
 
         {activeTab === "property-list" && (
-          <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] ">
-            <div
-              className={`flex ${
-                useColumnLayout ? "flex-col" : "flex-col lg:flex-row"
-              } gap-10 w-full`}
-              style={{ fontFamily: "Plus Jakarta Sans" }}
-            >
-              <div className="mt-4 sm:mt-6 w-full">
-                <PropertiesListTable params={params} />
-              </div>
-            </div>
-          </section>
+          <>
+            {isMobile ? (
+              <PropertyMobileCard properties={properties} />
+            ) : (
+              <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] ">
+                <div
+                  className={`flex ${
+                    useColumnLayout ? "flex-col" : "flex-col lg:flex-row"
+                  } gap-10 w-full`}
+                  style={{ fontFamily: "Plus Jakarta Sans" }}
+                >
+                  <div className="mt-4 sm:mt-6 w-full">
+                    :
+                    <PropertiesListTable
+                      properties={properties}
+                      isLoading={isLoading}
+                    />
+                  </div>
+                </div>
+              </section>
+            )}
+          </>
         )}
 
         {activeTab === "maintenance-issues" && (

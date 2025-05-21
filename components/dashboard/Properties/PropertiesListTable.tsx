@@ -1,12 +1,12 @@
 /*eslint-disable */
 import Pagination from "@/components/PaginationComponent";
-import { PropertyFilter } from "@/services/interface/filter";
+// import { PropertyFilter } from "@/services/interface/filter";
 import { useFetchPropertyDetails } from "@/services/property/query";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-const PropertiesListTable = ({params}: {params:PropertyFilter}) => {
+const PropertiesListTable = ({properties, isLoading}: any) => {
   // const propertyData = [
   //   {
   //     id: 1,
@@ -52,7 +52,7 @@ const PropertiesListTable = ({params}: {params:PropertyFilter}) => {
   //   },
   // ];
 
-    const { data: properties, isLoading } = useFetchPropertyDetails(params)
+    // const { data: properties, isLoading } = useFetchPropertyDetails(params)
 
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;

@@ -11,18 +11,25 @@ export function useFetchPropertyDetails(params?:PropertyFilter) {
     queryFn: () => getProperties(params),
     refetchOnMount: "always",
     refetchOnWindowFocus: true,
-    select: (data:any) =>
-      data.properties.map((property: any) => ({
+    select: (data:any) => {
+
+
+    return data.properties.map((property: any) => ({
         id: property.id,
         property: property.name,
         vacancy: property.property_status,
         rent: property?.rents[0]?.amount_paid || "-",
+        tenant_name: property?.rents?.find((item: any) => item.rent_status === 'active')?.tenant?.profile_name || "No Tenant",
         expiryDate: property?.rents[0]?.lease_end_date ? new Date(property?.rents[0]?.lease_end_date).toLocaleDateString("en-US", {
-          month: "short",
-          day: "numeric",
-          year: "numeric",
-        }) :  "-"
-      })),
+         month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+        }) :  "-",
+        daysLeft: property?.rents[0]?.lease_end_date ? Math.floor((new Date(property?.rents[0]?.lease_end_date).getTime() - new Date().getTime()) / (1000 * 3600 * 24)) : "-",
+
+      }))
+    }
+      
   });
 }
 

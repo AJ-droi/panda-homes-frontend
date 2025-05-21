@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import {
@@ -24,6 +23,7 @@ import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
 import { ChevronDown } from "lucide-react";
 import { toast } from "react-toastify";
+import Image from 'next/image';
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -131,7 +131,7 @@ const Sidebar = () => {
     },
     {
       name: "Switch To Tenant Account",
-      icon: <SidebarNoticeAndAgreementIcon />,
+      icon: <Image src={'/switch.svg'} alt={""} width={50} height={50} />,
       // activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
       onClick: handleSwitchAccount,
     },
