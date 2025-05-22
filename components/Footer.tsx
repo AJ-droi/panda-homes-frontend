@@ -10,8 +10,8 @@ const Footer = () => {
           <Image
             src="/landingPage/logo.png"
             alt="Panda Logo"
-            width={150}
-            height={150}
+            width={100}
+            height={100}
             style={{ objectFit: "contain" }}
             priority
           />

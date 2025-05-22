@@ -51,7 +51,7 @@ const Form1: React.FC<Form1Props> = ({
               <Image
                 src="/landingPage/logo.png"
                 alt="Panda Logo"
-                width={133}
+                width={100}
                 height={38}
                 style={{ objectFit: "contain" }}
                 priority

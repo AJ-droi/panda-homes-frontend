@@ -57,7 +57,7 @@ const Dropdown2: React.FC<DropdownProps> = ({
     >
       <button
         onClick={toggleDropdown}
-        className="w-full px-[30px] py-[19px] border-1 h-[64px] hover:cursor-pointer border-[#8692A6] rounded-[6px] flex items-center justify-between focus:outline-none focus:border-[#785DBA] transition-colors"
+        className="w-full px-[30px] py-[13px] border-1 mt-2 hover:cursor-pointer border-[#8692A6] rounded-[6px] flex items-center justify-between focus:outline-none focus:border-[#785DBA] transition-colors"
         type="button"
       >
         <div className="flex items-center text-sm">

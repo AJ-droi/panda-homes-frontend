@@ -34,7 +34,7 @@ const InputField: React.FC<InputFieldProps> = ({
         value={type === "file" ? undefined : value}
         onChange={(e) => onChange(e)}
         placeholder={placeholder}
-        className={`w-full px-[30px] h-[64px] py-[23px] border-1 text-[14px] border-[#8692A6] rounded-[6px] focus:outline-none focus:border-[#785DBA] text-[#666666] transition-colors leading-[100%] font-[500] ${
+        className={`w-full px-[30px] py-[13px] mt-2 border-1 text-[14px] border-[#8692A6] rounded-[6px] focus:outline-none focus:border-[#785DBA] text-[#666666] transition-colors leading-[100%] font-[500] ${
           icon ? "pl-10" : ""
         } ${className}`}
         style={{ fontFamily: 'Inter' }}

@@ -100,7 +100,6 @@ const PropertyForm = () => {
     setShowSummary(true);
   };
 
-  console.log(errors)
 
   const handleSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -131,7 +130,7 @@ const PropertyForm = () => {
       )} */}
 
         <div>
-          <label>Property</label>
+          <label>Name</label>
           <InputField
             name="name"
             placeholder="Enter name"
@@ -142,7 +141,7 @@ const PropertyForm = () => {
         </div>
 
         <div>
-          <label>Location</label>
+          <label>Address</label>
           {/* {!showSummary && (
             <GeoSearchMap
               onLocationSelect={(_, address: string) =>
@@ -259,10 +258,10 @@ const PropertyForm = () => {
 
         <button
           type="button"
-          className="bg-[#785DBA] text-white px-4 py-2 rounded"
+          className="bg-[#785DBA] text-white px-4 py-2 rounded w-full"
           onClick={handleShowSummary}
         >
-          View Property Summary
+          Review
         </button>
       </form>
 

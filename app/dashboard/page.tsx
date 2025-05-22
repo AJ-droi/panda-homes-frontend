@@ -1,12 +1,12 @@
  "use client";
 import React from 'react'
-import DashboardHome from '@/components/dashboard/Home/DashboardHome';
+import OverviewHome from '@/components/dashboard/Overview/OverviewHome';
 
 const Dashboard = () => {
 
   return (
-    <div className="flex flex-col min-h-screen">
-        <DashboardHome />
+    <div className="flex flex-col min-h-screen bg-[#fafafe] p-4 ">
+        <OverviewHome />
     </div>
   )
 }

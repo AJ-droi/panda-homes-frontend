@@ -1,7 +1,8 @@
 "use client"
 /* eslint-disable */
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
+
 
 const PropertyMobileCard = (props: any) => {
   const { properties } = props;
@@ -30,9 +31,11 @@ const PropertyMobileCard = (props: any) => {
         </div>
       ))}
 
-      <button className="bg-[#785DBA] text-white text-[12px] font-semibold py-2 px-4 w-[45%] rounded-md">
+      <button className="bg-[#785DBA] text-white text-[12px] font-semibold py-2 px-4 w-[45%] rounded-md" onClick={() => router.push('/dashboard/properties/group')}>
         Group Properties
       </button>
+
+ 
     </div>
   );
 };

@@ -1,10 +1,10 @@
 // components/BackButton.tsx
 'use client';
-
+/* eslint-disable */
 import { useRouter } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
 
-export default function BackButton() {
+export default function BackButton(props:any) {
   const router = useRouter();
 
   return (
@@ -13,7 +13,7 @@ export default function BackButton() {
       className="flex items-center gap-2 text-sm text-gray-700 hover:text-black"
     >
       <ArrowLeft className="w-4 h-4" />
-      <span>Back</span>
+      <span>{props.title || ""}</span>
     </button>
   );
 }
