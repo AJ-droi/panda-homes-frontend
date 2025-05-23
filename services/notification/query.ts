@@ -15,6 +15,7 @@ export function useFetchPropertyOverview() {
         day: "numeric",
         year: "numeric",
       }),
+      property_name: item.property.name,
       type: item.type,
       description: item.description,
       status: item.status

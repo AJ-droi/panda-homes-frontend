@@ -13,7 +13,10 @@ export default function BackButton(props:any) {
       className="flex items-center gap-2 text-sm text-gray-700 hover:text-black"
     >
       <ArrowLeft className="w-4 h-4" />
-      <span>{props.title || ""}</span>
+       <h2
+            className="text-lg font-semibold text-gray-900"
+            style={{ fontFamily: "Inter" }}
+          >{props.title || ""}</h2>
     </button>
   );
 }

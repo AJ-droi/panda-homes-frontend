@@ -1,28 +1,21 @@
-"use client";
 /* eslint-disable */
 import React, { useState } from "react";
-import Dropdown2 from "@/components/Dropdown2";
+import { ArrowLeft} from "lucide-react";
 import InputField from "@/components/InputField";
-import GeoSearchMap from "@/components/GeoSearchMap";
-import { useCreatePropertyMutation } from "@/services/property/mutation";
-import { createPropertySchema } from "@/schemas/property.schemas";
-import { useRouter } from "next/navigation";
 import AddressAutocomplete from "@/components/AddressAutoComplete";
+import Dropdown2 from "@/components/Dropdown2";
+import { createPropertySchema } from "@/schemas/property.schemas";
+import { useCreatePropertyMutation } from "@/services/property/mutation";
+import { useRouter } from "next/navigation";
 import BackButton from "@/components/Backbutton";
-import { ArrowLeft } from "lucide-react";
 
-const PropertyForm = () => {
+const PropertyFormModal = ({ isOpen = true, onClose = () => {} }) => {
   const [formData, setFormData] = useState({
     name: "",
     location: "Lagos",
-    // property_status: "vacant",
     property_type: "Duplex",
     no_of_bedrooms: "",
-    // rental_price: "",
-    // security_deposit: "",
-    // service_charge: "",
   });
-
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showSummary, setShowSummary] = useState(false);
   const { mutate, isPending } = useCreatePropertyMutation();
@@ -72,10 +65,11 @@ const PropertyForm = () => {
     // rental_price: parseInt(formData.rental_price.replace(/,/g, "")),
     // security_deposit: parseInt(formData.security_deposit.replace(/,/g, "")),
     // service_charge: parseInt(formData.service_charge.replace(/,/g, "")),
-    description: `Property ${formData.name} is a ${
+    description: `${formData.name} is a ${
       formData.no_of_bedrooms
     }-bedroom ${formData.property_type.toLowerCase()} located in ${
-      formData.location}`
+      formData.location
+    }`,
     // } with a rental price of ₦${
     //   formData.rental_price
     // }, a security deposit of ₦${
@@ -101,7 +95,6 @@ const PropertyForm = () => {
     setShowSummary(true);
   };
 
-
   const handleSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     const submissionData = getSubmissionData();
@@ -118,155 +111,129 @@ const PropertyForm = () => {
   const handlePlaceSelected = (
     place: google.maps.places.PlaceResult | null
   ) => {
-    setFormData((prev) => ({ ...prev, location: place?.formatted_address || "" }));
+    setFormData((prev) => ({
+      ...prev,
+      location: place?.formatted_address || "",
+    }));
   };
 
+  if (!isOpen) return null;
+
   return (
-    <>
-      <form className="space-y-6 text-[#000]">
-      {/* {errors && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-          {errors}
-        </div>
-      )} */}
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div
+        className="absolute inset-0  bg-opacity-50 backdrop-blur-sm"
+        onClick={onClose}
+      />
 
-        <div>
-          <label>Name</label>
-          <InputField
-            name="name"
-            placeholder="Enter name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-          {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+      <div className="relative bg-white rounded-lg shadow-xl max-w-xl w-full mx-4 max-h-screen overflow-hidden">
+        {/* Header */}
+        <div className="flex items-center px-6 py-4 border-b border-gray-200">
+          <BackButton title="List New Property" />
         </div>
 
-        <div>
-          <label>Address</label>
-          {/* {!showSummary && (
-            <GeoSearchMap
-              onLocationSelect={(_, address: string) =>
-                setFormData((prev) => ({ ...prev, location: address }))
-              }
+        {/* Form Content */}
+        <div
+          className="px-6 py-6 space-y-6 overflow-y-auto"
+          style={{ maxHeight: "calc(90vh - 140px)" }}
+        >
+          {/* Property Name */}
+          <div>
+            <label
+              className="block text-sm font-medium text-gray-700 mb-1"
+              style={{ fontFamily: "Inter" }}
+            >
+              Name
+            </label>
+            <InputField
+              name="name"
+              placeholder="Enter Property Name"
+              value={formData.name}
+              onChange={handleChange}
             />
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+            )}
+          </div>
 
-        
-          )} */}
+          {/* Address */}
+          <div>
+            <label
+              className="block text-sm font-medium text-gray-700 mb-1"
+              style={{ fontFamily: "Inter" }}
+            >
+              Address
+            </label>
+            <AddressAutocomplete onPlaceSelected={handlePlaceSelected} />
+            {formData.location && (
+              <p className="text-green-600 text-sm mt-1">
+                Selected: {formData.location}
+              </p>
+            )}
+            {errors.location && (
+              <p className="text-red-500 text-sm mt-1">{errors.location}</p>
+            )}
+          </div>
 
-          <AddressAutocomplete onPlaceSelected={handlePlaceSelected} />
-          {formData.location && (
-            <p className="text-green-600 text-sm mt-1">
-              Selected: {formData.location}
-            </p>
-          )}
-          {errors.location && (
-            <p className="text-red-500 text-sm mt-1">{errors.location}</p>
-          )}
-        </div>
-
-        <div className="flex flex-col lg:flex-row gap-4">
-          <div className="lg:w-1/2">
-            <label>Property Type</label>
+          {/* Property Type */}
+          <div>
+            <label
+              className="block text-sm font-medium text-gray-700 mb-1"
+              style={{ fontFamily: "Inter" }}
+            >
+              Property Type
+            </label>
             <Dropdown2
               name="property_type"
               options={["Duplex", "Flat", "Self-Contain"]}
               selectedOption={formData.property_type}
-              placeholder="Select type"
+              placeholder="Select Property Type"
               onChange={handleDropdownChange}
             />
             {errors.property_type && (
-              <p className="text-red-500 text-sm">{errors.property_type}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {errors.property_type}
+              </p>
             )}
           </div>
 
-          <div className="lg:w-1/2">
-            <label>Bedrooms</label>
+          {/* Number of Bedrooms */}
+          <div>
+            <label
+              className="block text-sm font-medium text-gray-700 mb-1"
+              style={{ fontFamily: "Inter" }}
+            >
+              No. of Bedrooms
+            </label>
             <Dropdown2
               name="no_of_bedrooms"
               options={["1", "2", "3", "4", "5", "6+"]}
               selectedOption={formData.no_of_bedrooms}
-              placeholder="Select type"
+              placeholder="Select no. of Bedrooms"
               onChange={handleDropdownChange}
             />
-            {/* <InputField
-              name="no_of_bedrooms"
-              type="number"
-              placeholder="e.g. 3"
-              value={formData.no_of_bedrooms}
-              onChange={handleChange}
-            /> */}
             {errors.no_of_bedrooms && (
-              <p className="text-red-500 text-sm">{errors.no_of_bedrooms}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {errors.no_of_bedrooms}
+              </p>
             )}
           </div>
-
-          {/* <div className="w-1/3">
-            <label>Status</label>
-            <Dropdown2
-              name="property_status"
-              options={["vacant", "occupied", "under_maintenance"]}
-              selectedOption={formData.property_status}
-              placeholder="Select status"
-              onChange={handleDropdownChange}
-            />
-            {errors.property_status && (
-              <p className="text-red-500 text-sm">{errors.property_status}</p>
-            )}
-          </div> */}
         </div>
 
-        {/* <div className="flex flex-col lg:flex-row gap-4">
-          <div className="lg:w-1/3">
-            <label>Rental Price (₦)</label>
-            <InputField
-              name="rental_price"
-              type="text"
-              value={formData.rental_price}
-              onChange={handleChange}
-              placeholder="e.g. 150000"
-            />
-            {errors.rental_price && (
-              <p className="text-red-500 text-sm">{errors.rental_price}</p>
-            )}
-          </div>
+        {/* Footer with Review Button */}
+        <div className="px-6 py-4 border-t border-gray-200 flex justify-end">
+          <button
+            onClick={handleShowSummary}
+            className="px-8 py-3 bg-[#785DBA] text-white rounded-lg font-medium hover:bg-[#6B4CA0] transition-colors"
+            style={{ fontFamily: "Inter" }}
+          >
+            Review
+          </button>
+        </div>
+      </div>
 
-          <div className="lg:w-1/3">
-            <label>Security Deposit</label>
-            <InputField
-              name="security_deposit"
-              type="text"
-              value={formData.security_deposit}
-              onChange={handleChange}
-            />
-            {errors.security_deposit && (
-              <p className="text-red-500 text-sm">{errors.security_deposit}</p>
-            )}
-          </div>
-
-          <div className="lg:w-1/3">
-            <label>Service Charge</label>
-            <InputField
-              name="service_charge"
-              type="text"
-              value={formData.service_charge}
-              onChange={handleChange}
-            />
-            {errors.service_charge && (
-              <p className="text-red-500 text-sm">{errors.service_charge}</p>
-            )}
-          </div>
-        </div> */}
-
-        <button
-          type="button"
-          className="bg-[#785DBA] text-white px-4 py-2 rounded w-full"
-          onClick={handleShowSummary}
-        >
-          Review
-        </button>
-      </form>
-
-     {showSummary && (
+      {/* Summary Modal */}
+      {showSummary && (
         <>
           <div
             className="absolute inset-0  bg-opacity-50 backdrop-blur-sm"
@@ -331,8 +298,8 @@ const PropertyForm = () => {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 
-export default PropertyForm;
+export default PropertyFormModal;

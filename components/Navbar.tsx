@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable */
 import React, { useState, useRef, useEffect } from "react";
 import {
   NavbarNotificationBell,
@@ -9,7 +10,7 @@ import { ChevronDown } from "lucide-react";
 import device from "@/constants/breakpoints";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 
-const Navbar = () => {
+const Navbar = ({onPropertyClick}:any) => {
   const router = useRouter();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -70,7 +71,7 @@ const Navbar = () => {
                 Add Tenant
               </button>
               <button
-                onClick={() => handleAction("/dashboard/add-property")}
+                onClick={isTabletOrSmaller ?() => handleAction("/dashboard/add-property") : () => onPropertyClick()}
                 className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
               >
                 Add Property

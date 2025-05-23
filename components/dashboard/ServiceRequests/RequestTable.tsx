@@ -2,75 +2,12 @@
 import React, { useState } from "react";
 import Pagination from "@/components/PaginationComponent";
 import { useFetchServiceRequest } from "@/services/service-request/query";
+import { AnyARecord } from "node:dns";
 
-const PropertyPaymentTable = () => {
-  // const requestTable = [
-  //   {
-  //     id: 1,
-  //     property: "Lekki Flat A",
-  //     requestId: "#SR002",
-  //     tenant: "Jane Smith",
-  //     issue: "Power Outage",
-  //     dateReported: "Mar 1st 2025",
-  //     status: "Pending",
-  //   },
-  //   {
-  //     id: 2,
-  //     property: "Abuja Duplex",
-  //     requestId: "#SR003",
-  //     tenant: "Peter Okon",
-  //     issue: "Leaking Roof",
-  //     dateReported: "Mar 1st 2025",
-  //     status: "In Progress",
-  //   },
-  //   {
-  //     id: 3,
-  //     property: "Abuja Duplex",
-  //     requestId: "#SR003",
-  //     tenant: "Peter Okon",
-  //     issue: "Leaking Roof",
-  //     dateReported: "Mar 1st 2025",
-  //     status: "Resolved",
-  //   },
-  //   {
-  //     id: 4,
-  //     property: "Abuja Duplex",
-  //     requestId: "#SR003",
-  //     tenant: "Peter Okon",
-  //     issue: "Leaking Roof",
-  //     dateReported: "Mar 1st 2025",
-  //     status: "Resolved",
-  //   },
-  //   {
-  //     id: 5,
-  //     property: "Abuja Duplex",
-  //     requestId: "#SR003",
-  //     tenant: "Peter Okon",
-  //     issue: "Leaking Roof",
-  //     dateReported: "Mar 1st 2025",
-  //     status: "Resolved",
-  //   },
-  //   {
-  //     id: 6,
-  //     property: "Ikeja Studio",
-  //     requestId: "#SR003",
-  //     tenant: "Peter Okon",
-  //     issue: "Leaking Roof",
-  //     dateReported: "Mar 1st 2025",
-  //     status: "Resolved",
-  //   },
-  //   {
-  //     id: 7,
-  //     property: "Ikeja Studio",
-  //     requestId: "#SR003",
-  //     tenant: "Peter Okon",
-  //     issue: "Leaking Roof",
-  //     dateReported: "Mar 1st 2025",
-  //     status: "Resolved",
-  //   },
-  // ];
+const PropertyPaymentTable = ({serviceRequest, isLoading}:any) => {
+ 
 
-  const { data: serviceRequest, isLoading } = useFetchServiceRequest();
+
    const [currentPage, setCurrentPage] = useState(1);
       const itemsPerPage = 10;
       
@@ -79,7 +16,6 @@ const PropertyPaymentTable = () => {
       const indexOfFirstItem = indexOfLastItem - itemsPerPage;
       const currentItems = serviceRequest?.slice(indexOfFirstItem, indexOfLastItem);
 
-      console.log(serviceRequest)
   return (
     <div className="max-w-full text-[#6E7079] overflow-hidden ">
       <div className="overflow-x-auto">
