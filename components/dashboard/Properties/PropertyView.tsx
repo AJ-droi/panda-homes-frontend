@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Edit3, ArrowLeft } from 'lucide-react';
 import InputField from '@/components/InputField';
+import { useFetchPropertyById } from '@/services/property/query';
+import { useParams } from 'next/navigation';
 // adjust the path as needed
 
 type PropertyField =
@@ -58,6 +60,17 @@ const PropertyView = () => {
     setEditMode(prev => ({ ...prev, [field]: !prev[field] }));
   };
 
+
+  const {id} = useParams<{id:string}>()
+
+  const {data} = useFetchPropertyById(id) 
+
+  useEffect(() =>{
+    if(data){
+      setPropertyData(data)
+    }
+  }, [data])
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setPropertyData(prev => ({ ...prev, [name as PropertyField]: value }));
@@ -74,7 +87,7 @@ const PropertyView = () => {
 
   const renderField = (label: string, field: PropertyField, type: string = 'text') => (
     <div className='py-2'>
-      <label className="text-sm text-gray-600 font-medium">{label}</label>
+      <label className="text-sm text-gray-800 font-medium">{label}</label>
       {editMode[field] ? (
         <InputField
           name={field}
@@ -84,7 +97,7 @@ const PropertyView = () => {
         />
       ) : (
         <div className="flex items-center justify-between mt-1">
-          <p className="text-gray-800">{propertyData[field]}</p>
+          <p className="text-gray-500 text-[14px]">{propertyData[field]}</p>
           <button onClick={() => toggleEditMode(field)}>
             <Edit3 size={16} className="text-gray-500" />
           </button>
