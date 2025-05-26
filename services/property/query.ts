@@ -64,12 +64,12 @@ export function useFetchPropertyById(id: string) {
       data.location
     }`,
     location: data.location,
-    occupancyStatus: data.property_status,
+    occupancy_status: data.property_status,
     tenant_name:
       activeTenant?.tenant?.first_name && activeTenant?.tenant?.last_name
         ? `${activeTenant.tenant.first_name} ${activeTenant.tenant.last_name}`
         : '',
-    phone_number: activeTenant?.tenant?.phone_number || '',
+
     propertyType: data.property_type,
     lease_start_date: leaseStart
       ? leaseStart.toLocaleDateString('en-US', {
@@ -93,11 +93,16 @@ export function useFetchPropertyById(id: string) {
           day: 'numeric',
           year: 'numeric',
         }),
-    rentStatus: activeTenant?.status || 'N/A',
+    rent_status: activeTenant?.status || 'N/A',
     rental_price: activeRent?.rental_price || 0,
     service_charge: activeRent?.service_charge || 0,
+    security_deposit: activeRent?.security_deposit || 0,
     property_tenants: data.property_tenants || [],
     no_of_bedrooms: data.no_of_bedrooms,
+    first_name: activeTenant?.tenant?.user?.first_name || '', 
+    last_name: activeTenant?.tenant?.user?.last_name || '',
+    email: activeTenant?.tenant?.user?.email || '',
+    phone_number: activeTenant?.tenant?.user?.phone_number || '',
   };
 }
   });

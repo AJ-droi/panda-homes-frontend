@@ -268,7 +268,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
 
           </div>
 
-
+{/* 
               <div className="flex justify-start gap-2 sm:gap-[14px] items-center">
           <input
             type="checkbox"
@@ -279,7 +279,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
           <span className="font-[500] text-[14px] sm:text-[16px] leading-[100%] text-[#696F79]">
             Choose as a sub account
           </span>
-        </div>
+        </div> */}
 
           {/* Submit Button */}
           <section className="flex flex-col-reverse sm:flex-row justify-end gap-4">

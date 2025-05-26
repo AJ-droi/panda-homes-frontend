@@ -80,8 +80,8 @@ export const DocumentPreviewModal = ({ documentUrl, onClose }: any) => {
   );
 };
 
-const NoticeTable = () => {
-  const { data: noticeData } = useFetchNoticeAgreements();
+const NoticeTable = ({ noticeData}:any) => {
+
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const [previewUrl, setPreviewUrl] = useState(null);
