@@ -12,7 +12,7 @@ const OverviewCard = (props:any) => {
                 {data?.map((item:any, itemIndex:number) => (
                   <div
                     key={ itemIndex}
-                    className="border-b-1   border-[#37352F29] max-w-[708px] font-plus-jarkarta"
+                    className="border-b-1  pt-2  border-[#37352F29] max-w-[708px] font-plus-jarkarta"
                   >
            
                       <div className="flex items-start border-l-2 border-[#DDDEE1] pl-4 pr-6">

@@ -186,3 +186,13 @@ export const getHistoryByPropertyId = async (id: string) => {
     };
   }
 };
+
+export const deletePropertyById = async (id: string) => {
+  const response = await axiosInstance.delete(`/properties/${id}`);
+
+  if (response.status !== 200) {
+    throw new Error("Error removing property");
+  }
+
+  return response.data;
+};

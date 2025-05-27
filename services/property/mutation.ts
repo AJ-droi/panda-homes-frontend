@@ -3,7 +3,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { z } from "zod";
 import { createPropertySchema } from "@/schemas/property.schemas";
-import { createProperty, updateProperty } from "./api";
+import { createProperty, deletePropertyById, updateProperty } from "./api";
 
 
 export function useCreatePropertyMutation() {
@@ -42,3 +42,21 @@ export function useUpdatePropertyMutation(id:string) {
     });
   }
   
+
+  export function useDeletePropertyMutation() {
+    return useMutation({
+      mutationFn: async (id:string) => {
+        return await deletePropertyById(id);
+      },
+      onMutate: () => {
+        console.log("🔐 property deletion started...");
+      },
+      onError: (error: any) => {
+        console.error(error.message);
+        return error.message || "An error occurred during property deletion.";
+      },
+      onSuccess: async (data) => {
+        return data;
+      },
+    });
+  } 

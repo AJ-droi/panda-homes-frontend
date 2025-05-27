@@ -135,7 +135,7 @@ const PropertiesHome = () => {
         )}
 
         {activeTab === "maintenance-issues" && (
-          <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] my-[2%]">
+          <section className="max-w-[98%] text-[#0e0e0f] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] my-[2%]">
             <div className="w-full">
               <IssuesListTable />
             </div>

@@ -43,7 +43,14 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${plusJakarta.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${plusJakarta.variable} antialiased `}
+        style={{
+          backgroundImage: "url('/auth-bg.png')",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          height: "100vh",
+        }}
       >
         <Providers>
           <ToastContainer
@@ -56,7 +63,9 @@ export default function RootLayout({
             theme="light"
             transition={Flip}
           />
-          {children}
+         
+         {children}
+          
         </Providers>
       </body>
     </html>

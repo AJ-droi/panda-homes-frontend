@@ -1,8 +1,12 @@
+/*eslint-disable */
 import React, { useEffect, useState } from 'react';
-import { Edit3, ArrowLeft } from 'lucide-react';
+import { Edit3} from 'lucide-react';
 import InputField from '@/components/InputField';
 import { useFetchPropertyById } from '@/services/property/query';
 import { useParams } from 'next/navigation';
+import BackButton from '@/components/Backbutton';
+import { useDeletePropertyMutation, useUpdatePropertyMutation } from '@/services/property/mutation';
+import { toast } from 'react-toastify';
 // adjust the path as needed
 
 type PropertyField =
@@ -60,10 +64,39 @@ const PropertyView = () => {
     setEditMode(prev => ({ ...prev, [field]: !prev[field] }));
   };
 
+  const toggleEditPropertyMode = () => {
+    setEditMode(prev => ({
+      ...prev,
+      name: !prev.name,
+      location: !prev.location,
+      description: !prev.description,
+      occupancy_status: !prev.occupancy_status,
+    }));
+  }
 
   const {id} = useParams<{id:string}>()
 
   const {data} = useFetchPropertyById(id) 
+
+  const {mutate, isPending} = useUpdatePropertyMutation(id)
+
+const deleteMutation = useDeletePropertyMutation();
+
+const handleDelete = async () => {
+  try {
+    await deleteMutation.mutateAsync(id, {
+      onSuccess: () => {
+        toast.success('Property deleted successfully');
+        window.location.href = '/dashboard/properties';
+      },
+      onError: (error) => {
+        toast.error('Error deleting property:', error);
+      }
+    });
+  } catch (error) {
+    alert("Failed to delete property.");
+  }
+};
 
   useEffect(() =>{
     if(data){
@@ -77,6 +110,25 @@ const PropertyView = () => {
   };
 
   const handleSubmit = () => {
+
+    const payload = {
+      ...propertyData,
+      rental_price: Number(propertyData.rental_price),
+      service_charge: Number(propertyData.service_charge),
+      security_deposit: Number(propertyData.security_deposit),
+      lease_start_date: new Date(propertyData.lease_start_date).toISOString(),
+      lease_end_date: new Date(propertyData.lease_end_date).toISOString(),  
+    }
+
+    mutate(payload, {
+      onSuccess: () => {
+       toast.success('Property data updated successfully');
+       window.location.reload();
+      },
+      onError: (error) => {
+        toast.error('Error updating property data:', error);
+      }
+    })
     console.log('Saving property data:', propertyData);
     const resetEditMode = Object.keys(editMode).reduce((acc, key) => {
       acc[key as PropertyField] = false;
@@ -114,9 +166,7 @@ const PropertyView = () => {
           {/* Property Details Section */}
           <div className="">
             <div className="flex items-center mb-6">
-              <button className="mr-4 p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                <ArrowLeft size={20} className="text-gray-600" />
-              </button>
+             <BackButton />
               <h2 className="text-xl font-semibold text-gray-700">Property Details</h2>
             </div>
 
@@ -128,16 +178,18 @@ const PropertyView = () => {
             {renderField('Description', 'description')}
             {renderField('Current Occupancy Status', 'occupancy_status')}
 
-            <div className="flex gap-4 mt-6">
+            <div className="flex justify-between gap-4 mt-6">
               <button
                 type="button"
-                className="px-6 py-2 border border-[#785DBA] text-[#785DBA] rounded-lg hover:bg-purple-50 transition-colors"
+                className="px-6 py-2 border border-[#785DBA] text-[#785DBA] rounded-lg hover:bg-purple-50 transition-colors text-[12px]"
+                onClick={() => toggleEditPropertyMode()}
               >
                 Edit Property
               </button>
               <button
                 type="button"
-                className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors"
+                className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors text-[12px]"
+                onClick={() => handleDelete()}
               >
                 Delete Property
               </button>
@@ -145,7 +197,7 @@ const PropertyView = () => {
           </div>
 
           {/* Tenancy Details Section */}
-          <div className="">
+          {data?.occupancy_status !== 'vacant' && <div className="">
             <h2 className="text-xl font-semibold text-gray-700 mb-6">Tenancy Details</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {renderField('Service Charge', 'service_charge')}
@@ -159,40 +211,40 @@ const PropertyView = () => {
             <div className="mt-6">
               <button
                 type="button"
-                className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors"
+                className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors text-[12px]"
               >
                 End Tenancy
               </button>
             </div>
-          </div>
+          </div>}
 
           {/* Tenant Details Section */}
-          <div className="">
+          {data?.occupancy_status !== 'vacant' && <div className="">
             <h2 className="text-xl font-semibold text-gray-700 mb-6">Tenant Details</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {renderField('First Name', 'first_name')}
               {renderField('Last Name', 'last_name')}
               {renderField('Phone Number', 'phone_number')}
-              {renderField('Email', 'email', 'email')}
+              {/* {renderField('Email', 'email', 'email')} */}
             </div>
 
             <div className="mt-6">
               <button
                 type="button"
-                className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors"
+                className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors text-[12px]"
               >
                 View KYC
               </button>
             </div>
-          </div>
+          </div>}
 
           {/* Save Changes Button */}
           <div className="flex justify-end">
             <button
               onClick={handleSubmit}
-              className="px-8 py-3 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors font-medium"
+              className="px-8 py-3 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors font-medium text-[12px]"
             >
-              Save Changes
+             {isPending ? 'Saving Changes...' : 'Save Changes'} 
             </button>
           </div>
         </div>

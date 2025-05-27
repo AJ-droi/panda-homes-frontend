@@ -196,7 +196,7 @@ const PropertiesListTable = ({ properties, isLoading }: any) => {
         />
       </div>
       <button
-        className="bg-[#785DBA] text-white text-[12px] font-semibold py-2 px-4 w-[45%] rounded-md"
+        className="bg-[#785DBA] text-white text-[12px] font-semibold py-2 px-4 w-[25%] mt-4 rounded-md flex justify-center justify-self-end"
         onClick={() => setIsModalOpen(true)}
       >
         Group Properties

@@ -68,10 +68,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
   };
 
   return (
-    <div className="mx-auto p-6 bg-white">
+    <div className="w-full bg-white rounded-md h-[70vh] px-5 py-5">
       <div className="flex flex-row justify-between items-center">
-        <div className="text-[32px] font-[500] text-[#333333]">
-          {isLogin ? " " : "Create an account"}
+        <div className="text-[32px] font-[500] text-[#333333] px-[3%]">
+          {isLogin ? <img src="/client-login.svg" width={200} height={200} /> : "Create an account"}
         </div>
         {/* <Link
           href={isLogin ? "signup" : "login"}
@@ -88,9 +88,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
       )}
 
       <form
-        className="space-y-4 mt-6 text-[#666666]"
+        className="space-y-4 mt-6 text-[#666666] px-[3%]"
         onSubmit={isLogin ? handleLogin : handleRegister}
       >
+        {isLogin && <p className="text-[#696F79]">Hey there! It’s great to have you here.</p>}
         {!isLogin && (
           <>
             <div className="mt-6">
@@ -103,7 +104,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
-                className="mt-1 text-black block w-full px-3 py-2 border border-[#66666659] h-[56px] rounded-[12px] shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 text-black block w-full px-3 py-3 sm:px-3 sm:py-2 border border-[#66666659] h-12 sm:h-[56px] rounded-[12px] shadow-sm bg-gray-50 cursor-default text-sm sm:text-base"
               />
             </div>
             <div className="mt-6">
@@ -116,7 +117,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 required
-                className="mt-1 text-black block w-full px-3 py-2 border border-[#66666659] h-[56px] rounded-[12px] shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 text-black block w-full px-3 py-3 sm:px-3 sm:py-2 border border-[#66666659] h-12 sm:h-[56px] rounded-[12px] shadow-sm bg-gray-50 cursor-default text-sm sm:text-base"
               />
             </div>
             {/* <div>
@@ -133,9 +134,9 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
           </>
         )}
 
-        <div className="mt-6">
-          <label htmlFor="email" className="block font-medium">
-            Email
+        <div className="mt-6 relative">
+          <label htmlFor="email" className="block font-medium absolute -top-[18%] ml-[5%] bg-[#fff] text-[12px] px-[3%] ">
+           Your Email
           </label>
           <input
             id="email"
@@ -143,12 +144,12 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             // required
-            className="mt-1 text-black block w-full px-3 py-2 border border-[#66666659] h-[56px] rounded-[12px] shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+           className="mt-1 text-black block w-full px-3 py-3 sm:px-3 sm:py-2 border border-[#66666659] h-12 sm:h-[56px] rounded-[12px] shadow-sm  cursor-default text-sm sm:text-base"
           />
         </div>
 
         <div className="mt-6 relative">
-          <label htmlFor="password" className="block font-medium">
+          <label htmlFor="password" className="block font-medium absolute -top-[18%] ml-[5%] bg-[#fff] text-[12px] px-[3%]">
             Password
           </label>
           <input
@@ -156,12 +157,12 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
             type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 text-black block w-full px-3 py-2 border border-[#66666659] h-[56px] rounded-[12px] shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 text-black block w-full px-3 py-3 sm:px-3 sm:py-2 border border-[#66666659] h-12 sm:h-[56px] rounded-[12px] shadow-sm bg-gray-50 cursor-default text-sm sm:text-base"
           />
           <button
             type="button"
             onClick={() => setShowPassword((prev) => !prev)}
-            className="absolute top-[45px] right-3 text-sm text-gray-600 focus:outline-none"
+            className="absolute top-[17px] right-3 text-sm text-gray-600 focus:outline-none"
           >
             {showPassword ? "Hide" : "Show"}
           </button>
@@ -193,25 +194,22 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
           <div
             className={`flex lg:flex lg:flex-row gap-4 w-full items-center justify-center lg:w-auto mt-4 lg:mt-0`}
           >
-            <ColouredButton
-              borderRadius="40px"
-              height="64px"
-              disabled={isPending}
-            >
-              <div
-                className={`font-[500] text-base sm:text-lg md:text-xl lg:text-[24px] whitespace-nowrap`}
+            <button
+            
+                className={`bg-[#212121] text-[12px] text-center w-full p-4 rounded-md text-[#fff]`}
               >
                 {isLogin
                   ? isPending
                     ? "Signing In"
                     : "Sign In"
                   : "Create an account"}
-              </div>
-            </ColouredButton>
+              
+            </button>
           </div>
         </div>
       </form>
-
+  
+  <p className="text-[#212121] text-center py-5 text-[12px] w-[80%] mx-auto">By Continuing, you agree to Panda’s Terms of Service and acknowledge you’ve read our Privacy Policy. </p>
       {/* Google login button */}
       {/* <div className="flex mt-10 gap-2 justify-between items-center">
         <div className="bg-[#66666640] w-1/2 h-0.5"></div>
