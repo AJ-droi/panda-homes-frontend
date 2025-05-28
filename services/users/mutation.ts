@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "@tanstack/react-query";
-import {  createUser, createUserKyc, loginUser, resetPassword, updateUser } from "./api";
+import {  createUser, createUserKyc, forgotPassword, loginUser, resetPassword, updateUser, validateOtp } from "./api";
 import { loginSchema } from "@/schemas/user.schemas";
 import { z } from "zod";
 import Cookies from "js-cookie";
@@ -72,7 +72,41 @@ export function useCreateUserMutation() {
   });
 }
 
+export function useForgotPasswordMutation() {
+  return useMutation({
+    mutationFn: async (formPayload: {email:string}) => {
+      return await forgotPassword(formPayload);
+    },
+    onMutate: () => {
+      console.log("🔐 forgot password started...");
+    },
+    onError: (error: any) => {
+      console.error(error.message);
+      return error.message || "An error occurred during forgot password.";
+    },
+    onSuccess: async (data) => {
+      return data;
+    },
+  });
+}
 
+export function useValidateOtpMutation() {
+  return useMutation({
+    mutationFn: async (formPayload: {otp:string}) => {
+      return await validateOtp(formPayload);
+    },
+    onMutate: () => {
+      console.log("🔐 otp validation started...");
+    },
+    onError: (error: any) => {
+      console.error(error.message);
+      return error.message || "An error occurred during otp validation.";
+    },
+    onSuccess: async (data) => {
+      return data;
+    },
+  });
+}
 
 export function useResetPasswordMutation() {
   return useMutation({

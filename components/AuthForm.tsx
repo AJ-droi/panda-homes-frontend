@@ -159,6 +159,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
             onChange={(e) => setPassword(e.target.value)}
             className="mt-1 text-black block w-full px-3 py-3 sm:px-3 sm:py-2 border border-[#66666659] h-12 sm:h-[56px] rounded-[12px] shadow-sm bg-gray-50 cursor-default text-sm sm:text-base"
           />
+
+          <span className="text-[#785DBA] w-full text-right text-[12px] flex justify-end pt-3" onClick={() => router.push('/forgot-password')}>Forgot Password</span>
           <button
             type="button"
             onClick={() => setShowPassword((prev) => !prev)}

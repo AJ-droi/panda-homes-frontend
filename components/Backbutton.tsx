@@ -20,3 +20,21 @@ export default function BackButton(props:any) {
     </button>
   );
 }
+
+
+export function BackToLogin() {
+  const router = useRouter();
+
+  return (
+    <button
+      onClick={() => router.push('/')}
+      className="flex items-center gap-2 text-sm text-gray-700 hover:text-black p-5"
+    >
+      <ArrowLeft className="w-4 h-4" />
+       <h2
+            className="text-md font-plus-jarkarta text-gray-900"
+            
+          >Back to Login</h2>
+    </button>
+  );
+}
