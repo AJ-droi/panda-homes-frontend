@@ -39,7 +39,7 @@ const Sidebar = () => {
     Cookies.remove("user_id");
     Cookies.remove("session");
     localStorage.clear();
-    router.push("/login");
+    router.push("/");
   };
 
   // Close sidebar when clicking outside
@@ -124,7 +124,7 @@ const Sidebar = () => {
       path: "/dashboard/service-requests",
     },
     {
-      name: "Notices & Agreements",
+      name: "Documents",
       icon: <SidebarNoticeAndAgreementIcon />,
       activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
       path: "/dashboard/notice-agreement",
@@ -207,7 +207,7 @@ const Sidebar = () => {
                   onClick={() => handleAction("/dashboard/notice-agreement/send-notice")}
                   className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
                 >
-                  Send Notice
+                  Create Document
                 </button>
               </div>
             )}

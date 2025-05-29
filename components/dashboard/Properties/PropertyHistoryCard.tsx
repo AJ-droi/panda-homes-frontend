@@ -95,15 +95,15 @@ export default function PropertyHistoryCard() {
           History
         </h1>
 
-        <div className="flex flex-col sm:flex-row gap-2 mt-4 sm:mt-0 w-1/2">
+        <div className="flex flex-col sm:flex-row gap-2 mt-4 sm:mt-0 b w-[100%] mx-auto">
           {/* Search Bar */}
           <div className="relative flex justify-between items-center w-full py-2">
             {/* Search Input */}
-            <div className="relative flex-grow mr-4 ">
+            <div className="relative flex-grow mr-4 w-[100%]">
               <input
                 type="text"
                 placeholder="Search"
-                className="pl-10 pr-4 font-[400] text-[14.53px] leading-[100%] bg-white shadow-lg text-[#ABAFB1] py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full "
+                className="pl-10 pr-4 font-[400] text-[14.53px] leading-[100%] bg-white shadow-lg text-[#ABAFB1] py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full  "
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -113,7 +113,7 @@ export default function PropertyHistoryCard() {
             </div>
 
             {/* Filter Icon Container */}
-            <div className="lg:hidden flex items-center justify-center">
+            {/* <div className="lg:hidden flex items-center justify-center">
               <button
                 className="w-13 h-13 flex items-center justify-center"
                 onClick={() => setShowFilterDropdown(!showFilterDropdown)}
@@ -128,7 +128,7 @@ export default function PropertyHistoryCard() {
                   // className="shadow-lg"
                 />
               </button>
-            </div>
+            </div> */}
           </div>
 {/* 
           <div className="hidden lg:flex text-[#53545C] text-sm font-[400] leading-[100%] gap-1">

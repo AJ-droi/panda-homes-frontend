@@ -73,7 +73,7 @@ const VerifyForm = () => {
 
 
         <button
-          className={`bg-[#212121] text-[12px] text-center w-full p-4 rounded-md text-[#fff]`}
+          className={`bg-[#212121] text-[12px] text-center w-full p-4 rounded-md text-[#fff] hover:bg-[#785DBA]`}
         >
           {isPending ? "Processing..." : "Submit"}
         </button>

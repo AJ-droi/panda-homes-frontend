@@ -6,9 +6,9 @@ const AddTenant = () => {
   return (
     <section className="bg-[#fafafe] min-h-screen p-4 sm:p-6 md:p-8">
         <div className=''>
-    <div className="mb-4">
+    {/* <div className="mb-4">
       <PropertyFormStar />
-    </div>
+    </div> */}
     <div className=''>
     <AddTenantForm  />
     </div>

@@ -37,7 +37,7 @@ const CalendarDropdown: React.FC<CalendarDropdownProps> = ({
       <button
         type="button"
         onClick={toggleCalendar}
-        className={`w-full px-[30px] py-[19px] border-1 h-[64px] hover:cursor-pointer border-[#8692A6] text-[#999999] rounded-[6px] flex items-center justify-between focus:outline-none ${
+        className={`w-full px-[30px] py-[12px] border-1 h-[56px] hover:cursor-pointer border-[#8692A6] text-[#999999] rounded-[6px] flex items-center justify-between focus:outline-none ${
           error 
             ? "border-[#D42620] focus:border-[#D42620]" 
             : "border-[#8692A6] focus:border-[#785DBA]"
@@ -83,7 +83,7 @@ const CalendarDropdown: React.FC<CalendarDropdownProps> = ({
             onChange={handleDateChange}
             inline
             minDate={disablePastDates ? new Date() : undefined}
-            calendarClassName="bg-white border border-gray-300 rounded-lg shadow-lg p-2"
+            calendarClassName="bg-white border border-gray-300 rounded-lg shadow-lg"
           />
         </div>
       )}

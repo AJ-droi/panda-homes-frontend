@@ -209,7 +209,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
 
             <div className="flex flex-col gap-2">
               <label className="block text-sm font-medium mb-2">
-                Lease Start Date
+                Tenancy Start Date
               </label>
               <CalendarDropdown
                 selectedDate={formData.lease_start_date}
@@ -220,7 +220,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
 
             <div className="flex flex-col gap-2">
               <label className="block text-sm font-medium mb-2">
-                Lease End Date
+                Tenancy End Date
               </label>
               <CalendarDropdown
                 selectedDate={formData.lease_end_date}
