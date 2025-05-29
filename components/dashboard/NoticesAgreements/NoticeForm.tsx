@@ -275,7 +275,7 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
         className="text-xl md:text-2xl leading-[150%] font-[500] mb-2 md:mb-2 text-[#785DBA] pt-[2%]"
         style={{ fontFamily: "Plus Jakarta Sans" }}
       >
-        Send New Notice
+        Create Document
       </h1>
 
       <main className="text-black mt-[37.96px]">

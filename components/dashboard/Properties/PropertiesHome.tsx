@@ -9,6 +9,8 @@ import { useFetchPropertyDetails } from "@/services/property/query";
 import PropertyMobileCard from "./PropertyMobileCard";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
+import Dropdown from "@/components/Dropdown";
+import { LocationIcon } from "@/layout/svgIconPaths";
 
 const PropertiesHome = () => {
   const [useColumnLayout, setUseColumnLayout] = useState(false);
@@ -31,6 +33,7 @@ const PropertiesHome = () => {
   const [params, setParams] = useState({
     name: "",
     location: "",
+    order:"",
     property_status: "",
     property_type: "",
     build_year: "",
@@ -54,7 +57,7 @@ const PropertiesHome = () => {
     <div className=" px-3 sm:px-4 md:px-6 lg:px-0 w-full">
       <BackButton />
       <div>
-        <section className="flex flex-col justify-center">
+        <section className="flex flex-row justify-center">
           <div className="mt-3 sm:mt-4 w-full flex justify-start">
             <SearchBar
               placeholder="Search for a property"
@@ -63,14 +66,14 @@ const PropertiesHome = () => {
               onSearchClick={(value) => handleSearchChange("search", value)}
             />
           </div>
-          {/* <div className="flex flex-wrap justify-center items-center gap-1.5 sm:gap-2 md:gap-3 lg:gap-[12.71px] p-2 md:p-[6.35px] mt-2 rounded-[7.62px] shadow-md">
+          <div className="flex flex-wrap justify-center items-center gap-1.5 sm:gap-2 md:gap-3 lg:gap-[12.71px] p-2 md:p-[6.35px] mt-2 rounded-[7.62px] ">
             <Dropdown
-              options={["", "Lagos", "Abia", "Benue", "Benin"]}
-              placeholder="Location"
+              options={["", "asc", "desc"]}
+              placeholder="Filter"
               icon={<LocationIcon />}
-              onChange={(value) => handleSearchChange("location", value)}
+              onChange={(value) => handleSearchChange("order", value)}
             />
-            <Dropdown
+            {/* <Dropdown
               options={["", "Bungalow", "3-Storey", "Duplex", "Hall"]}
               placeholder="Property Type"
               icon={<PropertyTypeIcon />}
@@ -92,8 +95,8 @@ const PropertiesHome = () => {
                 options={["", "2024", "2025", "2001", "1992"]}
                 placeholder="Build Year"
                 icon={<BuildYearCalendarIcon />}
-              />
-          </div> */}
+              /> */}
+          </div>
         </section>
 
         <div className="flex flex-wrap my-5">
@@ -122,7 +125,6 @@ const PropertiesHome = () => {
                   style={{ fontFamily: "Plus Jakarta Sans" }}
                 >
                   <div className="mt-4 sm:mt-6 w-full">
-                    :
                     <PropertiesListTable
                       properties={properties}
                       isLoading={isLoading}

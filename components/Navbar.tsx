@@ -81,7 +81,7 @@ const Navbar = ({onPropertyClick}:any) => {
                 onClick={() => handleAction("/dashboard/notice-agreement/send-notice")}
                 className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
               >
-                Send Notice
+               Create Document
               </button>
             </div>
           )}

@@ -1,5 +1,4 @@
 import AddTenantForm from '@/components/dashboard/Tenants/AddTenantForm'
-import { PropertyFormStar } from '@/layout/svgIconPaths'
 import React from 'react'
 
 const AddTenant = () => {

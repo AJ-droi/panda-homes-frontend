@@ -180,7 +180,7 @@ export default function PropertyHistoryCard() {
                 key={item.id}
                 className="border-b-1  mt-10 border-[#37352F29] max-w-[708px] py-2"
               >
-                {itemIndex === 0 && (
+  
                   <div className="flex items-start border-l-2 border-[#37352F] p-4">
                     <div className="ml-6">
                       <h3 className="text-[16px] font-[700] leading-[24px] text-gray-700">
@@ -188,7 +188,7 @@ export default function PropertyHistoryCard() {
                       </h3>
                     </div>
                   </div>
-                )}
+                
 
                 <div className="flex border-l-2 border-[#37352F] pl-4 pr-6">
                   <div className="ml-6 flex gap-[10px]">

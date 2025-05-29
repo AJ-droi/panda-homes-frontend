@@ -107,7 +107,10 @@ const PropertyForm = () => {
     const submissionData = getSubmissionData();
 
     mutate(submissionData, {
-      onSuccess: () => router.push("/dashboard/properties"),
+      onSuccess: () => {
+        setShowSummary(false)
+        router.push("/dashboard/properties");
+      },
       onError: (error: any) => {
         console.error("An error occurred: " + error.message);
         alert(error.response?.data?.message || "Submission failed");

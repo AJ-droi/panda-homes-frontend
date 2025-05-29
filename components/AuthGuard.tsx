@@ -21,7 +21,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
 
 
     if (!token) {
-      router.replace('/login');
+      router.replace('/');
       return;
     }
 

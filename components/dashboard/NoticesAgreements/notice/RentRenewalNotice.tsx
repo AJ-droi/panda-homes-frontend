@@ -107,7 +107,7 @@ export default function RentRenewalNotice() {
       
       <div className="flex justify-center mt-6">
         <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-md">
-          Send Notice
+        Crea
         </button>
       </div>
     </div>
