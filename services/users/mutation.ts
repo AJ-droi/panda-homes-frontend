@@ -27,11 +27,7 @@ export function useLoginMutation() {
 
     onSuccess: async (data) => {
       try {
-        Cookies.set("access_token",data.access_token, {
-          expires: 7, // days
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "strict",
-        });
+            localStorage.setItem('access_token', data.access_token)
 
         // console.log("🔐 Login successful:", data) ;
         data.user.role == 'tenant'?

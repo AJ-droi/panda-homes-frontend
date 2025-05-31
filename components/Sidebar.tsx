@@ -87,12 +87,7 @@ const Sidebar = () => {
       return;
     }
     // Replace token in cookies or localStorage
-    Cookies.set("access_token", subtoken, {
-      expires: 7, // days
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-    });
-
+    localStorage.setItem('access_token', subtoken)
     // Update app state or trigger revalidation
     // setUser(subAccount); // or trigger SWR/NextAuth update
     router.push("/tenant-dashboard");

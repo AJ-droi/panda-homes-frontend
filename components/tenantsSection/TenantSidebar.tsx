@@ -63,11 +63,7 @@ const TenantSidebar = () => {
       return;
     }
     // Replace token in cookies or localStorage
-    Cookies.set("access_token", parentoken, {
-      expires: 7, // days
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-    });
+       localStorage.setItem('access_token', parentoken)
 
     // Update app state or trigger revalidation
     // setUser(subAccount); // or trigger SWR/NextAuth update
