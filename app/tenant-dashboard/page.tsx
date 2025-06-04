@@ -47,7 +47,7 @@ const TenantDashboard = () => {
       "first_name",
     ]);
 
-  // console.log('property', propertyHistoryData)
+
   return (
     <div className="flex px-4 sm:px-8 md:px-16 py-6 md:py-10 bg-[#fafafe] flex-col min-h-screen">
       {!propertyHistory && !newServiceRequest && (
