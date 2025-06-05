@@ -1,133 +1,80 @@
-/* eslint-disable */
-"use client";
-import React, { useEffect, useState } from "react";
-import PropertyDescriptionCard from "@/components/tenantsSection/PropertyDescriptionCard";
-import TenantServiceRequestCard from "@/components/tenantsSection/ServiceRequestCard";
-import RentCountdown from "@/components/tenantsSection/RentExpiryProgressBar";
-import PropertyHistoryCard from "@/components/tenantsSection/PropertyHistoryCard";
-import TenantServiceRequestForm from "@/components/tenantsSection/TenantServiceRequestForm";
-import ColouredButton from "@/components/ColouredButton";
-import {
-  useGetTenantRent,
-  useGetTenantProperty,
-  useGetPropertyHistory,
-  useGetAdminPhoneNumber,
-} from "@/services/tenants/query";
+"use client"
+import React from 'react';
+import { ArrowRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
-const TenantDashboard = () => {
-  const [propertyHistory, setPropertyHistory] = useState(false);
-  const [newServiceRequest, setNewServiceRequest] = useState(false);
-  const [tenantDetails, setTenantDetails] = useState<any>({});
-
-  useEffect(() => {
-    const isClient = typeof window !== "undefined";
-    if (isClient) {
-      const jsonTenantDetails = localStorage.getItem("tenant");
-      if (jsonTenantDetails) {
-        try {
-          setTenantDetails(JSON.parse(jsonTenantDetails));
-        } catch (error) {
-          console.error("Failed to parse tenant details", error);
-        }
-      }
+export default function TenantHome() {
+    const router = useRouter()
+  const serviceCards = [
+    {
+      title: "New Service Request",
+      description: "Report a maintenance issue or request repairs.",
+      icon: <ArrowRight className="w-5 h-5 text-[#444D61]" />,
+      action: () =>{router.push('/tenant-dashboard/service-requests')}
+    },
+    {
+      title: "View Tenancy",
+      description: "See your rent details, lease, and payment history.",
+      icon: <ArrowRight className="w-5 h-5 text-[#444D61]" />,
+      action: () => {router.push('/tenant-dashboard/tenancy')}
+    },
+    {
+      title: "View Documents",
+      description: "Access your lease agreement, notices, and uploads.",
+      icon: <ArrowRight className="w-5 h-5 text-[#444D61]" />,
+      action: () => {router.push('/tenant-dashboard/notice-agreement')}
+    },
+    {
+      title: "Contact Us",
+      description: "Need help? Reach out to Us.",
+      icon: <ArrowRight className="w-5 h-5 text-[#444D61]" />,
+      action: () => {router.push('/tenant-dashboard/settings')},
+      fullWidth: true
     }
-  }, []);
-  const { data: rentDetails, isLoading: isRentLoading } = useGetTenantRent(
-    tenantDetails?.id
-  );
-
-  // const { data:propertyHistoryData, isLoading: isPropertyHistoryDataLoading } = useGetPropertyHistory(tenantDetails?.property_id)
-
-  const { data: tenantPropertyData, isLoading: isPropertyDataLoading } =
-    useGetTenantProperty(tenantDetails?.property_id);
-
-  const { data: adminData, isLoading: isAdminNumberLoading } =
-    useGetAdminPhoneNumber(tenantPropertyData?.owner_id, [
-      "phone_number",
-      "first_name",
-    ]);
-
+  ];
 
   return (
-    <div className="flex px-4 sm:px-8 md:px-16 py-6 md:py-10 bg-[#fafafe] flex-col min-h-screen">
-      {!propertyHistory && !newServiceRequest && (
-        <div>
-          <section className="mt-6 md:mt-10">
-            <div
-              className="font-[600] text-[#666666] text-[20px] md:text-[24px] leading-[150%]"
-              style={{ fontFamily: "Plus Jakarta Sans" }}
-            >
-              {isPropertyDataLoading
-                ? "loading apartment details..."
-                : !tenantPropertyData?.name
-                ? "No data available"
-                : tenantPropertyData?.name}
-            </div>
-            <div className="mt-6 md:mt-10 max-w-[823.611328125px]">
-              {isRentLoading ? (
-                <p className="text-[16px] md:text-[13.95px] leading-[100%] text-[#000000] font-[400]">
-                  Fetching rent details...
-                </p>
-              )  : (
-                <RentCountdown expirationDate={rentDetails?.lease_end_date} isPropertyDataLoading={isPropertyDataLoading} rental_price={rentDetails?.rental_price} />
-              )}
-            </div>
-          </section>
+    <div className="min-h-screen bg-gray-50 p-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-4xl font-light text-gray-900 mb-2">Hello Uche,</h1>
+          <p className="text-xl text-gray-600">What would you like to do today?</p>
+        </div>
 
-          <section className="mt-6 md:mt-10">
-            <div>
-              <div
-                className="font-[600] text-[18px] md:text-[22px] leading-[145%] text-[#4D4D4D]"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-              >
-                My apartment
+        {/* Service Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {serviceCards.map((card, index) => (
+            <div
+              key={index}
+              className={`
+                bg-white border-1 border-[#E2E2E2] rounded-lg p-6 cursor-pointer
+                hover:bg-blue-50 transition-colors duration-200
+                ${card.fullWidth ? 'md:col-span-1' : ''}
+                ${index === 3 ? 'md:col-start-1' : ''}
+              `}
+              onClick={card.action}
+            >
+              <div className="flex flex-col ">
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    {card.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                    {card.description}
+                  </p>
+                </div>
+                <div className=" text-gray-400 hover:text-blue-500 transition-colors flex justify-end w-full">
+                  {card.icon}
+                </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 mt-4 md:mt-6 lg:grid-cols-2 gap-4 md:gap-6 w-full">
-              <PropertyDescriptionCard
-                onClick={() => {
-                  setNewServiceRequest(false);
-                  return null;
-                }}
-                property={tenantPropertyData}
-              />
-              <TenantServiceRequestCard
-                onClick={() => {
-                  setPropertyHistory(false);
-                  setNewServiceRequest(true);
-                  return null;
-                }}
-              />
-            </div>
-          </section>
+          ))}
         </div>
-      )}
 
-      {/* {propertyHistory && (
-        <div className="mt-4">
-          <div className="w-auto mb-10 sm:w-auto flex justify-end">
-            <div className="max-w-[110px]">
-              <ColouredButton onClick={() => setPropertyHistory(false)}>
-                Close
-              </ColouredButton>
-            </div>
-          </div>
-          <PropertyHistoryCard />
-        </div>
-      )} */}
-
-      {newServiceRequest && (
-        <div className="mt-4">
-          <TenantServiceRequestForm
-            onClose={() => {
-              setNewServiceRequest(false);
-              return null;
-            }}
-          />
-        </div>
-      )}
+        {/* Additional spacing for better visual balance */}
+        <div className="mt-12"></div>
+      </div>
     </div>
   );
-};
-
-export default TenantDashboard;
+}
