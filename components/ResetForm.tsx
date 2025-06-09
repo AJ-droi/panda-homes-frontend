@@ -45,7 +45,7 @@ const ResetForm = () => {
   };
 
   return (
-     <div className="w-full bg-white rounded-md h-[70vh]">
+        <div className="w-full bg-white rounded-ss-3xl rounded-se-3xl md:rounded-md h-[70vh] md:h-[60vh]">
           <BackToLogin />
     <div className="h-[100%] px-5 py-5 flex flex-col justify-start">
       <div className="flex flex-col ">

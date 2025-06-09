@@ -33,7 +33,7 @@ const ForgotForm = () => {
   };
 
   return (
-    <div className="w-full bg-white rounded-md h-[60vh]">
+    <div className="w-full bg-white rounded-ss-3xl rounded-se-3xl md:rounded-md h-[70vh] md:h-[60vh]">
       <BackToLogin />
       <div className="rounded-md  px-5  flex flex-col justify-start">
         <div className="flex flex-col ">

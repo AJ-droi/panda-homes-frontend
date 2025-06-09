@@ -68,7 +68,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
   };
 
   return (
-    <div className="w-full bg-white rounded-md h-[70vh] px-5 py-5">
+    <div className="w-full bg-white rounded-ss-3xl rounded-se-3xl  md:rounded-md h-[70vh] px-5 py-5">
       <div className="flex flex-row justify-between items-center">
         <div className="text-[32px] font-[500] text-[#333333] px-[3%]">
           {isLogin ? <img src="/client-login.svg" width={200} height={200} /> : "Create an account"}
@@ -160,7 +160,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
             className="mt-1 text-black block w-full px-3 py-3 sm:px-3 sm:py-2 border border-[#66666659] h-12 sm:h-[56px] rounded-[12px] shadow-sm bg-gray-50 cursor-default text-sm sm:text-base"
           />
 
-          <span className="text-[#785DBA] w-full text-right text-[14px] flex justify-end pt-3 underline" onClick={() => router.push('/forgot-password')}>Forgot Password</span>
+          <span className="text-[#785DBA] w-full text-right text-[14px] flex justify-end pt-3 hover:underline" onClick={() => router.push('/forgot-password')}>Forgot Password</span>
           <button
             type="button"
             onClick={() => setShowPassword((prev) => !prev)}
