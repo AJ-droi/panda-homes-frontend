@@ -23,7 +23,7 @@ const ChatComponent = () => {
         position: 'relative',
         top: 0,
         left: 0,
-        width: '100vw',
+        width: '88vw',
         height: '90vh',
         border: 'none',
         zIndex: 0,

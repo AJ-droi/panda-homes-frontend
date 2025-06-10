@@ -47,11 +47,23 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
     }
   }, [data]);
 
+    function formatPhoneNumber(phone: string): string {
+  if (phone.startsWith('0')) {
+    return '+234' + phone.slice(1);
+  }
+  return phone; // return as-is if it doesn't start with 0
+}
+
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement >
   ) => {
     const { name, value, type } = e.target as HTMLInputElement | HTMLSelectElement;
     const checked = (e.target as HTMLInputElement).checked;
+
+         const formattedValue =
+    name === 'phone_number' ? formatPhoneNumber(value) : value;
+
 
     const isCurrencyField = [
       "rental_price",
@@ -65,7 +77,14 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
         const formatted = Number(rawValue).toLocaleString("en-NG");
         setFormData((prev) => ({ ...prev, [name]: formatted }));
       }
-    } else {
+    } else if(formattedValue){
+       setFormData(prev => ({
+    ...prev,
+    [name]: formattedValue,
+  }));
+    }
+    
+    else {
       setFormData((prev: any) => ({
         ...prev,
         [name]: type === "checkbox" ? checked : value
@@ -87,6 +106,8 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
       [name]: value,
     }));
   };
+
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
