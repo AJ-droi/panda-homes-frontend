@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Flip, ToastContainer } from "react-toastify";
 import Providers from "../components/providers"; // 👈 import client wrapper
 
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -41,7 +42,11 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         />
+
+
+
       </head>
+      
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${plusJakarta.variable} antialiased `}
         style={{
@@ -63,6 +68,7 @@ export default function RootLayout({
             theme="light"
             transition={Flip}
           />
+           {/* <TawkToWidget /> */}
          
          {children}
           
