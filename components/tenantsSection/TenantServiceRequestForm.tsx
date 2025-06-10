@@ -12,6 +12,7 @@ import {
 } from "@/services/tenants/query";
 import { useCreateServiceRequest } from "@/services/tenants/mutation";
 import InputField from "../InputField";
+import { useRouter } from "next/navigation";
 
 interface propertyFormProps {
   onClose?: () => void;
@@ -47,7 +48,7 @@ const TenantServiceRequestForm: React.FC<propertyFormProps> = ({ onClose }) => {
     tenantDetails?.property_id
   );
 
-  console.log(tenantPropertyData)
+  const router = useRouter()
 
   const categoryOptions = ["Plumbing", "Electricity", "Leaking Roof", "Other"];
 
@@ -138,6 +139,7 @@ const TenantServiceRequestForm: React.FC<propertyFormProps> = ({ onClose }) => {
       onSuccess: () => {
         if (onClose) {
           onClose();
+          router.push('/tenant-dashboard/service-requests/new')
         }
       },
       onError: (error) => {
