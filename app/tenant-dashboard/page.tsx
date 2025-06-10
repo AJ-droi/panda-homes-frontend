@@ -38,7 +38,7 @@ export default function TenantHome() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-light text-gray-900 mb-2">Hello Uche,</h1>
+          <h1 className="text-4xl font-light text-gray-900 mb-2">Hello,</h1>
           <p className="text-xl text-gray-600">What would you like to do today?</p>
         </div>
 
