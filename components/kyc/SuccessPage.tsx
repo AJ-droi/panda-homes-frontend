@@ -6,7 +6,7 @@ export default function SuccessPage() {
     const router = useRouter();
   
     const handleClick = () => {
-      router.push("/login"); // Replace with your actual redirect route
+      router.push("/"); // Replace with your actual redirect route
     };
   
     return (

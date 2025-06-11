@@ -15,7 +15,7 @@ const LandingPageTrackCard = () => {
       </section>
 
       <section className="py-4 sm:py-0 w-full sm:w-[33%] justify-center items-center flex border-t sm:border-t-0 border-gray-200">
-        <Link href="/login" className="w-full sm:w-auto flex justify-center">
+        <Link href="/" className="w-full sm:w-auto flex justify-center">
           <ColouredButton title="Login" />
         </Link>
       </section>

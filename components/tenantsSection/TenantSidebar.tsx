@@ -52,7 +52,7 @@ const TenantSidebar = () => {
   const handleLogout = () => {
     localStorage.removeItem("tenant");
     Cookies.remove("token");
-    router.push("/login");
+    router.push("/");
   };
 
   function handleSwitchAccount() {

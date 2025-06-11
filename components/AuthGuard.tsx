@@ -28,7 +28,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
 
     if (expired) {
       localStorage.removeItem('access_token');
-      router.replace('/login');
+      router.replace('/');
       return;
     }
 
