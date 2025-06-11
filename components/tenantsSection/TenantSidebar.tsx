@@ -24,7 +24,7 @@ import {
   NavbarNotificationBell,
   NavbarSettingsIcon,
 } from "@/layout/svgIconPaths";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 const TenantSidebar = () => {
   const pathname = usePathname();
@@ -51,24 +51,25 @@ const TenantSidebar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("tenant");
+     localStorage.removeItem("token");
     Cookies.remove("token");
     router.push("/");
   };
 
-  function handleSwitchAccount() {
-    const parentoken = localStorage.getItem("parent_token") as string;
+  // function handleSwitchAccount() {
+  //   const parentoken = localStorage.getItem("parent_token") as string;
 
-    if (!parentoken) {
-      toast.error("No Admin account is linked to this account");
-      return;
-    }
-    // Replace token in cookies or localStorage
-       localStorage.setItem('access_token', parentoken)
+  //   if (!parentoken) {
+  //     toast.error("No Admin account is linked to this account");
+  //     return;
+  //   }
+  //   // Replace token in cookies or localStorage
+  //      localStorage.setItem('access_token', parentoken)
 
-    // Update app state or trigger revalidation
-    // setUser(subAccount); // or trigger SWR/NextAuth update
-    router.push("/dashboard");
-  }
+  //   // Update app state or trigger revalidation
+  //   // setUser(subAccount); // or trigger SWR/NextAuth update
+  //   router.push("/dashboard");
+  // }
 
   const iconData = [
     {
@@ -77,6 +78,12 @@ const TenantSidebar = () => {
       activeIcon: <HomeActiveIcon />,
       path: "/tenant-dashboard",
     },
+     {
+      name: "Tenancy",
+      icon: <PropertyHistoryIcon/>,
+      activeIcon: <ActivePropertyHistoryIcon />,
+      path: "/tenant-dashboard/tenancy",
+    },
     {
       name: "Service Requests",
       icon: <SidebarServiceRequestsIcon />,
@@ -84,24 +91,24 @@ const TenantSidebar = () => {
       path: "/tenant-dashboard/service-requests",
     },
     {
-      name: "Notices & Agreements",
+      name: "Documents",
       icon: <SidebarNoticeAndAgreementIcon />,
       activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
       path: "/tenant-dashboard/notice-agreement",
     },
-    {
-      name: "Property History",
-      icon: <PropertyHistoryIcon />,
-      activeIcon: <ActivePropertyHistoryIcon />,
-      path: "/tenant-dashboard/property-history",
-    },
+    // {
+    //   name: "Property History",
+    //   icon: <PropertyHistoryIcon />,
+    //   activeIcon: <ActivePropertyHistoryIcon />,
+    //   path: "/tenant-dashboard/property-history",
+    // },
 
-    {
-      name: "Switch to Admin Account",
-      icon: <SidebarNoticeAndAgreementIcon />,
-      // activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
-      onClick: handleSwitchAccount,
-    },
+    // {
+    //   name: "Switch to Admin Account",
+    //   icon: <SidebarNoticeAndAgreementIcon />,
+    //   // activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
+    //   onClick: handleSwitchAccount,
+    // },
     {
       name: "Logout",
       icon: <LogoutIcon />,

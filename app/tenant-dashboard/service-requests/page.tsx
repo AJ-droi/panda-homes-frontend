@@ -1,16 +1,39 @@
-"use client";
-import TenantServiceRequestHome from "@/components/tenantsSection/tenantServiceRequest/TenantServiceRequestHome";
-import React from "react";
 
-const TenantServiceRequests = () => {
+"use client"
+import React from 'react';
 
-  return (
-    <div className="flex flex-col min-h-screen">
-        <div className="p-4 sm:p-6 md:p-8 bg-[#fafafe] min-h-screen">
-          <TenantServiceRequestHome />
-        </div>
-      </div>
-  );
+
+// const socket = io('http://localhost:3150'); // your NestJS backend URL
+
+// interface Message {
+//   id: string;
+//   sender: string;
+//   text: string;
+//   read: boolean;
+//   createdAt: string;
+// }
+
+const ChatComponent = () => {
+
+  return(
+    <div className='bg-[#fafafe] min-h-screen'>
+       <iframe
+      src="https://tawk.to/chat/6848323f75c70f190ee42012/1itd093bu"
+      style={{
+        position: 'relative',
+        top: 0,
+        left: 0,
+        width: '88vw',
+        height: '90vh',
+        border: 'none',
+        zIndex: 0,
+      }}
+      allow="microphone; camera"
+    />
+    </div>
+       
+
+  )
 };
 
-export default TenantServiceRequests;
+export default ChatComponent;

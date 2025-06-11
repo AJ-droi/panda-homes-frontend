@@ -45,14 +45,26 @@ export function useGetTenantProperty(property_id: string) {
 
 export function useFetchTenantServiceRequest(property_id: string, page: number = 1, limit: number = 10) {
   return useQuery({
-    queryKey: queryKeys.getTenantServiceRequests(property_id),
+    queryKey: ["tenant-service-request", property_id, page, limit],
     queryFn: () => getTenantServiceRequest(property_id, page, limit),
+    enabled: !!property_id,
     refetchOnMount: true,
     refetchOnWindowFocus: true,
     staleTime: 0,
-    enabled: !!property_id
+    select: (data) => {
+      return data?.service_requests.map((service: any) => ({
+        id: service.id,
+        requestid: service.request_id,
+        property: service.property_name,
+        tenant: service.tenant_name,
+        issue: service.description,
+        dateReported: service.date_reported,
+        status: service.status,
+      }));
+    }
   });
 }
+
 
 export function useGetAdminPhoneNumber(user_id: string, fields: string[]) {
   return useQuery({
