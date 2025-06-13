@@ -72,9 +72,16 @@ export default function MyTenancy() {
               <p className="text-gray-700">
                 Your rent of{" "}
                 <span className="text-[#785DBA]font-semibold">
-                  ₦{rentAmount}
+                  ₦{rentDetails?.rental_price}
                 </span>{" "}
-                is expiring in {expiryDate}
+                is expiring on {new Date(rentDetails?.lease_end_date).toLocaleDateString(
+                  "en-US",
+                  {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  }
+                )}
               </p>
             </div>
             <div className="text-right">

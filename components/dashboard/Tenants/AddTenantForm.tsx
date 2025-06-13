@@ -190,7 +190,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
 
             <div className="flex flex-col gap-2">
               <label className="block text-sm font-medium mb-2">
-                Phone Number
+                Phone Number (Whatsapp)
               </label>
               <InputField
                 name="phone_number"
