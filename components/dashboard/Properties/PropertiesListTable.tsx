@@ -191,8 +191,8 @@ const PropertiesListTable = ({ properties, isLoading }: any) => {
           itemsPerPage={itemsPerPage}
           totalItems={properties?.length}
           currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          totalPages={undefined}
+         onPageChange={setCurrentPage}
+    
         />
       </div>
       <button

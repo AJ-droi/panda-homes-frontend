@@ -1,84 +1,210 @@
-/* eslint-disable */
 import React from "react";
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
 
 interface PaginationProps {
-  itemsPerPage: number;
   totalItems: number;
   currentPage: number;
-  setCurrentPage: (page: number) => void;
-  totalPages: number | any;
+  itemsPerPage: number;
+  onPageChange: (page: number) => void;
+  onItemsPerPageChange?: (itemsPerPage: number) => void;
+  itemsPerPageOptions?: number[];
+  showItemsPerPage?: boolean;
+  showNavigation?: boolean;
+  showPageJumper?: boolean;
+  className?: string;
 }
 
-const Pagination = ({ 
-  itemsPerPage, 
-  totalItems, 
-  currentPage, 
-  setCurrentPage, 
-  totalPages,
-}: PaginationProps) => {
-  // const handlePageChange = (page: number) => {
-  //   if (page >= 1 && page <= totalPages) {
-  //     setCurrentPage(page);
-  //   }
-  // };
+const Pagination: React.FC<PaginationProps> = ({ 
+  totalItems,
+  currentPage,
+  itemsPerPage,
+  onPageChange,
+  onItemsPerPageChange,
+  itemsPerPageOptions = [5, 10, 20, 50],
+  showItemsPerPage = true,
+  showNavigation = true,
+  showPageJumper = false,
+  className = ""
+}) => {
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const startItem = (currentPage - 1) * itemsPerPage + 1;
+  const endItem = Math.min(currentPage * itemsPerPage, totalItems);
 
-  const pageOptions = Array.from({ length: totalPages }, (_, i) => i + 1);
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      onPageChange(page);
+    }
+  };
+
+  const handleItemsPerPageChange = (newItemsPerPage: number) => {
+    if (onItemsPerPageChange) {
+      onItemsPerPageChange(newItemsPerPage);
+      // Reset to first page when changing items per page
+      onPageChange(1);
+    }
+  };
+
+  // Generate page numbers for display
+  const getPageNumbers = () => {
+    const delta = 2; // Number of pages to show on each side of current page
+    const pages: (number | string)[] = [];
+    
+    if (totalPages <= 7) {
+      // Show all pages if total is small
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      // Always show first page
+      pages.push(1);
+      
+      if (currentPage > delta + 2) {
+        pages.push('...');
+      }
+      
+      // Show pages around current page
+      const start = Math.max(2, currentPage - delta);
+      const end = Math.min(totalPages - 1, currentPage + delta);
+      
+      for (let i = start; i <= end; i++) {
+        pages.push(i);
+      }
+      
+      if (currentPage < totalPages - delta - 1) {
+        pages.push('...');
+      }
+      
+      // Always show last page
+      if (totalPages > 1) {
+        pages.push(totalPages);
+      }
+    }
+    
+    return pages;
+  };
+
+  if (totalItems === 0) {
+    return null;
+  }
 
   return (
-    <div className="flex flex-wrap items-center justify-between w-full mt-4 text-sm text-[#8B8D97] gap-2 sm:gap-0">
+    <div className={`flex flex-wrap items-center justify-between w-full mt-4 text-sm text-gray-600 gap-4 ${className}`}>
       {/* Items per page selector */}
-      <div className="flex items-center space-x-1 order-1 sm:order-none">
-        <div className="relative">
+      {showItemsPerPage && onItemsPerPageChange && (
+        <div className="flex items-center space-x-2">
+          <span className="text-gray-500">Show</span>
           <select 
-            className="appearance-none bg-[#5E636614] border border-gray-300 rounded px-1 py-1 pr-8 focus:outline-none text-xs sm:text-sm"
+            className="border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             value={itemsPerPage}
+            onChange={(e) => handleItemsPerPageChange(Number(e.target.value))}
           >
-            <option>10</option>
+            {itemsPerPageOptions.map(option => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
           </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1">
-            <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4 text-gray-500" />
-          </div>
+          <span className="text-gray-500">per page</span>
         </div>
-        <span className="text-[#A6A8B1] text-xs sm:text-sm">Items per page</span>
-      </div>
+      )}
       
       {/* Item range display */}
-      <div className="text-xs sm:text-sm order-3 sm:order-none w-full sm:w-auto text-center sm:text-left">
-        {currentPage * itemsPerPage - itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, totalItems)} of {totalItems} items
+      <div className="text-gray-600">
+        Showing {startItem}-{endItem} of {totalItems} results
       </div>
       
-      {/* Page selector */}
-      <div className="flex items-center order-2 sm:order-none">
-        {/* <select 
-          className="appearance-none bg-white border border-gray-300 rounded px-2 sm:px-3 py-1 ml-0 sm:ml-2 focus:outline-none text-xs sm:text-sm"
-          value={currentPage}
-          onChange={(e) => handlePageChange(Number(e.target.value))}
-        >
-          {pageOptions.map(page => (
-            <option key={page} value={page}>{page}</option>
-          ))}
-        </select> */}
-        <span className="ml-1 sm:ml-2 text-xs sm:text-sm">of {totalPages} pages</span>
-      </div>
+      {/* Page navigation */}
+      {showNavigation && totalPages > 1 && (
+        <div className="flex items-center space-x-1">
+          {/* First page button */}
+          <button 
+            onClick={() => handlePageChange(1)}
+            className={`p-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors ${
+              currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+            disabled={currentPage === 1}
+            title="First page"
+          >
+            <ChevronsLeft className="h-4 w-4" />
+          </button>
+          
+          {/* Previous page button */}
+          <button 
+            onClick={() => handlePageChange(currentPage - 1)}
+            className={`p-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors ${
+              currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+            disabled={currentPage === 1}
+            title="Previous page"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          
+          {/* Page numbers */}
+          <div className="flex items-center space-x-1">
+            {getPageNumbers().map((page, index) => (
+              <React.Fragment key={index}>
+                {page === '...' ? (
+                  <span className="px-3 py-2 text-gray-500">...</span>
+                ) : (
+                  <button
+                    onClick={() => handlePageChange(page as number)}
+                    className={`px-3 py-2 border rounded transition-colors ${
+                      currentPage === page
+                        ? 'bg-blue-500 text-white border-blue-500'
+                        : 'border-gray-300 hover:bg-gray-50'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+          
+          {/* Next page button */}
+          <button 
+            onClick={() => handlePageChange(currentPage + 1)}
+            className={`p-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors ${
+              currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+            disabled={currentPage === totalPages}
+            title="Next page"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+          
+          {/* Last page button */}
+          <button 
+            onClick={() => handlePageChange(totalPages)}
+            className={`p-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors ${
+              currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+            disabled={currentPage === totalPages}
+            title="Last page"
+          >
+            <ChevronsRight className="h-4 w-4" />
+          </button>
+        </div>
+      )}
       
-      {/* Navigation buttons */}
-      {/* <div className="flex items-center space-x-1 order-4 sm:order-none">
-        <button 
-          onClick={() => handlePageChange(currentPage - 1)}
-          className={`p-1 border border-gray-300 rounded ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100'}`}
-          disabled={currentPage === 1}
-        >
-          <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
-        </button>
-        <button 
-          onClick={() => handlePageChange(currentPage + 1)}
-          className={`p-1 border border-gray-300 rounded ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100'}`}
-          disabled={currentPage === totalPages}
-        >
-          <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
-        </button>
-      </div> */}
+      {/* Page jumper */}
+      {showPageJumper && totalPages > 1 && (
+        <div className="flex items-center space-x-2">
+          <span className="text-gray-500">Go to page:</span>
+          <select 
+            className="border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            value={currentPage}
+            onChange={(e) => handlePageChange(Number(e.target.value))}
+          >
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+              <option key={page} value={page}>
+                {page}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
     </div>
   );
 };

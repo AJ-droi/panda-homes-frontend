@@ -271,7 +271,7 @@ export default function PropertyHistory() {
               itemsPerPage={itemsPerPage}
               totalItems={properties.length}
               currentPage={currentPage}
-              setCurrentPage={setCurrentPage} totalPages={undefined}      />
+             onPageChange={setCurrentPage}      />
           </div>
         </main>
       </div>

@@ -1,5 +1,4 @@
 // components/TawkToWidget.tsx
-/* eslint-disable */
 "use client"
 import { useEffect } from 'react';
 

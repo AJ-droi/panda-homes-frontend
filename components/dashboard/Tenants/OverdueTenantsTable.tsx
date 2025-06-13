@@ -155,7 +155,7 @@ const OverdueRentsTable = () => {
         itemsPerPage={itemsPerPage}
         totalItems={overDueRent?.length}
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage} totalPages={undefined}      />
+       onPageChange={setCurrentPage}      />
     </div>
   );
 };

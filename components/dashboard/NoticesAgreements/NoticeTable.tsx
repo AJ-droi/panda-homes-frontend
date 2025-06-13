@@ -163,8 +163,8 @@ const NoticeTable = ({ noticeData}:any) => {
         itemsPerPage={itemsPerPage}
         totalItems={noticeData?.length}
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        totalPages={undefined}
+       onPageChange={setCurrentPage}
+  
       />
 
       {previewUrl && (

@@ -5,48 +5,6 @@ import { useFetchNoticeAgreementByTenant } from "@/services/notice-agreement/que
 import React, { useState } from "react";
 
 const TenantNoticeTable = () => {
-  // const noticeData = [
-  //   {
-  //     id: 1,
-  //     property: "Lekki Villa",
-  //     tenant: "John Doe",
-  //     dateSent: "March 1st, 2025",
-  //     status: "Acknowledged",
-  //     noticeType: "Eviction Warning",
-  //   },
-  //   {
-  //     id: 2,
-  //     property: "Abuja Heights",
-  //     tenant: "Jane Smith",
-  //     dateSent: "June 1st, 2025",
-  //     status: "Unacknowledged",
-  //     noticeType: "Rent Increase",
-  //   },
-  //   {
-  //     id: 3,
-  //     property: "Ikeja Studios",
-  //     tenant: "Peter Okon",
-  //     dateSent: "April 1st, 2025",
-  //     status: "Pending",
-  //     noticeType: "Lease Renewal",
-  //   },
-  //   {
-  //     id: 4,
-  //     property: "Ikeja Studios",
-  //     tenant: "Peter Okon",
-  //     dateSent: "April 1st, 2025",
-  //     status: "Pending",
-  //     noticeType: "Lease Renewal",
-  //   },
-  //   {
-  //     id: 5,
-  //     property: "Ikeja Studios",
-  //     tenant: "Peter Okon",
-  //     dateSent: "April 1st, 2025",
-  //     status: "Pending",
-  //     noticeType: "Lease Renewal",
-  //   },
-  // ];
 
 
     const { data: noticeData, isLoading } = useFetchNoticeAgreementByTenant();
@@ -181,7 +139,7 @@ const TenantNoticeTable = () => {
         itemsPerPage={itemsPerPage}
         totalItems={noticeData?.length}
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage} totalPages={undefined}      />
+        onPageChange={setCurrentPage}      />
 
 
           {previewUrl && (

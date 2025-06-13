@@ -1,12 +1,13 @@
 
 "use client";
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
-import {
-  NavbarActiveNotificationBell,
-  NavbarActiveSettingsIcon,
-  NavbarNotificationBell,
-  NavbarSettingsIcon,
-} from "@/layout/svgIconPaths";
+// import {
+//   NavbarActiveNotificationBell,
+//   NavbarActiveSettingsIcon,
+//   NavbarNotificationBell,
+//   NavbarSettingsIcon,
+// } from "@/layout/svgIconPaths";
 import { usePathname, useRouter } from "next/navigation";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
@@ -38,20 +39,20 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingPath, setLoadingPath] = useState<string | null>(null);
 
-  const iconData = [
-    {
-      name: "Settings",
-      icon: <NavbarNotificationBell />,
-      activeIcon: <NavbarActiveNotificationBell />,
-      path: "/tenant-dashboard/notifications",
-    },
-    {
-      name: "Notifications",
-      icon: <NavbarSettingsIcon />,
-      activeIcon: <NavbarActiveSettingsIcon />,
-      path: "/tenant-dashboard/settings",
-    },
-  ];
+  // const iconData = [
+  //   {
+  //     name: "Settings",
+  //     icon: <NavbarNotificationBell />,
+  //     activeIcon: <NavbarActiveNotificationBell />,
+  //     path: "/tenant-dashboard/notifications",
+  //   },
+  //   {
+  //     name: "Notifications",
+  //     icon: <NavbarSettingsIcon />,
+  //     activeIcon: <NavbarActiveSettingsIcon />,
+  //     path: "/tenant-dashboard/settings",
+  //   },
+  // ];
 
   const redirect = async (path: string) => {
     if (pathname === path) return;
@@ -82,7 +83,7 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
       {/* <div>Hello {tenantDetails?.first_name ? tenantDetails?.first_name : 'There'}</div> */}
       {!isTenantRegister && (
         <div className="gap-[24px] items-center justify-between flex">
-          {iconData.map((item) => (
+          {/* {iconData.map((item) => (
             <div
               key={item.name}
               className={`hover:cursor-pointer ${
@@ -96,7 +97,7 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
             >
               {pathname === item.path ? item.activeIcon : item.icon}
             </div>
-          ))}
+          ))} */}
         </div>
       )}
 

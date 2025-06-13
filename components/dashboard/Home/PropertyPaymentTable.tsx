@@ -168,7 +168,7 @@ const PropertyPaymentTable = () => {
           itemsPerPage={itemsPerPage}
           totalItems={upcomingRentPayment?.length || 0}
           currentPage={currentPage}
-          setCurrentPage={setCurrentPage} totalPages={undefined}        />
+         onPageChange={setCurrentPage}/>
       )}
     </div>
   );

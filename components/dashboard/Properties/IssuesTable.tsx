@@ -131,7 +131,7 @@ const IssuesListTable = () => {
         itemsPerPage={itemsPerPage}
         totalItems={activeMaintenance?.length}
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage} totalPages={undefined}            />
+       onPageChange={setCurrentPage}            />
     </div>
   );
 };

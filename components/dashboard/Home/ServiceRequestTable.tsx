@@ -146,7 +146,7 @@ const ServiceRequestTable = () => {
         itemsPerPage={itemsPerPage}
         totalItems={serviceRequest?.length}
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage} totalPages={undefined}            />
+       onPageChange={setCurrentPage}            />
     </div>
   );
 };

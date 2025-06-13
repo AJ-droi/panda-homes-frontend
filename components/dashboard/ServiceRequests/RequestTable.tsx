@@ -133,8 +133,8 @@ const PropertyPaymentTable = ({serviceRequest, isLoading}:any) => {
           itemsPerPage={itemsPerPage}
           totalItems={serviceRequest?.length}
           currentPage={currentPage}
-          setCurrentPage={setCurrentPage} 
-          totalPages={undefined}              />
+         onPageChange={setCurrentPage} 
+                  />
       </div>
     </div>
   );

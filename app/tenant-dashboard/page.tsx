@@ -1,5 +1,6 @@
 "use client"
-import React from 'react';
+/* eslint-disable */
+import React, { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -33,12 +34,28 @@ export default function TenantHome() {
     }
   ];
 
+    const [tenantDetails, setTenantDetails] = useState<any>({});
+  
+    useEffect(() => {
+      const isClient = typeof window !== "undefined";
+      if (isClient) {
+        const jsonTenantDetails = localStorage.getItem("tenant");
+        if (jsonTenantDetails) {
+          try {
+            setTenantDetails(JSON.parse(jsonTenantDetails));
+          } catch (error) {
+            console.error("Failed to parse tenant details", error);
+          }
+        }
+      }
+    }, []);
+
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-light text-gray-900 mb-2">Hello,</h1>
+          <h1 className="text-4xl font-light text-gray-900 mb-2">Hello {tenantDetails?.first_name},</h1>
           <p className="text-xl text-gray-600">What would you like to do today?</p>
         </div>
 

@@ -124,7 +124,7 @@ const TenantsListTable = ({params}: {params:UserFilter}) => {
         itemsPerPage={itemsPerPage}
         totalItems={users?.length}
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage} totalPages={undefined}      />
+       onPageChange={setCurrentPage}      />
     </div>
   );
 };

@@ -134,8 +134,7 @@ const TenantServiceRequestTable = () => {
           itemsPerPage={itemsPerPage}
           totalItems={tenantServiceRequest.pagination.totalRows}
           currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          totalPages={tenantServiceRequest.pagination.totalPages}
+         onPageChange={setCurrentPage}
         />
       )}
     </div>

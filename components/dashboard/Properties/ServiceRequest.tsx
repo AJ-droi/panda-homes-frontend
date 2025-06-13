@@ -100,7 +100,7 @@ export default function ServiceRequest() {
           itemsPerPage={itemsPerPage}
           totalItems={serviceRequests?.length}
           currentPage={currentPage}
-          setCurrentPage={setCurrentPage} totalPages={undefined}      />
+         onPageChange={setCurrentPage}      />
       </div>
 
       {/* Action Buttons */}
