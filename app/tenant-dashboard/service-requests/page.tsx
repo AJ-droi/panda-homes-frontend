@@ -18,7 +18,7 @@ const ChatComponent = () => {
   return(
     <div className='bg-[#fafafe] min-h-screen'>
        <iframe
-      src="https://tawk.to/chat/6848323f75c70f190ee42012/1itd093bu"
+      src="https://tawk.to/chat/684bdd0665fb5d190dc1fbe1/1itk5eokt"
       style={{
         position: 'relative',
         top: 0,
