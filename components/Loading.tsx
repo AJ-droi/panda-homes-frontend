@@ -23,6 +23,7 @@ const Loading: React.FC<LoadingProps> = ({ message = "Please Wait Panda is Loadi
         onContextMenu={(e) => e.preventDefault()}
       />
       
+      
       <div className="relative z-[10000] flex flex-col justify-center items-center text-center">
         <div className="mb-6">
           <Image

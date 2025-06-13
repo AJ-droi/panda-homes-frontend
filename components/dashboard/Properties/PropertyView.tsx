@@ -84,17 +84,10 @@ const deleteMutation = useDeletePropertyMutation();
 
 const handleDelete = async () => {
   try {
-    await deleteMutation.mutateAsync(id, {
-      onSuccess: () => {
-        toast.success('Property deleted successfully');
-        window.location.href = '/dashboard/properties';
-      },
-      onError: (error) => {
-        toast.error('Error deleting property:', error);
-      }
-    });
-  } catch (error) {
-    alert("Failed to delete property.");
+     await deleteMutation.mutateAsync(id);
+     window.location.href = '/dashboard/properties'
+  } catch (error:any) {
+    toast.error(error.message);
   }
 };
 

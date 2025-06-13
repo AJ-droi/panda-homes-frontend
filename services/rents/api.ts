@@ -49,3 +49,12 @@ import axiosInstance from "../axios-instance";
   }
 
 
+export const removeTenant = async (id: string) => {
+  try {
+    const response = await axiosInstance.put(`/rents/remove/${id}`);
+    return response.data;
+  } catch (error: any) {
+    // Throw to ensure React Query triggers onError
+    throw new Error(error?.response?.data?.message || "Failed to remove tenant");
+  }
+};

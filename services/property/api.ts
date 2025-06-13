@@ -30,6 +30,33 @@ export const getProperties = async (params?: PropertyFilter) => {
   }
 };
 
+
+export const getVacantProperties = async () => {
+  try {
+    const response = await axiosInstance.get(`/properties/vacant`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.status !== 200) {
+      throw new Error("error fetching properties");
+    }
+
+    return response.data;
+  } catch (error: any) {
+    const errorMessage = error.message || "An error occurred";
+
+    return {
+      success: false,
+      message: errorMessage,
+      error: error.response?.data || null,
+    };
+  }
+};
+
+
+
 export const getPropertiesById = async (id: string) => {
   try {
     const response = await axiosInstance.get(`/properties/${id}`, {
@@ -188,11 +215,12 @@ export const getHistoryByPropertyId = async (id: string) => {
 };
 
 export const deletePropertyById = async (id: string) => {
-  const response = await axiosInstance.delete(`/properties/${id}`);
-
-  if (response.status !== 200) {
-    throw new Error("Error removing property");
+  try {
+    const response = await axiosInstance.delete(`/properties/${id}`);
+    return response.data;
+  } catch (error: any) {
+    // Throw to ensure React Query triggers onError
+    throw new Error(error?.response?.data?.message || "Failed to delete property");
   }
-
-  return response.data;
 };
+

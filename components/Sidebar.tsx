@@ -18,6 +18,8 @@ import {
   LogoutIcon,
   NavbarNotificationBell,
   NavbarSettingsIcon,
+  SidebarTenantsIcon,
+  TenantActiveIcon,
 } from "@/layout/svgIconPaths";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
@@ -106,12 +108,12 @@ const Sidebar = () => {
       activeIcon: <PropertyActiveIcon />,
       path: "/dashboard/properties",
     },
-    // {
-    //   name: "Tenants",
-    //   icon: <SidebarTenantsIcon />,
-    //   activeIcon: <TenantActiveIcon />,
-    //   path: "/dashboard/tenants",
-    // },
+    {
+      name: "Tenants",
+      icon: <SidebarTenantsIcon />,
+      activeIcon: <TenantActiveIcon />,
+      path: "/dashboard/tenants",
+    },
     {
       name: "Service Requests",
       icon: <SidebarServiceRequestsIcon />,

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // services/property/query.ts
 import { useQuery } from "@tanstack/react-query";
-import { getHistoryByPropertyId, getProperties, getPropertiesById, getPropertyRent, getPropertyServiceRequests } from "./api";
+import { getHistoryByPropertyId, getProperties, getPropertiesById, getPropertyRent, getPropertyServiceRequests, getVacantProperties } from "./api";
 import { getAdminDashboardAnalytics } from "../users/api";
 import { PropertyFilter } from "../interface/filter";
 
@@ -15,6 +15,35 @@ export function useFetchPropertyDetails(params?:PropertyFilter) {
 
 
     return data.properties.map((property: any) => ({
+        id: property.id,
+        property: property.name,
+        vacancy: property.property_status,
+        rent: property?.rents[0]?.amount_paid || "-",
+        tenant_name: property?.rents?.find((item: any) => item.rent_status === 'active')?.tenant?.profile_name || "No Tenant",
+        expiryDate: property?.rents[0]?.lease_end_date ? new Date(property?.rents[0]?.lease_end_date).toLocaleDateString("en-US", {
+         month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+        }) :  "-",
+        daysLeft: property?.rents[0]?.lease_end_date ? Math.floor((new Date(property?.rents[0]?.lease_end_date).getTime() - new Date().getTime()) / (1000 * 3600 * 24)) : "-",
+
+      }))
+    }
+      
+  });
+}
+
+
+export function useFetchVacantPropertyDetails() {
+  return useQuery({
+    queryKey: ["get-properties"], // ✅ include params here
+    queryFn: () => getVacantProperties(),
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
+    select: (data:any) => {
+
+      
+    return data?.map((property: any) => ({
         id: property.id,
         property: property.name,
         vacancy: property.property_status,

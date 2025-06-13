@@ -10,25 +10,25 @@ export function useFetchTenantDetails(params:UserFilter) {
     queryFn:() => getTenants(params),
     refetchOnMount: "always",
     refetchOnWindowFocus: true,
-    select: (data: any) =>
-      data?.users?.map((item: any) => ({
+    select: (data: any) =>{
+      return data?.users.map((item: any) => ({
         id: item?.id,
         tenantName: `${item?.user?.first_name ?? ""} ${item?.user?.last_name ?? ""}`,
-        property: item?.property_tenants?.[0]?.property?.name || "No Property",
-        moveInDay: item?.moveInDate
-          ? new Date(item.moveInDate).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })
-          : "-",
-        rentStatus: item?.rentPaid ? "Paid" : "Overdue",
-        rent:item?.rents[0].rental_price || "-",
+        property: item?.rents[0]?.property?.name || "No Property",
+        // moveInDay: item?.moveInDate
+        //   ? new Date(item.moveInDate).toLocaleDateString("en-US", {
+        //       month: "short",
+        //       day: "numeric",
+        //       year: "numeric",
+        //     })
+        //   : "-",
+        // rentStatus: item?.rentPaid ? "Paid" : "Overdue",
+        rent:item?.rents[0]?.rental_price || "-",
         expiryDate:item?.rents?.[0]?.lease_end_date ? new Date(item?.rents?.[0]?.lease_end_date).toLocaleDateString("en-US", {
           month: "short",
           day: "numeric",
           year: "numeric",
         }) : "-"
-      })) ?? [],
+      })) }
   });
 }

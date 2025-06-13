@@ -7,7 +7,7 @@ import ColouredButton from "@/components/ColouredButton";
 import CalendarDropdown from "@/components/CalendarDropdown";
 import { useCreateUserMutation } from "@/services/users/mutation";
 import { useRouter } from "next/navigation";
-import { useFetchPropertyDetails } from "@/services/property/query";
+import { useFetchPropertyDetails, useFetchVacantPropertyDetails } from "@/services/property/query";
 import BackButton from "@/components/Backbutton";
 
 interface addTenantProps {
@@ -35,7 +35,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
 
   const { mutate, isPending } = useCreateUserMutation();
 
-  const { data } = useFetchPropertyDetails();
+  const { data } = useFetchVacantPropertyDetails();
 
   useMemo(() => {
     if (data) {
