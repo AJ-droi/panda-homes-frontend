@@ -151,7 +151,7 @@ const Pagination: React.FC<PaginationProps> = ({
                     onClick={() => handlePageChange(page as number)}
                     className={`px-3 py-2 border rounded transition-colors ${
                       currentPage === page
-                        ? 'bg-blue-500 text-white border-blue-500'
+                        ? 'bg-[#785DBA] text-white border-[#785DBA]'
                         : 'border-gray-300 hover:bg-gray-50'
                     }`}
                   >
@@ -193,7 +193,7 @@ const Pagination: React.FC<PaginationProps> = ({
         <div className="flex items-center space-x-2">
           <span className="text-gray-500">Go to page:</span>
           <select 
-            className="border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-[#785DBA] focus:border-transparent"
             value={currentPage}
             onChange={(e) => handlePageChange(Number(e.target.value))}
           >

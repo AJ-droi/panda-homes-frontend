@@ -155,9 +155,9 @@ const Sidebar = () => {
           <button onClick={toggleSidebar} className="mr-4">
             <BreadcrumbIcon />
           </button>
-          <span className="font-medium text-[#785DBA] text-[16px] font-plus-jakarta">
+          {/* <span className="font-medium text-[#785DBA] text-[16px] font-plus-jakarta">
             Hello Tunji
-          </span>
+          </span> */}
         </div>
         <div
           className="gap-[24px] items-center justify-between flex relative"

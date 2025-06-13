@@ -24,6 +24,7 @@ import {
   NavbarNotificationBell,
   NavbarSettingsIcon,
 } from "@/layout/svgIconPaths";
+import { toast } from "react-toastify";
 // import { toast } from "react-toastify";
 
 const TenantSidebar = () => {
@@ -32,13 +33,16 @@ const TenantSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [tenantDetails, setTenantDetails] = useState<any>({});
+    const [parentoken, setParentToken] = useState<any>("");
 
   useEffect(() => {
     const isClient = typeof window !== "undefined";
     if (isClient) {
       const jsonTenantDetails = localStorage.getItem("tenant");
+       const parentokenDetail = localStorage.getItem("parent_token") as string;
       if (jsonTenantDetails) {
         try {
+          setParentToken(parentokenDetail)
           setTenantDetails(JSON.parse(jsonTenantDetails));
         } catch (error) {
           console.error("Failed to parse tenant details", error);
@@ -51,25 +55,24 @@ const TenantSidebar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("tenant");
-     localStorage.removeItem("token");
+    localStorage.removeItem("token");
     Cookies.remove("token");
     router.push("/");
   };
+ 
 
-  // function handleSwitchAccount() {
-  //   const parentoken = localStorage.getItem("parent_token") as string;
+  function handleSwitchAccount() {
+    if (!parentoken) {
+      toast.error("No Admin account is linked to this account");
+      return;
+    }
+    // Replace token in cookies or localStorage
+    localStorage.setItem("access_token", parentoken);
 
-  //   if (!parentoken) {
-  //     toast.error("No Admin account is linked to this account");
-  //     return;
-  //   }
-  //   // Replace token in cookies or localStorage
-  //      localStorage.setItem('access_token', parentoken)
-
-  //   // Update app state or trigger revalidation
-  //   // setUser(subAccount); // or trigger SWR/NextAuth update
-  //   router.push("/dashboard");
-  // }
+    // Update app state or trigger revalidation
+    // setUser(subAccount); // or trigger SWR/NextAuth update
+    router.push("/dashboard");
+  }
 
   const iconData = [
     {
@@ -78,9 +81,9 @@ const TenantSidebar = () => {
       activeIcon: <HomeActiveIcon />,
       path: "/tenant-dashboard",
     },
-     {
+    {
       name: "Tenancy",
-      icon: <PropertyHistoryIcon/>,
+      icon: <PropertyHistoryIcon />,
       activeIcon: <ActivePropertyHistoryIcon />,
       path: "/tenant-dashboard/tenancy",
     },
@@ -103,12 +106,15 @@ const TenantSidebar = () => {
     //   path: "/tenant-dashboard/property-history",
     // },
 
-    // {
-    //   name: "Switch to Admin Account",
-    //   icon: <SidebarNoticeAndAgreementIcon />,
-    //   // activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
-    //   onClick: handleSwitchAccount,
-    // },
+    ...(parentoken
+      ? [
+          {
+            name: "Switch to Admin Account",
+            icon: <SidebarNoticeAndAgreementIcon />,
+            onClick: handleSwitchAccount,
+          },
+        ]
+      : []),
     {
       name: "Logout",
       icon: <LogoutIcon />,
@@ -235,7 +241,7 @@ const TenantSidebar = () => {
             <Image
               src="/landingPage/logo.png"
               alt="Panda Logo"
-              width={133}
+              width={100}
               height={38}
               style={{ objectFit: "contain" }}
               priority

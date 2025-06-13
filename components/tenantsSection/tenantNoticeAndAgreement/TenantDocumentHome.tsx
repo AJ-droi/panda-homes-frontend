@@ -14,7 +14,9 @@ const TenantDocumentHome = () => {
   // Calculate items to display on current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = noticeData?.slice(indexOfFirstItem, indexOfLastItem);
+const currentItems = React.useMemo(() => {
+  return noticeData?.slice(indexOfFirstItem, indexOfLastItem) || [];
+}, [noticeData, indexOfFirstItem, indexOfLastItem]);
 
 //   const sampleDocuments = [
 //     "Lease Agreement.pdf",
