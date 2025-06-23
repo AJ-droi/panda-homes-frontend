@@ -29,7 +29,7 @@ export default function TenantHome() {
       title: "Contact Us",
       description: "Need help? Reach out to Us.",
       icon: <ArrowRight className="w-5 h-5 text-[#444D61]" />,
-      action: () => {router.push('#')},
+      action: () => {router.push('/tenant-dashboard/contact-us')},
       fullWidth: true
     }
   ];
