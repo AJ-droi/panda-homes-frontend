@@ -1,39 +1,17 @@
 
 "use client"
+import ServiceRequestCard from '@/components/dashboard/ServiceRequests/ServiceRequestCard';
+import { useFetchServiceRequestByTenant } from '@/services/service-request/query';
 import React from 'react';
 
 
-// const socket = io('http://localhost:3150'); // your NestJS backend URL
 
-// interface Message {
-//   id: string;
-//   sender: string;
-//   text: string;
-//   read: boolean;
-//   createdAt: string;
-// }
+export default function TenantServiceRequests() {
+    const { data: serviceRequest } = useFetchServiceRequestByTenant();
 
-const ChatComponent = () => {
-
-  return(
-    <div className='bg-[#fafafe] min-h-screen'>
-       <iframe
-      src="https://tawk.to/chat/684bdd0665fb5d190dc1fbe1/1itk5eokt"
-      style={{
-        position: 'relative',
-        top: 0,
-        left: 0,
-        width: '88vw',
-        height: '90vh',
-        border: 'none',
-        zIndex: 0,
-      }}
-      allow="microphone; camera"
-    />
+  return (
+    <div className="flex flex-col min-h-screen bg-[#fafafe] w-full">
+    <ServiceRequestCard request={serviceRequest} />
     </div>
-       
-
   )
-};
-
-export default ChatComponent;
+}

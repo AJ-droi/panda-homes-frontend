@@ -1,6 +1,7 @@
 export enum Role {
     ADMIN="admin",
     LANDLORD="landlord",
+    REP="rep",
     TENANT="tenant",
     AGENT="agent",
     PROPERTY_MANAGER="property_manager",
