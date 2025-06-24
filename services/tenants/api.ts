@@ -1,16 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosInstance from "../axios-instance";
 
-export const getTenantServiceRequest = async (property_id: string, page: number = 1, limit: number = 10) => {
+export const getTenantServiceRequest = async (status='') => {
   try {
-    const response = await axiosInstance.get(`/service-requests/tenant-property/${property_id}`, {
+    const response = await axiosInstance.get(`/service-requests/tenant?status=${status}`, {
       headers: {
         "Content-Type": "application/json",
       },
-      params: {
-        page,
-        limit
-      }
     });
 
     if (response.status !== 200) {

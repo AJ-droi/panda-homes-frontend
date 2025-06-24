@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { User, MessageSquare, Send, CheckCheck } from "lucide-react";
 import { initSocket, getSocket } from "@/services/chat/socket";
 import { create } from "domain";
+import BackButton from "@/components/Backbutton";
 
 interface Message {
   id?: string;
@@ -43,13 +44,15 @@ export default function TenantServiceChat({
     socket.emit("mark_read", { requestId, sender });
 
     if (requestId) {
-      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/request/${requestId}`)
+      fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/request/${requestId}`
+      )
         .then((res) => res.json())
         .then((fetchedMessages) => {
           const welcomeMessage = {
             id: "system-welcome",
-            content:
-              "Welcome to your service request chat! How can we assist you today?",
+            content: `Hi! 👋 What can I help you with today?  
+Please tell us the issue and please make it as short as possible`,
             sender: "admin",
             requestId,
             isSystem: true,
@@ -129,6 +132,7 @@ export default function TenantServiceChat({
     <div className="max-w-7xl mx-auto bg-white min-h-screen w-full">
       {/* Header */}
       <div className="p-6 border-b">
+        <BackButton />
         <h1 className="text-2xl font-medium text-gray-900 mb-2">
           Need help with your apartment?
         </h1>
@@ -139,7 +143,7 @@ export default function TenantServiceChat({
       </div>
 
       {/* Chat Messages */}
-      <div className="flex-1 p-6 space-y-6 max-h-[70vh] overflow-y-auto">
+      <div className="flex-1 p-6 space-y-6 max-h-[70vh] overflow-y-auto min-h-[70vh]">
         {messages.map((message: any) => (
           <div
             key={message.id}
@@ -151,7 +155,7 @@ export default function TenantServiceChat({
             <div
               className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
                 message.sender === "admin"
-                  ? "bg-[#785DBA] text-white"
+                  ? "bg-[#615EF0] text-white"
                   : "bg-gray-200 text-gray-600"
               }`}
             >
@@ -171,13 +175,11 @@ export default function TenantServiceChat({
               <div
                 className={`p-4 rounded-lg ${
                   message.sender === "admin"
-                    ? "bg-blue-50 border-2 border-blue-500 border-dashed"
+                    ? " border-2 bg-[#615EF0] text-[#fff] "
                     : "bg-gray-100"
                 }`}
               >
-                <p className="text-gray-800 leading-relaxed">
-                  {message.content}
-                </p>
+                <p className=" leading-relaxed">{message.content}</p>
               </div>
               <span className="text-xs text-gray-500 mt-1 block">
                 {message?.created_at
@@ -197,7 +199,7 @@ export default function TenantServiceChat({
         {/* Typing Indicator */}
         {isTyping && (
           <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#785DBA] text-white flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-[#615EF0] text-white flex items-center justify-center">
               <MessageSquare className="w-5 h-5" />
             </div>
             <div className="bg-gray-50 p-4 rounded-lg">
@@ -222,7 +224,7 @@ export default function TenantServiceChat({
       </div>
 
       {/* Message Input */}
-      <div className="border-t p-6">
+      <div className=" p-6">
         <div className="flex gap-3">
           <input
             type="text"
@@ -230,12 +232,12 @@ export default function TenantServiceChat({
             onChange={(e) => setInputMessage(e.target.value)}
             onKeyPress={(e) => e.key === "Enter" && handleSendMessage(e)}
             placeholder="Type your message"
-            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#785DBA] focus:border-transparent"
+            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#615EF0] focus:border-transparent"
           />
           <button
             onClick={handleSendMessage}
             disabled={!inputMessage.trim()}
-            className="px-6 py-3  text-white rounded-lg bg-[#785DBA] focus:outline-none focus:ring-2 focus:ring-[#785DBA] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+            className="px-6 py-3  text-white rounded-lg bg-[#615EF0] focus:outline-none focus:ring-2 focus:ring-[#785DBA] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
           >
             <Send className="w-4 h-4" />
             Submit

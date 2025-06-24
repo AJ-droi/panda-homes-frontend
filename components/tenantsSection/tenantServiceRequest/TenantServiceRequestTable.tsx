@@ -33,8 +33,6 @@ const TenantServiceRequestTable = () => {
     isFetching: isFetchingRequests,
   } = useFetchTenantServiceRequest(
     tenantDetails?.property_id,
-    currentPage,
-    itemsPerPage
   );
   const currentItems = tenantServiceRequest?.service_requests;
 

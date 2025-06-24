@@ -43,16 +43,17 @@ export function useGetTenantProperty(property_id: string) {
   });
 }
 
-export function useFetchTenantServiceRequest(property_id: string, page: number = 1, limit: number = 10) {
+export function useFetchTenantServiceRequest(status:string) {
   return useQuery({
-    queryKey: ["tenant-service-request", property_id, page, limit],
-    queryFn: () => getTenantServiceRequest(property_id, page, limit),
-    enabled: !!property_id,
+    queryKey: ["tenant-service-request"],
+    queryFn: () => getTenantServiceRequest(status),
+    enabled: !!status,
     refetchOnMount: true,
     refetchOnWindowFocus: true,
     staleTime: 0,
     select: (data) => {
-      return data?.service_requests.map((service: any) => ({
+      console.log(data)
+      return data?.map((service: any) => ({
         id: service.id,
         requestid: service.request_id,
         property: service.property_name,
@@ -60,6 +61,22 @@ export function useFetchTenantServiceRequest(property_id: string, page: number =
         issue: service.description,
         dateReported: service.date_reported,
         status: service.status,
+        created_at: new Date(service.created_at).toLocaleDateString(
+          "en-US",
+          {
+           month: "short",
+            day: "numeric",
+            year: "numeric",
+          }
+        ),
+         date_resolved: new Date(service.resolution_date).toLocaleDateString(
+          "en-US",
+          {
+           month: "short",
+            day: "numeric",
+            year: "numeric",
+          }
+        ),
       }));
     }
   });
