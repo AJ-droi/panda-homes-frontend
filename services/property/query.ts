@@ -122,6 +122,7 @@ export function useFetchPropertyById(id: string) {
           day: 'numeric',
           year: 'numeric',
         }),
+    tenant_id: activeRent?.tenant_id || '',
     rent_status: activeTenant?.status || 'inactive',
     rental_price: activeRent?.rental_price || 0,
     service_charge: activeRent?.service_charge || 0,

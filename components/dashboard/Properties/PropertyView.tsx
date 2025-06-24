@@ -7,6 +7,7 @@ import { useParams } from 'next/navigation';
 import BackButton from '@/components/Backbutton';
 import { useDeletePropertyMutation, useUpdatePropertyMutation } from '@/services/property/mutation';
 import { toast } from 'react-toastify';
+import { useRemoveTenantMutation } from '@/services/rents/mutation';
 // adjust the path as needed
 
 type PropertyField =
@@ -76,7 +77,7 @@ const PropertyView = () => {
 
   const {id} = useParams<{id:string}>()
 
-  const {data} = useFetchPropertyById(id) 
+  const {data} = useFetchPropertyById(id)  as any;
 
   const {mutate, isPending} = useUpdatePropertyMutation(id)
 
@@ -90,6 +91,24 @@ const handleDelete = async () => {
     toast.error(error.message);
   }
 };
+
+  const removeTenant = useRemoveTenantMutation()
+
+
+  const confirmRemoveTenant = async (tenant_id:string) => {
+    if (!tenant_id) return;
+    try {
+      await removeTenant.mutateAsync(tenant_id)
+      window.location.reload()
+      // Optionally refetch tenant list here
+    } catch (error) {
+      console.error("Failed to remove tenant", error);
+    } finally {
+      toast.success('Tenant removed successfully');
+      // setShowModal(false);
+      // setSelectedTenant(null);
+    }
+  };
 
   useEffect(() =>{
     if(data){
@@ -205,8 +224,10 @@ const handleDelete = async () => {
               <button
                 type="button"
                 className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors text-[12px]"
+                onClick={() => confirmRemoveTenant(data?.tenant_id)}
+                disabled={removeTenant.isPending}
               >
-                End Tenancy
+                  {removeTenant.isPending? `Removing Tenant` :`End Tenancy`}
               </button>
             </div>
           </div>}
