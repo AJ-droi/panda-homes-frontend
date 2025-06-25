@@ -11,7 +11,7 @@ export default function TenantHome() {
       title: "New Service Request",
       description: "Report a maintenance issue or request repairs.",
       icon: <ArrowRight className="w-5 h-5 text-[#444D61]" />,
-      action: () =>{router.push('/tenant-dashboard/service-requests/chat')}
+      action: () =>{router.push('/tenant-dashboard/service-requests')}
     },
     {
       title: "View Tenancy",
