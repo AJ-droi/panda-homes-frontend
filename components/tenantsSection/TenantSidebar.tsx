@@ -61,12 +61,15 @@ const TenantSidebar = () => {
   };
  
   function handleSwitchAccount() {
+    let access_token = localStorage.getItem('access_token') as string
     if (!parentoken || parentoken == 'null') {
       toast.error("No Admin account is linked to this account");
       return;
     }
     // Replace token in cookies or localStorage
+    localStorage.setItem("sub_account_token", access_token)
     localStorage.setItem("access_token", parentoken);
+    
 
     // Update app state or trigger revalidation
     // setUser(subAccount); // or trigger SWR/NextAuth update
