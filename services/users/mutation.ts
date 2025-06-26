@@ -30,16 +30,10 @@ export function useLoginMutation() {
             localStorage.setItem('access_token', data.access_token)
 
         // console.log("🔐 Login successful:", data) ;
-        data.user.role == 'tenant'?
-        (
-          localStorage.setItem('parent_token', data.parent_account_token),
-        localStorage.setItem('sub_account_token', data.access_token)
-      ) :
-        (
-          localStorage.setItem('sub_account_token', data.related_accounts[0].access_token),
-          localStorage.setItem('tenant', JSON.stringify(data.related_accounts[0])),
-          localStorage.setItem('parent_token', data.access_token)
-      )
+  
+        localStorage.setItem('parent_token', data.parent_access_token),
+        localStorage.setItem('sub_account_token', data.sub_access_token)
+     
 
         // Optionally redirect or refetch user info
         return data

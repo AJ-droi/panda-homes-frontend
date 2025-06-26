@@ -81,19 +81,18 @@ const Sidebar = () => {
     setDropdownOpen(false);
   };
 
-  function handleSwitchAccount() {
-    const subtoken = localStorage.getItem("sub_account_token") as string;
+function handleSwitchAccount() {
+  const subtoken = localStorage.getItem("sub_account_token");
 
-    if(!subtoken){
-      toast.error('No Tenant account is linked to this account')
-      return;
-    }
-    // Replace token in cookies or localStorage
-    localStorage.setItem('access_token', subtoken)
-    // Update app state or trigger revalidation
-    // setUser(subAccount); // or trigger SWR/NextAuth update
-    router.push("/tenant-dashboard");
+  if (!subtoken || subtoken === "null") {
+    toast.error("No Tenant account is linked to this account");
+    return;
   }
+
+  localStorage.setItem("access_token", subtoken);
+  router.push("/tenant-dashboard");
+}
+
 
   const iconData = [
     {

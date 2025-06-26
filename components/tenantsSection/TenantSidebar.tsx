@@ -60,9 +60,8 @@ const TenantSidebar = () => {
     router.push("/");
   };
  
-
   function handleSwitchAccount() {
-    if (!parentoken) {
+    if (!parentoken || parentoken == 'null') {
       toast.error("No Admin account is linked to this account");
       return;
     }
@@ -106,7 +105,7 @@ const TenantSidebar = () => {
     //   path: "/tenant-dashboard/property-history",
     // },
 
-    ...(parentoken
+    ...((parentoken && parentoken !== 'null')
       ? [
           {
             name: "Switch to Admin Account",
