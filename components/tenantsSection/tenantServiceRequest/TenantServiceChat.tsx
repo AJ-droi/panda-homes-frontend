@@ -5,13 +5,15 @@ import { User, MessageSquare, Send, CheckCheck } from "lucide-react";
 import { initSocket, getSocket } from "@/services/chat/socket";
 import { create } from "domain";
 import BackButton from "@/components/Backbutton";
+import { useFetchChatByRequestId } from "@/services/chat/query";
+import { useNotificationSound } from "@/hooks/useNotificationSound";
 
 interface Message {
   id?: string;
   content: string;
   sender: string;
   requestId: string;
-  created_at?: Date; // Optional, for timestamp
+  created_at?: any; // Optional, for timestamp
 }
 
 interface ChatWindowProps {
@@ -28,6 +30,7 @@ export default function TenantServiceChat({
   const [inputMessage, setInputMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<any>(null);
+  const playNotification = useNotificationSound();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -37,40 +40,44 @@ export default function TenantServiceChat({
     scrollToBottom();
   }, [messages]);
 
+  const { data: fetchedMessages } = useFetchChatByRequestId(requestId);
+
+  // Add welcome message and fetched messages
   useEffect(() => {
+    if (fetchedMessages && fetchedMessages.success !== false) {
+      const welcomeMessage: Message = {
+        id: "system-welcome",
+        content: `Hi! 👋 What can I help you with today?\nPlease tell us the issue and make it short.`,
+        sender: "admin",
+        requestId,
+        // isSystem: true,
+      };
+
+      setMessages([welcomeMessage, ...fetchedMessages]);
+    }
+  }, [fetchedMessages]);
+
+  // Real-time message updates via socket
+  useEffect(() => {
+    if (!requestId) return;
+
     const socket = initSocket();
     socket.emit("join", requestId);
-
     socket.emit("mark_read", { requestId, sender });
 
-    if (requestId) {
-      fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/request/${requestId}`
-      )
-        .then((res) => res.json())
-        .then((fetchedMessages) => {
-          const welcomeMessage = {
-            id: "system-welcome",
-            content: `Hi! 👋 What can I help you with today?  
-Please tell us the issue and please make it as short as possible`,
-            sender: "admin",
-            requestId,
-            isSystem: true,
-          };
-
-          // ✅ Ensure system message always appears first
-          setMessages([welcomeMessage, ...fetchedMessages]);
-        });
-    }
-
     socket.on("new_message", (msg: any) => {
-      console.log("New message received:", msg);
-      if (msg.service_request_id === requestId) {
-        setMessages((prev) => [...prev, msg]);
-      }
-    });
+      if (msg.service_request_id !== requestId) return;
 
-    // content: 'You are not a tenant of any property. Please contact your property manager for assistance.',
+      // Play sound only if from opposite sender
+      if (msg.sender !== sender) playNotification();
+
+      setMessages((prev) => {
+        const exists = prev.some(
+          (m) => m.content === msg.content && m.sender === msg.sender
+        );
+        return exists ? prev : [...prev, msg];
+      });
+    });
 
     return () => {
       socket.off("new_message");
@@ -81,44 +88,43 @@ Please tell us the issue and please make it as short as possible`,
     e.preventDefault();
     if (!inputMessage.trim()) return;
 
-    // const newMessage = {
-    //   id: messages.length + 1,
-    //   sender: 'user',
-    //   text: inputMessage,
-    //   timestamp: new Date()
-    // };
+    const socket = getSocket();
 
-    // setMessages(prev => [...prev, newMessage]);
+    // Prepare message object
+    const message: Message = {
+      content: inputMessage,
+      sender,
+      requestId,
+      // created_at: new Date().toISOString(), // Optional for timestamp display
+    };
+
+    // ⏱️ Optimistically update UI
+    setMessages((prev) => [...prev, message]);
+
+    // Clear input
     setInputMessage("");
-    // setIsTyping(true);
+    setIsTyping(false);
 
-    // Simulate bot response
-    setTimeout(() => {
-      const socket = getSocket();
-      const message: Message = {
-        content: inputMessage,
-        sender,
-        requestId,
-      };
-      socket.emit("send_message", message, (response: any) => {
-        console.log(response);
-        if (response?.error) {
-          console.error("Emit error:", response.error);
+    // Emit to server
+    socket.emit("send_message", message, (response: any) => {
+      if (response?.error) {
+        console.error("Emit error:", response.error);
 
-          // Append fallback system message
-          const fallbackMessage: Message = {
-            content:
-              "⚠️ You are not a tenant of any property. Please contact your property manager for assistance.",
-            sender: "admin",
-            requestId,
-          };
+        // Replace optimistic message with error system message if needed
+        const fallbackMessage: Message = {
+          content:
+            "⚠️ You are not a tenant of any property. Please contact your property manager for assistance.",
+          sender: "admin",
+          requestId,
+          created_at: new Date().toISOString(),
+        };
 
-          setMessages((prev) => [...prev, fallbackMessage]);
-        }
-      });
-      setInputMessage("");
-      setIsTyping(false);
-    }, 2000);
+        setMessages((prev) => [...prev, fallbackMessage]);
+      }
+    });
+
+    setInputMessage("");
+    setIsTyping(false);
   };
 
   const formatTime = (timestamp: any) => {

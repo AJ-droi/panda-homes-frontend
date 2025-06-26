@@ -7,7 +7,7 @@ const page = () => {
   const requestId = generateServiceRequestId(); // Example request ID, replace with actual logic if needed
 
   return (
-    <div className="flex h-screen bg-[#fff] text-[#000]">
+    <div className="flex bg-[#fff] text-[#000]">
         <TenantServiceChat requestId={requestId} sender="tenant" />
     </div>
   );

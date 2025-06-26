@@ -9,8 +9,13 @@ import {
   FileText,
   Send,
   CheckCheck,
+  X,
 } from "lucide-react";
 import CustomerRightSidebar from "./CustomerRightSidebar";
+import { useFetchChatByRequestId } from "@/services/chat/query";
+import { useQueryClient } from "@tanstack/react-query";
+import { useMarkAsResolved } from "@/services/chat/mutation";
+import { useNotificationSound } from "@/hooks/useNotificationSound";
 
 interface Message {
   id?: string;
@@ -34,27 +39,37 @@ interface ChatWindowProps {
 const CustomerMainChatArea = ({ requestId, sender }: ChatWindowProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
+  const playNotification = useNotificationSound();
+
+  const queryClient = useQueryClient();
+
+  const { data } = useFetchChatByRequestId(requestId); // Keep this minimal
 
   useEffect(() => {
-    const socket = initSocket();
-
-    socket.emit("join", requestId);
-
-    socket.emit("mark_read", { requestId, sender });
-
-    // ✅ Only fetch messages if requestId is defined
-    if (requestId) {
-      fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/chats/request/${requestId}`)
-        .then((res) => res.json())
-        .then(setMessages)
-        .catch((err) => {
-          console.error("Error fetching messages:", err);
-        });
+    if (data && data.success !== false) {
+      setMessages(data); // or data.messages if structured that way
     }
+  }, [data]);
+
+  useEffect(() => {
+    if (!requestId) return;
+
+    const socket = initSocket();
+    socket.emit("join", requestId);
+    socket.emit("mark_read", { requestId, sender });
 
     socket.on("new_message", (msg: any) => {
       if (msg.service_request_id === requestId) {
+         if (msg.sender !== sender) {
+          playNotification();
+        }
+        // Optional immediate UI update:
         setMessages((prev) => [...prev, msg]);
+
+        // 🔁 React Query Refetch
+        queryClient.refetchQueries({
+          queryKey: ["chat-by-requestId", requestId],
+        });
       }
     });
 
@@ -62,15 +77,13 @@ const CustomerMainChatArea = ({ requestId, sender }: ChatWindowProps) => {
       socket.off("new_message");
     };
   }, [requestId]);
+   const {mutate} = useMarkAsResolved(requestId)
 
-  const markAsResolved = async (ticketId: any) => {
+  const markAsResolved = async () => {
     try {
       // This would call your NestJS endpoint
-      const response = await fetch("/api/tickets/resolve", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ticketId, status: "resolved" }),
-      });
+     
+      mutate()
     } catch (error) {
       console.error("Error resolving ticket:", error);
     }
@@ -90,15 +103,16 @@ const CustomerMainChatArea = ({ requestId, sender }: ChatWindowProps) => {
   };
 
   let userInfo = messages[0]?.serviceRequest;
+  const [viewTenantInfo, setViewTenantInfo] = useState(false);
 
   return (
     <>
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 bg-white flex flex-col w-full overflow-hidden">
         {requestId ? (
           <>
-            {/* Chat Header */}
+            {/* Header */}
             <div className="bg-white border-b border-gray-200 p-4">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
                 <div className="flex items-center space-x-4">
                   <div className="w-10 h-10 bg-[#785DBA] rounded-full flex items-center justify-center text-white font-medium">
                     {userInfo?.tenant_name
@@ -107,25 +121,31 @@ const CustomerMainChatArea = ({ requestId, sender }: ChatWindowProps) => {
                       .join("")}
                   </div>
                   <div>
-                    <h2 className="font-semibold text-gray-900">
+                    <h2 className="font-semibold text-gray-900 text-sm sm:text-base">
                       {userInfo?.tenant_name}
                     </h2>
                     <p className="text-sm text-gray-600">
-                      {userInfo?.property_name}{" "}
+                      {userInfo?.property_name}
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <button className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg">
-                    <Phone className="w-5 h-5" />
-                  </button>
-                  <button className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg">
-                    <Mail className="w-5 h-5" />
-                  </button>
+                <div className="flex items-center justify-between gap-2">
+                  {/* <button className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg">
+                <Phone className="w-5 h-5" />
+              </button>
+              <button className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg">
+                <Mail className="w-5 h-5" />
+              </button> */}
+                <button
+                      onClick={() => setViewTenantInfo(true)}
+                      className="md:hidden px-4 py-2 bg-[#785DBA] text-white rounded-lg text-sm hover:bg-green-700"
+                    >
+                      View Tenant Information
+                    </button>
                   {userInfo?.status === "pending" && (
                     <button
-                      onClick={() => markAsResolved(userInfo?.id)}
-                      className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                      onClick={() => markAsResolved()}
+                      className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700"
                     >
                       Mark as Resolved
                     </button>
@@ -135,7 +155,7 @@ const CustomerMainChatArea = ({ requestId, sender }: ChatWindowProps) => {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-4">
               {messages?.map((message: any) => (
                 <div
                   key={message.id}
@@ -144,7 +164,7 @@ const CustomerMainChatArea = ({ requestId, sender }: ChatWindowProps) => {
                   }`}
                 >
                   <div
-                    className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                    className={`max-w-[80%] sm:max-w-md px-4 py-2 rounded-lg ${
                       message.sender === "admin"
                         ? "bg-[#EBF4FF] text-black"
                         : "bg-gray-200 text-gray-900"
@@ -179,30 +199,29 @@ const CustomerMainChatArea = ({ requestId, sender }: ChatWindowProps) => {
             </div>
 
             {/* Message Input */}
-
-            <div className="bg-white border-t border-gray-200 p-4">
-              <div className="flex space-x-3">
+           {userInfo?.status === "pending" && <div className="bg-white border-t border-gray-200 p-3 sm:p-4">
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
                 <input
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === "Enter" && sendMessage(e)}
                   placeholder="Type your message"
-                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#785DBA] focus:border-transparent"
+                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#785DBA]"
                 />
                 <button
                   onClick={sendMessage}
                   disabled={!input.trim()}
-                  className="px-6 py-3  text-white rounded-lg bg-[#785DBA] focus:outline-none focus:ring-2 focus:ring-[#785DBA] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                  className="px-6 py-3 text-white rounded-lg bg-[#785DBA] hover:bg-[#6848b5] disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   <Send className="w-4 h-4" />
                   Submit
                 </button>
               </div>
-            </div>
+            </div>}
           </>
         ) : (
-          <div className="flex-1 flex items-center justify-center">
+          <div className="flex-1 flex items-center justify-center px-4">
             <div className="text-center text-gray-500">
               <MessageCircle className="w-12 h-12 mx-auto mb-4 text-gray-300" />
               <h3 className="text-lg font-medium">Select a conversation</h3>
@@ -214,7 +233,22 @@ const CustomerMainChatArea = ({ requestId, sender }: ChatWindowProps) => {
         )}
       </div>
 
-      <CustomerRightSidebar activeChat={userInfo} />
+      {viewTenantInfo && (
+        <div className="fixed inset-0 z-50 bg-white flex flex-col shadow-lg md:hidden">
+           <button
+        className="md:hidden fixed top-4 right-4 z-50 bg-white rounded-full p-2 shadow-md"
+        onClick={() => setViewTenantInfo(false)}
+      >
+        <X className="w-5 h-5 text-gray-800" />
+      </button>
+          <CustomerRightSidebar activeChat={userInfo} />
+        </div>
+      )}
+
+      {/* Hide right sidebar on small screens */}
+      <div className="hidden lg:block">
+        <CustomerRightSidebar activeChat={userInfo} />
+      </div>
     </>
   );
 };

@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { sendMail } from "./api";
+import { markAsResolved, sendMail } from "./api";
+import { toast } from "react-toastify";
 
 export function useSendMail() {
     return useMutation({
@@ -18,3 +19,23 @@ export function useSendMail() {
       },
     });
   }
+
+
+ 
+export function useMarkAsResolved(requestId: string) {
+  return useMutation({
+    mutationFn: () => markAsResolved(requestId),
+    onMutate: () => {
+      console.log("🔐 resolving service request...");
+    },
+    onError: (error: any) => {
+      const message = error.message || "An error occurred while resolving service.";
+      toast.error(message); // show toast
+    },
+    onSuccess: (data) => {
+      console.log("✅ Ticket resolved:", data);
+      toast.success('service request is resolved')
+      window.location.reload(); // reload page
+    },
+  });
+}

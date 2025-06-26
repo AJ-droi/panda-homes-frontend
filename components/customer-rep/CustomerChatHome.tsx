@@ -1,12 +1,13 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
-import { MessageCircle, Phone, Mail, Clock, CheckCircle, User, FileText, Wrench, Zap, Droplets, Home } from 'lucide-react';
+import { MessageCircle, Phone, Mail, Clock, CheckCircle, User, FileText, Wrench, Zap, Droplets, Home, X, Menu } from 'lucide-react';
 import CustomerSidebar from './CustomerSidebar';
 import { generateServiceRequestId } from '@/services/chat/socket';
 import ChatWindow from '@/components/chat/ChatWindow'
 import CustomerMainChatArea from './CustomerMainChatArea';
 
 const CustomerRepDashboard = () => {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeChat, setActiveChat] = useState<any>(null);
   const [chatMessage, setChatMessage] = useState('');
   const [tickets, setTickets] = useState([
@@ -98,15 +99,42 @@ const CustomerRepDashboard = () => {
      const [activeRequestId, setActiveRequestId] = useState<string>('');
 
   return (
-    <div className="flex h-screen bg-gray-50 text-[#000]">
-      {/* Sidebar - Ticket List */}
-      <CustomerSidebar onSelect={(id) => setActiveRequestId(id)}  />
-        
-      {/* Main Chat Area */}
-        <CustomerMainChatArea requestId={activeRequestId} sender="admin" />
+   <div className="relative flex flex-col md:flex-row h-screen bg-gray-50 text-[#000]">
+      {/* Mobile Sidebar Toggle Button */}
+      <button
+        className="md:hidden fixed top-4 left-4 z-50 bg-white rounded-full p-2 shadow-md"
+        onClick={() => setSidebarOpen(true)}
+      >
+        <Menu className="w-5 h-5 text-gray-800" />
+      </button>
 
-      {/* Right Sidebar - Contact Details */}
-    
+      {/* Mobile Sidebar */}
+      {sidebarOpen && (
+        <div className="fixed inset-0 z-50 bg-white flex flex-col shadow-lg md:hidden">
+          {/* <div className="flex justify-between items-center p-4 border-b">
+            <h2 className="font-semibold text-lg">Service Requests</h2>
+            <button onClick={() => setSidebarOpen(false)}>
+              <X className="w-5 h-5 text-gray-700" />
+            </button>
+          </div> */}
+          <CustomerSidebar
+            onSelect={(id) => {
+              setActiveRequestId(id);
+              setSidebarOpen(false);
+            }}
+          />
+        </div>
+      )}
+
+      {/* Desktop Sidebar */}
+      <div className="hidden md:block md:w-96 border-r border-gray-200 bg-white">
+        <CustomerSidebar onSelect={setActiveRequestId} />
+      </div>
+
+      {/* Main Chat Area */}
+      <div className="flex-1 flex flex-row">
+        <CustomerMainChatArea requestId={activeRequestId} sender="admin" />
+      </div>
     </div>
   );
 };

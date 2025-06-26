@@ -26,7 +26,7 @@ const CustomerRightSidebar = ({activeChat}:any) => {
   return (
     <>
       {activeChat ? (
-        <div className="w-80 bg-white border-l border-gray-200 p-4">
+        <div className="md:w-80 bg-white border-l border-gray-200 p-4">
           <div className="space-y-6">
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Personal Information</h3>

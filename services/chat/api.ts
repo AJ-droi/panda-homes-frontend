@@ -29,3 +29,73 @@ export const sendMail = async (data:any) => {
     
     }
   };
+
+
+  export const getChats = async() => {
+  try {
+      const response = await axiosInstance.get(`chats`, {
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+
+      if (response.status !== 200) {
+        throw new Error("Error fetcthing service requests chat");
+      }
+  
+      return response.data
+    } catch (error: any) {
+      const errorMessage = error.message || "An error occurred";
+      return {
+        success: false,
+        message: errorMessage,
+        error: error.response?.data || null,
+      };
+    }
+  }
+
+  export const getChatByRequestId= async (requestId:string) => {
+    try {
+      const response = await axiosInstance.get(`chats/request/${requestId}`, {
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+
+      if (response.status !== 200) {
+        throw new Error("Error fetcthing service requests chat");
+      }
+  
+      return response.data
+    } catch (error: any) {
+      const errorMessage = error.message || "An error occurred";
+      return {
+        success: false,
+        message: errorMessage,
+        error: error.response?.data || null,
+      };
+    }
+  }
+
+  export const markAsResolved = async(requestId:string) => {
+     try {
+      const response = await axiosInstance.post(`chats/mark-as-resolved/${requestId}`, {
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+
+      if (response.status !== 200) {
+        throw new Error("Error fetcthing service requests chat");
+      }
+  
+      return response.data
+    } catch (error: any) {
+      const errorMessage = error.message || "An error occurred";
+      return {
+        success: false,
+        message: errorMessage,
+        error: error.response?.data || null,
+      };
+    }
+  }
