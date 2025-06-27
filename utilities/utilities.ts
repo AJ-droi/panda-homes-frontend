@@ -12,3 +12,8 @@ export const formatDate = (dateString:Date) => {
   export const formatNumberWithCommas = (num: number): string => {
     return num.toLocaleString('en-US');
   }
+
+  export function toSentenceCase(text: string): string {
+  if (!text) return '';
+  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+}

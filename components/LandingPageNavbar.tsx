@@ -17,7 +17,7 @@ const LandingNavbar = () => {
       <div className="flex justify-between animate__animated animate__slideInLeft items-center w-full lg:w-auto">
         <div className="w-[133px] h-[38px] hover:cursor-pointer">
           <Image
-            src="/landingPage/logo.png"
+            src="/landingPage/logo.svg"
             alt="Panda Logo"
             width={100}
             height={100}

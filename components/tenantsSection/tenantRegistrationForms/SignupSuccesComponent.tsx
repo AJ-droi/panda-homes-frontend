@@ -36,7 +36,7 @@ const SuccessForm = ({}) => {
           <div className="w-full max-w-md flex flex-col justify-center items-center py-4 px-4 sm:px-6 rounded-[10px] mb-4 sm:mb-6">
             <div className="w-[100px] sm:w-[133px] mb-6 sm:mb-10 p-0 h-[28px] sm:h-[38px] hover:cursor-pointer">
               <Image
-                src="/landingPage/logo.png"
+                src="/landingPage/logo.svg"
                 alt="Panda Logo"
                 width={133}
                 height={38}

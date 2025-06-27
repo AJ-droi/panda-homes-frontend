@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { toSentenceCase } from '@/utilities/utilities';
 
 export default function TenantHome() {
     const router = useRouter()
@@ -61,7 +62,7 @@ export default function TenantHome() {
       <div className="max-w-7xl mx-auto py-5">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Hello {tenantDetails?.first_name || 'Tenant'},</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Hello {toSentenceCase(tenantDetails?.first_name) || 'Tenant'},</h1>
           <p className="text-2xl text-gray-600">What would you like to do today?</p>
         </div>
 

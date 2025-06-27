@@ -27,7 +27,7 @@ const Loading: React.FC<LoadingProps> = ({ message = "Please Wait Panda is Loadi
       <div className="relative z-[10000] flex flex-col justify-center items-center text-center">
         <div className="mb-6">
           <Image
-            src="/landingPage/logo.png"
+            src="/landingPage/logo.svg"
             alt="Panda Logo"
             width={160}
             height={80}

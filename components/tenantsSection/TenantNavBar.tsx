@@ -13,6 +13,7 @@ import device from "@/constants/breakpoints";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import { toSentenceCase } from "@/utilities/utilities";
 
 interface TenantNavbarProps {
   isTenantRegister?: boolean;
@@ -122,15 +123,13 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
     };
   }, []);
 
-    if (isTabletOrSmaller) {
-    return null;
-  }
+
   return (
     <div className="bg-white flex text-[#000]  text-[18px] leading-[145%] font-[400] px-4 sm:px-6 md:px-8 lg:px-20 h-[76px] border-b border-[#66666659] shadow-lg justify-between items-center w-full">
       {/* <div>Hello {tenantDetails?.first_name ? tenantDetails?.first_name : 'There'}</div> */}
       <section className="w-[133px] p-0 h-[38px] hover:cursor-pointer">
         <Image
-          src="/landingPage/logo.png"
+          src="/landingPage/logo.svg"
           alt="Panda Logo"
           width={100}
           height={38}
@@ -144,12 +143,12 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
           onClick={() => setShowDropdown((prev) => !prev)}
         >
           <h3>
-            {tenantDetails?.first_name} {tenantDetails?.last_name}
+            {toSentenceCase(tenantDetails?.first_name)} {toSentenceCase(tenantDetails?.last_name)}
           </h3>
           <Image
-            src="/nav-dropdown-icon.png"
+            src="/nav-dropdown-icon.svg"
             alt="Dropdown Icon"
-            width={15}
+            width={10}
             height={10}
             style={{ objectFit: "contain" }}
             priority
