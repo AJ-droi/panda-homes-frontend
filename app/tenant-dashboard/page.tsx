@@ -23,7 +23,7 @@ export default function TenantHome() {
       title: "Billing & Payments",
       description: "Track your rent, see past payments, and pay bills.",
       icon: <ArrowRight className="w-5 h-5 text-[#444D61]" />,
-      action: () => {router.push('#')}
+      action: () => {console.warn("Billing & Payments is not yet implemented")}
     },
     {
       title: "Documents",
@@ -61,7 +61,7 @@ export default function TenantHome() {
       <div className="max-w-7xl mx-auto py-5">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Hello {tenantDetails?.first_name},</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Hello {tenantDetails?.first_name || 'Tenant'},</h1>
           <p className="text-2xl text-gray-600">What would you like to do today?</p>
         </div>
 

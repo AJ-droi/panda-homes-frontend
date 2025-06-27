@@ -104,9 +104,7 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
     }
   };
 
-  if (isTabletOrSmaller) {
-    return null;
-  }
+
 
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null) as any;
@@ -123,6 +121,10 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+    if (isTabletOrSmaller) {
+    return null;
+  }
   return (
     <div className="bg-white flex text-[#000]  text-[18px] leading-[145%] font-[400] px-4 sm:px-6 md:px-8 lg:px-20 h-[76px] border-b border-[#66666659] shadow-lg justify-between items-center w-full">
       {/* <div>Hello {tenantDetails?.first_name ? tenantDetails?.first_name : 'There'}</div> */}
@@ -142,7 +144,7 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
           onClick={() => setShowDropdown((prev) => !prev)}
         >
           <h3>
-            {tenantDetails.first_name} {tenantDetails.last_name}
+            {tenantDetails?.first_name} {tenantDetails?.last_name}
           </h3>
           <Image
             src="/nav-dropdown-icon.png"
