@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { MessageCircle, Phone, Mail, Clock, CheckCircle, User, FileText, Wrench, Zap, Droplets, Home, X, Menu } from 'lucide-react';
 import CustomerSidebar from './CustomerSidebar';
 import { generateServiceRequestId } from '@/services/chat/socket';
-import ChatWindow from '@/components/chat/ChatWindow'
 import CustomerMainChatArea from './CustomerMainChatArea';
 
 const CustomerRepDashboard = () => {

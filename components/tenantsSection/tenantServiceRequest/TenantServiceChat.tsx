@@ -246,7 +246,6 @@ export default function TenantServiceChat({
             className="px-6 py-3  text-white rounded-lg bg-[#615EF0] focus:outline-none focus:ring-2 focus:ring-[#785DBA] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
           >
             <Send className="w-4 h-4" />
-            Submit
           </button>
         </div>
       </div>

@@ -1,22 +1,19 @@
 "use client";
 import AuthGuard from "@/components/AuthGuard";
 import TenantNavbar from "@/components/tenantsSection/TenantNavBar";
-import TenantSidebar from "@/components/tenantsSection/TenantSidebar";
-import device from "@/constants/breakpoints";
-import { useMatchMediaQuery } from "@/hooks/useViewPort";
+// import device from "@/constants/breakpoints";
+// import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import React from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
+  // const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
 
   return (
     <AuthGuard>
       <div className="flex flex-col min-h-screen">
-        <TenantSidebar />
+        {/* <TenantSidebar /> */}
         <div
-          className={`flex-1 ${
-            isTabletOrSmaller ? "ml-0" : "ml-[179px]"
-          } transition-all duration-300`}
+          className={`flex-1 transition-all duration-300`}
         >
           <TenantNavbar />
           <main style={{ flex: 1 }}>{children}</main>

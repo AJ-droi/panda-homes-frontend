@@ -1,7 +1,6 @@
-
 "use client";
 /* eslint-disable */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 // import {
 //   NavbarActiveNotificationBell,
 //   NavbarActiveSettingsIcon,
@@ -11,31 +10,62 @@ import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
+import Image from "next/image";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 interface TenantNavbarProps {
   isTenantRegister?: boolean;
 }
 
 const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
-  // const [tenantDetails, setTenantDetails] = useState<any>({})
+  const [tenantDetails, setTenantDetails] = useState<any>({});
   const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
-  
-  useEffect(() => {
-    const isClient = typeof window !== 'undefined';
-    if (isClient) {
-      const jsonTenantDetails = localStorage.getItem('tenant')
-      if (jsonTenantDetails) {
-        try {
-          // setTenantDetails(JSON.parse(jsonTenantDetails))
-        } catch (error) {
-          console.error('Failed to parse tenant details', error)
+   const [parentoken, setParentToken] = useState<any>("");
+
+    useEffect(() => {
+      const isClient = typeof window !== "undefined";
+      if (isClient) {
+        const jsonTenantDetails = localStorage.getItem("tenant");
+         const parentokenDetail = localStorage.getItem("parent_token") as string;
+        if (jsonTenantDetails) {
+          try {
+            setParentToken(parentokenDetail)
+            setTenantDetails(JSON.parse(jsonTenantDetails));
+          } catch (error) {
+            console.error("Failed to parse tenant details", error);
+          }
         }
       }
-    }
-  }, [])
+    }, []);
+  
 
   const pathname = usePathname();
   const router = useRouter();
+
+   const handleLogout = () => {
+      localStorage.removeItem("tenant");
+      localStorage.removeItem("token");
+      Cookies.remove("token");
+      router.push("/");
+    };
+
+
+      function handleSwitchAccount() {
+        let access_token = localStorage.getItem('access_token') as string
+        if (!parentoken || parentoken == 'null') {
+          toast.error("No Admin account is linked to this account");
+          return;
+        }
+        // Replace token in cookies or localStorage
+        localStorage.setItem("sub_account_token", access_token)
+        localStorage.setItem("access_token", parentoken);
+        
+    
+        // Update app state or trigger revalidation
+        // setUser(subAccount); // or trigger SWR/NextAuth update
+        router.push("/dashboard");
+      }
   const [isLoading, setIsLoading] = useState(false);
   const [loadingPath, setLoadingPath] = useState<string | null>(null);
 
@@ -78,29 +108,68 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
     return null;
   }
 
-  return (
-    <div className="bg-white flex text-[#785DBA] text-[22px] leading-[145%] font-[700] px-4 sm:px-6 md:px-8 lg:px-20 h-[76px] border-b border-[#66666659] shadow-lg justify-end items-center w-full">
-      {/* <div>Hello {tenantDetails?.first_name ? tenantDetails?.first_name : 'There'}</div> */}
-      {!isTenantRegister && (
-        <div className="gap-[24px] items-center justify-between flex">
-          {/* {iconData.map((item) => (
-            <div
-              key={item.name}
-              className={`hover:cursor-pointer ${
-                isLoading && loadingPath === item.path
-                  ? "opacity-50 pointer-events-none"
-                  : ""
-              }`}
-              onClick={() =>
-                !isLoading && loadingPath !== item.path && redirect(item.path)
-              }
-            >
-              {pathname === item.path ? item.activeIcon : item.icon}
-            </div>
-          ))} */}
-        </div>
-      )}
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null) as any;
 
+  // Close dropdown if clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: any) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+  return (
+    <div className="bg-white flex text-[#000]  text-[18px] leading-[145%] font-[400] px-4 sm:px-6 md:px-8 lg:px-20 h-[76px] border-b border-[#66666659] shadow-lg justify-between items-center w-full">
+      {/* <div>Hello {tenantDetails?.first_name ? tenantDetails?.first_name : 'There'}</div> */}
+      <section className="w-[133px] p-0 h-[38px] hover:cursor-pointer">
+        <Image
+          src="/landingPage/logo.png"
+          alt="Panda Logo"
+          width={100}
+          height={38}
+          style={{ objectFit: "contain" }}
+          priority
+        />
+      </section>
+      <div className="relative" ref={dropdownRef}>
+        <div
+          className="flex justify-center gap-x-3 cursor-pointer"
+          onClick={() => setShowDropdown((prev) => !prev)}
+        >
+          <h3>
+            {tenantDetails.first_name} {tenantDetails.last_name}
+          </h3>
+          <Image
+            src="/nav-dropdown-icon.png"
+            alt="Dropdown Icon"
+            width={15}
+            height={10}
+            style={{ objectFit: "contain" }}
+            priority
+          />
+        </div>
+
+        {showDropdown && (
+          <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
+            <ul className="py-1 text-gray-700">
+              <li className="px-4 py-2 hover:[#F0E9FF] cursor-pointer" onClick={() => handleSwitchAccount()}>
+                Switch to Admin Account
+              </li>
+              <li className="px-4 py-2 hover:[#F0E9FF] cursor-pointer">
+                Settings
+              </li>
+              <li className="px-4 py-2 hover:[#F0E9FF] cursor-pointer" onClick={() => handleLogout()}>
+                Log out
+              </li>
+            </ul>
+          </div>
+        )}
+      </div>
       {/* {isLoading && <Loading />} */}
     </div>
   );

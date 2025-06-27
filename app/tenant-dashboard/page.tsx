@@ -8,26 +8,32 @@ export default function TenantHome() {
     const router = useRouter()
   const serviceCards = [
     {
-      title: "New Service Request",
-      description: "Report a maintenance issue or request repairs.",
+      title: "Service Request",
+      description: "Request for repairs or Track your current service requests and chat with support.",
       icon: <ArrowRight className="w-5 h-5 text-[#444D61]" />,
       action: () =>{router.push('/tenant-dashboard/service-requests')}
     },
     {
       title: "View Tenancy",
-      description: "See your rent details, lease, and payment history.",
+      description: "See your lease terms, rent amount, tenancy period, and usage policy.",
       icon: <ArrowRight className="w-5 h-5 text-[#444D61]" />,
       action: () => {router.push('/tenant-dashboard/tenancy')}
     },
+     {
+      title: "Billing & Payments",
+      description: "Track your rent, see past payments, and pay bills.",
+      icon: <ArrowRight className="w-5 h-5 text-[#444D61]" />,
+      action: () => {router.push('#')}
+    },
     {
-      title: "View Documents",
-      description: "Access your lease agreement, notices, and uploads.",
+      title: "Documents",
+      description: "Access your tenancy agreement, rent notices, and important files.",
       icon: <ArrowRight className="w-5 h-5 text-[#444D61]" />,
       action: () => {router.push('/tenant-dashboard/notice-agreement')}
     },
     {
       title: "Contact Us",
-      description: "Need help? Reach out to Us.",
+      description: "Have questions? Reach out to our team directly.",
       icon: <ArrowRight className="w-5 h-5 text-[#444D61]" />,
       action: () => {router.push('/tenant-dashboard/contact-us')},
       fullWidth: true
@@ -52,11 +58,11 @@ export default function TenantHome() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto py-5">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-light text-gray-900 mb-2">Hello {tenantDetails?.first_name},</h1>
-          <p className="text-xl text-gray-600">What would you like to do today?</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Hello {tenantDetails?.first_name},</h1>
+          <p className="text-2xl text-gray-600">What would you like to do today?</p>
         </div>
 
         {/* Service Cards Grid */}

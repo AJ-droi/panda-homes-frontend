@@ -215,7 +215,7 @@ const CustomerMainChatArea = ({ requestId, sender }: ChatWindowProps) => {
                   className="px-6 py-3 text-white rounded-lg bg-[#785DBA] hover:bg-[#6848b5] disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   <Send className="w-4 h-4" />
-                  Submit
+ 
                 </button>
               </div>
             </div>}
