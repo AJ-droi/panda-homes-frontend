@@ -5,7 +5,7 @@ export function useFetchChats() {
     return useQuery({
       queryKey: ["chats"],
       queryFn: getChats,
-      refetchOnMount: "always",
+      refetchOnMount: 'always',
       refetchOnWindowFocus: true,
     //   select:(data) => 
     //     data.service_requests.map((service: any) => ({

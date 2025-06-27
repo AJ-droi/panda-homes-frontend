@@ -20,12 +20,12 @@ export default function TenantHome() {
       icon: <ArrowRight className="w-5 h-5 text-[#444D61]" />,
       action: () => {router.push('/tenant-dashboard/tenancy')}
     },
-     {
-      title: "Billing & Payments",
-      description: "Track your rent, see past payments, and pay bills.",
-      icon: <ArrowRight className="w-5 h-5 text-[#444D61]" />,
-      action: () => {console.warn("Billing & Payments is not yet implemented")}
-    },
+    //  {
+    //   title: "Billing & Payments",
+    //   description: "Track your rent, see past payments, and pay bills.",
+    //   icon: <ArrowRight className="w-5 h-5 text-[#444D61]" />,
+    //   action: () => {console.warn("Billing & Payments is not yet implemented")}
+    // },
     {
       title: "Documents",
       description: "Access your tenancy agreement, rent notices, and important files.",

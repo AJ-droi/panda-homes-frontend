@@ -22,51 +22,48 @@ interface TenantNavbarProps {
 const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
   const [tenantDetails, setTenantDetails] = useState<any>({});
   const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
-   const [parentoken, setParentToken] = useState<any>("");
+  const [parentoken, setParentToken] = useState<any>("");
 
-    useEffect(() => {
-      const isClient = typeof window !== "undefined";
-      if (isClient) {
-        const jsonTenantDetails = localStorage.getItem("tenant");
-         const parentokenDetail = localStorage.getItem("parent_token") as string;
-        if (jsonTenantDetails) {
-          try {
-            setParentToken(parentokenDetail)
-            setTenantDetails(JSON.parse(jsonTenantDetails));
-          } catch (error) {
-            console.error("Failed to parse tenant details", error);
-          }
+  useEffect(() => {
+    const isClient = typeof window !== "undefined";
+    if (isClient) {
+      const jsonTenantDetails = localStorage.getItem("tenant");
+      const parentokenDetail = localStorage.getItem("parent_token") as string;
+      if (jsonTenantDetails) {
+        try {
+          setParentToken(parentokenDetail);
+          setTenantDetails(JSON.parse(jsonTenantDetails));
+        } catch (error) {
+          console.error("Failed to parse tenant details", error);
         }
       }
-    }, []);
-  
+    }
+  }, []);
 
   const pathname = usePathname();
   const router = useRouter();
 
-   const handleLogout = () => {
-      localStorage.removeItem("tenant");
-      localStorage.removeItem("token");
-      Cookies.remove("token");
-      router.push("/");
-    };
+  const handleLogout = () => {
+    localStorage.removeItem("tenant");
+    localStorage.removeItem("token");
+    Cookies.remove("token");
+    router.push("/");
+  };
 
+  function handleSwitchAccount() {
+    let access_token = localStorage.getItem("access_token") as string;
+    if (!parentoken || parentoken == "null") {
+      toast.error("No Admin account is linked to this account");
+      return;
+    }
+    // Replace token in cookies or localStorage
+    localStorage.setItem("sub_account_token", access_token);
+    localStorage.setItem("access_token", parentoken);
 
-      function handleSwitchAccount() {
-        let access_token = localStorage.getItem('access_token') as string
-        if (!parentoken || parentoken == 'null') {
-          toast.error("No Admin account is linked to this account");
-          return;
-        }
-        // Replace token in cookies or localStorage
-        localStorage.setItem("sub_account_token", access_token)
-        localStorage.setItem("access_token", parentoken);
-        
-    
-        // Update app state or trigger revalidation
-        // setUser(subAccount); // or trigger SWR/NextAuth update
-        router.push("/dashboard");
-      }
+    // Update app state or trigger revalidation
+    // setUser(subAccount); // or trigger SWR/NextAuth update
+    router.push("/dashboard");
+  }
   const [isLoading, setIsLoading] = useState(false);
   const [loadingPath, setLoadingPath] = useState<string | null>(null);
 
@@ -105,8 +102,6 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
     }
   };
 
-
-
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null) as any;
 
@@ -122,7 +117,6 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
 
   return (
     <div className="bg-white flex text-[#000]  text-[18px] leading-[145%] font-[400] px-4 sm:px-6 md:px-8 lg:px-20 h-[76px] border-b border-[#66666659] shadow-lg justify-between items-center w-full">
@@ -143,7 +137,8 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
           onClick={() => setShowDropdown((prev) => !prev)}
         >
           <h3>
-            {toSentenceCase(tenantDetails?.first_name)} {toSentenceCase(tenantDetails?.last_name)}
+            {toSentenceCase(tenantDetails?.first_name)}{" "}
+            {toSentenceCase(tenantDetails?.last_name)}
           </h3>
           <Image
             src="/nav-dropdown-icon.svg"
@@ -158,13 +153,21 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
         {showDropdown && (
           <div className="absolute right-0 mt-2 w-60 rounded-es-md rounded-ee-md shadow-lg bg-white  ring-opacity-5 z-10 text-[16px]">
             <ul className="py-1 text-gray-700">
-              <li className="px-4 py-2 hover:bg-[#F0E9FF] cursor-pointer" onClick={() => handleSwitchAccount()}>
-                Switch to Admin Account
-              </li>
+              {(parentoken && parentoken !=='null') && (
+                <li
+                  className="px-4 py-2 hover:bg-[#F0E9FF] cursor-pointer"
+                  onClick={() => handleSwitchAccount()}
+                >
+                  Switch to Admin Account
+                </li>
+              )}
               <li className="px-4 py-2 hover:bg-[#F0E9FF] cursor-pointer">
                 Settings
               </li>
-              <li className="px-4 py-2 hover:bg-[#F0E9FF] cursor-pointer" onClick={() => handleLogout()}>
+              <li
+                className="px-4 py-2 hover:bg-[#F0E9FF] cursor-pointer"
+                onClick={() => handleLogout()}
+              >
                 Log out
               </li>
             </ul>

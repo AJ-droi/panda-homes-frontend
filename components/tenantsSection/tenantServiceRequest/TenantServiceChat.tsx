@@ -69,6 +69,7 @@ export default function TenantServiceChat({
       if (msg.service_request_id !== requestId) return;
 
       // Play sound only if from opposite sender
+      console.log(msg.sender, sender)
       if (msg.sender !== sender) playNotification();
 
       setMessages((prev) => {

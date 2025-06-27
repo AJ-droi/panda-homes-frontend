@@ -60,6 +60,7 @@ const CustomerMainChatArea = ({ requestId, sender }: ChatWindowProps) => {
 
     socket.on("new_message", (msg: any) => {
       if (msg.service_request_id === requestId) {
+        console.log(msg.sender, sender)
          if (msg.sender !== sender) {
           playNotification();
         }
