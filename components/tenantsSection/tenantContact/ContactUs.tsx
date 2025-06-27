@@ -1,4 +1,5 @@
 "use client";
+import BackButton from "@/components/Backbutton";
 /* eslint-disable */
 import { useSendMail } from "@/services/chat/mutation";
 import React, { useState } from "react";
@@ -8,27 +9,29 @@ export default function SimpleContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const {mutate, isPending} = useSendMail()
+  const { mutate, isPending } = useSendMail();
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = () => {
     if (message.trim() === "") return;
 
     setIsSubmitting(true);
-          mutate(
-        {
-         message: message,
+    mutate(
+      {
+        message: message,
+      },
+      {
+        onSuccess: () => {
+          // router.push("/dashboard/notice-agreement");
+          window.location.reload();
         },
-        {
-          onSuccess: () => {
-            // router.push("/dashboard/notice-agreement");
-            window.location.reload()
-          },
-          onError: (error: any) => {
-            setError(error.message || "An error occurred during notice creation.");
-          },
-        }
-      );
+        onError: (error: any) => {
+          setError(
+            error.message || "An error occurred during notice creation."
+          );
+        },
+      }
+    );
 
     // Simulate form submission
     setTimeout(() => {
@@ -60,7 +63,7 @@ export default function SimpleContactForm() {
 
   return (
     <div className="min-h-screen bg-gray-50  flex items-start justify-start p-10">
-          {error && (
+      {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
           {error}
         </div>
@@ -68,8 +71,9 @@ export default function SimpleContactForm() {
       <div className=" ">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-xl font-semibold text-gray-800 mb-2 m-0">
-            Contact Us
+          <h1 className="text-xl font-semibold text-gray-800 mb-2 m-0 flex">
+            <BackButton />
+            <span>Contact Us</span>
           </h1>
           <p className="text-sm text-[#353535] m-0">
             Got a question, concern, or need help with something? We're here to

@@ -2,7 +2,7 @@
 'use client';
 /* eslint-disable */
 import { useRouter } from 'next/navigation';
-import { ArrowLeft } from 'lucide-react';
+import Image from 'next/image'
 
 export default function BackButton(props:any) {
   const router = useRouter();
@@ -12,7 +12,7 @@ export default function BackButton(props:any) {
       onClick={() => router.back()}
       className="flex items-center gap-2 text-sm text-gray-700 hover:text-black"
     >
-      <ArrowLeft className="w-4 h-4" />
+      <Image src={'/back-arrow.png'} width={20} height={20} alt="back-arrow"/>
        <h2
             className="text-lg font-semibold text-gray-900"
             style={{ fontFamily: "Inter" }}
@@ -30,7 +30,7 @@ export function BackToLogin() {
       onClick={() => router.push('/')}
       className="flex items-center gap-2 text-sm text-gray-700 hover:text-black p-5"
     >
-      <ArrowLeft className="w-4 h-4" />
+       <Image src={'/back-arrow.png'} width={20} height={20} alt="back-arrow"/>
        <h2
             className="text-md font-plus-jarkarta text-gray-900"
             

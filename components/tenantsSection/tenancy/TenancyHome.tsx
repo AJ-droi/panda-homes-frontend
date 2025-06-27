@@ -6,6 +6,7 @@ import {
   useGetTenantRent,
 } from "@/services/tenants/query";
 import { differenceInDays } from "date-fns";
+import BackButton from "@/components/Backbutton";
 
 export default function MyTenancy() {
   const rentAmount = "1,500,000";
@@ -54,11 +55,12 @@ export default function MyTenancy() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto py-5">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-semibold text-gray-900 mb-2">
-            My Tenancy
+          <h1 className="text-3xl font-semibold text-gray-900 mb-2 flex">
+            <BackButton />
+            <span>My Tenancy</span>
           </h1>
           <p className="text-gray-600">
             Everything you need to know about your tenancy.

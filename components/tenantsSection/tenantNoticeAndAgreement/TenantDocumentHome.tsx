@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import DocumentsList from "./DocumentList";
 import Pagination from "@/components/PaginationComponent";
 import { useFetchNoticeAgreementByTenant } from "@/services/notice-agreement/query";
+import BackButton from "@/components/Backbutton";
 
 const TenantDocumentHome = () => {
   const { data: noticeData } = useFetchNoticeAgreementByTenant();
@@ -41,7 +42,10 @@ const TenantDocumentHome = () => {
       {/* Original Documents Example */}
 
       <div className="p-6 border-gray-200">
-        <h3 className="text-lg font-semibold text-gray-900">My Documents</h3>
+        <h3 className="text-lg font-semibold text-gray-900 flex">
+          <BackButton />
+          <span>My Documents</span>
+        </h3>
         <p className="text-sm text-gray-600 mt-1">
           Easily view, download, or reference important documents like your
           lease agreement, notices, ID uploads, and more.

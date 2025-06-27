@@ -157,15 +157,15 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
         </div>
 
         {showDropdown && (
-          <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
+          <div className="absolute right-0 mt-2 w-60 rounded-es-md rounded-ee-md shadow-lg bg-white  ring-opacity-5 z-10 text-[16px]">
             <ul className="py-1 text-gray-700">
-              <li className="px-4 py-2 hover:[#F0E9FF] cursor-pointer" onClick={() => handleSwitchAccount()}>
+              <li className="px-4 py-2 hover:bg-[#F0E9FF] cursor-pointer" onClick={() => handleSwitchAccount()}>
                 Switch to Admin Account
               </li>
-              <li className="px-4 py-2 hover:[#F0E9FF] cursor-pointer">
+              <li className="px-4 py-2 hover:bg-[#F0E9FF] cursor-pointer">
                 Settings
               </li>
-              <li className="px-4 py-2 hover:[#F0E9FF] cursor-pointer" onClick={() => handleLogout()}>
+              <li className="px-4 py-2 hover:bg-[#F0E9FF] cursor-pointer" onClick={() => handleLogout()}>
                 Log out
               </li>
             </ul>
