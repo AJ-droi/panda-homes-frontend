@@ -160,7 +160,7 @@ export default function MyTenancy() {
               </li>
               <li>
                 {" "}
-                Caution Fee: ₦
+                Service Charge: ₦
                 {Number(rentDetails?.service_charge).toLocaleString("en-NG") ||
                   0}
               </li>
