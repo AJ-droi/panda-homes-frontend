@@ -7,6 +7,7 @@ import {
 } from "@/services/tenants/query";
 import { differenceInDays } from "date-fns";
 import BackButton from "@/components/Backbutton";
+import { formatNumberWithCommas } from "@/utilities/utilities";
 
 export default function MyTenancy() {
   const rentAmount = "1,500,000";
@@ -74,7 +75,7 @@ export default function MyTenancy() {
               <p className="text-gray-700">
                 Your rent of{" "}
                 <span className="text-[#785DBA]font-semibold">
-                  ₦{rentDetails?.rental_price}
+                  ₦{Number(rentDetails?.rental_price).toLocaleString("en-NG")}
                 </span>{" "}
                 is expiring on {new Date(rentDetails?.lease_end_date).toLocaleDateString(
                   "en-US",

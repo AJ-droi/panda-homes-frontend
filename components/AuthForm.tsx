@@ -72,9 +72,9 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
   return (
     <div className="w-full bg-white rounded-ss-3xl rounded-se-3xl  md:rounded-md h-[70vh] px-5 py-5">
       <div className="flex flex-row justify-between items-center">
-        <div className="text-[32px] font-[500] text-[#333333] px-[3%]">
+        {/* <div className="text-[32px] font-[500] text-[#333333] px-[3%]">
           {isLogin ? <img src="/client-login.svg" width={200} height={200} /> : "Create an account"}
-        </div>
+        </div> */}
         {/* <Link
           href={isLogin ? "signup" : "login"}
           className="underline font-[400] text-[#111111]"

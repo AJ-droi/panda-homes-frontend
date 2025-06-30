@@ -8,6 +8,7 @@ import BackButton from '@/components/Backbutton';
 import { useDeletePropertyMutation, useUpdatePropertyMutation } from '@/services/property/mutation';
 import { toast } from 'react-toastify';
 import { useRemoveTenantMutation } from '@/services/rents/mutation';
+import { toSentenceCase } from '@/utilities/utilities';
 // adjust the path as needed
 
 type PropertyField =
@@ -161,10 +162,15 @@ const handleDelete = async () => {
         />
       ) : (
         <div className="flex items-center justify-between mt-1">
-          <p className="text-gray-500 text-[14px]">{propertyData[field]}</p>
-          <button onClick={() => toggleEditMode(field)}>
+          <p className="text-gray-500 text-[14px]"> {
+          (field === "service_charge" || field === "rental_price" || field === "security_deposit" )
+          ? Number(propertyData[field]).toLocaleString("en-NG") 
+          : (field === "first_name" || field === "last_name")
+          ?toSentenceCase(propertyData[field])
+          : propertyData[field]}</p>
+          {/* <button onClick={() => toggleEditMode(field)}>
             <Edit3 size={16} className="text-gray-500" />
-          </button>
+          </button> */}
         </div>
       )}
     </div>

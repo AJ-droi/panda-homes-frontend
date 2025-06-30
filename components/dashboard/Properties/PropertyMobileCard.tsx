@@ -31,9 +31,9 @@ const PropertyMobileCard = (props: any) => {
         </div>
       ))}
 
-      <button className="bg-[#785DBA] text-white text-[12px] font-semibold py-2 px-4 w-[45%] rounded-md" onClick={() => router.push('/dashboard/properties/group')}>
+      {/* <button className="bg-[#785DBA] text-white text-[12px] font-semibold py-2 px-4 w-[45%] rounded-md" onClick={() => router.push('/dashboard/properties/group')}>
         Group Properties
-      </button>
+      </button> */}
 
 
         <button className=" fixed bottom-5 right-10" onClick={() => router.push('/dashboard/add-property')}>

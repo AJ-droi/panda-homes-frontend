@@ -143,10 +143,10 @@ export default function TenantServiceChat({
         <h1 className="text-2xl font-medium text-gray-900 mb-2">
           Need help with your apartment?
         </h1>
-        <p className="text-gray-600">
+        {/* <p className="text-gray-600">
           Let's start with a few quick questions. If you need to speak to
           someone, we're right here with you.
-        </p>
+        </p> */}
       </div>
 
       {/* Chat Messages */}

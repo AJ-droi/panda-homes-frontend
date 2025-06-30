@@ -29,7 +29,7 @@ const OverviewCard = (props: any) => {
               <div className="flex items-start border-l-2 border-[#DDDEE1] pl-4 pr-6">
                 <div className="">
                   <h3 className="text-[14px] font-[700] leading-[24px] text-[#1A1F36] font-plus-jarkarta">
-                    {item.property_name}
+                        {item.description}
                   </h3>
                 </div>
               </div>
@@ -39,7 +39,7 @@ const OverviewCard = (props: any) => {
                   {/* <HistoriesPageBulletIcon /> */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between ">
                     <h4 className="text-[12px]  text-[#1A1F36] font-inter">
-                      {item.description}
+                        {item.property_name}
                     </h4>
                   </div>
                 </div>

@@ -25,6 +25,7 @@ import {
   NavbarSettingsIcon,
 } from "@/layout/svgIconPaths";
 import { toast } from "react-toastify";
+import { toSentenceCase } from "@/utilities/utilities";
 // import { toast } from "react-toastify";
 
 const TenantSidebar = () => {
@@ -189,7 +190,7 @@ const TenantSidebar = () => {
           </button>
           <span className="font-medium text-[#785DBA] text-[16px] font-plus-jakarta">
             Hello{" "}
-            {tenantDetails?.first_name ? tenantDetails?.first_name : "There"}
+            {toSentenceCase(tenantDetails?.first_name )? toSentenceCase(tenantDetails?.first_name) : "There"}
           </span>
         </div>
         <div className="gap-[24px] items-center justify-between flex">

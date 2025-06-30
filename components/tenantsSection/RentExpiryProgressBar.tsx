@@ -1,5 +1,5 @@
 import React from "react";
-import { formatNumberWithCommas } from "@/utilities/utilities";
+
 
 interface RentCountdownProps {
   expirationDate: string;
@@ -47,10 +47,8 @@ const RentCountdown: React.FC<RentCountdownProps> = ({
       </p>
       <p className="text-[#785DBA] leading-[150%] text-sm sm:text-[15.88px] md:text-xl font-semibold">
         NGN{isPropertyDataLoading
-          ? "loading..."
-          : !rental_price
           ? "0"
-          : formatNumberWithCommas(rental_price)
+          : Number(rental_price).toLocaleString("en-NG")
         }
       </p>
     </div>

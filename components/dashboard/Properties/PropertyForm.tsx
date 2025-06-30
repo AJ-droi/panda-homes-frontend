@@ -72,7 +72,7 @@ const PropertyForm = () => {
     // rental_price: parseInt(formData.rental_price.replace(/,/g, "")),
     // security_deposit: parseInt(formData.security_deposit.replace(/,/g, "")),
     // service_charge: parseInt(formData.service_charge.replace(/,/g, "")),
-    description: `Property ${formData.name} is a ${
+    description: `Property is a ${
       formData.no_of_bedrooms
     }-bedroom ${formData.property_type.toLowerCase()} located in ${
       formData.location}`
