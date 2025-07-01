@@ -81,6 +81,32 @@ export const loginUser = async (data: z.infer<typeof loginSchema>) => {
     }
   }
 
+
+  export const getTenantAndPropertyInfo = async (params?: UserFilter) => {
+    try {
+      const response = await axiosInstance.get("/users/tenant-property", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        params, // ✅ pass query params
+      });
+
+      if (response.status !== 200) {
+        throw new Error("Error Fetching Tenant Property Info");
+      }
+  
+      return response.data
+    } catch (error: any) {
+      const errorMessage = error.message || "An error occurred";
+      return {
+        success: false,
+        message: errorMessage,
+        error: error.response?.data || null,
+      };
+    }
+  }
+
+
   export const getAdminDashboardAnalytics = async () => {
     try {
       const response = await axiosInstance.get("properties/admin/dashboard", {

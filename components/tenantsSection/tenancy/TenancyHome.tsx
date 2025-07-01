@@ -8,29 +8,13 @@ import {
 import { differenceInDays } from "date-fns";
 import BackButton from "@/components/Backbutton";
 import { formatNumberWithCommas } from "@/utilities/utilities";
+import { useFetchTenantAndPropertyInfo } from "@/services/users/query";
 
 export default function MyTenancy() {
-  const rentAmount = "1,500,000";
-  const expiryDate = "October 15th, 2025";
 
-  const [tenantDetails, setTenantDetails] = useState<any>({});
 
-  useEffect(() => {
-    const isClient = typeof window !== "undefined";
-    if (isClient) {
-      const jsonTenantDetails = localStorage.getItem("tenant");
-      if (jsonTenantDetails) {
-        try {
-          setTenantDetails(JSON.parse(jsonTenantDetails));
-        } catch (error) {
-          console.error("Failed to parse tenant details", error);
-        }
-      }
-    }
-  }, []);
-  const { data: rentDetails, isLoading: isRentLoading } = useGetTenantRent(
-    tenantDetails?.id
-  );
+    const {data:rentDetails} =useFetchTenantAndPropertyInfo()
+
   const leaseStart = new Date(rentDetails?.lease_start_date);
   const leaseEnd = new Date(rentDetails?.lease_end_date);
   const today = new Date();
@@ -51,8 +35,6 @@ export default function MyTenancy() {
   );
   // const { data:propertyHistoryData, isLoading: isPropertyHistoryDataLoading } = useGetPropertyHistory(tenantDetails?.property_id)
 
-  const { data: tenantPropertyData, isLoading: isPropertyDataLoading } =
-    useGetTenantProperty(tenantDetails?.property_id);
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -110,7 +92,7 @@ export default function MyTenancy() {
               Property Description
             </h3>
             <p className="text-[#1B2559] font-[400] py-3 px-2 text-[14px]">
-              {rentDetails?.property?.description}
+              {rentDetails?.description}
             </p>
           </div>
           <div className="bg-[#fff] rounded-md">

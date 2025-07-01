@@ -27,9 +27,13 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
     user.role === Role.ADMIN
       ? router.push("/dashboard")
       :  user.role === Role.TENANT
-       ? (router.push("/tenant-dashboard"))
+       ? (
+        router.push("/tenant-dashboard"),
+        localStorage.setItem("tenant", JSON.stringify(user))
+      )
        :(router.push("/customer-rep-dashboard"))
-        localStorage.setItem("tenant", JSON.stringify(user));
+      
+   
   };
 
   const { mutate, isPending } = useLoginMutation();

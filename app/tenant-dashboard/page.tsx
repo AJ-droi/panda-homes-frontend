@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { toSentenceCase } from '@/utilities/utilities';
+import { useFetchTenantAndPropertyInfo } from '@/services/users/query';
 
 export default function TenantHome() {
     const router = useRouter()
@@ -56,6 +57,7 @@ export default function TenantHome() {
         }
       }
     }, []);
+
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">

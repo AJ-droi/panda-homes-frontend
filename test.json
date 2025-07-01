@@ -1,0 +1,78 @@
+{
+    "id": "8f8b627e-513b-4ee4-889f-a124516ebf44",
+    "created_at": "2025-05-26T05:18:53.622Z",
+    "updated_at": "2025-06-21T10:35:18.388Z",
+    "deleted_at": null,
+    "email": "ajiriosiobe@gmail.com",
+    "password": "$2b$10$JrTKoDqNqzoclripnzTGfef9rurlKgFNBL4hjJKPAs9nltwIxeWLC",
+    "is_verified": true,
+    "profile_name": "ajiri osiobe",
+    "role": "tenant",
+    "creator_id": "3e4a8603-eb20-401d-b46b-1a59e641685b",
+    "userId": "9ee7a913-8659-4627-ae90-14f408e13a59",
+    "user": {
+        "id": "9ee7a913-8659-4627-ae90-14f408e13a59",
+        "created_at": "2025-04-22T00:13:04.542Z",
+        "updated_at": "2025-05-27T07:56:46.247Z",
+        "deleted_at": null,
+        "first_name": "ajiri",
+        "last_name": "osiobe",
+        "email": "ajiriosiobe@gmail.com",
+        "phone_number": "08104228894",
+        "password": "$2b$10$FyoN6.HDxMeTvp8llXuYj.gTFNAZXixxfRutXaZyy7CNEN4ktZ7ES",
+        "role": "tenant",
+        "is_verified": true,
+        "logo_urls": null,
+        "creator_id": null
+    },
+    "property_tenants": [
+        {
+            "id": "63517376-513d-4c27-8f3e-05a1c57495b3",
+            "created_at": "2025-06-13T14:58:22.082Z",
+            "updated_at": "2025-06-13T14:58:22.082Z",
+            "deleted_at": null,
+            "property_id": "2c4768f0-68d3-4f1c-8a20-264297aaf06f",
+            "tenant_id": "8f8b627e-513b-4ee4-889f-a124516ebf44",
+            "status": "active",
+            "property": {
+                "id": "2c4768f0-68d3-4f1c-8a20-264297aaf06f",
+                "created_at": "2025-06-19T11:38:26.796Z",
+                "updated_at": "2025-06-19T11:38:26.796Z",
+                "deleted_at": null,
+                "name": "Chat property",
+                "location": "Lakowe, Eti Osa, FP5V+WGG, Lekki 105101, Lagos, Nigeria",
+                "description": "Chat property is a 3-bedroom duplex located in Lakowe, Eti Osa, FP5V+WGG, Lekki 105101, Lagos, Nigeria",
+                "property_status": "vacant",
+                "owner_id": "3e4a8603-eb20-401d-b46b-1a59e641685b",
+                "property_type": "Duplex",
+                "property_images": null,
+                "no_of_bedrooms": 3,
+                "rental_price": null,
+                "payment_frequency": null,
+                "security_deposit": null,
+                "service_charge": null,
+                "comment": null,
+                "rents": [
+                    {
+                        "id": "c7a7c862-aac1-40b2-b178-9b31def0b2d5",
+                        "created_at": "2025-06-11T11:28:39.681Z",
+                        "updated_at": "2025-06-11T11:28:39.681Z",
+                        "deleted_at": null,
+                        "property_id": "2c4768f0-68d3-4f1c-8a20-264297aaf06f",
+                        "tenant_id": "8f8b627e-513b-4ee4-889f-a124516ebf44",
+                        "amount_paid": 1000000,
+                        "expiry_date": null,
+                        "lease_start_date": "2025-06-12T23:00:00.000Z",
+                        "lease_end_date": "2025-07-12T23:00:00.000Z",
+                        "rent_receipts": null,
+                        "rental_price": 1000000,
+                        "security_deposit": 250000,
+                        "service_charge": 50000,
+                        "payment_status": "paid",
+                        "rent_status": "active"
+                    }
+                ]
+            }
+        }
+    ]
+}
