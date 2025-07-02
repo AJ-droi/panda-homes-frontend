@@ -55,7 +55,7 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
 
   function handleSwitchAccount() {
     let access_token = localStorage.getItem("access_token") as string;
-    if ((!parentoken || parentoken == "null") && !subtoken) {
+    if (!parentoken || parentoken == "null" || !subtoken) {
       toast.error("No Admin account is linked to this account");
       return;
     }
@@ -158,7 +158,7 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
         {showDropdown && (
           <div className="absolute right-0 mt-2 w-60 rounded-es-md rounded-ee-md shadow-lg bg-white  ring-opacity-5 z-10 text-[16px]">
             <ul className="py-1 text-gray-700">
-              {((parentoken && parentoken !=='null') || subtoken) && (
+              {(parentoken && parentoken !=='null' && subtoken) && (
                 <li
                   className="px-4 py-2 hover:bg-[#F0E9FF] cursor-pointer"
                   onClick={() => handleSwitchAccount()}
