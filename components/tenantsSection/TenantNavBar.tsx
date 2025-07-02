@@ -31,11 +31,12 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
       const jsonTenantDetails = localStorage.getItem("tenant") as any
       const parentokenDetail = localStorage.getItem("parent_token") as string;
         const subtokenDetail = localStorage.getItem("sub_account_token") as string;
+        console.log({subtokenDetail})
       if (jsonTenantDetails || parentokenDetail || subtokenDetail) {
         try {
           setParentToken(parentokenDetail);
           setTenantDetails(JSON.parse(jsonTenantDetails));
-           setSubToken(JSON.parse(subtokenDetail))
+           setSubToken(subtokenDetail)
         } catch (error) {
           console.error("Failed to parse tenant details", error);
         }
@@ -54,7 +55,7 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
 
   function handleSwitchAccount() {
     let access_token = localStorage.getItem("access_token") as string;
-    if (!parentoken || parentoken == "null") {
+    if ((!parentoken || parentoken == "null") && !subtoken) {
       toast.error("No Admin account is linked to this account");
       return;
     }
@@ -84,7 +85,7 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
   //   },
   // ];
 
-  console.log({subtoken, parentoken})
+
 
   const redirect = async (path: string) => {
     if (pathname === path) return;
@@ -157,7 +158,7 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
         {showDropdown && (
           <div className="absolute right-0 mt-2 w-60 rounded-es-md rounded-ee-md shadow-lg bg-white  ring-opacity-5 z-10 text-[16px]">
             <ul className="py-1 text-gray-700">
-              {(parentoken && parentoken !=='null' && subtoken) && (
+              {((parentoken && parentoken !=='null') || subtoken) && (
                 <li
                   className="px-4 py-2 hover:bg-[#F0E9FF] cursor-pointer"
                   onClick={() => handleSwitchAccount()}

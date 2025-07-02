@@ -82,6 +82,7 @@ const Sidebar = () => {
   };
 
 function handleSwitchAccount() {
+  const access_token = localStorage.getItem('access_token') as string
   const subtoken = localStorage.getItem("sub_account_token");
 
   if (!subtoken || subtoken === "null") {
@@ -90,6 +91,7 @@ function handleSwitchAccount() {
   }
 
   localStorage.setItem("access_token", subtoken);
+  localStorage.setItem("parent_token", access_token)
   router.push("/tenant-dashboard");
 }
 
