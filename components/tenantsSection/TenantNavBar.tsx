@@ -23,16 +23,19 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
   const [tenantDetails, setTenantDetails] = useState<any>({});
   const isTabletOrSmaller = useMatchMediaQuery(device.tablet);
   const [parentoken, setParentToken] = useState<any>("");
+    const [subtoken, setSubToken] = useState<any>("");
 
   useEffect(() => {
     const isClient = typeof window !== "undefined";
     if (isClient) {
-      const jsonTenantDetails = localStorage.getItem("tenant");
+      const jsonTenantDetails = localStorage.getItem("tenant") as any
       const parentokenDetail = localStorage.getItem("parent_token") as string;
-      if (jsonTenantDetails) {
+        const subtokenDetail = localStorage.getItem("sub_account_token") as string;
+      if (jsonTenantDetails || parentokenDetail || subtokenDetail) {
         try {
           setParentToken(parentokenDetail);
           setTenantDetails(JSON.parse(jsonTenantDetails));
+           setSubToken(JSON.parse(subtokenDetail))
         } catch (error) {
           console.error("Failed to parse tenant details", error);
         }
@@ -44,9 +47,8 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
   const router = useRouter();
 
   const handleLogout = () => {
-    localStorage.removeItem("tenant");
-    localStorage.removeItem("token");
     Cookies.remove("token");
+    localStorage.clear()
     router.push("/");
   };
 
@@ -81,6 +83,8 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
   //     path: "/tenant-dashboard/settings",
   //   },
   // ];
+
+  console.log({subtoken, parentoken})
 
   const redirect = async (path: string) => {
     if (pathname === path) return;
@@ -153,7 +157,7 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
         {showDropdown && (
           <div className="absolute right-0 mt-2 w-60 rounded-es-md rounded-ee-md shadow-lg bg-white  ring-opacity-5 z-10 text-[16px]">
             <ul className="py-1 text-gray-700">
-              {(parentoken && parentoken !=='null') && (
+              {(parentoken && parentoken !=='null' && subtoken) && (
                 <li
                   className="px-4 py-2 hover:bg-[#F0E9FF] cursor-pointer"
                   onClick={() => handleSwitchAccount()}

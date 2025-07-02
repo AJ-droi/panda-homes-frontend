@@ -7,8 +7,14 @@ import ColouredButton from "@/components/ColouredButton";
 import CalendarDropdown from "@/components/CalendarDropdown";
 import { useCreateUserMutation } from "@/services/users/mutation";
 import { useRouter } from "next/navigation";
-import { useFetchPropertyDetails, useFetchVacantPropertyDetails } from "@/services/property/query";
+import {
+  useFetchPropertyDetails,
+  useFetchVacantPropertyDetails,
+} from "@/services/property/query";
 import BackButton from "@/components/Backbutton";
+import Image from "next/image";
+import Modal from "@/components/Modal";
+import { toast } from "react-toastify";
 
 interface addTenantProps {
   onClose?: () => void;
@@ -18,6 +24,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
   const router = useRouter();
   const [propertyOptions, setPropertyOptions] = useState<any[]>();
   const [error, setError] = useState("");
+  const [isOpen, setIsOpen] = useState(false)
 
   const [formData, setFormData] = useState({
     property_id: "",
@@ -34,6 +41,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
   });
 
   const { mutate, isPending } = useCreateUserMutation();
+  const [passwordLink, setPasswordLink] = useState('')
 
   const { data } = useFetchVacantPropertyDetails();
 
@@ -47,23 +55,23 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
     }
   }, [data]);
 
-    function formatPhoneNumber(phone: string): string {
-  if (phone.startsWith('0')) {
-    return '+234' + phone.slice(1);
+  function formatPhoneNumber(phone: string): string {
+    if (phone.startsWith("0")) {
+      return "+234" + phone.slice(1);
+    }
+    return phone; // return as-is if it doesn't start with 0
   }
-  return phone; // return as-is if it doesn't start with 0
-}
-
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement >
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value, type } = e.target as HTMLInputElement | HTMLSelectElement;
+    const { name, value, type } = e.target as
+      | HTMLInputElement
+      | HTMLSelectElement;
     const checked = (e.target as HTMLInputElement).checked;
 
-         const formattedValue =
-    name === 'phone_number' ? formatPhoneNumber(value) : value;
-
+    const formattedValue =
+      name === "phone_number" ? formatPhoneNumber(value) : value;
 
     const isCurrencyField = [
       "rental_price",
@@ -77,18 +85,16 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
         const formatted = Number(rawValue).toLocaleString("en-NG");
         setFormData((prev) => ({ ...prev, [name]: formatted }));
       }
-    } else if(formattedValue){
-       setFormData(prev => ({
-    ...prev,
-    [name]: formattedValue,
-  }));
-    }
-    
-    else {
+    } else if (formattedValue) {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: formattedValue,
+      }));
+    } else {
       setFormData((prev: any) => ({
         ...prev,
-        [name]: type === "checkbox" ? checked : value
-      }))
+        [name]: type === "checkbox" ? checked : value,
+      }));
     }
   };
 
@@ -107,8 +113,6 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
     }));
   };
 
-
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -122,8 +126,10 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
         service_charge: parseInt(formData.service_charge.replace(/,/g, "")),
       },
       {
-        onSuccess: () => {
-          router.push("/dashboard/tenants");
+        onSuccess: (data) => {
+          setIsOpen(true)
+          setPasswordLink(data.password_link)
+          // router.push("/dashboard/tenants");
         },
         onError: (error: any) => {
           setError(error.message || "An error occurred during signup.");
@@ -134,7 +140,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
 
   return (
     <div className="w-full p-4 md:p-6 shadow-2xl bg-white rounded-lg">
-         <BackButton />
+      <BackButton />
       <h1 className="text-2xl md:text-3xl leading-[150%] font-bold mb-4 md:mb-6 text-[#000000]">
         Register a new Tenant
       </h1>
@@ -286,10 +292,9 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
                 placeholder="e.g. 15000"
               />
             </div>
-
           </div>
 
-{/* 
+          {/* 
               <div className="flex justify-start gap-2 sm:gap-[14px] items-center">
           <input
             type="checkbox"
@@ -312,6 +317,36 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
           </section>
         </form>
       </main>
+
+      {isOpen && <Modal onClose={() => {
+        setIsOpen(false)
+         router.push("/dashboard/tenants");
+      }}>
+        <div className="flex flex-col justify-center items-center text-[#000] text-center p-2">
+          <Image src={"/success.svg"} alt={"success"} height={40} width={40} />
+          <div>
+            <h3 className="text-[20px] pt-[3%]">Registration Link Sent</h3>
+            <h4 className="py-2 text-[14px]">
+              The registration link has been successfully sent to the tenant's
+              email.
+            </h4>
+
+            <p className="text-[#98A0B4] text-[12px]">Want to share the link manually?</p>
+          </div>
+          <button 
+          className="bg-[#785DBA] text-[#fff] rounded-md px-3 py-2 mt-3 text-[12px]"
+          onClick={() => {
+          navigator.clipboard.writeText(passwordLink)
+            .then(() => {
+              toast.success("Link copied to clipboard!");
+            })
+            .catch(err => {
+              toast.info("Failed to copy!", err);
+            });
+        }}
+          >Yes, Copy</button>
+        </div>
+      </Modal>}
     </div>
   );
 };

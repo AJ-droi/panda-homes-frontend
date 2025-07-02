@@ -35,16 +35,19 @@ const TenantSidebar = () => {
 
   const [tenantDetails, setTenantDetails] = useState<any>({});
     const [parentoken, setParentToken] = useState<any>("");
+     const [subtoken, setSubToken] = useState<any>("");
 
   useEffect(() => {
     const isClient = typeof window !== "undefined";
     if (isClient) {
       const jsonTenantDetails = localStorage.getItem("tenant");
        const parentokenDetail = localStorage.getItem("parent_token") as string;
+         const subtokenDetail = localStorage.getItem("sub_account_token") as string;
       if (jsonTenantDetails) {
         try {
           setParentToken(parentokenDetail)
           setTenantDetails(JSON.parse(jsonTenantDetails));
+          setSubToken(JSON.parse(subtokenDetail))
         } catch (error) {
           console.error("Failed to parse tenant details", error);
         }
@@ -76,7 +79,6 @@ const TenantSidebar = () => {
     // setUser(subAccount); // or trigger SWR/NextAuth update
     router.push("/dashboard");
   }
-
   const iconData = [
     {
       name: "Home",
@@ -109,7 +111,7 @@ const TenantSidebar = () => {
     //   path: "/tenant-dashboard/property-history",
     // },
 
-    ...((parentoken && parentoken !== 'null')
+    ...((parentoken && parentoken !== 'null' && subtoken)
       ? [
           {
             name: "Switch to Admin Account",
