@@ -57,7 +57,7 @@ const TenantsHome = () => {
   };
   return (
     <div className="bg-[#fafafe] px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10 w-full overflow-x-hidden">
-      <BackButton />
+      <BackButton title="Your Tenants"/>
       <div>
         <section className="flex flex-col justify-start">
           <div className="mt-3 sm:mt-4 w-full flex justify-start">
@@ -101,7 +101,7 @@ const TenantsHome = () => {
           )} */}
         </section>
 
-        <div className="flex flex-wrap my-5">
+        {/* <div className="flex flex-wrap my-5">
           <button
             className={`px-6 py-4 font-medium text-sm md:text-base ${
               activeTab === "tenant-list"
@@ -112,21 +112,12 @@ const TenantsHome = () => {
           >
             Tenants List
           </button>
-          {/* <button
-            className={`px-6 py-4 font-medium text-sm md:text-base ${
-              activeTab === "overdue-payment"
-                ? "text-[#785DBA] border-b-2 border-[#785DBA]"
-                : "text-gray-600 border-b-1 border-gray-200 hover:text-gray-800"
-            }`}
-            onClick={() => setActiveTab("overdue-payment")}
-          >
-            OverDue Payments
-          </button> */}
-        </div>
+     
+        </div> */}
 
         <section className="w-full flex flex-col gap-y-5">
           {activeTab === "tenant-list" && (
-            <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] ">
+            <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[1%] my-3">
               <div className="mt-3 sm:mt-4 md:mt-5 w-full">
                 <TenantsListTable params={params} />
               </div>

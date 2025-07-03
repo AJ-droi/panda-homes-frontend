@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import LeaseExpirationTable from "./LeaseExpirationTable";
 import PropertiesListTable from "./PropertiesListTable";
@@ -9,8 +10,7 @@ import { useFetchPropertyDetails } from "@/services/property/query";
 import PropertyMobileCard from "./PropertyMobileCard";
 import { useMatchMediaQuery } from "@/hooks/useViewPort";
 import device from "@/constants/breakpoints";
-import Dropdown from "@/components/Dropdown";
-import { LocationIcon } from "@/layout/svgIconPaths";
+
 
 const PropertiesHome = () => {
   const [useColumnLayout, setUseColumnLayout] = useState(false);
@@ -55,7 +55,7 @@ const PropertiesHome = () => {
 
   return (
     <div className=" px-3 sm:px-4 md:px-6 lg:px-0 w-full">
-      <BackButton />
+      <BackButton title="Your Properties" />
       <div>
         <section className="flex flex-row justify-center">
           <div className="mt-3 sm:mt-4 w-full flex justify-start">
@@ -66,14 +66,14 @@ const PropertiesHome = () => {
               onSearchClick={(value) => handleSearchChange("search", value)}
             />
           </div>
-          <div className="flex flex-wrap justify-center items-center gap-1.5 sm:gap-2 md:gap-3 lg:gap-[12.71px] p-2 md:p-[6.35px] mt-2 rounded-[7.62px] ">
+          {/* <div className="flex flex-wrap justify-center items-center gap-1.5 sm:gap-2 md:gap-3 lg:gap-[12.71px] p-2 md:p-[6.35px] mt-2 rounded-[7.62px] ">
             <Dropdown
               options={["", "asc", "desc"]}
               placeholder="Filter"
               icon={<LocationIcon />}
               onChange={(value) => handleSearchChange("order", value)}
             />
-            {/* <Dropdown
+            <Dropdown
               options={["", "Bungalow", "3-Storey", "Duplex", "Hall"]}
               placeholder="Property Type"
               icon={<PropertyTypeIcon />}
@@ -95,13 +95,13 @@ const PropertiesHome = () => {
                 options={["", "2024", "2025", "2001", "1992"]}
                 placeholder="Build Year"
                 icon={<BuildYearCalendarIcon />}
-              /> */}
-          </div>
+              />
+          </div> */}
         </section>
 
-        <div className="flex flex-wrap my-5">
+        {/* <div className="flex flex-wrap my-5">
           <button
-            className={`px-6 py-4 font-medium text-sm md:text-base ${
+            className={`px-6 py-2 font-medium text-sm md:text-base ${
               activeTab === "property-list"
                 ? "text-[#785DBA] border-b-2 border-[#785DBA]"
                 : "text-gray-600 border-b-1 border-gray-200 hover:text-gray-800"
@@ -110,14 +110,14 @@ const PropertiesHome = () => {
           >
             Property List
           </button>
-        </div>
+        </div> */}
 
         {activeTab === "property-list" && (
           <>
             {isMobile ? (
               <PropertyMobileCard properties={properties} />
             ) : (
-              <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] ">
+              <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[1%] my-[2%]">
                 <div
                   className={`flex ${
                     useColumnLayout ? "flex-col" : "flex-col lg:flex-row"

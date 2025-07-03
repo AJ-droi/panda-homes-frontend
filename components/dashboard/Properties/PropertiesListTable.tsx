@@ -8,60 +8,17 @@ import React, { useState } from "react";
 import GroupPropertyModal from "../GroupPropertyModal";
 
 const PropertiesListTable = ({ properties, isLoading }: any) => {
-  // const propertyData = [
-  //   {
-  //     id: 1,
-  //     property: "Lekki Flat A",
-  //     location: "Lekki, Lagos",
-  //     vacancy: "Vacant",
-  //     rentOwed: "Nil",
-  //   },
-  //   {
-  //     id: 2,
-  //     property: "Abuja Duplex",
-  //     location: "Wuse2, Abuja",
-  //     vacancy: "Not Vacant",
-  //     rentOwed: "₦1,200,000",
-  //   },
-  //   {
-  //     id: 3,
-  //     property: "Abuja Duplex",
-  //     location: "Ikeja, Lagos",
-  //     vacancy: "Not Vacant",
-  //     rentOwed: "₦2,000,000",
-  //   },
-  //   {
-  //     id: 4,
-  //     property: "Abuja Duplex",
-  //     location: "Ikeja, Lagos",
-  //     vacancy: "Not Vacant",
-  //     rentOwed: "₦500,000",
-  //   },
-  //   {
-  //     id: 5,
-  //     property: "Abuja Duplex",
-  //     location: "Ikeja, Lagos",
-  //     vacancy: "Not Vacant",
-  //     rentOwed: "₦500,000",
-  //   },
-  //   {
-  //     id: 6,
-  //     property: "Ikeja Studio",
-  //     location: "Ikeja, Lagos",
-  //     vacancy: "Vacant",
-  //     rentOwed: "Nil",
-  //   },
-  // ];
-
-  // const { data: properties, isLoading } = useFetchPropertyDetails(params)
+ 
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+    const [itemsPerPage, setItemsPerPage] = useState(10);
 
   // Calculate items to display on current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = properties?.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = React.useMemo(() => {
+    return properties?.slice(indexOfFirstItem, indexOfLastItem) || [];
+  }, [properties, indexOfFirstItem, indexOfLastItem]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const router = useRouter();
@@ -74,7 +31,7 @@ const PropertiesListTable = ({ properties, isLoading }: any) => {
             <thead>
               <tr className="border-y border-[#E1E2E9]">
                 <th
-                  className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+                  className="text-left text-md leading-[145%] py-2 px-6 text-[#785DBA] font-normal"
                   style={{ fontFamily: "Plus Jakarta Sans" }}
                 >
                   Property
@@ -86,20 +43,20 @@ const PropertiesListTable = ({ properties, isLoading }: any) => {
                 Location
               </th> */}
                 <th
-                  className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+                  className="text-left text-md leading-[145%] py-2 px-6 text-[#785DBA] font-normal"
                   style={{ fontFamily: "Plus Jakarta Sans" }}
                 >
                   Status
                 </th>
                 <th
-                  className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+                  className="text-left text-md leading-[145%] py-2 px-6 text-[#785DBA] font-normal"
                   style={{ fontFamily: "Plus Jakarta Sans" }}
                 >
                   Rent
                 </th>
 
                 <th
-                  className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
+                  className="text-left text-md leading-[145%] py-2 px-6 text-[#785DBA] font-normal"
                   style={{ fontFamily: "Plus Jakarta Sans" }}
                 >
                   Expiry Date
@@ -113,7 +70,7 @@ const PropertiesListTable = ({ properties, isLoading }: any) => {
               </tr>
             </thead>
             <tbody
-              className="leading-[145%]"
+              className="leading-[145%] border-b border-[#E1E2E9]"
               style={{ fontFamily: "Plus Jakarta Sans" }}
             >
               {isLoading ? (
@@ -170,7 +127,7 @@ const PropertiesListTable = ({ properties, isLoading }: any) => {
                         item.rent === "-" ? "''" : "text-[#34A853]"
                       }`}
                     >
-                      {item.rent}
+                      {Number(item.rent).toLocaleString("en-NG")}
                     </td>
                     <td className="py-4 px-6 text-left">
                       {item.expiryDate || "-"}
@@ -192,6 +149,11 @@ const PropertiesListTable = ({ properties, isLoading }: any) => {
           totalItems={properties?.length}
           currentPage={currentPage}
          onPageChange={setCurrentPage}
+          onItemsPerPageChange={setItemsPerPage}
+        itemsPerPageOptions={[10, 25, 50, 100]}
+        showNavigation
+        showItemsPerPage
+        showPageJumper
     
         />
       </div>

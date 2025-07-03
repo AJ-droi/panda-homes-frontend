@@ -166,7 +166,7 @@ const TenantNavbar: React.FC<TenantNavbarProps> = ({ isTenantRegister }) => {
                   Switch to Admin Account
                 </li>
               )}
-              <li className="px-4 py-2 hover:bg-[#F0E9FF] cursor-pointer">
+              <li className="px-4 py-2 hover:bg-[#F0E9FF] cursor-pointer" onClick={() => router.push('/tenant-dashboard/settings')}>
                 Settings
               </li>
               <li

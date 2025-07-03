@@ -52,10 +52,14 @@ const TenantsListTable = ({ params }: { params: UserFilter }) => {
           <thead>
             <tr className="border-y border-[#E1E2E9]">
               {/* ...other headers */}
-              <th className="text-left py-4 px-6 text-[#785DBA]">Actions</th>
+                <th className="text-left py-4 font-[400] px-6 text-[#785DBA]">Name</th>
+                <th className="text-left py-4 font-[400] px-6 text-[#785DBA]">Property</th>
+                <th className="text-left py-4  font-[400] px-6 text-[#785DBA]">Rent</th>
+                <th className="text-left py-4 font-[400] px-6 text-[#785DBA]">Date</th>
+              <th className="text-left py-4  font-[400] px-6 text-[#785DBA]">Actions</th>
             </tr>
           </thead>
-          <tbody style={{ fontFamily: "Plus Jakarta Sans" }}>
+          <tbody style={{ fontFamily: "Plus Jakarta Sans" }} className="border-b border-[#E1E2E9]">
             {isLoading ? (
               <tr><td colSpan={6}>Loading...</td></tr>
             ) : currentItems?.length === 0 ? (

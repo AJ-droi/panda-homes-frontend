@@ -30,9 +30,9 @@ const NoticesAgreementHome = () => {
   }, []);
 
   return (
-    <div className="bg-[#fafafe] p-4 w-full">
+    <div className="bg-[#fafafe] p-4 w-full min-h-[100vh]">
       <section>
-        <BackButton />
+        <BackButton title="Documents" />
         {/* <div className="py-5">
           <NoticesHomeNav />
         </div> */}
@@ -67,13 +67,13 @@ const NoticesAgreementHome = () => {
       {isMobile ? (
         <NoticeAgreementCard notice={noticeData} />
       ) : (
-        <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%] min-h-[100vh] ">
-          <div
+        <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[2%]  ">
+          {/* <div
             className="text-[#4D4D4D] font-[600] text-[22px] leading-[145%] py-[2%]"
             style={{ fontFamily: "Plus Jakarta Sans" }}
           >
             Documents
-          </div>
+          </div> */}
           <div
             className={`flex ${
               useColumnLayout ? "flex-col" : "flex-col lg:flex-row"

@@ -3,22 +3,26 @@ import React, { useState } from "react";
 import Pagination from "@/components/PaginationComponent";
 import { useFetchServiceRequest } from "@/services/service-request/query";
 import { AnyARecord } from "node:dns";
+import BackButton from "@/components/Backbutton";
 
 const PropertyPaymentTable = ({serviceRequest, isLoading}:any) => {
  
 
 
    const [currentPage, setCurrentPage] = useState(1);
-      const itemsPerPage = 10;
-      
-      // Calculate items to display on current page
-      const indexOfLastItem = currentPage * itemsPerPage;
-      const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-      const currentItems = serviceRequest?.slice(indexOfFirstItem, indexOfLastItem);
+   const [itemsPerPage, setItemsPerPage] = useState(10);
+ 
+   // Calculate items to display on current page
+   const indexOfLastItem = currentPage * itemsPerPage;
+   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+   const currentItems = React.useMemo(() => {
+     return serviceRequest?.slice(indexOfFirstItem, indexOfLastItem) || [];
+   }, [serviceRequest, indexOfFirstItem, indexOfLastItem]);
 
   return (
     <div className="max-w-full text-[#6E7079] overflow-hidden ">
-      <div className="overflow-x-auto">
+         <BackButton title='All Requests' />
+      <div className="overflow-x-auto py-4">
         <table className="w-full">
           <thead>
           <tr className="border-y border-[#E1E2E9]">
@@ -66,7 +70,7 @@ const PropertyPaymentTable = ({serviceRequest, isLoading}:any) => {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="border-b border-[#E1E2E9]">
           {isLoading
               ? (
                 Array.from({ length: 5 }).map((_, index) => (
@@ -129,12 +133,18 @@ const PropertyPaymentTable = ({serviceRequest, isLoading}:any) => {
             ))}
           </tbody>
         </table>
-          <Pagination 
+            <Pagination
           itemsPerPage={itemsPerPage}
           totalItems={serviceRequest?.length}
           currentPage={currentPage}
-         onPageChange={setCurrentPage} 
-                  />
+         onPageChange={setCurrentPage}
+          onItemsPerPageChange={setItemsPerPage}
+        itemsPerPageOptions={[10, 25, 50, 100]}
+        showNavigation
+        showItemsPerPage
+        showPageJumper
+    
+        />
       </div>
     </div>
   );
