@@ -154,7 +154,7 @@ export default function AttachTenantForm() {
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <div className="space-y-6">
             {/* Tenant Selection */}
-            <div className="grid grid-cols-1 gap-6 w-[40%] mb-24">
+            <div className="grid grid-cols-1 gap-6 md:w-[40%] mb-24">
               <FormSelect
                 label="Tenant"
                 value={formData.tenant}
@@ -166,7 +166,7 @@ export default function AttachTenantForm() {
             </div>
 
             {/* Tenancy Details - Row 1 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-[60%]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:w-[60%]">
               <FormSelect
                 label="Tenancy Type"
                 value={formData.tenancyType}
@@ -185,7 +185,7 @@ export default function AttachTenantForm() {
             </div>
 
             {/* Tenancy Details - Row 2 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-[60%]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:w-[60%]">
               <FormInput
                 label="Service Charge"
                 type="text"
@@ -203,7 +203,7 @@ export default function AttachTenantForm() {
             </div>
 
             {/* Date Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-[60%]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:w-[60%]">
               <FormDateInput
                 label="Lease start date"
                 value={formData.leaseStartDate}
@@ -219,7 +219,7 @@ export default function AttachTenantForm() {
             </div>
 
             {/* Status and Permitted Use */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-[60%]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:w-[60%]">
               <FormSelect
                 label="Rent Status"
                 value={formData.rentStatus}
