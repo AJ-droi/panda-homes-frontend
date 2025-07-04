@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import { ArrowLeft, User, Mail, Phone, Calendar, MapPin, Building, Users, FileText } from 'lucide-react';
+import BackButton from '@/components/Backbutton';
 
 // Reusable Input Component
 const InputField = ({ 
@@ -94,14 +95,11 @@ const ProfileSettings = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-4xl px-4 sm:px-6 lg:px-20">
-          <div className="flex items-center py-4">
-            <ArrowLeft className="w-5 h-5 text-gray-600 mr-3 cursor-pointer hover:text-gray-800 transition-colors" />
-            <h1 className="text-xl font-semibold text-gray-900">Profile Settings</h1>
-          </div>
+
+        <div className="max-w-4xl px-4 py-2 sm:px-6 lg:px-20">
+            <BackButton title="Profile Settings" />
         </div>
-      </div>
+ 
 
       {/* Content */}
       <div className="max-w-7xl px-4 sm:px-6 lg:px-20 py-6">

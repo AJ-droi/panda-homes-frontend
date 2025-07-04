@@ -39,7 +39,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   return (
-    <div className="flex flex-col md:flex-row shadow-md  text-[15.25px] font-[500] border-[#262626] bg-[#fff] rounded-[8px] focus:outline-none pr-[12.71px] pl-[15.25px] w-full max-w-[40%] focus:border-[#785DBA] transition-colors text-[#666666] items-center justify-between gap-3">
+    <div className="flex flex-col md:flex-row shadow-md  text-[15.25px] font-[500] border-[#262626] bg-[#fff] rounded-[8px] focus:outline-none pr-[12.71px] pl-[15.25px] w-full max-w-[60%] md:max-w-[40%] focus:border-[#785DBA] transition-colors text-[#666666] items-center justify-between gap-3">
       <input
         type="text"
         placeholder={placeholder}

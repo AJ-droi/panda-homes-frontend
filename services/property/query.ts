@@ -18,7 +18,7 @@ export function useFetchPropertyDetails(params?:PropertyFilter) {
         id: property.id,
         property: property.name,
         vacancy: property.property_status,
-        rent: property?.rents[0]?.amount_paid || "-",
+        rent: property?.rents[0]?.amount_paid ? Number(property?.rents[0]?.amount_paid).toLocaleString("en-NG") : "-",
         tenant_name: property?.rents?.find((item: any) => item.rent_status === 'active')?.tenant?.profile_name || "No Tenant",
         expiryDate: property?.rents[0]?.lease_end_date ? new Date(property?.rents[0]?.lease_end_date).toLocaleDateString("en-US", {
          month: 'short',

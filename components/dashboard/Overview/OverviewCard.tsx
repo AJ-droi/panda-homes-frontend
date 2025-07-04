@@ -1,5 +1,6 @@
 // import { HistoriesPageBulletIcon } from '@/layout/svgIconPaths'
 import Pagination from "@/components/PaginationComponent";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 /* eslint-disable */
 const OverviewCard = (props: any) => {
@@ -13,6 +14,8 @@ const OverviewCard = (props: any) => {
   const currentItems = React.useMemo(() => {
     return data?.slice(indexOfFirstItem, indexOfLastItem) || [];
   }, [data, indexOfFirstItem, indexOfLastItem]);
+
+  const router = useRouter();
   return (
     <div className="bg-[#fff] p-4 rounded-lg shadow-md">
       {data?.length < 1 && (
@@ -24,12 +27,20 @@ const OverviewCard = (props: any) => {
           {currentItems?.map((item: any, itemIndex: number) => (
             <div
               key={itemIndex}
-              className="border-b-1  pt-2  border-[#37352F29] max-w-[708px] font-plus-jarkarta"
+              className="border-b-1  pt-2  border-[#37352F29] max-w-[708px] font-plus-jarkarta hover:bg-[#efefef]"
+              onClick={
+                item.request_id
+                  ? () =>
+                      router.push(
+                        `/dashboard/service-requests/${item.request_id}`
+                      )
+                  : () => {} // No-op function if request_id is missing
+              }
             >
               <div className="flex items-start border-l-2 border-[#DDDEE1] pl-4 pr-6">
                 <div className="">
-                  <h3 className="text-[14px] font-[700] leading-[24px] text-[#1A1F36] font-plus-jarkarta">
-                        {item.description}
+                  <h3 className="text-[14px] font-[700] leading-[24px] text-[#1A1F36] font-plus-jarkarta hover:underline">
+                    {item.description}
                   </h3>
                 </div>
               </div>
@@ -39,7 +50,7 @@ const OverviewCard = (props: any) => {
                   {/* <HistoriesPageBulletIcon /> */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between ">
                     <h4 className="text-[12px]  text-[#1A1F36] font-inter">
-                        {item.property_name}
+                      {item.property_name}
                     </h4>
                   </div>
                 </div>

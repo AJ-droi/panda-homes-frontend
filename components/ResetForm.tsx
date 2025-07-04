@@ -113,7 +113,7 @@ const ResetForm = () => {
         <button
           className={`bg-[#212121] text-[12px] text-center w-full p-4 rounded-md text-[#fff] hover:bg-[#785DBA]`}
         >
-          {isPending ? "Processing..." : "Reset Password"}
+          {isPending ? "Processing..." : "Create Password"}
         </button>
       </form>
 

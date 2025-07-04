@@ -18,7 +18,8 @@ export function useFetchPropertyOverview() {
       property_name: item.property.name,
       type: item.type,
       description: item.description,
-      status: item.status
+      status: item.status,
+      request_id: item.serviceRequest ? item.serviceRequest.request_id : null
       }))
   });
 }

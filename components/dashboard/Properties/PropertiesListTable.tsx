@@ -19,9 +19,12 @@ const PropertiesListTable = ({ properties, isLoading }: any) => {
   const currentItems = React.useMemo(() => {
     return properties?.slice(indexOfFirstItem, indexOfLastItem) || [];
   }, [properties, indexOfFirstItem, indexOfLastItem]);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const router = useRouter();
+
+  console.log({currentItems})
 
   return (
     <div>
@@ -127,7 +130,7 @@ const PropertiesListTable = ({ properties, isLoading }: any) => {
                         item.rent === "-" ? "''" : "text-[#34A853]"
                       }`}
                     >
-                      {Number(item.rent).toLocaleString("en-NG")}
+                      {item.rent}
                     </td>
                     <td className="py-4 px-6 text-left">
                       {item.expiryDate || "-"}
