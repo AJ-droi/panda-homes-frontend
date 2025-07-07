@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getTenantAndPropertyInfo, getTenants } from "./api";
 import { UserFilter } from "../interface/filter";
+import { toSentenceCase } from "@/utilities/utilities";
 
 export function useFetchTenantDetails(params: UserFilter) {
   return useQuery({
@@ -13,8 +14,8 @@ export function useFetchTenantDetails(params: UserFilter) {
     select: (data: any) => {
       return data?.users.map((item: any) => ({
         id: item?.id,
-        tenantName: `${item?.user?.first_name ?? ""} ${
-          item?.user?.last_name ?? ""
+        tenantName: `${toSentenceCase(item?.user?.first_name) ?? ""} ${
+          toSentenceCase(item?.user?.last_name) ?? ""
         }`,
         property: item?.rents[0]?.property?.name || "No Property",
         // moveInDay: item?.moveInDate

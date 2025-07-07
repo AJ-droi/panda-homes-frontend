@@ -1,7 +1,8 @@
 /*eslint-disable */
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ChevronLeft, ChevronDown, } from 'lucide-react';
 import BackButton from '@/components/Backbutton';
+import { useFetchTenantDetails } from '@/services/users/query';
 
 // Reusable Input Component
 const FormInput = ({ 
@@ -95,22 +96,33 @@ const FormDateInput = ({
 
 export default function AttachTenantForm() {
   const [formData, setFormData] = useState({
-    tenant: '',
-    tenancyType: 'Monthly',
+    tenant_id: '',
+    // tenancyType: 'Monthly',
     rentalPrice: '500,000',
     serviceCharge: '500,000',
     securityDeposit: '500,000',
     leaseStartDate: '2022-06-05',
     leaseEndDate: '2022-06-05',
     rentStatus: 'Paid',
-    permittedUse: ''
+    // permittedUse: ''
   });
 
-  const tenantOptions = [
-    { value: 'john-doe', label: 'John Doe' },
-    { value: 'jane-smith', label: 'Jane Smith' },
-    { value: 'mike-johnson', label: 'Mike Johnson' }
-  ];
+    const { data: users, isLoading } = useFetchTenantDetails({});
+
+   const tenantOptions = useMemo(() => {
+  if (!users) return [];
+  return users.map((user: any) => ({
+    value: user.id,
+    label: user.tenantName,
+  }));
+}, [users]);
+
+console.log({tenantOptions})
+//   const tenantOptions = [
+//     { value: 'john-doe', label: 'John Doe' },
+//     { value: 'jane-smith', label: 'Jane Smith' },
+//     { value: 'mike-johnson', label: 'Mike Johnson' }
+//   ];
 
   const tenancyTypeOptions = [
     { value: 'Monthly', label: 'Monthly' },
@@ -119,9 +131,9 @@ export default function AttachTenantForm() {
   ];
 
   const rentStatusOptions = [
-    { value: 'Paid', label: 'Paid' },
-    { value: 'Pending', label: 'Pending' },
-    { value: 'Overdue', label: 'Overdue' }
+    { value: 'active', label: 'Paid' },
+    { value: 'inactive', label: 'Pending' },
+    // { value: 'Overdue', label: 'Overdue' }
   ];
 
   const handleInputChange = (field:any, value:string) => {
@@ -137,7 +149,7 @@ export default function AttachTenantForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 py-4 px-4 sm:px-6 lg:px-8 text-[#000] text-[12px]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex items-center mb-6">
@@ -157,8 +169,8 @@ export default function AttachTenantForm() {
             <div className="grid grid-cols-1 gap-6 md:w-[40%] mb-24">
               <FormSelect
                 label="Tenant"
-                value={formData.tenant}
-                onChange={(e:any) => handleInputChange('tenant', e.target.value)}
+                value={formData.tenant_id}
+                onChange={(e:any) => handleInputChange('tenant_id', e.target.value)}
                 options={tenantOptions}
                 placeholder="Select Tenant"
                 required
@@ -167,19 +179,27 @@ export default function AttachTenantForm() {
 
             {/* Tenancy Details - Row 1 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:w-[60%]">
-              <FormSelect
+              {/* <FormSelect
                 label="Tenancy Type"
                 value={formData.tenancyType}
                 onChange={(e:any) => handleInputChange('tenancyType', e.target.value)}
                 options={tenancyTypeOptions}
                 required
-              />
+              /> */}
               <FormInput
                 label="Rental Price"
                 type="text"
                 value={formData.rentalPrice}
                 onChange={(e:any) => handleInputChange('rentalPrice', e.target.value)}
                 placeholder="500,000"
+                required
+              />
+
+               <FormSelect
+                label="Rent Status"
+                value={formData.rentStatus}
+                onChange={(e:any) => handleInputChange('rentStatus', e.target.value)}
+                options={rentStatusOptions}
                 required
               />
             </div>
@@ -220,20 +240,20 @@ export default function AttachTenantForm() {
 
             {/* Status and Permitted Use */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:w-[60%]">
-              <FormSelect
+              {/* <FormSelect
                 label="Rent Status"
                 value={formData.rentStatus}
                 onChange={(e:any) => handleInputChange('rentStatus', e.target.value)}
                 options={rentStatusOptions}
                 required
-              />
-              <FormInput
+              /> */}
+              {/* <FormInput
                 label="Permitted Use"
                 type="text"
                 value={formData.permittedUse}
                 onChange={(e:any) => handleInputChange('permittedUse', e.target.value)}
                 placeholder="Enter permitted use"
-              />
+              /> */}
             </div>
 
             {/* Submit Button */}

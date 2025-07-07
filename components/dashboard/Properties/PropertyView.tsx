@@ -266,8 +266,7 @@ const PropertyView = () => {
               <button
                 type="button"
                 className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors text-[12px] my-2"
-                onClick={() => router.push('/dashboard/properties/attach-tenant') }
-              >
+                onClick={() => router.push(`/dashboard/properties/attach-tenant/${id}`)} >
                Assign a Tenant
               </button>
             </div>

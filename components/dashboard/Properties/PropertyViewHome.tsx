@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import PropertyView from "./PropertyView";
 // import PropertyHistory from "../PropertyHistory/PropertyHistoryTable";
 import PropertyHistoryCard from "./PropertyHistoryCard";
+import UploadDocument from "./UploadDocument";
 // import BackButton from "@/components/Backbutton";
 
 
@@ -29,17 +30,6 @@ const PropertyViewHome: React.FC = () => {
             Property Overview
           </button>
 
-          {/* <button
-            className={`px-6 py-4 font-medium text-sm md:text-base ${
-              activeTab === "rental-history"
-                ? "text-[#785DBA] border-b-2 border-[#785DBA]"
-                : "text-gray-600 hover:text-gray-800"
-            }`}
-            onClick={() => setActiveTab("rental-history")}
-          >
-            Rental History
-          </button> */}
-
           <button
             className={`px-6 py-4 font-medium text-sm md:text-base ${
               activeTab === "property-history"
@@ -51,43 +41,20 @@ const PropertyViewHome: React.FC = () => {
             Property History
           </button>
 
-          {/* <button
-            className={`px-6 py-4 font-medium text-sm md:text-base ${
-              activeTab === "payment-records"
-                ? "text-[#785DBA] border-b-2 border-[#785DBA]"
-                : "text-gray-600 hover:text-gray-800"
-            }`}
-            onClick={() => setActiveTab("payment-records")}
-          >
-            Payment Records
-          </button>
-
           <button
             className={`px-6 py-4 font-medium text-sm md:text-base ${
-              activeTab === "service-request"
+              activeTab === "property-history"
                 ? "text-[#785DBA] border-b-2 border-[#785DBA]"
                 : "text-gray-600 hover:text-gray-800"
             }`}
-            onClick={() => setActiveTab("service-request")}
+            onClick={() => setActiveTab("branding")}
           >
-            Service Requests
+            Upload Document
           </button>
 
-          <button
-            className={`px-6 py-4 font-medium text-sm md:text-base ${
-              activeTab === "notice-agreement"
-                ? "text-[#785DBA] border-b-2 border-[#785DBA]"
-                : "text-gray-600 hover:text-gray-800"
-            }`}
-            onClick={() => setActiveTab("notice-agreement")}
-          >
-              Notices & Agreements
-          </button> */}
+        
         </div>
       </div>  
-      {/* <div className="px-[2%] py-[1%]">
-      <BackButton />
-      </div> */}
 
 
       {/* Main Content */}
@@ -98,6 +65,8 @@ const PropertyViewHome: React.FC = () => {
       {/* {activeTab === "rental-history" && <RentalHistory />} */}
 
       {activeTab === "property-history" && <PropertyHistoryCard/>}
+
+       {activeTab === "branding" && <UploadDocument />}
 
       {/* {activeTab === "payment-records" && <PaymentRecords />}
 
