@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { createNoticeAgreement } from "./api";
+import { createNoticeAgreement, uploadDocument } from "./api";
+import { toast } from "react-toastify";
 
 export function useCreateNoticeAgreement() {
     return useMutation({
@@ -15,6 +16,26 @@ export function useCreateNoticeAgreement() {
       },
       onSuccess: async (data) => {
         return data;
+      },
+    });
+  }
+
+
+  export function useUploadDocument() {
+    return useMutation({
+      mutationFn: async ({id, formPayload}:{id:string, formPayload: {document_url: string[]}}) => {
+        return await uploadDocument(id, formPayload)
+      },
+      onMutate: () => {
+        console.log("🔐 notice agreement creation started...");
+      },
+      onError: (error: any) => {
+        console.error(error.message);
+        return toast.error(error.message || "An error occurred during notice agreement creation.");
+      },
+      onSuccess: async (data) => {
+        console.log({data})
+        return toast.success(data.message || "upload successful")
       },
     });
   }

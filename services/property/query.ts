@@ -87,7 +87,7 @@ export function useFetchPropertyById(id: string) {
 
   return {
     name: data.name,
-    description: `Property ${data.name} is a ${
+    description: `${data.name} is a ${
       data.no_of_bedrooms
     }-bedroom ${data.property_type?.toLowerCase()} located in ${
       data.location

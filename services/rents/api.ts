@@ -49,9 +49,9 @@ import axiosInstance from "../axios-instance";
   }
 
 
-export const removeTenant = async (id: string) => {
+export const removeTenant = async (id: string, data:any) => {
   try {
-    const response = await axiosInstance.put(`/rents/remove/${id}`);
+    const response = await axiosInstance.put(`/rents/remove/${id}`, data);
     return response.data;
   } catch (error: any) {
     // Throw to ensure React Query triggers onError

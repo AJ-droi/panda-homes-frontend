@@ -43,7 +43,7 @@ const PropertyViewHome: React.FC = () => {
 
           <button
             className={`px-6 py-4 font-medium text-sm md:text-base ${
-              activeTab === "property-history"
+              activeTab === "branding"
                 ? "text-[#785DBA] border-b-2 border-[#785DBA]"
                 : "text-gray-600 hover:text-gray-800"
             }`}

@@ -3,6 +3,8 @@ import { useMemo, useState } from 'react';
 import { ChevronLeft, ChevronDown, } from 'lucide-react';
 import BackButton from '@/components/Backbutton';
 import { useFetchTenantDetails } from '@/services/users/query';
+import { useAssignTenantToProperty } from '@/services/property/mutation';
+import { useParams, useRouter } from 'next/navigation';
 
 // Reusable Input Component
 const FormInput = ({ 
@@ -98,16 +100,19 @@ export default function AttachTenantForm() {
   const [formData, setFormData] = useState({
     tenant_id: '',
     // tenancyType: 'Monthly',
-    rentalPrice: '500,000',
-    serviceCharge: '500,000',
-    securityDeposit: '500,000',
-    leaseStartDate: '2022-06-05',
-    leaseEndDate: '2022-06-05',
-    rentStatus: 'Paid',
+    rental_price: "",
+    service_charge: "",
+    security_deposit: "",
+    lease_start_date: '',
+    lease_end_date: '',
+    rent_status: 'Paid',
     // permittedUse: ''
   });
 
     const { data: users, isLoading } = useFetchTenantDetails({});
+    const {id} = useParams() as {id:string}
+
+    const router = useRouter()
 
    const tenantOptions = useMemo(() => {
   if (!users) return [];
@@ -117,18 +122,6 @@ export default function AttachTenantForm() {
   }));
 }, [users]);
 
-console.log({tenantOptions})
-//   const tenantOptions = [
-//     { value: 'john-doe', label: 'John Doe' },
-//     { value: 'jane-smith', label: 'Jane Smith' },
-//     { value: 'mike-johnson', label: 'Mike Johnson' }
-//   ];
-
-  const tenancyTypeOptions = [
-    { value: 'Monthly', label: 'Monthly' },
-    { value: 'Yearly', label: 'Yearly' },
-    { value: 'Weekly', label: 'Weekly' }
-  ];
 
   const rentStatusOptions = [
     { value: 'active', label: 'Paid' },
@@ -143,10 +136,27 @@ console.log({tenantOptions})
     }));
   };
 
-  const handleSubmit = () => {
-    console.log('Form submitted:', formData);
-    // Handle form submission here
+  const assignTenant = useAssignTenantToProperty(id)
+
+const handleSubmit = async (e: any) => {
+  e.preventDefault();
+
+  const finalData = {
+    ...formData,
+    rental_price: Number(formData.rental_price),
+    security_deposit: Number(formData.security_deposit),
+    service_charge: Number(formData.service_charge),
   };
+
+  try {
+    console.log('Form submitted:', finalData);
+    await assignTenant.mutateAsync(finalData); // wait for success
+    router.push(`/dashboard/view-property/${id}`);
+  } catch (error) {
+    console.error('Assignment failed:', error);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gray-50 py-4 px-4 sm:px-6 lg:px-8 text-[#000] text-[12px]">
@@ -189,16 +199,16 @@ console.log({tenantOptions})
               <FormInput
                 label="Rental Price"
                 type="text"
-                value={formData.rentalPrice}
-                onChange={(e:any) => handleInputChange('rentalPrice', e.target.value)}
+                value={formData.rental_price}
+                onChange={(e:any) => handleInputChange('rental_price', e.target.value)}
                 placeholder="500,000"
                 required
               />
 
                <FormSelect
                 label="Rent Status"
-                value={formData.rentStatus}
-                onChange={(e:any) => handleInputChange('rentStatus', e.target.value)}
+                value={formData.rent_status}
+                onChange={(e:any) => handleInputChange('rent_status', e.target.value)}
                 options={rentStatusOptions}
                 required
               />
@@ -209,15 +219,15 @@ console.log({tenantOptions})
               <FormInput
                 label="Service Charge"
                 type="text"
-                value={formData.serviceCharge}
-                onChange={(e:any) => handleInputChange('serviceCharge', e.target.value)}
+                value={formData.service_charge}
+                onChange={(e:any) => handleInputChange('service_charge', e.target.value)}
                 placeholder="500,000"
               />
               <FormInput
                 label="Security Deposit"
                 type="text"
-                value={formData.securityDeposit}
-                onChange={(e:any) => handleInputChange('securityDeposit', e.target.value)}
+                value={formData.security_deposit}
+                onChange={(e:any) => handleInputChange('security_deposit', e.target.value)}
                 placeholder="500,000"
               />
             </div>
@@ -226,14 +236,14 @@ console.log({tenantOptions})
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:w-[60%]">
               <FormDateInput
                 label="Lease start date"
-                value={formData.leaseStartDate}
-                onChange={(e:any) => handleInputChange('leaseStartDate', e.target.value)}
+                value={formData.lease_start_date}
+                onChange={(e:any) => handleInputChange('lease_start_date', e.target.value)}
                 required
               />
               <FormDateInput
                 label="Lease end date"
-                value={formData.leaseEndDate}
-                onChange={(e:any) => handleInputChange('leaseEndDate', e.target.value)}
+                value={formData.lease_end_date}
+                onChange={(e:any) => handleInputChange('lease_end_date', e.target.value)}
                 required
               />
             </div>

@@ -3,7 +3,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { z } from "zod";
 import { createPropertySchema } from "@/schemas/property.schemas";
-import { createProperty, deletePropertyById, updateProperty } from "./api";
+import { AttachTenantToProperty, createProperty, deletePropertyById, updateProperty } from "./api";
 import { toast } from "react-toastify";
 
 
@@ -61,3 +61,23 @@ export function useUpdatePropertyMutation(id:string) {
     },
   });
 }
+
+export function useAssignTenantToProperty(id:string) {
+    return useMutation({
+      mutationFn: async (formPayload: any) => {
+        return await AttachTenantToProperty(id, formPayload);
+      },
+      onMutate: () => {
+        console.log("🔐 Tenant Assignment started...");
+      },
+      onError: (error: any) => {
+        console.error(error.message);
+       toast.error(error.message || "An error occurred during tenant assignment.");
+      },
+      onSuccess: async (data) => {
+        toast.success('Tenant has been assigned to property successfully');
+        return data;
+      },
+    });
+  }
+  

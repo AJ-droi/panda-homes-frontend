@@ -1,5 +1,12 @@
+/*eslint-disable */
 import React, { useRef, useState } from "react";
 import { Trash } from "lucide-react";
+import axios from "axios";
+import { useUploadDocument } from "@/services/notice-agreement/mutation";
+import { useParams } from "next/navigation";
+
+const CLOUD_NAME = "djrqmnzdw";
+const UPLOAD_PRESET = "gi3ara5r";
 
 type UploadingFile = {
   name: string;
@@ -11,9 +18,13 @@ const UploadDocument = () => {
   const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
   const logoInputRef = useRef<HTMLInputElement>(null);
 
-  const handleBrowseLogo = () => {
-    logoInputRef.current?.click();
-  };
+const handleBrowseLogo = () => {
+  if (logoInputRef.current) {
+    logoInputRef.current.value = ""; // Allow re-uploading same file
+    logoInputRef.current.click();
+  }
+};
+
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -25,17 +36,65 @@ const UploadDocument = () => {
     e.stopPropagation();
 
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      const newFileNames = Array.from(e.dataTransfer.files).map((file) => file.name);
+      const newFileNames = Array.from(e.dataTransfer.files).map(
+        (file) => file.name
+      );
       simulateUpload(newFileNames);
     }
   };
 
-  const handleLogoFilesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const upload = useUploadDocument();
+  const { id } = useParams() as any;
+
+  const handleLogoFilesChange = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (e.target.files && e.target.files.length > 0) {
-      const newFileNames = Array.from(e.target.files).map((file) => file.name);
-      simulateUpload(newFileNames);
+      const files = Array.from(e.target.files);
+      await uploadToCloudinary(files);
     }
   };
+
+  const uploadToCloudinary = async (files: File[]) => {
+    console.log({ files });
+    for (const file of files) {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", UPLOAD_PRESET);
+
+      // Add file to uploading list
+      setUploadingFiles((prev) => [...prev, { name: file.name, progress: 0 }]);
+
+      try {
+        const res = await axios.post(
+          `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`,
+          formData,
+          {
+            onUploadProgress: (progressEvent: any) => {
+              const percent = Math.round(
+                (progressEvent.loaded * 100) / progressEvent.total
+              );
+
+              setUploadingFiles((prev) =>
+                prev.map((f) =>
+                  f.name === file.name ? { ...f, progress: percent } : f
+                )
+              );
+            },
+          }
+        );
+        console.log({ r: res.data });
+        const secureUrl = res.data.secure_url;
+        setUploadedFiles((prev) => [...prev, secureUrl]);
+      } catch (error) {
+        console.error("Upload failed:", error);
+      } finally {
+        setUploadingFiles((prev) => prev.filter((f) => f.name !== file.name));
+      }
+    }
+  };
+
+  console.log({ uploadedFiles });
 
   const simulateUpload = (fileNames: string[]) => {
     const uploads = fileNames.map((name) => ({ name, progress: 0 }));
@@ -68,11 +127,28 @@ const UploadDocument = () => {
     setUploadedFiles((prev) => prev.filter((_, index) => index !== fileIndex));
   };
 
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      await upload.mutateAsync({
+        id,
+        formPayload: { document_url: uploadedFiles },
+      });
+
+      // Clear uploaded files after successful upload
+      setUploadedFiles([]);
+      if (logoInputRef.current) {
+        logoInputRef.current.value = ""; // Reset file input
+      }
+    } catch (error) {
+      console.error("Failed to upload files:", error);
+    }
+  };
+
   return (
     <div className="bg-white min-h-screen w-full py-12">
       <div className="max-w-2xl mx-auto">
         <div className="p-6 rounded-lg">
-
           {/* Drop Zone */}
           <div
             className="border-2 border-dashed border-gray-300 rounded-lg p-8 mb-4 flex flex-col items-center justify-center"
@@ -154,7 +230,7 @@ const UploadDocument = () => {
                   key={index}
                   className="relative border border-gray-200 rounded-md px-3 py-2 mb-2 flex items-center justify-between"
                 >
-                  <div className="text-sm">{file}</div>
+                  <div className="text-sm truncate max-w-[75%]">{file}</div>
                   <button
                     onClick={() => removeUploadedFile(index)}
                     className="text-red-400 hover:text-red-600"
@@ -167,8 +243,12 @@ const UploadDocument = () => {
           )}
 
           {/* Upload Button */}
-          <button className="w-full bg-[#785DBA] hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded transition duration-150">
-            UPLOAD FILES
+          <button
+            className="w-full bg-[#785DBA] hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded transition duration-150"
+            onClick={handleSubmit}
+            disabled={upload.isPending}
+          >
+            {upload.isPending ? "UPLOADING..." : "UPLOAD FILES"}
           </button>
         </div>
       </div>
