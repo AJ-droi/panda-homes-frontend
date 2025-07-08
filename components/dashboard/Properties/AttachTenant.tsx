@@ -271,7 +271,7 @@ const handleSubmit = async (e: any) => {
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="bg-[#785DBA] hover:bg-[#ccc] text-white font-medium py-2 px-6 rounded-lg transition-colors "
+                className="bg-[#785DBA] hover:bg-[#ccc] text-white font-medium py-2 px-6 rounded-lg transition-colors hover:cursor-pointer"
               >
                 Attach Tenant
               </button>

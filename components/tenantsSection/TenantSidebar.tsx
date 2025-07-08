@@ -187,7 +187,7 @@ const TenantSidebar = () => {
     return (
       <div className="flex items-center justify-between px-4 md:px-6 lg:px-8 py-10 bg-white">
         <div className="flex items-center gap-2">
-          <button onClick={toggleSidebar} className="flex items-center">
+          <button onClick={toggleSidebar} className="flex items-center hover:cursor-pointer">
             <BreadcrumbIcon />
           </button>
           <span className="font-medium text-[#785DBA] text-[16px] font-plus-jakarta">

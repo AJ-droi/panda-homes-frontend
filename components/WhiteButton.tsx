@@ -16,7 +16,7 @@ const WhiteButton: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={`bg-white border-2 hover:cursor-pointer hover:bg-[#785DBA] hover:text-white text-${textColor} border-[#E0DEF7] font-[700] text-[#000929] text-base px-6 py-[12px]`}
+      className={`bg-white border-2 hover:cursor-pointer hover:bg-[#785DBA] hover:text-white text-${textColor} border-[#E0DEF7] font-[700] text-[#000929] text-base px-6 py-[12px] hover:cursor-pointer`}
       style={{ borderRadius, height, }}
     >
       {children || title}

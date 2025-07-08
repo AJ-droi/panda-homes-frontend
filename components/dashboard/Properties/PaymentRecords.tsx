@@ -108,14 +108,14 @@ export default function PaymentRecords() {
             <button
               onClick={handlePrevPage}
               disabled={currentPage === 1}
-              className="p-1 rounded-md hover:bg-gray-100 disabled:opacity-50"
+              className="p-1 rounded-md hover:bg-gray-100 disabled:opacity-50 hover:cursor-pointer"
             >
               <ChevronLeft size={16} />
             </button>
             <button
               onClick={handleNextPage}
               disabled={currentPage === totalPages}
-              className="p-1 rounded-md hover:bg-gray-100 disabled:opacity-50"
+              className="p-1 rounded-md hover:bg-gray-100 disabled:opacity-50 hover:cursor-pointer"
             >
               <ChevronRight size={16} />
             </button>
@@ -125,10 +125,10 @@ export default function PaymentRecords() {
 
       {/* Action Buttons */}
       <div className="mt-8 flex justify-end space-x-4">
-        <button className="px-6 py-2 border border-[#785DBA] text-[#785DBA] rounded-md hover:bg-purple-50">
+        <button className="px-6 py-2 border border-[#785DBA] text-[#785DBA] rounded-md hover:bg-purple-50 hover:cursor-pointer">
           Edit Property
         </button>
-        <button className="px-6 py-2 bg-[#785DBA] text-white rounded-md hover:bg-purple-700">
+        <button className="px-6 py-2 bg-[#785DBA] text-white rounded-md hover:bg-purple-700 hover:cursor-pointer">
           Delete Property
         </button>
       </div>

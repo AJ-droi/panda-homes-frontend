@@ -105,10 +105,10 @@ export default function ServiceRequest() {
 
       {/* Action Buttons */}
       <div className="flex justify-end mt-6 space-x-4">
-        <button className="px-6 py-3 border border-[#785DBA] text-[#785DBA] rounded-lg font-medium hover:bg-purple-50">
+        <button className="px-6 py-3 border border-[#785DBA] text-[#785DBA] rounded-lg font-medium hover:bg-purple-50 hover:cursor-pointer">
           Edit Property
         </button>
-        <button className="px-6 py-3 bg-[#785DBA] text-white rounded-lg font-medium hover:bg-[#785DBA]">
+        <button className="px-6 py-3 bg-[#785DBA] text-white rounded-lg font-medium hover:bg-[#785DBA] hover:cursor-pointer">
           Delete Property
         </button>
       </div>

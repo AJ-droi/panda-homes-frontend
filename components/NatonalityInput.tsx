@@ -119,7 +119,7 @@ const NationalityInput: React.FC<NationalityInputProps> = ({
                 Select Nationality
               </h3>
               <button
-                className="p-1"
+                className="p-1 hover:cursor-pointer"
                 onClick={() => {
                   setModalVisible(false);
                   setSearchQuery("");

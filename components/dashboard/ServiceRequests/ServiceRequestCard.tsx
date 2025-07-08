@@ -41,7 +41,7 @@ const ServiceRequestCard = (props: any) => {
           </p>
           <p className="text-[#696969] text-[12px]">Status: {item.status}</p>
           <button
-            className="bg-[#785DBA] text-[#fff] px-4 py-2 rounded-md text-[14px] font-medium w-[30%]"
+            className="bg-[#785DBA] text-[#fff] px-4 py-2 rounded-md text-[14px] font-medium w-[30%] hover:cursor-pointer"
             onClick={() => viewServiceRequest(item.requestid)}
           >
             Track Request

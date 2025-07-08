@@ -179,7 +179,7 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
             </h2>
             <button
               onClick={() => setShowPreview(false)}
-              className="text-gray-500 hover:text-gray-700"
+              className="text-gray-500 hover:text-gray-700 hover:cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -247,7 +247,7 @@ const NoticeForm: React.FC<noticeFormProps> = ({ onClose }) => {
           <div className="flex justify-end space-x-4 mt-4">
             <button
               onClick={() => setShowPreview(false)}
-              className="px-4 py-2 border border-gray-300 rounded-md"
+              className="px-4 py-2 border border-gray-300 rounded-md hover:cursor-pointer"
             >
               Edit Notice
             </button>

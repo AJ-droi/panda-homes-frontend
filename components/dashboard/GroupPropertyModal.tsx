@@ -107,7 +107,7 @@ const GroupPropertyModal = ({ isOpen = true, onClose = () => {} }) => {
         <div className="p-6 bg-white border-t border-gray-200">
           <button
             onClick={handleReview}
-            className="w-full bg-[#785DBA] text-white py-4 rounded-lg font-medium text-base hover:bg-purple-700 transition-colors"
+            className="w-full bg-[#785DBA] text-white py-4 rounded-lg font-medium text-base hover:bg-purple-700 transition-colors hover:cursor-pointer"
           >
             Review
           </button>

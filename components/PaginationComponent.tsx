@@ -119,7 +119,7 @@ const Pagination: React.FC<PaginationProps> = ({
           {/* First page button */}
           <button 
             onClick={() => handlePageChange(1)}
-            className={`p-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors ${
+            className={`p-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors hover:cursor-pointer ${
               currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''
             }`}
             disabled={currentPage === 1}
@@ -131,7 +131,7 @@ const Pagination: React.FC<PaginationProps> = ({
           {/* Previous page button */}
           <button 
             onClick={() => handlePageChange(currentPage - 1)}
-            className={`p-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors ${
+            className={`p-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors hover:cursor-pointer ${
               currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''
             }`}
             disabled={currentPage === 1}
@@ -165,7 +165,7 @@ const Pagination: React.FC<PaginationProps> = ({
           {/* Next page button */}
           <button 
             onClick={() => handlePageChange(currentPage + 1)}
-            className={`p-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors ${
+            className={`p-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors hover:cursor-pointer ${
               currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''
             }`}
             disabled={currentPage === totalPages}
@@ -177,7 +177,7 @@ const Pagination: React.FC<PaginationProps> = ({
           {/* Last page button */}
           <button 
             onClick={() => handlePageChange(totalPages)}
-            className={`p-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors ${
+            className={`p-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors hover:cursor-pointer ${
               currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''
             }`}
             disabled={currentPage === totalPages}

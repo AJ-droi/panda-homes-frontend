@@ -334,7 +334,7 @@ const AddTenantForm: React.FC<addTenantProps> = ({}) => {
             <p className="text-[#98A0B4] text-[12px]">Want to share the link manually?</p>
           </div>
           <button 
-          className="bg-[#785DBA] text-[#fff] rounded-md px-3 py-2 mt-3 text-[12px]"
+          className="bg-[#785DBA] text-[#fff] rounded-md px-3 py-2 mt-3 text-[12px] hover:cursor-pointer"
           onClick={() => {
           navigator.clipboard.writeText(passwordLink)
             .then(() => {

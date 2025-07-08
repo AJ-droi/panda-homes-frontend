@@ -31,7 +31,7 @@ const NoticeAgreementCard = (props: any) => {
           <p className="text-[#696969] text-[12px]">{item.dateSent}</p>
         </div>
       ))}
-        <button className=" fixed bottom-5 right-10" onClick={() => router.push('/dashboard/notice-agreement/send-notice')}>
+        <button className=" fixed bottom-5 right-10 hover:cursor-pointer" onClick={() => router.push('/dashboard/notice-agreement/send-notice')}>
        <img src="/add.svg" width={50} height={50} />
       </button>
     </div>

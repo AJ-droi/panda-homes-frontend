@@ -101,7 +101,7 @@ const CustomerRepDashboard = () => {
    <div className="relative flex flex-col md:flex-row min-h-screen bg-gray-50 text-[#000]">
       {/* Mobile Sidebar Toggle Button */}
       <button
-        className="md:hidden fixed top-4 left-4 z-50 bg-white rounded-full p-2 shadow-md"
+        className="md:hidden fixed top-4 left-4 z-50 bg-white rounded-full p-2 shadow-md hover:cursor-pointer"
         onClick={() => setSidebarOpen(true)}
       >
         <Menu className="w-5 h-5 text-gray-800" />

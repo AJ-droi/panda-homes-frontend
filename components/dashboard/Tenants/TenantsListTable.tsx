@@ -76,7 +76,7 @@ const TenantsListTable = ({ params }: { params: UserFilter }) => {
                   {item.property !== "No Property" &&<td className="py-4 px-6">
                     <button
                       onClick={() => handleRemoveTenant(item)}
-                      className="px-4 py-2 rounded text-white"
+                      className="px-4 py-2 rounded text-white hover:cursor-pointer"
                       style={{ backgroundColor: "#785DBA" }}
                     >
                       Remove
@@ -114,13 +114,13 @@ const TenantsListTable = ({ params }: { params: UserFilter }) => {
             <div className="flex gap-4 justify-end mt-6">
               <button
                 onClick={() => setShowModal(false)}
-                className="px-4 py-2 rounded border border-gray-300"
+                className="px-4 py-2 rounded border border-gray-300 hover:cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 onClick={confirmRemoveTenant}
-                className="px-4 py-2 rounded text-white"
+                className="px-4 py-2 rounded text-white hover:cursor-pointer"
                 style={{ backgroundColor: "#785DBA" }}
               >
                 Confirm

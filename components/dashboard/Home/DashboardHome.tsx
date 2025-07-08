@@ -38,7 +38,7 @@ const DashboardHome = () => {
 
       <div className="flex flex-wrap my-5">
           <button
-            className={`px-6 py-4 font-medium text-sm md:text-base ${
+            className={`px-6 py-4 font-medium text-sm md:text-base hover:cursor-pointer ${
               activeTab === 'upcoming-rent' 
                 ? 'text-[#785DBA] border-b-2 border-[#785DBA]' 
                 : 'text-gray-600 border-b-1 border-gray-200 hover:text-gray-800'
@@ -48,7 +48,7 @@ const DashboardHome = () => {
             Upcoming Rent Payment
           </button>
           <button
-            className={`px-6 py-4 font-medium text-sm md:text-base ${
+            className={`px-6 py-4 font-medium text-sm md:text-base hover:cursor-pointer ${
               activeTab === 'service-request' 
                 ? 'text-[#785DBA] border-b-2 border-[#785DBA]' 
                 : 'text-gray-600 border-b-1 border-gray-200 hover:text-gray-800'

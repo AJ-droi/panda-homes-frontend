@@ -40,7 +40,7 @@ const CustomerSidebar = ({ onSelect }: ChatSidebarProps) => {
           <button
             key={status}
             onClick={() => setFilter(status)}
-            className={`relative flex flex-row items-center justify-center gap-x-2 py-2 w-full text-sm font-medium capitalize border-b-2 transition-colors ${
+            className={`relative flex flex-row items-center justify-center gap-x-2 py-2 w-full text-sm font-medium capitalize border-b-2 transition-colors hover:cursor-pointer ${
               filter === status
                 ? "border-[#785DBA] text-[#785DBA] bg-white"
                 : "border-transparent text-gray-500 hover:text-gray-700"

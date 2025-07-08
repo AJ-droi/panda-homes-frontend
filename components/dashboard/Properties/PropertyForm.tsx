@@ -262,7 +262,7 @@ const PropertyForm = () => {
 
         <button
           type="button"
-          className="bg-[#785DBA] text-white px-4 py-2 rounded w-full"
+          className="bg-[#785DBA] text-white px-4 py-2 rounded w-full hover:cursor-pointer"
           onClick={handleShowSummary}
         >
           Review
@@ -280,7 +280,7 @@ const PropertyForm = () => {
               <div className="flex items-center mb-4">
                 <button
                   onClick={() => setShowSummary(false)}
-                  className="mr-3 text-gray-600 hover:text-gray-800"
+                  className="mr-3 text-gray-600 hover:text-gray-800 hover:cursor-pointer"
                 >
                   <ArrowLeft className="w-5 h-5" />
                 </button>
@@ -315,7 +315,7 @@ const PropertyForm = () => {
 
               <div className="flex justify-start gap-3">
                 <button
-                  className="bg-[#785DBA] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#6B4CA0] transition-colors disabled:opacity-50"
+                  className="bg-[#785DBA] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#6B4CA0] transition-colors disabled:opacity-50 hover:cursor-pointer"
                   onClick={handleSubmit}
                   disabled={isPending}
                   style={{ fontFamily: "Inter" }}
@@ -323,7 +323,7 @@ const PropertyForm = () => {
                   {isPending ? "Creating..." : "Save"}
                 </button>
                 <button
-                  className="bg-gray-300 text-black px-6 py-2 rounded-lg font-medium hover:bg-gray-400 transition-colors"
+                  className="bg-gray-300 text-black px-6 py-2 rounded-lg font-medium hover:bg-gray-400 transition-colors hover:cursor-pointer"
                   onClick={() => setShowSummary(false)}
                   style={{ fontFamily: "Inter" }}
                 >

@@ -110,10 +110,10 @@ export default function NotificationPreferences() {
 
       {/* Action Buttons */}
       <div className="flex flex-col sm:flex-row justify-end gap-3 mt-8">
-        <button className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors">
+        <button className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors hover:cursor-pointer">
           Cancel
         </button>
-        <button className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-purple-700 transition-colors">
+        <button className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-purple-700 transition-colors hover:cursor-pointer">
           Save Changes
         </button>
       </div>

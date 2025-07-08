@@ -152,17 +152,17 @@ export default function PropertyHistory() {
                   <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
                 </div>
 
-                <button className="flex items-center px-4 py-2 border border-gray-300 rounded-md bg-white hover:bg-gray-50">
+                <button className="flex items-center px-4 py-2 border border-gray-300 rounded-md bg-white hover:bg-gray-50 hover:cursor-pointer">
                   <span className="mr-2">Filter</span>
                   <ChevronDown className="h-4 w-4" />
                 </button>
 
-                <button className="flex items-center px-4 py-2 border border-gray-300 rounded-md bg-white hover:bg-gray-50">
+                <button className="flex items-center px-4 py-2 border border-gray-300 rounded-md bg-white hover:bg-gray-50 hover:cursor-pointer">
                   <span className="mr-2">Filter</span>
                   <ChevronDown className="h-4 w-4" />
                 </button>
 
-                <button className="flex items-center px-4 py-2 border border-gray-300 rounded-md bg-white hover:bg-gray-50">
+                <button className="flex items-center px-4 py-2 border border-gray-300 rounded-md bg-white hover:bg-gray-50 hover:cursor-pointer">
                   <span className="mr-2">Bulk Action</span>
                   <ChevronDown className="h-4 w-4" />
                 </button>
@@ -252,7 +252,7 @@ export default function PropertyHistory() {
                         {property.dateCreated}
                       </td>
                       <td className="py-4 px-4">
-                        <button className="bg-gray-200 px-3 py-1 rounded-md text-sm text-gray-600 hover:bg-gray-300 flex items-center">
+                        <button className="bg-gray-200 px-3 py-1 rounded-md text-sm text-gray-600 hover:bg-gray-300 flex items-center hover:cursor-pointer">
                           View details
                           <ChevronDown className="ml-1 h-4 w-4" />
                         </button>

@@ -213,14 +213,14 @@ const PropertyView = () => {
           <div className="flex justify-between gap-4 mt-6">
             <button
               type="button"
-              className="px-6 py-2 border border-[#785DBA] text-[#785DBA] rounded-lg hover:bg-purple-50 transition-colors text-[12px]"
+              className="px-6 py-2 border border-[#785DBA] text-[#785DBA] rounded-lg hover:bg-purple-50 transition-colors text-[12px] hover:cursor-pointer"
               onClick={() => toggleEditPropertyMode()}
             >
               Edit Property
             </button>
             <button
               type="button"
-              className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors text-[12px]"
+              className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors text-[12px] hover:cursor-pointer"
               onClick={() => handleDelete()}
             >
               Delete Property
@@ -247,7 +247,7 @@ const PropertyView = () => {
               <div className="mt-6">
                 <button
                   type="button"
-                  className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors text-[12px]"
+                  className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors text-[12px] hover:cursor-pointer"
                   onClick={() => confirmRemoveTenant(data?.tenant_id)}
                   disabled={removeTenant.isPending}
                 >
@@ -266,7 +266,7 @@ const PropertyView = () => {
               </p>
               <button
                 type="button"
-                className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors text-[12px] my-2"
+                className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors text-[12px] my-2 hover:cursor-pointer"
                 onClick={() => router.push(`/dashboard/properties/attach-tenant/${property_id}`)} >
                Assign a Tenant
               </button>
@@ -291,7 +291,7 @@ const PropertyView = () => {
               <div className="mt-6">
                 <button
                   type="button"
-                  className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors text-[12px]"
+                  className="px-6 py-2 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors text-[12px] hover:cursor-pointer"
                 >
                   View KYC
                 </button>
@@ -314,7 +314,7 @@ const PropertyView = () => {
           <div className="flex justify-end">
             <button
               onClick={handleSubmit}
-              className="px-8 py-3 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors font-medium text-[12px]"
+              className="px-8 py-3 bg-[#785DBA] text-white rounded-lg hover:bg-[#785DBA] transition-colors font-medium text-[12px] hover:cursor-pointer"
             >
               {isPending ? "Saving Changes..." : "Save Changes"}
             </button>

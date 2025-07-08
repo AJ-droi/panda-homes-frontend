@@ -107,7 +107,7 @@ const DocumentBranding = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
               </svg>
             </div>
-            <p className="text-center text-gray-500 mb-2">Drag & drop files or <button onClick={handleBrowseLogo} className="text-[#785DBA] font-medium">Browse</button></p>
+            <p className="text-center text-gray-500 mb-2">Drag & drop files or <button onClick={handleBrowseLogo} className="text-[#785DBA] font-medium hover:cursor-pointer">Browse</button></p>
             <p className="text-sm text-gray-500">Supported formats: JPEG, PNG, GIF, MP4, PDF, PSD, AI, Word, PPT</p>
             <input 
               type="file" 
@@ -157,7 +157,7 @@ const DocumentBranding = () => {
           )}
 
           {/* Upload Button */}
-          <button className="w-full bg-[#785DBA] hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded transition duration-150">
+          <button className="w-full bg-[#785DBA] hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded transition duration-150 hover:cursor-pointer">
             UPLOAD FILES
           </button>
         </div>
@@ -200,7 +200,7 @@ const DocumentBranding = () => {
                       <div style={{ width: "75%" }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-[#785DBA]"></div>
                     </div>
                   </div>
-                  <button className="text-gray-400 hover:text-gray-600">
+                  <button className="text-gray-400 hover:text-gray-600 hover:cursor-pointer">
                     <XCircle size={20} />
                   </button>
                 </div>
@@ -217,7 +217,7 @@ const DocumentBranding = () => {
                   <div className="text-sm">{file}</div>
                   <button 
                     onClick={() => removeLetterheadFile(index)}
-                    className="text-red-400 hover:text-red-600"
+                    className="text-red-400 hover:text-red-600 hover:cursor-pointer"
                   >
                     <XCircle size={18} />
                   </button>
@@ -227,7 +227,7 @@ const DocumentBranding = () => {
           )}
 
           {/* Upload Button */}
-          <button className="w-full bg-[#785DBA] hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded transition duration-150">
+          <button className="w-full bg-[#785DBA] hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded transition duration-150 hover:cursor-pointer">
             UPLOAD FILES
           </button>
         </div>

@@ -11,7 +11,7 @@ const NotificationItem = ({ notification, onDismiss }:any) => {
       </div>
       <button 
         onClick={() => onDismiss(notification.id)} 
-        className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+        className="p-1 hover:bg-gray-100 rounded-full transition-colors hover:cursor-pointer"
         aria-label="Dismiss notification"
       >
         <X className="h-5 w-5 text-[#222222]" />

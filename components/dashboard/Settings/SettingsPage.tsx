@@ -68,7 +68,7 @@ const SettingsPage = () => {
         {/* Tabs */}
         <div className="flex flex-wrap border-b">
           <button
-            className={`px-6 py-4 font-medium text-sm md:text-base ${
+            className={`px-6 py-4 font-medium text-sm md:text-base hover:cursor-pointer ${
               activeTab === 'profile' 
                 ? 'text-[#785DBA] border-b-2 border-[#785DBA]' 
                 : 'text-gray-600 hover:text-gray-800'
@@ -78,7 +78,7 @@ const SettingsPage = () => {
             Profile & Account Settings
           </button>
           <button
-            className={`px-6 py-4 font-medium text-sm md:text-base ${
+            className={`px-6 py-4 font-medium text-sm md:text-base hover:cursor-pointer ${
               activeTab === 'notifications' 
                 ? 'text-[#785DBA] border-b-2 border-[#785DBA]' 
                 : 'text-gray-600 hover:text-gray-800'
@@ -88,7 +88,7 @@ const SettingsPage = () => {
             Notification Preferences
           </button>
           <button
-            className={`px-6 py-4 font-medium text-sm md:text-base ${
+            className={`px-6 py-4 font-medium text-sm md:text-base hover:cursor-pointer ${
               activeTab === 'branding' 
                 ? 'text-[#785DBA] border-b-2 border-[#785DBA]' 
                 : 'text-gray-600 hover:text-gray-800'
@@ -217,14 +217,14 @@ const SettingsPage = () => {
                 <button
                   type="submit"
                   disabled={isPending}
-                  className="px-6 py-3 bg-[#785DBA] text-white font-medium rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-[#785DBA]"
+                  className="px-6 py-3 bg-[#785DBA] text-white font-medium rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-[#785DBA] hover:cursor-pointer"
                 >
                   Update Profile
                 </button>
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="px-6 py-3 text-gray-600 font-medium hover:text-gray-800 focus:outline-none"
+                  className="px-6 py-3 text-gray-600 font-medium hover:text-gray-800 focus:outline-none hover:cursor-pointer"
                 >
                   Reset
                 </button>

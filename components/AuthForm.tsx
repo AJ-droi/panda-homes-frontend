@@ -201,7 +201,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
           <div
             className={`flex lg:flex lg:flex-row gap-4 w-full items-center justify-center lg:w-auto mt-4 lg:mt-0`}
           >
-            <button className={`bg-[#212121] text-[12px] text-center w-full p-4 rounded-md text-[#fff] hover:bg-[#785DBA]`}
+            <button className={`bg-[#212121] text-[12px] text-center w-full p-4 rounded-md text-[#fff] hover:bg-[#785DBA] hover:cursor-pointer`}
               >
                 {isLogin
                   ? isPending
@@ -214,7 +214,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
         </div>
       </form>
   
-  <p className="text-[#212121] text-center py-5 text-[12px] w-[80%] mx-auto">By Continuing, you agree to Panda’s Terms of Service and acknowledge you’ve read our Privacy Policy. </p>
+  <p className="text-[#212121] text-center py-5 text-[12px] w-[80%] mx-auto">By Continuing, you agree to Panda’s <span className="underline hover:cursor-pointer" onClick={() => router.push("/terms-of-service")}>Terms of Service</span> and acknowledge you’ve read our Privacy Policy. </p>
       {/* Google login button */}
       {/* <div className="flex mt-10 gap-2 justify-between items-center">
         <div className="bg-[#66666640] w-1/2 h-0.5"></div>

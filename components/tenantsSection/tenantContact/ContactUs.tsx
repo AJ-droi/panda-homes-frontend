@@ -96,7 +96,7 @@ export default function SimpleContactForm() {
           <button
             onClick={handleSubmit}
             disabled={message.trim() === "" || isSubmitting}
-            className="bg-[#011C2A] flex justify-self-end  hover:bg-gray-700 disabled:bg-gray-500 text-white border-none rounded px-6 py-3 text-sm font-medium cursor-pointer disabled:cursor-not-allowed transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            className="bg-[#011C2A] flex justify-self-end  hover:bg-gray-700 disabled:bg-gray-500 text-white border-none rounded px-6 py-3 text-sm font-medium cursor-pointer disabled:cursor-not-allowed transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 hover:cursor-pointer"
           >
             {isSubmitting ? "Sending..." : "Send Message"}
           </button>

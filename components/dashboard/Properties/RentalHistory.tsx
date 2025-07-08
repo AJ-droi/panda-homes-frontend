@@ -163,10 +163,10 @@ export default function RentalHistory() {
 
       {/* Action Buttons */}
       <div className="flex justify-end mt-8 space-x-4">
-        <button className="px-6 py-2 border border-[#785DBA] rounded text-[#785DBA] hover:bg-purple-50">
+        <button className="px-6 py-2 border border-[#785DBA] rounded text-[#785DBA] hover:bg-purple-50 hover:cursor-pointer">
           Edit Property
         </button>
-        <button className="px-6 py-2 bg-[#785DBA] rounded text-white hover:bg-purple-700">
+        <button className="px-6 py-2 bg-[#785DBA] rounded text-white hover:bg-purple-700 hover:cursor-pointer">
           Delete Property
         </button>
       </div>

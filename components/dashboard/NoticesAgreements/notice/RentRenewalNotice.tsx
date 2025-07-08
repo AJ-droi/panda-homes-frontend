@@ -6,7 +6,7 @@ export default function RentRenewalNotice() {
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6 md:p-8 w-full">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-xl font-bold">Rent Renewal</h1>
-          <button className="text-indigo-600 hover:text-indigo-800">Preview</button>
+          <button className="text-indigo-600 hover:text-indigo-800 hover:cursor-pointer">Preview</button>
         </div>
         
         <div className="space-y-6">
@@ -106,7 +106,7 @@ export default function RentRenewalNotice() {
       </div>
       
       <div className="flex justify-center mt-6">
-        <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-md">
+        <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-md hover:cursor-pointer">
         Crea
         </button>
       </div>

@@ -115,7 +115,7 @@ const TenantNoticeTable = () => {
                   <div className="flex justify-center space-x-2">
                     <button
                       onClick={() => handlePreview(item.notice_document)}
-                      className="bg-[#785DBA] text-white hover:cursor-pointer hover:bg-[#624a94] px-[16px] py-[10px] rounded-[12px] text-sm"
+                      className="bg-[#785DBA] text-white hover:cursor-pointer hover:bg-[#624a94] px-[16px] py-[10px] rounded-[12px] text-sm "
                     >
                       Preview
                     </button>
@@ -124,7 +124,7 @@ const TenantNoticeTable = () => {
                       download
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-[#5E636614] text-[#8B8D97] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm inline-flex items-center"
+                      className="bg-[#5E636614] text-[#8B8D97] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm inline-flex items-center "
                     >
                       Download
                     </a>

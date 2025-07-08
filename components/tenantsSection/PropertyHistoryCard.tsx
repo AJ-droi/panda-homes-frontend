@@ -110,7 +110,7 @@ export default function TenantPropertyHistoryCard() {
             {/* Filter Icon Container */}
             <div className="lg:hidden flex items-center justify-center">
               <button
-                className="w-13 h-13 flex items-center justify-center"
+                className="w-13 h-13 flex items-center justify-center hover:cursor-pointer"
                 onClick={() => setShowFilterDropdown(!showFilterDropdown)}
                 aria-label="Filter"
               >
@@ -127,18 +127,18 @@ export default function TenantPropertyHistoryCard() {
           </div>
 
           <div className="hidden lg:flex text-[#53545C] text-sm font-[400] leading-[100%] gap-1">
-            <button className="flex items-center px-2 py-1.5 border border-[#53545C] rounded-md bg-white hover:bg-gray-50">
+            <button className="flex items-center px-2 py-1.5 border border-[#53545C] rounded-md bg-white hover:bg-gray-50 hover:cursor-pointer">
               <Filter className="h-4 w-4 mr-1" />
               <span>Filter</span>
             </button>
 
-            <button className="flex items-center px-2 py-1.5 border border-[#53545C] rounded-md bg-white hover:bg-gray-50">
+            <button className="flex items-center px-2 py-1.5 border border-[#53545C] rounded-md bg-white hover:bg-gray-50 hover:cursor-pointer">
               <Grid className="h-4 w-4 mr-1" />
               <span>Filter</span>
             </button>
 
             <div className="relative">
-              <button className="flex items-center px-2 py-5 border border-[#53545C] rounded-md bg-white hover:bg-gray-50">
+              <button className="flex items-center px-2 py-5 border border-[#53545C] rounded-md bg-white hover:bg-gray-50 hover:cursor-pointer">
                 <span>Bulk Action</span>
                 <ChevronDown className="h-4 w-4 ml-1" />
               </button>
@@ -147,15 +147,15 @@ export default function TenantPropertyHistoryCard() {
 
           {showFilterDropdown && (
             <div className="lg:hidden absolute mt-12 right-4 w-40 bg-white rounded-md shadow-lg z-10 border border-gray-200">
-              <button className="flex items-center w-full px-4 py-2 text-left text-[#53545C] hover:bg-gray-100">
+              <button className="flex items-center w-full px-4 py-2 text-left text-[#53545C] hover:bg-gray-100 hover:cursor-pointer">
                 <Filter className="h-5 w-5 mr-2" />
                 <span>Filter</span>
               </button>
-              <button className="flex items-center w-full px-4 py-2 text-left text-[#53545C] hover:bg-gray-100">
+              <button className="flex items-center w-full px-4 py-2 text-left text-[#53545C] hover:bg-gray-100 hover:cursor-pointer">
                 <Grid className="h-5 w-5 mr-2" />
                 <span>Filter</span>
               </button>
-              <button className="flex items-center w-full px-4 py-2 text-left text-[#53545C] hover:bg-gray-100">
+              <button className="flex items-center w-full px-4 py-2 text-left text-[#53545C] hover:bg-gray-100 hover:cursor-pointer">
                 <span>Bulk Action</span>
                 <ChevronDown className="h-5 w-5 ml-2" />
               </button>
@@ -244,10 +244,10 @@ export default function TenantPropertyHistoryCard() {
           </div>
 
           <div className="flex items-center space-x-1">
-            <button className="p-1 rounded-md hover:bg-gray-200">
+            <button className="p-1 rounded-md hover:bg-gray-200 hover:cursor-pointer">
               <ChevronLeft className="h-5 w-5" />
             </button>
-            <button className="p-1 rounded-md hover:bg-gray-200">
+            <button className="p-1 rounded-md hover:bg-gray-200 hover:cursor-pointer">
               <ChevronRight className="h-5 w-5" />
             </button>
           </div>

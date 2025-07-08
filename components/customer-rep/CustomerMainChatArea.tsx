@@ -139,14 +139,14 @@ const CustomerMainChatArea = ({ requestId, sender }: ChatWindowProps) => {
               </button> */}
                 <button
                       onClick={() => setViewTenantInfo(true)}
-                      className="md:hidden px-4 py-2 bg-[#785DBA] text-white rounded-lg text-sm hover:bg-green-700"
+                      className="md:hidden px-4 py-2 bg-[#785DBA] text-white rounded-lg text-sm hover:bg-green-700 hover:cursor-pointer"
                     >
                       View Tenant Information
                     </button>
                   {userInfo?.status === "pending" && (
                     <button
                       onClick={() => markAsResolved()}
-                      className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700"
+                      className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 hover:cursor-pointer"
                     >
                       Mark as Resolved
                     </button>
@@ -213,7 +213,7 @@ const CustomerMainChatArea = ({ requestId, sender }: ChatWindowProps) => {
                 <button
                   onClick={sendMessage}
                   disabled={!input.trim()}
-                  className="px-6 py-3 text-white rounded-lg bg-[#785DBA] hover:bg-[#6848b5] disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="px-6 py-3 text-white rounded-lg bg-[#785DBA] hover:bg-[#6848b5] disabled:opacity-50 flex items-center justify-center gap-2 hover:cursor-pointer"
                 >
                   <Send className="w-4 h-4" />
  
@@ -237,7 +237,7 @@ const CustomerMainChatArea = ({ requestId, sender }: ChatWindowProps) => {
       {viewTenantInfo && (
         <div className="fixed inset-0 z-50 bg-white flex flex-col shadow-lg md:hidden">
            <button
-        className="md:hidden fixed top-4 right-4 z-50 bg-white rounded-full p-2 shadow-md"
+        className="md:hidden fixed top-4 right-4 z-50 bg-white rounded-full p-2 shadow-md hover:cursor-pointer"
         onClick={() => setViewTenantInfo(false)}
       >
         <X className="w-5 h-5 text-gray-800" />

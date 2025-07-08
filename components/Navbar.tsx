@@ -57,29 +57,29 @@ const Navbar = ({onPropertyClick}:any) => {
         <div className="relative">
           <button
             onClick={() => setDropdownOpen((prev) => !prev)}
-            className="text-sm font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] px-4 py-2 rounded-md flex items-center gap-2 text-white"
+            className="text-sm font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] px-4 py-2 rounded-md flex items-center gap-2 text-white hover:cursor-pointer"
           >
             New <ChevronDown size={16} />
           </button>
 
           {dropdownOpen && (
-            <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-50 font-[400] text-[#000]">
+            <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-50 font-[400] text-[#000] ">
               <button
                 onClick={() => handleAction("/dashboard/add-tenant")}
-                className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
+                className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 hover:cursor-pointer"
               >
                 Add Tenant
               </button>
               <button
                 onClick={isTabletOrSmaller ?() => handleAction("/dashboard/add-property") : () => onPropertyClick()}
-                className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
+                className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 hover:cursor-pointer"
               >
                 Add Property
               </button>
 
               <button
                 onClick={() => handleAction("/dashboard/notice-agreement/send-notice")}
-                className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
+                className="block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 hover:cursor-pointer"
               >
                Create Document
               </button>

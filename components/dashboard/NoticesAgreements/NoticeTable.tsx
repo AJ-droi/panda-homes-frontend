@@ -23,7 +23,7 @@ export const DocumentPreviewModal = ({ documentUrl, onClose }: any) => {
           <h3 className="text-xl font-semibold text-gray-800">Document Preview</h3>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-gray-500 hover:text-gray-700 hover:cursor-pointer"
             aria-label="Close Preview Modal"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -138,7 +138,7 @@ const NoticeTable = ({ noticeData}:any) => {
                   <div className="flex justify-start space-x-2">
                     <button
                       onClick={() => handlePreview(item.notice_document)}
-                      className="bg-[#785DBA] text-white hover:cursor-pointer hover:bg-[#624a94] px-[16px] py-[10px] rounded-[12px] text-sm"
+                      className="bg-[#785DBA] text-white hover:cursor-pointer hover:bg-[#624a94] px-[16px] py-[10px] rounded-[12px] text-sm hover:cursor-pointer"
                     >
                       Preview
                     </button>

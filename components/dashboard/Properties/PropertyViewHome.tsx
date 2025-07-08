@@ -20,7 +20,7 @@ const PropertyViewHome: React.FC = () => {
       <div className="border-b border-gray-200 overflow-x-auto">
         <div className="flex whitespace-nowrap">
           <button
-            className={`px-6 py-4 font-medium text-sm md:text-base ${
+            className={`px-6 py-4 font-medium text-sm md:text-base hover:cursor-pointer ${
               activeTab === "property-overview"
                 ? "text-[#785DBA] border-b-2 border-[#785DBA]"
                 : "text-gray-600 hover:text-gray-800"
@@ -31,7 +31,7 @@ const PropertyViewHome: React.FC = () => {
           </button>
 
           <button
-            className={`px-6 py-4 font-medium text-sm md:text-base ${
+            className={`px-6 py-4 font-medium text-sm md:text-base hover:cursor-pointer ${
               activeTab === "property-history"
                 ? "text-[#785DBA] border-b-2 border-[#785DBA]"
                 : "text-gray-600 hover:text-gray-800"
@@ -42,7 +42,7 @@ const PropertyViewHome: React.FC = () => {
           </button>
 
           <button
-            className={`px-6 py-4 font-medium text-sm md:text-base ${
+            className={`px-6 py-4 font-medium text-sm md:text-base hover:cursor-pointer ${
               activeTab === "branding"
                 ? "text-[#785DBA] border-b-2 border-[#785DBA]"
                 : "text-gray-600 hover:text-gray-800"

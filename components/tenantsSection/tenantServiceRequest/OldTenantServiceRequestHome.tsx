@@ -72,7 +72,7 @@ const TenantServiceRequestHome = () => {
             </div>
           </section>
           <div className="flex">
-          <button onClick={()=> setNewServiceRequest(true)} className="text-xs md:text-sm max-w-[140px] md:max-w-[161px] font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-1.5 md:p-2 rounded-[6px] md:rounded-[8px] w-full text-white">
+          <button onClick={()=> setNewServiceRequest(true)} className="text-xs md:text-sm max-w-[140px] md:max-w-[161px] font-[400] bg-gradient-to-r from-[#7942FB] to-[#B091F9] p-1.5 md:p-2 rounded-[6px] md:rounded-[8px] w-full text-white hover:cursor-pointer">
             Send a new request
           </button>
         </div>

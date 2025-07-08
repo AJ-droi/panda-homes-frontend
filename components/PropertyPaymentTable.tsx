@@ -51,13 +51,13 @@ const PropertyPaymentTable = () => {
   const getActionButton = (status: string) => {
     switch(status) {
       case "Pending":
-        return <button className="bg-green-600 text-white px-4 py-2 rounded-md text-sm">Send Reminder</button>;
+        return <button className="bg-green-600 text-white px-4 py-2 rounded-md text-sm hover:cursor-pointer">Send Reminder</button>;
       case "Late":
-        return <button className="bg-green-600 text-white px-4 py-2 rounded-md text-sm">Issue Notice</button>;
+        return <button className="bg-green-600 text-white px-4 py-2 rounded-md text-sm hover:cursor-pointer">Issue Notice</button>;
       case "Paid":
-        return <button className="bg-green-600 text-white px-4 py-2 rounded-md text-sm">View Receipt</button>;
+        return <button className="bg-green-600 text-white px-4 py-2 rounded-md text-sm hover:cursor-pointer">View Receipt</button>;
       default:
-        return <button className="bg-green-600 text-white px-4 py-2 rounded-md text-sm">Action</button>;
+        return <button className="bg-green-600 text-white px-4 py-2 rounded-md text-sm hover:cursor-pointer">Action</button>;
     }
   };
 

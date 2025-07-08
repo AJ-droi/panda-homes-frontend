@@ -73,7 +73,7 @@ export default function NoticeAgreement() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <button
-                      className="bg-gray-200 hover:bg-gray-300 text-gray-700 py-1 px-4 rounded-md text-sm"
+                      className="bg-gray-200 hover:bg-gray-300 text-gray-700 py-1 px-4 rounded-md text-sm hover:cursor-pointer"
                     >
                       View
                     </button>
@@ -118,14 +118,14 @@ export default function NoticeAgreement() {
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="p-1 rounded-md hover:bg-gray-200 disabled:opacity-50"
+                className="p-1 rounded-md hover:bg-gray-200 disabled:opacity-50 hover:cursor-pointer"
               >
                 <ChevronLeft size={16} />
               </button>
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="p-1 rounded-md hover:bg-gray-200 disabled:opacity-50"
+                className="p-1 rounded-md hover:bg-gray-200 disabled:opacity-50 hover:cursor-pointer"
               >
                 <ChevronRight size={16} />
               </button>
@@ -136,10 +136,10 @@ export default function NoticeAgreement() {
 
       {/* Action Buttons */}
       <div className="mt-8 flex justify-end space-x-4">
-        <button className="px-5 py-2 border border-[#785DBA] text-[#785DBA] rounded-md hover:bg-purple-50">
+        <button className="px-5 py-2 border border-[#785DBA] text-[#785DBA] rounded-md hover:bg-purple-50 hover:cursor-pointer">
           Edit Property
         </button>
-        <button className="px-5 py-2 bg-[#785DBA] text-white rounded-md hover:bg-purple-600">
+        <button className="px-5 py-2 bg-[#785DBA] text-white rounded-md hover:bg-purple-600 hover:cursor-pointer">
           Delete Property
         </button>
       </div>

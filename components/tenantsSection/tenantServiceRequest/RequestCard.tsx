@@ -9,7 +9,7 @@ const RequestCard = ({ request, type }: any) => {
         <div key={index} className="border-b border-[#E0E0E0] py-4">
           <h3>{service_request.issue}</h3>
           <button
-            className="underline text-[#673AB7] pb-2 text-[12px]"
+            className="underline text-[#673AB7] pb-2 text-[12px] hover:cursor-pointer"
         
             onClick={(e) => {
               e.preventDefault();

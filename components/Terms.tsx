@@ -129,7 +129,7 @@ const TermsAndConditions = () => {
                 >
                   <button
                     onClick={() => toggleSection(index)}
-                    className="w-full px-4 py-3 bg-white hover:bg-gray-50 flex items-center justify-between text-left transition-colors"
+                    className="w-full px-4 py-3 bg-white hover:bg-gray-50 flex items-center justify-between text-left transition-colors hover:cursor-pointer"
                   >
                     <div className="flex items-center space-x-3">
                       <span className="text-sm font-medium text-gray-500">

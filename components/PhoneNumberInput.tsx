@@ -137,7 +137,7 @@ const PhoneInputCustom: React.FC<PhoneInputProps> = ({
                 Select Country
               </h3>
               <button
-                className="p-1"
+                className="p-1 hover:cursor-pointer"
                 onClick={() => {
                   setModalVisible(false);
                   setSearchQuery("");

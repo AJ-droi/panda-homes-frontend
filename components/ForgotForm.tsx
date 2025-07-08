@@ -70,7 +70,7 @@ const ForgotForm = () => {
          
           </div>
 
-          <button className={`bg-[#212121] text-[12px] text-center w-full p-4 rounded-md text-[#fff] hover:bg-[#785DBA]`}>
+          <button className={`bg-[#212121] text-[12px] text-center w-full p-4 rounded-md text-[#fff] hover:bg-[#785DBA] hover:cursor-pointer`}>
             {isPending ? "Processing..." : "Submit"}
           </button>
         </form>

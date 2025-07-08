@@ -224,7 +224,7 @@ const PropertyFormModal = ({ isOpen = true, onClose = () => {} }) => {
         <div className="px-6 py-4 border-t border-gray-200 flex justify-end">
           <button
             onClick={handleShowSummary}
-            className="px-8 py-3 bg-[#785DBA] text-white rounded-lg font-medium hover:bg-[#6B4CA0] transition-colors"
+            className="px-8 py-3 bg-[#785DBA] text-white rounded-lg font-medium hover:bg-[#6B4CA0] transition-colors hover:cursor-pointer"
             style={{ fontFamily: "Inter" }}
           >
             Review
@@ -244,7 +244,7 @@ const PropertyFormModal = ({ isOpen = true, onClose = () => {} }) => {
               <div className="flex items-center mb-4">
                 <button
                   onClick={() => setShowSummary(false)}
-                  className="mr-3 text-gray-600 hover:text-gray-800"
+                  className="mr-3 text-gray-600 hover:text-gray-800 hover:cursor-pointer"
                 >
                   <ArrowLeft className="w-5 h-5" />
                 </button>
@@ -279,7 +279,7 @@ const PropertyFormModal = ({ isOpen = true, onClose = () => {} }) => {
 
               <div className="flex justify-start gap-3">
                 <button
-                  className="bg-[#785DBA] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#6B4CA0] transition-colors disabled:opacity-50"
+                  className="bg-[#785DBA] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#6B4CA0] transition-colors disabled:opacity-50 hover:cursor-pointer"
                   onClick={handleSubmit}
                   disabled={isPending}
                   style={{ fontFamily: "Inter" }}
@@ -287,7 +287,7 @@ const PropertyFormModal = ({ isOpen = true, onClose = () => {} }) => {
                   {isPending ? "Creating..." : "Save"}
                 </button>
                 <button
-                  className="bg-gray-300 text-black px-6 py-2 rounded-lg font-medium hover:bg-gray-400 transition-colors"
+                  className="bg-gray-300 text-black px-6 py-2 rounded-lg font-medium hover:bg-gray-400 transition-colors hover:cursor-pointer"
                   onClick={() => setShowSummary(false)}
                   style={{ fontFamily: "Inter" }}
                 >

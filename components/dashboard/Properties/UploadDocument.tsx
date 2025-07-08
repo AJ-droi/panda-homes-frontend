@@ -174,7 +174,7 @@ const handleBrowseLogo = () => {
               Drag & drop files or{" "}
               <button
                 onClick={handleBrowseLogo}
-                className="text-[#785DBA] font-medium"
+                className="text-[#785DBA] font-medium hover:cursor-pointer"
               >
                 Browse
               </button>
@@ -210,7 +210,7 @@ const handleBrowseLogo = () => {
                       </div>
                     </div>
                     <button
-                      className="text-gray-400 hover:text-gray-600"
+                      className="text-gray-400 hover:text-gray-600 hover:cursor-pointer"
                       disabled
                     >
                       <Trash size={20} />
@@ -233,7 +233,7 @@ const handleBrowseLogo = () => {
                   <div className="text-sm truncate max-w-[75%]">{file}</div>
                   <button
                     onClick={() => removeUploadedFile(index)}
-                    className="text-red-400 hover:text-red-600"
+                    className="text-red-400 hover:text-red-600 hover:cursor-pointer"
                   >
                     <Trash size={18} />
                   </button>
@@ -244,7 +244,7 @@ const handleBrowseLogo = () => {
 
           {/* Upload Button */}
           <button
-            className="w-full bg-[#785DBA] hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded transition duration-150"
+            className="w-full bg-[#785DBA] hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded transition duration-150 hover:cursor-pointer"
             onClick={handleSubmit}
             disabled={upload.isPending}
           >

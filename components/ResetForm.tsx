@@ -81,7 +81,7 @@ const ResetForm = () => {
           <button
             type="button"
             onClick={() => setShowPassword((prev) => !prev)}
-            className="absolute top-[17px] right-3 text-sm text-gray-600 focus:outline-none"
+            className="absolute top-[17px] right-3 text-sm text-gray-600 focus:outline-none hover:cursor-pointer"
           >
             {showPassword ? "Hide" : "Show"}
           </button>
@@ -111,7 +111,7 @@ const ResetForm = () => {
         </div>
 
         <button
-          className={`bg-[#212121] text-[12px] text-center w-full p-4 rounded-md text-[#fff] hover:bg-[#785DBA]`}
+          className={`bg-[#212121] text-[12px] text-center w-full p-4 rounded-md text-[#fff] hover:bg-[#785DBA] hover:cursor-pointer`}
         >
           {isPending ? "Processing..." : "Create Password"}
         </button>

@@ -8,7 +8,7 @@ const Modal = ({ children, onClose }: { children: React.ReactNode; onClose: () =
         onClick={onClose}
       />
       <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-4 relative">
-        <button className="absolute top-2 right-2 text-gray-500 text-2xl" onClick={onClose}>
+        <button className="absolute top-2 right-2 text-gray-500 text-2xl hover:cursor-pointer" onClick={onClose}>
           ×
         </button>
         {children}

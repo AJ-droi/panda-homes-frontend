@@ -36,7 +36,7 @@ const PropertyMobileCard = (props: any) => {
       </button> */}
 
 
-        <button className=" fixed bottom-5 right-10" onClick={() => router.push('/dashboard/add-property')}>
+        <button className=" fixed bottom-5 right-10 hover:cursor-pointer" onClick={() => router.push('/dashboard/add-property')}>
        <img src="/add.svg" width={50} height={50} />
       </button>
 

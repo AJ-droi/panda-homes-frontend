@@ -10,7 +10,7 @@ export default function BackButton(props:any) {
   return (
     <button
       onClick={() => router.back()}
-      className="flex items-center gap-2 text-sm text-gray-700 hover:text-black"
+      className="flex items-center gap-2 text-sm text-gray-700 hover:text-black hover:cursor-pointer"
     >
       <Image src={'/back-arrow.svg'} width={20} height={20} alt="back-arrow"/>
        <h2

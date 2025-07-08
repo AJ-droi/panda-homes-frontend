@@ -117,7 +117,7 @@ const IssuesListTable = () => {
                 </td>
                 <td className={`py-4 text-center px-6`}>{item.dateReported}</td>
                 <td className="py-4 px-6 text-center">
-                <button className="bg-[#5E636614] text-[#8B8D97] hover:cursor-pointer hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm">
+                <button className="bg-[#5E636614] text-[#8B8D97] hover:bg-transparent hover:border-1 hover:border-black hover:text-black px-[16px] py-[10px] rounded-[12px] text-sm hover:cursor-pointer">
                     View Details
                   </button>
                 </td>

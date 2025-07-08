@@ -45,7 +45,7 @@ export default function SuccessPage() {
   
           <button
             onClick={handleClick}
-            className="bg-[#785DBA] hover:bg-[#8a6bc4] transition text-white px-6 py-3 rounded-lg font-medium text-sm md:text-base"
+            className="bg-[#785DBA] hover:bg-[#8a6bc4] transition text-white px-6 py-3 rounded-lg font-medium text-sm md:text-base hover:cursor-pointer"
           >
             Let’s Start!
           </button>
