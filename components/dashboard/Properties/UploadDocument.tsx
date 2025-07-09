@@ -19,6 +19,7 @@ const UploadDocument = () => {
   const logoInputRef = useRef<HTMLInputElement>(null);
   const upload = useUploadDocument();
   const { id } = useParams() as any;
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleBrowseLogo = () => {
     if (logoInputRef.current) {
@@ -51,7 +52,11 @@ const UploadDocument = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setIsSubmitting(true); // Start submitting state
+
     try {
+      const documentUrls: string[] = [];
+
       for (const fileObj of selectedFiles) {
         const formData = new FormData();
         formData.append("file", fileObj.file);
@@ -77,6 +82,8 @@ const UploadDocument = () => {
         );
 
         const secureUrl = res.data.secure_url;
+        documentUrls.push(secureUrl);
+
         setSelectedFiles((prev) =>
           prev.map((f) =>
             f.file.name === fileObj.file.name ? { ...f, secureUrl } : f
@@ -84,17 +91,18 @@ const UploadDocument = () => {
         );
       }
 
-      const documentUrls = selectedFiles
-        .map((f) => f.secureUrl)
-        .filter((url): url is string => Boolean(url));
-
       if (documentUrls.length > 0) {
-        await upload.mutateAsync({ id, formPayload: { document_url: documentUrls } });
+        await upload.mutateAsync({
+          id,
+          formPayload: { document_url: documentUrls },
+        });
         setSelectedFiles([]);
         if (logoInputRef.current) logoInputRef.current.value = "";
       }
     } catch (error) {
-      console.error("Failed to upload files:", error);
+      console.error("❌ Upload failed:", error);
+    } finally {
+      setIsSubmitting(false); // End submitting state
     }
   };
 
@@ -183,11 +191,11 @@ const UploadDocument = () => {
 
           {/* Upload Button */}
           <button
-            className="w-full bg-[#785DBA] hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded transition duration-150 hover:cursor-pointer"
+            className="w-full bg-[#785DBA] hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded transition duration-150 hover:cursor-pointer disabled:opacity-50"
             onClick={handleSubmit}
-            disabled={upload.isPending || selectedFiles.length === 0}
+            disabled={isSubmitting || selectedFiles.length === 0}
           >
-            {upload.isPending ? "UPLOADING..." : "UPLOAD FILES"}
+            {isSubmitting ? "SUBMITTING..." : "UPLOAD FILES"}
           </button>
         </div>
       </div>

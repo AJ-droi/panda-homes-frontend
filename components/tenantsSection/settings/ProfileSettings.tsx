@@ -15,7 +15,7 @@ const InputField = ({
   className = '' 
 }:any) => {
   return (
-    <div className={`flex flex-col space-y-2 ${className}`}>
+    <div className={`flex flex-col space-y-2 w-[100%]  ${className}`}>
       <label className="text-sm font-medium text-gray-700">{label}</label>
       <div className="relative">
         {Icon && (
@@ -31,7 +31,7 @@ const InputField = ({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className={`w-full px-3 py-3 border border-gray-300 rounded-4xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 ${
+          className={`w-full px-3 py-2 border border-gray-300 rounded-4xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 ${
             Icon || prefix ? 'pl-9' : ''
           }`}
         />
@@ -268,34 +268,38 @@ const ProfileSettings = () => {
                 </div>
 
                 {/* Save Button */}
-                <div className="flex justify-end pt-6 border-t border-gray-200">
+                {/* <div className="flex justify-end pt-6 border-t border-gray-200">
                   <button className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 hover:cursor-pointer">
                     Save Changes
                   </button>
-                </div>
+                </div> */}
               </div>
             )}
 
             {activeTab === 'Change Password' && (
-              <div className="space-y-6 max-w-md">
+              <div className="space-y-6 max-w-[100%]">
                 <h2 className="text-lg font-medium text-gray-900">Change Password</h2>
+                <div className='flex justify-between w-[100%] gap-x-3'>
                 <InputField
                   label="Current Password"
                   type="password"
                   placeholder="Enter current password"
+            
                 />
                 <InputField
                   label="New Password"
                   type="password"
                   placeholder="Enter new password"
+
                 />
+                </div>
                 <InputField
                   label="Confirm New Password"
                   type="password"
                   placeholder="Confirm new password"
                 />
-                <div className="pt-4">
-                  <button className="w-full px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 hover:cursor-pointer">
+                <div className="pt-4 flex justify-end">
+                  <button className="w-[30%] px-4 py-3 bg-[#785DBA] text-white text-[12px] font-medium rounded-lg hover:bg-[#1a1b1c] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 hover:cursor-pointer">
                     Update Password
                   </button>
                 </div>

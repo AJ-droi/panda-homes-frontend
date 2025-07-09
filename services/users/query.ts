@@ -49,29 +49,30 @@ export function useFetchTenantAndPropertyInfo() {
     refetchOnMount: "always",
     refetchOnWindowFocus: true,
     select: (data: any) => {
-      const activeProperty = data.property_tenants.find(
+      const activeProperties = data.property_tenants?.filter(
         (item: any) => item.status === "active"
       );
 
-      if (
-        activeProperty &&
-        activeProperty.property &&
-        Array.isArray(activeProperty.property.rents) &&
-        activeProperty.property.rents.length > 0
-      ) {
-        const rent = activeProperty.property.rents[0];
+      const getActiveRent = (rents: any[]) => {
+        return rents?.find((rent: any) => rent.rent_status === "active");
+      };
+
+      if (!activeProperties?.length) return [];
+
+      return activeProperties.map((item: any) => {
+        const rent = getActiveRent(item.property?.rents || []);
+        console.log({rent})
 
         return {
-          description: activeProperty.property.description || "",
-          rental_price: rent.rental_price || 0,
-          security_deposit: rent.security_deposit || 0,
-          service_charge: rent.service_charge || 0,
-          lease_start_date: rent.lease_start_date,
-          lease_end_date: rent.lease_end_date
+          property_name: item.property.name || "",
+          description: item.property?.description || "",
+          rental_price: rent?.rental_price || 0,
+          security_deposit: rent?.security_deposit || 0,
+          service_charge: rent?.service_charge || 0,
+          lease_start_date: rent?.lease_start_date || null,
+          lease_end_date: rent?.lease_end_date || null,
         };
-      }
-
-      return null; // Or throw or return default values
+      });
     },
   });
 }

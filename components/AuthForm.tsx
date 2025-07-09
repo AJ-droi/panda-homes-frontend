@@ -214,7 +214,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
         </div>
       </form>
   
-  <p className="text-[#212121] text-center py-5 text-[12px] w-[80%] mx-auto">By Continuing, you agree to Panda’s <span className="underline hover:cursor-pointer" onClick={() => router.push("/terms-of-service")}>Terms of Service</span> and acknowledge you’ve read our Privacy Policy. </p>
+  <p className="text-[#212121] text-center py-5 text-[12px] w-[80%] mx-auto">By Continuing, you agree to Panda’s <span className="underline hover:cursor-pointer" onClick={() => router.push("/terms-of-service")}>Terms of Service</span> and acknowledge you’ve read our <span className="underline hover:cursor-pointer" onClick={() => router.push("/privacy-policy")}>Privacy Policy</span>. </p>
       {/* Google login button */}
       {/* <div className="flex mt-10 gap-2 justify-between items-center">
         <div className="bg-[#66666640] w-1/2 h-0.5"></div>

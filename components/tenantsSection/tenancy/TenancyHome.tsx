@@ -9,11 +9,16 @@ import { differenceInDays } from "date-fns";
 import BackButton from "@/components/Backbutton";
 import { formatNumberWithCommas } from "@/utilities/utilities";
 import { useFetchTenantAndPropertyInfo } from "@/services/users/query";
+import TenancyInfoModal from "./TenancyInfoModal";
+import Modal from "@/components/Modal";
+import NoDataAvailable from "../NoDataComponent";
 
 export default function MyTenancy() {
+  const [isOpen, setIsOpen] = useState(true);
+  const [rentDetails, setRentDetails] = useState<any>(null);
 
-
-    const {data:rentDetails} =useFetchTenantAndPropertyInfo()
+  const { data: rentProperties } = useFetchTenantAndPropertyInfo();
+  console.log(rentDetails);
 
   const leaseStart = new Date(rentDetails?.lease_start_date);
   const leaseEnd = new Date(rentDetails?.lease_end_date);
@@ -34,7 +39,18 @@ export default function MyTenancy() {
     Math.max(0, (daysElapsed / totalLeaseDays) * 100)
   );
   // const { data:propertyHistoryData, isLoading: isPropertyHistoryDataLoading } = useGetPropertyHistory(tenantDetails?.property_id)
-
+  if (!rentDetails && !isOpen) {
+    return (
+      <div className="min-h-screen bg-gray-50 p-6">
+        <NoDataAvailable
+          title="Refresh Page to Select a Property"
+          description="Once you select a property"
+          subtitle=""
+        />
+        ;
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -59,7 +75,8 @@ export default function MyTenancy() {
                 <span className="text-[#785DBA]font-semibold">
                   ₦{Number(rentDetails?.rental_price).toLocaleString("en-NG")}
                 </span>{" "}
-                is expiring on {new Date(rentDetails?.lease_end_date).toLocaleDateString(
+                is expiring on{" "}
+                {new Date(rentDetails?.lease_end_date).toLocaleDateString(
                   "en-US",
                   {
                     month: "long",
@@ -150,6 +167,23 @@ export default function MyTenancy() {
             </ul>
           </div>
         </div>
+        {isOpen && (
+          <Modal
+            children={
+              <TenancyInfoModal
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                onConfirm={() => {
+                  setIsOpen(false);
+                }}
+                selectedProperty={rentDetails}
+                onChange={setRentDetails}
+                options={rentProperties}
+              />
+            }
+            onClose={() => setIsOpen(false)}
+          ></Modal>
+        )}
       </div>
     </div>
   );
