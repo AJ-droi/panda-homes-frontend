@@ -7,9 +7,9 @@ const RequestCard = ({ request, type }: any) => {
     <>
       {request?.map((service_request: any, index: string) => (
         <div key={index} className="border-b border-[#E0E0E0] py-4">
-          <h3>{service_request.issue}</h3>
+          <h3 className="text-[18px] text-[#1B2559]">{service_request.issue}</h3>
           <button
-            className="underline text-[#673AB7] pb-2 text-[12px] hover:cursor-pointer"
+            className="underline text-[#673AB7] py-2 text-[14px] font-semibold hover:cursor-pointer"
         
             onClick={(e) => {
               e.preventDefault();

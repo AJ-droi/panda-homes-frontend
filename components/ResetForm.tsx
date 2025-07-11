@@ -52,7 +52,7 @@ const ResetForm = () => {
         <h3 className="text-[16px] font-[500] text-[#673AB7]">
           Set a Password
         </h3>
-        <p className="text-[#212121]  py-5 text-[12px] w-[80%] ">
+        <p className="text-[#696F79]  py-5 text-[12px]  ">
          Please set a new password for your account.
         </p>
       </div>

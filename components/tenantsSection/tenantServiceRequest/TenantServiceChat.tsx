@@ -7,6 +7,7 @@ import { create } from "domain";
 import BackButton from "@/components/Backbutton";
 import { useFetchChatByRequestId } from "@/services/chat/query";
 import { useNotificationSound } from "@/hooks/useNotificationSound";
+import Image from 'next/image'
 
 interface Message {
   id?: string;
@@ -138,9 +139,9 @@ export default function TenantServiceChat({
   return (
     <div className="max-w-7xl mx-auto bg-white min-h-screen w-full">
       {/* Header */}
-      <div className="p-6 border-b">
+      <div className="p-6 border-b flex items-center gap-x-2">
         <BackButton />
-        <h1 className="text-2xl font-medium text-gray-900 mb-2">
+        <h1 className="text-2xl font-medium text-gray-900 ">
           Need help with your apartment?
         </h1>
         {/* <p className="text-gray-600">
@@ -167,7 +168,14 @@ export default function TenantServiceChat({
               }`}
             >
               {message.sender === "admin" ? (
-                <MessageSquare className="w-5 h-5" />
+                 <Image
+                              src="/admin-message-icon.svg"
+                              alt="Panda Logo"
+                              width={80}
+                              height={38}
+                              style={{ objectFit: "contain" }}
+                              priority
+                            />
               ) : (
                 <User className="w-5 h-5" />
               )}

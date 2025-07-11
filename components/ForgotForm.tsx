@@ -35,12 +35,12 @@ const ForgotForm = () => {
   return (
     <div className="w-full bg-white rounded-ss-3xl rounded-se-3xl md:rounded-md h-[70vh] md:h-[60vh]">
       <BackToLogin />
-      <div className="rounded-md  px-5  flex flex-col justify-start">
+      <div className="rounded-md  px-5  flex flex-col justify-start my-5">
         <div className="flex flex-col ">
           <h3 className="text-[16px] font-[500] text-[#673AB7]">
             Forgot your password?
           </h3>
-          <p className="text-[#212121]  py-5 text-[12px] w-[80%] ">
+          <p className="text-[#696F79]  py-5 text-[12px]  ">
             Don’t worry, happens to all of us. Enter your email below to recover
             your password
           </p>
@@ -52,7 +52,7 @@ const ForgotForm = () => {
           </div>
         )}
 
-        <form className="space-y-4 text-[#666666]" onSubmit={handleSubmit}>
+        <form className="space-y-14 text-[#666666]" onSubmit={handleSubmit}>
           <div className="mt-6 relative">
             <label
               htmlFor="email"
