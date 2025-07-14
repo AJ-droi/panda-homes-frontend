@@ -27,8 +27,8 @@ export function useFetchTenantDetails(params: UserFilter) {
         //   : "-",
         // rentStatus: item?.rentPaid ? "Paid" : "Overdue",
         rent: item?.rents[0]?.rental_price || "-",
-        expiryDate: item?.rents?.[0]?.lease_end_date
-          ? new Date(item?.rents?.[0]?.lease_end_date).toLocaleDateString(
+        date: item.created_at
+          ? new Date(item.created_at).toLocaleDateString(
               "en-US",
               {
                 month: "short",

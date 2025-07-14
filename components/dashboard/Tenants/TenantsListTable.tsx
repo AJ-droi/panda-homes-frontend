@@ -3,12 +3,18 @@ import Modal from "@/components/Modal";
 import Pagination from "@/components/PaginationComponent";
 import { UserFilter } from "@/services/interface/filter";
 import { useRemoveTenantMutation } from "@/services/rents/mutation";
-import { useFetchTenantDetails} from "@/services/users/query";
+import { useFetchTenantDetails } from "@/services/users/query";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-const TenantsListTable = ({ params }: { params: UserFilter }) => {
+const TenantsListTable = ({
+  params,
+  handleSort,
+}: {
+  params: UserFilter;
+  handleSort: any;
+}) => {
   const router = useRouter();
   const { data: users, isLoading } = useFetchTenantDetails(params);
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,14 +28,13 @@ const TenantsListTable = ({ params }: { params: UserFilter }) => {
     setShowModal(true);
   };
 
-  const removeTenant = useRemoveTenantMutation()
+  const removeTenant = useRemoveTenantMutation();
 
   const confirmRemoveTenant = async () => {
     if (!selectedTenant) return;
     try {
-
-      await removeTenant.mutateAsync(selectedTenant.id)
-      window.location.reload()
+      await removeTenant.mutateAsync(selectedTenant.id);
+      window.location.reload();
       // Optionally refetch tenant list here
     } catch (error) {
       console.error("Failed to remove tenant", error);
@@ -45,6 +50,17 @@ const TenantsListTable = ({ params }: { params: UserFilter }) => {
     return users?.slice(indexOfFirstItem, indexOfLastItem) || [];
   }, [users, currentPage, itemsPerPage]);
 
+  const [order, setOrder] = useState("asc");
+  const toggleColumn = (sortvalue: string) => {
+    if (order == "asc") {
+      setOrder("desc");
+      handleSort(sortvalue, order);
+    } else {
+      setOrder("asc");
+      handleSort(sortvalue, order);
+    }
+  };
+
   return (
     <div className="max-w-full text-[#6E7079] overflow-hidden ">
       <div className="overflow-x-auto">
@@ -52,19 +68,48 @@ const TenantsListTable = ({ params }: { params: UserFilter }) => {
           <thead>
             <tr className="border-y border-[#E1E2E9]">
               {/* ...other headers */}
-                <th className="text-left py-4 font-[400] px-6 text-[#785DBA]">Name</th>
-                <th className="text-left py-4 font-[400] px-6 text-[#785DBA]">Property</th>
-                <th className="text-left py-4  font-[400] px-6 text-[#785DBA]">Rent</th>
-                <th className="text-left py-4 font-[400] px-6 text-[#785DBA]">Date</th>
-              <th className="text-left py-4  font-[400] px-6 text-[#785DBA]">Actions</th>
+              <th
+                className="text-left py-4 font-[400] px-6 text-[#785DBA]"
+                onClick={() => toggleColumn("name")}
+              >
+                Name
+              </th>
+              <th
+                className="text-left py-4 font-[400] px-6 text-[#785DBA]"
+                onClick={() => toggleColumn("property")}
+              >
+                Property
+              </th>
+              <th
+                className="text-left py-4  font-[400] px-6 text-[#785DBA]"
+                // onClick={() => toggleColumn("rent")}
+              >
+                Rent
+              </th>
+              <th
+                className="text-left py-4 font-[400] px-6 text-[#785DBA]"
+                onClick={() => toggleColumn("date")}
+              >
+                Date
+              </th>
+              <th className="text-left py-4  font-[400] px-6 text-[#785DBA]">
+                Actions
+              </th>
             </tr>
           </thead>
-          <tbody style={{ fontFamily: "Plus Jakarta Sans" }} className="border-b border-[#E1E2E9]">
+          <tbody
+            style={{ fontFamily: "Plus Jakarta Sans" }}
+            className="border-b border-[#E1E2E9]"
+          >
             {isLoading ? (
-              <tr><td colSpan={6}>Loading...</td></tr>
+              <tr>
+                <td colSpan={6}>Loading...</td>
+              </tr>
             ) : currentItems?.length === 0 ? (
               <tr>
-                <td colSpan={6} className="py-6 text-gray-400">No Tenants available</td>
+                <td colSpan={6} className="py-6 text-gray-400">
+                  No Tenants available
+                </td>
               </tr>
             ) : (
               currentItems.map((item: any) => (
@@ -72,16 +117,18 @@ const TenantsListTable = ({ params }: { params: UserFilter }) => {
                   <td className="py-4 px-6">{item.tenantName}</td>
                   <td className="py-4 px-6">{item.property}</td>
                   <td className="py-4 px-6">{item.rent}</td>
-                  <td className="py-4 px-6">{item.expiryDate}</td>
-                  {item.property !== "No Property" &&<td className="py-4 px-6">
-                    <button
-                      onClick={() => handleRemoveTenant(item)}
-                      className="px-4 py-2 rounded text-white hover:cursor-pointer"
-                      style={{ backgroundColor: "#785DBA" }}
-                    >
-                      Remove
-                    </button>
-                  </td>}
+                  <td className="py-4 px-6">{item.date}</td>
+                  {item.property !== "No Property" && (
+                    <td className="py-4 px-6">
+                      <button
+                        onClick={() => handleRemoveTenant(item)}
+                        className="px-4 py-2 rounded text-white hover:cursor-pointer"
+                        style={{ backgroundColor: "#785DBA" }}
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  )}
                 </tr>
               ))
             )}
@@ -134,4 +181,3 @@ const TenantsListTable = ({ params }: { params: UserFilter }) => {
 };
 
 export default TenantsListTable;
-

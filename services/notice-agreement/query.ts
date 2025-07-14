@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { getNoticeAgreementByTenant, getNoticeAgreements, NoticeAnalytics } from "./api";
+import { NoticeAgreementFilter } from "../interface/filter";
 
-export function useFetchNoticeAgreements() {
+export function useFetchNoticeAgreements(params:NoticeAgreementFilter) {
     return useQuery({
-      queryKey: ["notice-agreement"],   
-      queryFn: getNoticeAgreements,
+      queryKey: ["notice-agreement", params],   
+      queryFn: () => getNoticeAgreements(params),
       refetchOnMount: "always",
       refetchOnWindowFocus: true,
       select: (data:any) =>
-        data.map((notice: any) => ({
+        data.notice.map((notice: any) => ({
           noticeType: notice.notice_type,
           tenant: notice.tenant_name,
           property: notice.property_name,

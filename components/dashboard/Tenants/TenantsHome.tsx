@@ -55,6 +55,15 @@ const TenantsHome = () => {
       page: 1, // optional: reset page on new search/filter
     }));
   };
+
+    const handleColumnSort = (sort_by:string, sort_order:string) => {
+     setParams((prev) => ({
+      ...prev,
+      sort_by,
+      sort_order,
+      page: 1, // optional: reset page on new search/filter
+    }));
+  }
   return (
     <div className="bg-[#fafafe] px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10 w-full overflow-x-hidden">
       <BackButton title="Your Tenants"/>
@@ -119,7 +128,7 @@ const TenantsHome = () => {
           {activeTab === "tenant-list" && (
             <section className="max-w-[98%] text-[#6E7079] rounded-2xl overflow-hidden shadow-md bg-white p-[1%] my-3">
               <div className="mt-3 sm:mt-4 md:mt-5 w-full">
-                <TenantsListTable params={params} />
+                <TenantsListTable params={params} handleSort={handleColumnSort} />
               </div>
             </section>
           )}

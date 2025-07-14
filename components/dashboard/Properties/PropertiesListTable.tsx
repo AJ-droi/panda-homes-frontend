@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import GroupPropertyModal from "../GroupPropertyModal";
 
-const PropertiesListTable = ({ properties, isLoading }: any) => {
+const PropertiesListTable = ({ properties, isLoading, handleSearch, handleSort }: any) => {
  
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,8 +23,17 @@ const PropertiesListTable = ({ properties, isLoading }: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const router = useRouter();
+  const [order, setOrder] = useState('asc')
 
-  console.log({currentItems})
+  const toggleColumn = (sortvalue:string) => {
+    if(order == 'asc'){
+       setOrder('desc')
+       handleSort(sortvalue, order)
+    }else{
+      setOrder('asc')
+      handleSort(sortvalue, order)
+    }
+  }
 
   return (
     <div>
@@ -36,6 +45,7 @@ const PropertiesListTable = ({ properties, isLoading }: any) => {
                 <th
                   className="text-left text-md leading-[145%] py-2 px-6 text-[#785DBA] font-normal"
                   style={{ fontFamily: "Plus Jakarta Sans" }}
+                  onClick={() => toggleColumn('name')}
                 >
                   Property
                 </th>
@@ -48,12 +58,14 @@ const PropertiesListTable = ({ properties, isLoading }: any) => {
                 <th
                   className="text-left text-md leading-[145%] py-2 px-6 text-[#785DBA] font-normal"
                   style={{ fontFamily: "Plus Jakarta Sans" }}
+                  onClick={() => toggleColumn('property_status')}
                 >
                   Status
                 </th>
                 <th
                   className="text-left text-md leading-[145%] py-2 px-6 text-[#785DBA] font-normal"
                   style={{ fontFamily: "Plus Jakarta Sans" }}
+                  onClick={() => toggleColumn('rent')}
                 >
                   Rent
                 </th>
@@ -61,6 +73,7 @@ const PropertiesListTable = ({ properties, isLoading }: any) => {
                 <th
                   className="text-left text-md leading-[145%] py-2 px-6 text-[#785DBA] font-normal"
                   style={{ fontFamily: "Plus Jakarta Sans" }}
+                   onClick={() => toggleColumn('expiry')}
                 >
                   Expiry Date
                 </th>

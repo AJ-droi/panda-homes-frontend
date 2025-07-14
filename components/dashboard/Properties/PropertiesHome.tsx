@@ -51,6 +51,15 @@ const PropertiesHome = () => {
     }));
   };
 
+  const handleColumnSort = (sort_by:string, sort_order:string) => {
+     setParams((prev) => ({
+      ...prev,
+      sort_by,
+      sort_order,
+      page: 1, // optional: reset page on new search/filter
+    }));
+  }
+
   const { data: properties, isLoading } = useFetchPropertyDetails(params);
 
   return (
@@ -128,6 +137,8 @@ const PropertiesHome = () => {
                     <PropertiesListTable
                       properties={properties}
                       isLoading={isLoading}
+                      handleSearch={handleSearchChange}
+                      handleSort={handleColumnSort}
                     />
                   </div>
                 </div>

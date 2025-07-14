@@ -1,4 +1,5 @@
 import axiosInstance from "../axios-instance";
+import { NoticeAgreementFilter } from "../interface/filter";
 
   
 export const createNoticeAgreement = async (data:any) => {
@@ -32,12 +33,13 @@ export const createNoticeAgreement = async (data:any) => {
   };
 
 
-  export const getNoticeAgreements = async () => {
+  export const getNoticeAgreements = async (params?:NoticeAgreementFilter) => {
     try {
       const response = await axiosInstance.get("/notice-agreement", {
         headers: {
           "Content-Type": "application/json",
-        }
+        },
+         params,
       });
 
       if (response.status !== 200) {

@@ -12,7 +12,29 @@ const NoticesAgreementHome = () => {
   // const [activeTab, setActiveTab] = useState("view-na");
 
   const [isMobile, setIsMobile] = useState(false);
-  const { data: noticeData } = useFetchNoticeAgreements();
+
+  const [params, setParams] = useState({
+    notice_type: "",
+    effective_date: "",
+    property_id: "",
+    tenant_id: "",
+    start_date: "",
+    end_date: "",
+    sort_by: "",
+    sort_order: "",
+    size: 10,
+    page: 1,
+  });
+  const { data: noticeData } = useFetchNoticeAgreements(params);
+
+  const handleColumnSort = (sort_by: string, sort_order: string) => {
+    setParams((prev) => ({
+      ...prev,
+      sort_by,
+      sort_order,
+      page: 1, // optional: reset page on new search/filter
+    }));
+  };
 
   //  const { data: serviceRequest, isLoading } = useFetchServiceRequest();
 
@@ -81,7 +103,10 @@ const NoticesAgreementHome = () => {
             style={{ fontFamily: "Plus Jakarta Sans" }}
           >
             <div className="mt-4 sm:mt-6 w-full">
-              <NoticeTable noticeData={noticeData} />
+              <NoticeTable
+                noticeData={noticeData}
+                handleSort={handleColumnSort}
+              />
             </div>
           </div>
         </section>

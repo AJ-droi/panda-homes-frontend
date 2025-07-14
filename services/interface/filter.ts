@@ -4,6 +4,8 @@ export interface PropertyFilter {
     location?: string;
     property_status?: string;
     owner_id?: string;
+    sort_by?:string;
+    sort_order?:string;
     start_date?: string;
     end_date?: string;
     size?: number;
@@ -24,3 +26,15 @@ export interface PropertyFilter {
     page?: number;
   }
   
+  export interface NoticeAgreementFilter {
+  notice_type?: string;
+  effective_date?: string;
+  property_id?: string;
+  tenant_id?: string;
+  start_date?: string;
+  end_date?: string;
+  sort_by?:string;
+  sort_order?:string;
+  size?: number;
+  page?: number;
+}
