@@ -13,11 +13,11 @@ export function useFetchTenantDetails(params: UserFilter) {
     refetchOnWindowFocus: true,
     select: (data: any) => {
       return data?.users.map((item: any) => ({
-        id: item?.id,
-        tenantName: `${toSentenceCase(item?.user?.first_name) ?? ""} ${
-          toSentenceCase(item?.user?.last_name) ?? ""
+        id: item?.tenant?.id,
+        tenantName: `${toSentenceCase(item?.tenant?.profile_name?.split(" ")[0]) ?? ""} ${
+          toSentenceCase(item?.tenant?.profile_name?.split(" ")[1]) ?? ""
         }`,
-        property: item?.rents[0]?.property?.name || "No Property",
+        property: item?.property?.name || "No Property",
         // moveInDay: item?.moveInDate
         //   ? new Date(item.moveInDate).toLocaleDateString("en-US", {
         //       month: "short",
@@ -26,9 +26,9 @@ export function useFetchTenantDetails(params: UserFilter) {
         //     })
         //   : "-",
         // rentStatus: item?.rentPaid ? "Paid" : "Overdue",
-        rent: item?.rents[0]?.rental_price || "-",
-        date: item.created_at
-          ? new Date(item.created_at).toLocaleDateString(
+        rent: item?.rental_price || "-",
+        date: item?.tenant?.created_at
+          ? new Date(item?.tenant?.created_at).toLocaleDateString(
               "en-US",
               {
                 month: "short",

@@ -82,7 +82,7 @@ const TenantsListTable = ({
               </th>
               <th
                 className="text-left py-4  font-[400] px-6 text-[#785DBA]"
-                // onClick={() => toggleColumn("rent")}
+                onClick={() => toggleColumn("rent")}
               >
                 Rent
               </th>

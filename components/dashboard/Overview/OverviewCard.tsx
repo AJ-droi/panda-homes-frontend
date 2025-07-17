@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import React, { useMemo, useState } from "react";
 import OverviewSearchBar from "./OverviewSearchBar";
 
-
 /* eslint-disable */
 const OverviewCard = (props: any) => {
   const { data } = props;
@@ -141,23 +140,23 @@ const OverviewCard = (props: any) => {
                   (item: any, itemIndex: number) => (
                     <div
                       key={itemIndex}
-                      className="flex items-start gap-4  rounded-lg hover:bg-[#efefef] cursor-pointer transition-colors  h-20 md:w-[60%] shadow-md"
+                      className="flex items-center gap-4 rounded-xl hover:bg-[#efefef] cursor-pointer transition-colors md:w-[60%] shadow-md"
                       onClick={() => handleClick(item)}
                     >
                       {/* Color-coded indicator */}
-
                       <div
-                        className={`w-3 h-20 rounded-ss-xl rounded-es-xl ${getEventTypeColor(
+                        className={`w-2 h-[100] rounded-ss-xl rounded-es-xl ${getEventTypeColor(
                           item.type
                         )}`}
+                       
                       />
 
                       {/* Content */}
-                      <div className="flex flex-col flex-1 min-w-0 justify-center h-20">
-                        <h3 className="text-[14px] font-[700] leading-[20px] text-[#787774] font-plus-jarkarta hover:underline mb-1">
+                      <div className="flex flex-col flex-1 min-w-0">
+                        <h3 className="text-[12px] md:text-[14px] font-bold leading-[20px] text-[#787774] font-plus-jarkarta hover:underline truncate">
                           {item.description}
                         </h3>
-                        <p className="text-[12px] text-[#787774] font-[400] leading-[16px] font-inter">
+                        <p className="text-[12px] text-[#787774] font-[400] leading-[16px] font-inter truncate">
                           {item.property_name}
                         </p>
                       </div>
