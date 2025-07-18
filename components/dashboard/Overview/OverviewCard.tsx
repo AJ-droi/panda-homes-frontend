@@ -148,14 +148,14 @@ const OverviewCard = (props: any) => {
                         className={`w-2 h-[100] rounded-ss-xl rounded-es-xl ${getEventTypeColor(
                           item.type
                         )}`}
-                       
                       />
 
                       {/* Content */}
-                      <div className="flex flex-col flex-1 min-w-0">
-                        <h3 className="text-[12px] md:text-[14px] font-bold leading-[20px] text-[#787774] font-plus-jarkarta hover:underline truncate">
+                      <div className="flex flex-col flex-1 min-w-0 space-y-3">
+                        <h3 className="text-[12px] md:text-[14px] font-bold leading-[20px] text-[#787774] font-plus-jarkarta hover:underline line-clamp-3">
                           {item.description}
                         </h3>
+
                         <p className="text-[12px] text-[#787774] font-[400] leading-[16px] font-inter truncate">
                           {item.property_name}
                         </p>

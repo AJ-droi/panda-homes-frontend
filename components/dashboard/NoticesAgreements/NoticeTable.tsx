@@ -3,6 +3,7 @@ import Pagination from "@/components/PaginationComponent";
 import { useFetchNoticeAgreements } from "@/services/notice-agreement/query";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import TableHeader from "../TableHeader";
 
 export const DocumentPreviewModal = ({ documentUrl, onClose }: any) => {
   const [isPdfLoading, setIsPdfLoading] = useState(true);
@@ -17,7 +18,7 @@ export const DocumentPreviewModal = ({ documentUrl, onClose }: any) => {
   const fileType = getFileType(documentUrl);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0  bg-opacity-50 flex items-center justify-center z-50 ml-[5%]">
       <div className="bg-white rounded-lg p-6 w-full sm:w-11/12 lg:w-5/6 max-w-6xl flex flex-col">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-xl font-semibold text-gray-800">
@@ -101,9 +102,8 @@ export const DocumentPreviewModal = ({ documentUrl, onClose }: any) => {
 const NoticeTable = ({ noticeData, handleSort }: any) => {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
-   const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [previewUrl, setPreviewUrl] = useState(null);
-
 
   // Calculate items to display on current page
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -118,17 +118,6 @@ const NoticeTable = ({ noticeData, handleSort }: any) => {
     setPreviewUrl(null);
   };
 
-  const [order, setOrder] = useState("asc");
-
-  const toggleColumn = (sortvalue: string) => {
-    if (order == "asc") {
-      setOrder("desc");
-      handleSort(sortvalue, order);
-    } else {
-      setOrder("asc");
-      handleSort(sortvalue, order);
-    }
-  };
 
   return (
     <div className="max-w-full text-[#6E7079] overflow-hidden">
@@ -136,41 +125,34 @@ const NoticeTable = ({ noticeData, handleSort }: any) => {
         <table className="w-full">
           <thead>
             <tr className="border-y border-[#E1E2E9]">
-              <th
-                className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-                  onClick={() => toggleColumn('notice_type')}
-              >
-                Notice Type
-              </th>
-              <th
-                className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-                    onClick={() => toggleColumn('tenant_name')}
-              >
-                Tenant
-              </th>
-              <th
-                className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-                    onClick={() => toggleColumn('property_name')}
-              >
-                Property
-              </th>
-              <th
-                className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-                    onClick={() => toggleColumn('created_at')}
-              >
-                Date Sent
-              </th>
-              <th
-                className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
-                style={{ fontFamily: "Plus Jakarta Sans" }}
-                 onClick={() => toggleColumn('status')}
-              >
-                Status
-              </th>
+              <TableHeader
+                headertitle={"Notice Type"}
+                ascending={() => handleSort("notice_type", "asc")}
+                descending={() => handleSort("notice_type", "desc")}
+              />
+
+              <TableHeader
+                headertitle={"Tenant"}
+                ascending={() => handleSort("tenant_name", "asc")}
+                descending={() => handleSort("tenant_name", "desc")}
+              />
+              <TableHeader
+                headertitle={"Property"}
+                ascending={() => handleSort("property_name", "asc")}
+                descending={() => handleSort("property_name", "desc")}
+              />
+              <TableHeader
+                headertitle={"Date Sent"}
+                ascending={() => handleSort("created_at", "asc")}
+                descending={() => handleSort("created_at", "desc")}
+              />
+
+              <TableHeader
+                headertitle={"Status"}
+                ascending={() => handleSort("status", "asc")}
+                descending={() => handleSort("status", "desc")}
+              />
+
               <th
                 className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
@@ -222,7 +204,7 @@ const NoticeTable = ({ noticeData, handleSort }: any) => {
         totalItems={noticeData?.length}
         currentPage={currentPage}
         onPageChange={setCurrentPage}
-          onItemsPerPageChange={setItemsPerPage}
+        onItemsPerPageChange={setItemsPerPage}
         itemsPerPageOptions={[10, 25, 50, 100]}
         showNavigation
         showItemsPerPage

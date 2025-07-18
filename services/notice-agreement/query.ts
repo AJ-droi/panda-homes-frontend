@@ -19,7 +19,7 @@ export function useFetchNoticeAgreements(params:NoticeAgreementFilter) {
             year: "numeric",
           }),
           status:notice.status,
-          notice_document: notice.notice_image
+          notice_document: notice?.notice_image ? notice?.notice_image : notice?.notice_documents[0]?.url
         })),
     });
   }

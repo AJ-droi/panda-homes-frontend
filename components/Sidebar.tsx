@@ -10,11 +10,11 @@ import {
   SidebarServiceRequestsIcon,
   SidebarNoticeAndAgreementIcon,
   BreadcrumbIcon,
-  HomeActiveIcon,
-  PropertyActiveIcon,
-  // TenantActiveIcon,
-  ServiceRequestsActiveIcon,
-  SidebarNoticeAndAgreementActiveIcon,
+  // HomeActiveIcon,
+  // PropertyActiveIcon,
+  // // TenantActiveIcon,
+  // ServiceRequestsActiveIcon,
+  // SidebarNoticeAndAgreementActiveIcon,
   LogoutIcon,
   NavbarNotificationBell,
   NavbarSettingsIcon,
@@ -100,13 +100,13 @@ function handleSwitchAccount() {
     {
       name: "Overview",
       icon: <SidebarHomeIcon />,
-      activeIcon: <HomeActiveIcon />,
+      activeIcon:<Image src={'/overview-active.svg'} alt={""} width={24} height={24} />,
       path: "/dashboard",
     },
     {
       name: "Properties",
       icon: <SidebarPropertiesIcon />,
-      activeIcon: <PropertyActiveIcon />,
+      activeIcon: <Image src={'/properties-active.svg'} alt={""} width={24} height={24} />,
       path: "/dashboard/properties",
     },
     {
@@ -118,19 +118,19 @@ function handleSwitchAccount() {
     {
       name: "Service Requests",
       icon: <SidebarServiceRequestsIcon />,
-      activeIcon: <ServiceRequestsActiveIcon />,
+      activeIcon: <Image src={'/service-request-active.svg'} alt={""} width={24} height={24} />,
       path: "/dashboard/service-requests",
     },
     {
       name: "Documents",
       icon: <SidebarNoticeAndAgreementIcon />,
-      activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
+      activeIcon: <Image src={'/documents-active.svg'} alt={""} width={24} height={24} />,
       path: "/dashboard/notice-agreement",
     },
     {
       name: "Switch To Tenant Account",
-      icon: <Image src={'/switch.svg'} alt={""} width={50} height={50} />,
-      // activeIcon: <SidebarNoticeAndAgreementActiveIcon />,
+      icon: <Image src={'/switch.svg'} alt={""} width={30} height={30} />,
+      activeIcon: <Image src={'/switch-active.svg'} alt={""} width={24} height={24} />,
       onClick: handleSwitchAccount,
     },
     {
@@ -258,7 +258,7 @@ function handleSwitchAccount() {
               <nav
                 key={index}
                 className={`flex gap-4 items-center px-4 py-4 hover:bg-gray-100 cursor-pointer ${
-                  pathname === item.path ? "border-r-2 border-r-[#785DBA]" : ""
+                  pathname === item.path ? "border-r-2 border-r-[#785DBA] font-bold" : ""
                 }`}
                 onClick={() => {
                   if (item.onClick) {

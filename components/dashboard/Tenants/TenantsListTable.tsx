@@ -7,6 +7,7 @@ import { useFetchTenantDetails } from "@/services/users/query";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import TableHeader from "../TableHeader";
 
 const TenantsListTable = ({
   params,
@@ -50,17 +51,6 @@ const TenantsListTable = ({
     return users?.slice(indexOfFirstItem, indexOfLastItem) || [];
   }, [users, currentPage, itemsPerPage]);
 
-  const [order, setOrder] = useState("asc");
-  const toggleColumn = (sortvalue: string) => {
-    if (order == "asc") {
-      setOrder("desc");
-      handleSort(sortvalue, order);
-    } else {
-      setOrder("asc");
-      handleSort(sortvalue, order);
-    }
-  };
-
   return (
     <div className="max-w-full text-[#6E7079] overflow-hidden ">
       <div className="overflow-x-auto">
@@ -68,30 +58,26 @@ const TenantsListTable = ({
           <thead>
             <tr className="border-y border-[#E1E2E9]">
               {/* ...other headers */}
-              <th
-                className="text-left py-4 font-[400] px-6 text-[#785DBA]"
-                onClick={() => toggleColumn("name")}
-              >
-                Name
-              </th>
-              <th
-                className="text-left py-4 font-[400] px-6 text-[#785DBA]"
-                onClick={() => toggleColumn("property")}
-              >
-                Property
-              </th>
-              <th
-                className="text-left py-4  font-[400] px-6 text-[#785DBA]"
-                onClick={() => toggleColumn("rent")}
-              >
-                Rent
-              </th>
-              <th
-                className="text-left py-4 font-[400] px-6 text-[#785DBA]"
-                onClick={() => toggleColumn("date")}
-              >
-                Date
-              </th>
+              <TableHeader
+                headertitle={"Name"}
+                ascending={() => handleSort("name", "asc")}
+                descending={() => handleSort("name", "desc")}
+              />
+              <TableHeader
+                headertitle={"Property"}
+                ascending={() => handleSort("property", "asc")}
+                descending={() => handleSort("property", "desc")}
+              />
+              <TableHeader
+                headertitle={"Rent"}
+                ascending={() => handleSort("rent", "asc")}
+                descending={() => handleSort("rent", "desc")}
+              />
+              <TableHeader
+                headertitle={"Date"}
+                ascending={() => handleSort("date", "asc")}
+                descending={() => handleSort("date", "desc")}
+              />
               <th className="text-left py-4  font-[400] px-6 text-[#785DBA]">
                 Actions
               </th>

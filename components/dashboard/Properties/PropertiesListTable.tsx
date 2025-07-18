@@ -6,12 +6,17 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import GroupPropertyModal from "../GroupPropertyModal";
+import Image from "next/image";
+import TableHeader from "../TableHeader";
 
-const PropertiesListTable = ({ properties, isLoading, handleSearch, handleSort }: any) => {
- 
-
+const PropertiesListTable = ({
+  properties,
+  isLoading,
+  handleSearch,
+  handleSort,
+}: any) => {
   const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   // Calculate items to display on current page
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -23,17 +28,6 @@ const PropertiesListTable = ({ properties, isLoading, handleSearch, handleSort }
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const router = useRouter();
-  const [order, setOrder] = useState('asc')
-
-  const toggleColumn = (sortvalue:string) => {
-    if(order == 'asc'){
-       setOrder('desc')
-       handleSort(sortvalue, order)
-    }else{
-      setOrder('asc')
-      handleSort(sortvalue, order)
-    }
-  }
 
   return (
     <div>
@@ -42,41 +36,33 @@ const PropertiesListTable = ({ properties, isLoading, handleSearch, handleSort }
           <table className="w-full">
             <thead>
               <tr className="border-y border-[#E1E2E9]">
-                <th
-                  className="text-left text-md leading-[145%] py-2 px-6 text-[#785DBA] font-normal"
-                  style={{ fontFamily: "Plus Jakarta Sans" }}
-                  onClick={() => toggleColumn('name')}
-                >
-                  Property
-                </th>
+                <TableHeader
+                  headertitle={"Property"}
+                  ascending={() => handleSort("name", "asc")}
+                  descending={() => handleSort("name", "desc")}
+                />
                 {/* <th
                className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
               >
                 Location
               </th> */}
-                <th
-                  className="text-left text-md leading-[145%] py-2 px-6 text-[#785DBA] font-normal"
-                  style={{ fontFamily: "Plus Jakarta Sans" }}
-                  onClick={() => toggleColumn('property_status')}
-                >
-                  Status
-                </th>
-                <th
-                  className="text-left text-md leading-[145%] py-2 px-6 text-[#785DBA] font-normal"
-                  style={{ fontFamily: "Plus Jakarta Sans" }}
-                  onClick={() => toggleColumn('rent')}
-                >
-                  Rent
-                </th>
+                <TableHeader
+                  headertitle={"Status"}
+                  ascending={() => handleSort("property_status", "asc")}
+                  descending={() => handleSort("property_status", "desc")}
+                />
+                <TableHeader
+                  headertitle={"Rent"}
+                  ascending={() => handleSort("rent", "asc")}
+                  descending={() => handleSort("rent", "desc")}
+                />
 
-                <th
-                  className="text-left text-md leading-[145%] py-2 px-6 text-[#785DBA] font-normal"
-                  style={{ fontFamily: "Plus Jakarta Sans" }}
-                   onClick={() => toggleColumn('expiry')}
-                >
-                  Expiry Date
-                </th>
+                <TableHeader
+                  headertitle={"Expiry Date"}
+                  ascending={() => handleSort("expiry", "asc")}
+                  descending={() => handleSort("expiry", "desc")}
+                />
                 {/* <th
                className="text-left text-md leading-[145%] py-4 px-6 text-[#785DBA] font-normal"
                 style={{ fontFamily: "Plus Jakarta Sans" }}
@@ -164,13 +150,12 @@ const PropertiesListTable = ({ properties, isLoading, handleSearch, handleSort }
           itemsPerPage={itemsPerPage}
           totalItems={properties?.length}
           currentPage={currentPage}
-         onPageChange={setCurrentPage}
+          onPageChange={setCurrentPage}
           onItemsPerPageChange={setItemsPerPage}
-        itemsPerPageOptions={[10, 25, 50, 100]}
-        showNavigation
-        showItemsPerPage
-        showPageJumper
-    
+          itemsPerPageOptions={[10, 25, 50, 100]}
+          showNavigation
+          showItemsPerPage
+          showPageJumper
         />
       </div>
       {/* <button
